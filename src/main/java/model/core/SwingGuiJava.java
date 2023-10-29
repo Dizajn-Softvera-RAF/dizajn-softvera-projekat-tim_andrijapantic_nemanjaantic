@@ -1,7 +1,7 @@
-package main.java.model.core;
+package model.core;
 
-import main.java.view.mainframe.MainFrame;
-import main.java.model.core.SwingGui;
+
+import view.mainframe.MainFrame;
 
 public class SwingGuiJava implements SwingGui {
 

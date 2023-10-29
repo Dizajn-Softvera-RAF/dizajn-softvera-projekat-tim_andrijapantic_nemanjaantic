@@ -1,4 +1,4 @@
-package main.java.model.core;
+package model.core;
 
 public interface SwingGui {
 

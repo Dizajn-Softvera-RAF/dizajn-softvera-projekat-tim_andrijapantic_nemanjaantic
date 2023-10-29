@@ -1,6 +1,8 @@
 package main.java;
 
-import main.java.model.core.AppCore;
+import model.core.AppCore;
+import model.core.SwingGui;
+import model.core.*;
 
 public class Main {
 

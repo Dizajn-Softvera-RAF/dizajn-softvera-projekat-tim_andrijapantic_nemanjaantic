@@ -1,4 +1,4 @@
-package main.java.view.controller;
+package view.controller;
 
 public class ActionManager {
 
