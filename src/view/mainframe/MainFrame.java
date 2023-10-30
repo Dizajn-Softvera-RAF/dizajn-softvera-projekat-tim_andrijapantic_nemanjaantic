@@ -7,6 +7,10 @@ public class MainFrame extends JFrame {
 
     private static MainFrame instance = null;
 
+    private static ToolBar toolBar;
+
+
+
 
     public static MainFrame getInstance() {
 
@@ -38,8 +42,24 @@ public class MainFrame extends JFrame {
 
         setLayout(new BorderLayout());
 
+
+        toolBar = new ToolBar();
+        toolBar.setSize(100, 50);
+        add(toolBar, BorderLayout.NORTH);
+
+
+
     }
 
+    public static void setInstance(MainFrame instance) {
+        MainFrame.instance = instance;
+    }
 
+    public static ToolBar getToolBar() {
+        return toolBar;
+    }
 
+    public static void setToolBar(ToolBar toolBar) {
+        MainFrame.toolBar = toolBar;
+    }
 }

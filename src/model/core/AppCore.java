@@ -17,18 +17,18 @@ public class AppCore {
         return instance;
     }
 
-    public void initialise(SwingGui gui) {
+    public void initialise(model.core.SwingGui gui) {
         this.gui = gui;
     }
     public void run() {
         this.gui.start();
     }
 
-    public SwingGui getGui() {
+    public model.core.SwingGui getGui() {
         return gui;
     }
 
-    public void setGui(SwingGui gui) {
+    public void setGui(model.core.SwingGui gui) {
         this.gui = gui;
     }
 }

@@ -1,4 +1,4 @@
-package main.java;
+package main;
 
 import model.core.AppCore;
 import model.core.SwingGui;
@@ -10,6 +10,7 @@ public class Main {
 
         AppCore appCore = AppCore.getInstance();
         SwingGui gui = new SwingGuiJava();
+        appCore.initialise(gui);
         appCore.run();
 
 
