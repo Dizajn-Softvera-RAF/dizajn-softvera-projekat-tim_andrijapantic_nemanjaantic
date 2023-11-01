@@ -40,9 +40,7 @@ public class MainFrame extends JFrame {
         setSize(screenWidth / 2, screenHeight / 2);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Projekat");
-
-        setLayout(new BorderLayout());
+        setTitle("ClassyCrafT");
 
 
         toolBar = new ToolBar();
