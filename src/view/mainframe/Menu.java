@@ -7,11 +7,9 @@ public class Menu extends JMenuBar {
 
     public Menu() {
         JMenu file = new JMenu("File");
-        file.setMnemonic('F');
         JMenu edit = new JMenu("Edit");
-        edit.setMnemonic('F');
         JMenu functions = new JMenu("Functions");
-        functions.setMnemonic('F');
+
 
         JMenuItem miNew = new JMenuItem("New");
         JMenuItem miAboutUs = new JMenuItem("About Us");
