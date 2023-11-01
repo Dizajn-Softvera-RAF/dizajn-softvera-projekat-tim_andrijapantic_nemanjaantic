@@ -7,6 +7,7 @@ public class ActionManager {
     private NewPackageAction newPackageAction;
     private NewComponentAction newComponentAction;
     private InfoAction infoAction;
+    private DeleteAction deleteAction;
 
     public ActionManager() {initilizeActions();}
 
@@ -16,6 +17,7 @@ public class ActionManager {
         newPackageAction = new NewPackageAction();
         newComponentAction = new NewComponentAction();
         infoAction = new InfoAction();
+        deleteAction = new DeleteAction();
     }
 
     public ExitAction getExitAction() {
@@ -56,6 +58,14 @@ public class ActionManager {
 
     public void setInfoAction(InfoAction infoAction) {
         this.infoAction = infoAction;
+    }
+
+    public DeleteAction getDeleteAction() {
+        return deleteAction;
+    }
+
+    public void setDeleteAction(DeleteAction deleteAction) {
+        this.deleteAction = deleteAction;
     }
 }
 

@@ -12,6 +12,7 @@ public class MainFrame extends JFrame {
     private static ToolBar toolBar;
 
     private ActionManager actionManager;
+    private Menu menu;
 
     public static MainFrame getInstance() {
 
@@ -41,6 +42,9 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("ClassyCrafT");
+
+        menu = new Menu();
+        setJMenuBar(menu);
 
 
         toolBar = new ToolBar();
