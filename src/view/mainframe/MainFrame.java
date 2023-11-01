@@ -1,5 +1,7 @@
 package view.mainframe;
 
+import controller.ActionManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,8 +11,7 @@ public class MainFrame extends JFrame {
 
     private static ToolBar toolBar;
 
-
-
+    private ActionManager actionManager;
 
     public static MainFrame getInstance() {
 
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
             throw new RuntimeException(e);
         }
 
+        actionManager = new ActionManager();
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screensize = kit.getScreenSize();
@@ -61,5 +63,13 @@ public class MainFrame extends JFrame {
 
     public static void setToolBar(ToolBar toolBar) {
         MainFrame.toolBar = toolBar;
+    }
+
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
+
+    public void setActionManager(ActionManager actionManager) {
+        this.actionManager = actionManager;
     }
 }

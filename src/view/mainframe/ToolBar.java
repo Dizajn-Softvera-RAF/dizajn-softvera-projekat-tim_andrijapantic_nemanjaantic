@@ -9,9 +9,15 @@ public class ToolBar extends JToolBar {
 
 
         setFloatable(false);
-        setBackground(new Color(255, 255, 204));
-        Dimension sizeT = new Dimension(200, 35);
+        setBackground(new Color(169, 204, 227));
+        Dimension sizeT = new Dimension(200, 50);
         this.setPreferredSize(sizeT.getSize());
-
+        add (MainFrame.getInstance().getActionManager().getNewProjectAction());
+        addSeparator();
+        add (MainFrame.getInstance().getActionManager().getNewPackageAction());
+        addSeparator();
+        add (MainFrame.getInstance().getActionManager().getNewComponentAction());
+        addSeparator();
+        add (MainFrame.getInstance().getActionManager().getInfoAction());
     }
 }
