@@ -24,6 +24,5 @@ public class InfoAction extends AbstractClassyAction {
         Message message = new Message(PossibleErr.ONLY_USE_DOUBLE_CLICK_ON_NODES);
         MessageGenerator msggenerator = new MessageGenerator();
         msggenerator.generateMsg(message);
-        new MessagePane(message);
     }
 }

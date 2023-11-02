@@ -22,6 +22,5 @@ public class DeleteAction extends AbstractClassyAction{
         Message message = new Message(PossibleErr.CANNOT_DELETE_ELEMENT);
         MessageGenerator msggenerator = new MessageGenerator();
         msggenerator.generateMsg(message);
-        new MessagePane(message);
     }
 }

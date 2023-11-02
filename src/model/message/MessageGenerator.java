@@ -5,6 +5,7 @@ import model.event.ISubscriber;
 import model.event.Notification;
 import model.logger.LoggerFactory;
 import model.logger.LoggerType;
+import view.mainframe.MainFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class MessageGenerator implements IPublisher {
 
         subscribers.add(LoggerFactory.createLogger(LoggerType.CONSOLE));
         subscribers.add(LoggerFactory.createLogger(LoggerType.FILE));
+        subscribers.add(MainFrame.getInstance());
     }
 
     public void generateMsg(Message message) {

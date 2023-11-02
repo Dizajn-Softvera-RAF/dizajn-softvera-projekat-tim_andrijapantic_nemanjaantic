@@ -24,6 +24,5 @@ public class NewProjectAction extends AbstractClassyAction{
         Message message = new Message(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT);
         MessageGenerator msggenerator = new MessageGenerator();
         msggenerator.generateMsg(message);
-        new MessagePane(message);
     }
 }

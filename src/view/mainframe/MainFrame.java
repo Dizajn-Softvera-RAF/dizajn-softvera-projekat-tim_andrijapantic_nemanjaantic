@@ -1,11 +1,14 @@
 package view.mainframe;
 
 import controller.ActionManager;
+import model.event.ISubscriber;
+import model.event.Notification;
+import view.dialogs.MessagePane;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance = null;
 
@@ -73,5 +76,10 @@ public class MainFrame extends JFrame {
 
     public void setActionManager(ActionManager actionManager) {
         this.actionManager = actionManager;
+    }
+
+    @Override
+    public void update(Notification notification) {
+        new MessagePane(notification.getMessage());
     }
 }

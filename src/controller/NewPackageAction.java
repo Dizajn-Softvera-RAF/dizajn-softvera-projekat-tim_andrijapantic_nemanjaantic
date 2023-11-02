@@ -24,6 +24,5 @@ public class NewPackageAction extends AbstractClassyAction{
         Message message = new Message(PossibleErr.PROJECT_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
         MessageGenerator msggenerator = new MessageGenerator();
         msggenerator.generateMsg(message);
-        new MessagePane(message);
     }
 }
