@@ -1,4 +1,4 @@
-package message;
+package model.message;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,13 +12,13 @@ public class Message {
 
     public Message(PossibleErr err) {
         if (err.equals(PossibleErr.PROJECT_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE)) {
-            stringContent = "Ne mozes praviti pakete ako nisi selektovao projekat.";
+            stringContent = "Ne mozes praviti Pakete ako nisi selektovao Projekat.";
             this.type = ErrType.ERROR;
         } else if (err.equals(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT)) {
-            stringContent = "Ne mozes praviti komponente ako nisi selektovao paket.";
+            stringContent = "Ne mozes praviti Komponente ako nisi selektovao Paket.";
             this.type = ErrType.ERROR;
         } else if (err.equals(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT)) {
-            stringContent = "Moras selektovati Project Explorer da bi pravio nove projekte.";
+            stringContent = "Ne mozes praviti nove Projekte ako nisi selektovao Project Explorer.";
             this.type = ErrType.ERROR;
         } else if (err.equals(PossibleErr.NAME_CANNOT_BE_EMPTY)) {
             stringContent = "Ime ne sme biti prazno.";
@@ -82,5 +82,10 @@ public class Message {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + type + "] [" + formatter.format(time) + "] " + stringContent;
     }
 }

@@ -1,4 +1,4 @@
-package event;
+package model.event;
 
 public interface IPublisher {
     void addSubscriber(ISubscriber sub);

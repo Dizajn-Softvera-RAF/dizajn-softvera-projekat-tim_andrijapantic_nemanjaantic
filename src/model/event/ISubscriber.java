@@ -1,4 +1,4 @@
-package event;
+package model.event;
 
 public interface ISubscriber {
     void update(Notification notification);

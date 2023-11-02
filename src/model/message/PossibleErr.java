@@ -1,4 +1,4 @@
-package message;
+package model.message;
 
 public enum PossibleErr {
     NODE_CANNOT_BE_DELETED,
