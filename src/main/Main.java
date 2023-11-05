@@ -3,6 +3,8 @@ package main;
 import model.core.AppCore;
 import model.core.SwingGui;
 import model.core.*;
+import view.repository.ClassyRepImplementation;
+import view.repository.ClassyRepository;
 
 public class Main {
 
@@ -10,7 +12,8 @@ public class Main {
 
         AppCore appCore = AppCore.getInstance();
         SwingGui gui = new SwingGuiJava();
-        appCore.initialise(gui);
+        ClassyRepository classyRepository = new ClassyRepImplementation();
+        appCore.initialise(gui, classyRepository);
         appCore.run();
 
 

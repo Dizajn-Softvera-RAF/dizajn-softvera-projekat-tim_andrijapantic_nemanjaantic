@@ -1,10 +1,7 @@
 package view.repository.factory;
 
 import view.repository.composite.ClassyNodeComposite;
-import view.repository.implementation.DiagramNode;
-import view.repository.implementation.PackageNode;
-import view.repository.implementation.ProjectExplorer;
-import view.repository.implementation.ProjectNode;
+import view.repository.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory{
     @Override
@@ -19,6 +16,8 @@ public class NodeFactory extends AbstractNodeFactory{
 
             return new PackageNode(name, parent);
 
+        } else if(type.equals("Element")){
+            return new ElementNode(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);
