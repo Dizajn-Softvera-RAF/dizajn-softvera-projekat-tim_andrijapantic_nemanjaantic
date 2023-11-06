@@ -1,6 +1,7 @@
 package model.tree;
 
 import view.repository.implementation.DiagramNode;
+import view.repository.implementation.PackageNode;
 import view.repository.implementation.ProjectExplorer;
 import view.repository.implementation.ProjectNode;
 
@@ -17,9 +18,11 @@ public class ClassyTreeCellRenderer  extends DefaultTreeCellRenderer {
         if (((MyNodeMutable) value).getClassyNode() instanceof ProjectNode) {
             imageURL = getClass().getResource("/projectImage.png");
         } else if (((MyNodeMutable) value).getClassyNode() instanceof DiagramNode) {
-            imageURL = getClass().getResource("/mapImage.png");
+            imageURL = getClass().getResource("/diagramImage.png");
         } else if (((MyNodeMutable) value).getClassyNode() instanceof ProjectExplorer) {
             imageURL = getClass().getResource("/projectExplorer.png");
+        } else if (((MyNodeMutable) value).getClassyNode() instanceof PackageNode) {
+            imageURL = getClass().getResource("/packageImage.png");
         }
         Icon icon = null;
         if (imageURL != null)
