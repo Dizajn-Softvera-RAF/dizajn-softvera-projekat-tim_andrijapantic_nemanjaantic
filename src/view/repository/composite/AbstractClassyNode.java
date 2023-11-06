@@ -1,9 +1,12 @@
 package view.repository.composite;
 
+import java.util.UUID;
+
 public abstract class AbstractClassyNode {
 
     protected String name;
     protected transient AbstractClassyNode parent;
+    protected UUID id;
 
     public AbstractClassyNode() {
     }
@@ -27,5 +30,14 @@ public abstract class AbstractClassyNode {
     public AbstractClassyNode(String name, AbstractClassyNode parent) {
         this.name = name;
         this.parent = parent;
+        this.id = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

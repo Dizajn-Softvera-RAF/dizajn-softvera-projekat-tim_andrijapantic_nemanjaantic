@@ -64,11 +64,11 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
         if (parent instanceof PackageNode) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram", parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram" + new Random().nextInt(100), parent);
         }
         if(parent instanceof DiagramNode){
 
-            return AppCore.getInstance().getClassyRepository().createNode("Element", "Element", parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Element", "Element" + new Random().nextInt(100), parent);
         }
         return null;
     }
@@ -81,5 +81,13 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void loadProject(ProjectNode node) {
 
+    }
+
+    public ClassyTreeView getTreeView() {
+        return treeView;
+    }
+
+    public void setTreeView(ClassyTreeView treeView) {
+        this.treeView = treeView;
     }
 }

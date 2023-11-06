@@ -1,12 +1,14 @@
 package view.mainframe;
 
 import controller.ActionManager;
+import diagramActions.DoubleClickAction;
 import model.core.AppCore;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.tree.ClassyTreeImplementation;
 import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
+import view.tabs.TabbedPane;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -89,6 +91,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar.setSize(100, 50);
         add(toolBar, BorderLayout.NORTH);
 
+        add(TabbedPane.getInstance());
+
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
@@ -99,7 +103,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         });
 
 
-
+        projectExplorer.addMouseListener(new DoubleClickAction());
 
     }
 
