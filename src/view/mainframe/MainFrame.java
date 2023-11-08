@@ -12,7 +12,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame implements ISubscriber {
 
@@ -89,6 +92,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar.setSize(100, 50);
         add(toolBar, BorderLayout.NORTH);
 
+
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
@@ -97,6 +101,22 @@ public class MainFrame extends JFrame implements ISubscriber {
 
             }
         });
+
+        projectExplorer.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                        if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 2){
+                            int row = projectExplorer.getClosestRowForLocation(e.getX(), e.getY());
+                            projectExplorer.setSelectionRow(row);
+
+                            TreePath path = projectExplorer.getPathForLocation(e.getX(), e.getY());
+                            if (path != null) {
+                                projectExplorer.startEditingAtPath(path);
+                            }
+                        }
+            }
+        });
+
 
 
 
@@ -130,6 +150,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     public void update(Notification notification) {
         new MessagePane(notification.getMessage());
     }
+
 
     public MyNodeMutable getSelectedNode() {
         return selectedNode;
