@@ -24,9 +24,8 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
     @Override
-    public MyNodeMutable addChild(MyNodeMutable parent, Element element, String name) {
-
-        ClassyNodeComposite child = createChild(parent.getClassyNode(), name);
+    public MyNodeMutable addChild(MyNodeMutable parent, Element element) {
+        ClassyNodeComposite child = createChild(parent.getClassyNode());
         if (child instanceof ElementNode) {
 
             ElementNode elementNode = (ElementNode) child;
@@ -36,7 +35,6 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             MyNodeMutable toReturn = new MyNodeMutable(elementNode);
             parent.add(toReturn);
-            parent.getClassyNode().setName(elementNode.getName());
             parent.getClassyNode().addChild(elementNode);
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
@@ -54,23 +52,23 @@ public class ClassyTreeImplementation implements ClassyTree{
         }
     }
 
-    private ClassyNodeComposite createChild(ClassyNodeComposite parent, String name) {
+    private ClassyNodeComposite createChild(ClassyNodeComposite parent) {
 
         if (parent instanceof ProjectExplorer) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("Project", name, parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Project", "Project" + new Random().nextInt(100), parent);
         }
         if (parent instanceof ProjectNode) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("Package", name, parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Package", "Package" + new Random().nextInt(100), parent);
         }
         if (parent instanceof PackageNode) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("Diagram", name, parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram" + new Random().nextInt(1000), parent);
         }
         if(parent instanceof DiagramNode){
 
-            return AppCore.getInstance().getClassyRepository().createNode("Element", name, parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Element", "Element" + new Random().nextInt(100), parent);
         }
         return null;
     }
@@ -83,5 +81,13 @@ public class ClassyTreeImplementation implements ClassyTree{
     @Override
     public void loadProject(ProjectNode node) {
 
+    }
+
+    public ClassyTreeView getTreeView() {
+        return treeView;
+    }
+
+    public void setTreeView(ClassyTreeView treeView) {
+        this.treeView = treeView;
     }
 }

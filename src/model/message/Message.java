@@ -11,11 +11,14 @@ public class Message {
     DateTimeFormatter formatter;
 
     public Message(PossibleErr err) {
-        if (err.equals(PossibleErr.PROJECT_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE)) {
-            stringContent = "Ne mozes praviti Pakete ako nisi selektovao Projekat.";
+        if (err.equals(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE)) {
+            stringContent = "Ne mozes praviti Pakete ako nisi selektovao Projekat ili Paket.";
             this.type = ErrType.ERROR;
-        } else if (err.equals(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT)) {
-            stringContent = "Ne mozes praviti Komponente ako nisi selektovao Paket.";
+        } else if (err.equals(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_DIAGRAM)) {
+            stringContent = "Ne mozes praviti Dijagrame ako nisi selektovao Paket.";
+            this.type = ErrType.ERROR;
+        } else if (err.equals(PossibleErr.DIAGRAM_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT)) {
+            stringContent = "Ne mozes praviti Komponente ako nisi selektovao Dijagram.";
             this.type = ErrType.ERROR;
         } else if (err.equals(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT)) {
             stringContent = "Ne mozes praviti nove Projekte ako nisi selektovao Project Explorer.";
@@ -47,6 +50,9 @@ public class Message {
         } else if (err.equals(PossibleErr.ONLY_USE_DOUBLE_CLICK_ON_NODES)) {
             stringContent = "Dupli klik koristiti samo na node-ovima.";
             this.type = ErrType.INFO;
+        } else if (err.equals(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR)) {
+            stringContent = "Moras selektovati projekat da bi dodao autora.";
+            this.type = ErrType.ERROR;
         }
         time = LocalDateTime.now();
         formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");

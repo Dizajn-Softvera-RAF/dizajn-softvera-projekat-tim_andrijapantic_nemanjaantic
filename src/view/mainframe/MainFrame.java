@@ -1,21 +1,20 @@
 package view.mainframe;
 
 import controller.ActionManager;
+import diagramActions.DoubleClickAction;
 import model.core.AppCore;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.tree.ClassyTreeImplementation;
 import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
+import view.tabs.TabbedPane;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MainFrame extends JFrame implements ISubscriber {
 
@@ -24,7 +23,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTreeImplementation classyTree;
 
     private JPanel leftPanel = new JPanel();
-    private JPanel rightPanel = new JPanel();
 
     private MyNodeMutable selectedNode;
 
@@ -78,9 +76,15 @@ public class MainFrame extends JFrame implements ISubscriber {
         leftPanel.add(projectExplorer, BorderLayout.CENTER);
         leftPanel.add(new JSeparator(1), BorderLayout.EAST);
 
+        JLabel autor = new JLabel();
+        JLabel projekat = new JLabel();
+        autor.setText("Autor");
+        projekat.setText("Projekat");
+        add(autor);
+        add(projekat);
+
 
         add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
 
         revalidate();
 
@@ -92,6 +96,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar.setSize(100, 50);
         add(toolBar, BorderLayout.NORTH);
 
+        add(new PackageView());
 
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
@@ -102,25 +107,9 @@ public class MainFrame extends JFrame implements ISubscriber {
             }
         });
 
-        projectExplorer.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                        if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 2){
-                            int row = projectExplorer.getClosestRowForLocation(e.getX(), e.getY());
-                            projectExplorer.setSelectionRow(row);
 
-                            TreePath path = projectExplorer.getPathForLocation(e.getX(), e.getY());
-                            if (path != null) {
-                                projectExplorer.startEditingAtPath(path);
-                            }
-                        }
-            }
-        });
-
-
-
-
-
+        projectExplorer.addMouseListener(new DoubleClickAction());
+        setIconImage(new ImageIcon(getClass().getResource("/images/ClassyCrafT.png")).getImage());
     }
 
 
@@ -150,7 +139,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     public void update(Notification notification) {
         new MessagePane(notification.getMessage());
     }
-
 
     public MyNodeMutable getSelectedNode() {
         return selectedNode;
