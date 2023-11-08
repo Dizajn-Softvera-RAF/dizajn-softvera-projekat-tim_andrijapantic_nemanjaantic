@@ -12,8 +12,8 @@ import java.awt.event.ActionEvent;
 public class ChangeAuthorAction extends AbstractClassyAction{
     public ChangeAuthorAction() {
         putValue(SMALL_ICON, loadIcon("/images/author.png"));
-        putValue(NAME, "Delete");
-        putValue(SHORT_DESCRIPTION, "Delete");
+        putValue(NAME, "Change Author");
+        putValue(SHORT_DESCRIPTION, "Change Author");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
