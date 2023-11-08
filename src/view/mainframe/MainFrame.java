@@ -109,7 +109,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
         projectExplorer.addMouseListener(new DoubleClickAction());
-
+        setIconImage(new ImageIcon(getClass().getResource("/images/ClassyCrafT.png")).getImage());
     }
 
 

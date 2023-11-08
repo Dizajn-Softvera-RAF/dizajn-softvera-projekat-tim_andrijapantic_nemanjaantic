@@ -3,7 +3,9 @@ package controller;
 import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
+import view.dialogs.InfoDialog;
 import view.dialogs.MessagePane;
+import view.mainframe.MainFrame;
 
 import java.awt.event.ActionEvent;
 
@@ -18,11 +20,6 @@ public class InfoAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /**
-         *  OVO ISPOD JE TEST, I OVAJ MESSAGE SE NECE KORISTITI OVDE
-         */
-        Message message = new Message(PossibleErr.ONLY_USE_DOUBLE_CLICK_ON_NODES);
-        MessageGenerator msggenerator = new MessageGenerator();
-        msggenerator.generateMsg(message);
+        new InfoDialog(MainFrame.getInstance(), "Info Window");
     }
 }
