@@ -21,7 +21,7 @@ public class NewComponentAction extends AbstractClassyAction{
         /**
          *  OVO ISPOD JE TEST, DODACE SE VEROVATNO U NULLPOINTEREXCEPTION
          */
-        Message message = new Message(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT);
+        Message message = new Message(PossibleErr.DIAGRAM_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT);
         MessageGenerator msggenerator = new MessageGenerator();
         msggenerator.generateMsg(message);
     }

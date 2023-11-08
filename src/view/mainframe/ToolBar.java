@@ -14,8 +14,6 @@ public class ToolBar extends JToolBar {
         this.setPreferredSize(sizeT.getSize());
         add (MainFrame.getInstance().getActionManager().getNewProjectAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getNewPackageAction());
-        addSeparator();
         add (MainFrame.getInstance().getActionManager().getNewComponentAction());
         addSeparator();
         add (MainFrame.getInstance().getActionManager().getInfoAction());

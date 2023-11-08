@@ -3,7 +3,11 @@ package controller;
 import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
+import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
+import view.mainframe.MainFrame;
+import view.repository.implementation.PackageNode;
+import view.repository.implementation.ProjectNode;
 
 import java.awt.event.ActionEvent;
 
@@ -21,8 +25,20 @@ public class NewPackageAction extends AbstractClassyAction{
         /**
          *  OVO ISPOD JE TEST, DODACE SE VEROVATNO U NULLPOINTEREXCEPTION
          */
-        Message message = new Message(PossibleErr.PROJECT_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
-        MessageGenerator msggenerator = new MessageGenerator();
-        msggenerator.generateMsg(message);
+        try {
+            MyNodeMutable selected = MainFrame.getInstance().getSelectedNode();
+            if (selected.getClassyNode() instanceof ProjectNode || selected.getClassyNode() instanceof PackageNode) {
+
+            } else {
+                Message message = new Message(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
+                MessageGenerator msggenerator = new MessageGenerator();
+                msggenerator.generateMsg(message);
+            }
+        } catch (NullPointerException exception) {
+            Message message = new Message(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
+            MessageGenerator msggenerator = new MessageGenerator();
+            msggenerator.generateMsg(message);
+        }
+
     }
 }
