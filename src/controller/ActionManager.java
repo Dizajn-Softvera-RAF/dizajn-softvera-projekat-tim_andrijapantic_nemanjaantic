@@ -8,6 +8,8 @@ public class ActionManager {
     private NewComponentAction newComponentAction;
     private InfoAction infoAction;
     private DeleteAction deleteAction;
+    private NewDiagramAction newDiagramAction;
+    private ChangeAuthorAction changeAuthorAction;
 
     public ActionManager() {initilizeActions();}
 
@@ -18,6 +20,8 @@ public class ActionManager {
         newComponentAction = new NewComponentAction();
         infoAction = new InfoAction();
         deleteAction = new DeleteAction();
+        newDiagramAction = new NewDiagramAction();
+        changeAuthorAction = new ChangeAuthorAction();
     }
 
     public ExitAction getExitAction() {
@@ -66,6 +70,22 @@ public class ActionManager {
 
     public void setDeleteAction(DeleteAction deleteAction) {
         this.deleteAction = deleteAction;
+    }
+
+    public NewDiagramAction getNewDiagramAction() {
+        return newDiagramAction;
+    }
+
+    public void setNewDiagramAction(NewDiagramAction newDiagramAction) {
+        this.newDiagramAction = newDiagramAction;
+    }
+
+    public ChangeAuthorAction getChangeAuthorAction() {
+        return changeAuthorAction;
+    }
+
+    public void setChangeAuthorAction(ChangeAuthorAction changeAuthorAction) {
+        this.changeAuthorAction = changeAuthorAction;
     }
 }
 

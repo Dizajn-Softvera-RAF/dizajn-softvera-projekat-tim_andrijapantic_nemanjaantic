@@ -4,6 +4,7 @@ import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import model.tree.MyNodeMutable;
+import view.dialogs.AddToPackageView;
 import view.dialogs.MessagePane;
 import view.mainframe.MainFrame;
 import view.repository.implementation.PackageNode;
@@ -25,8 +26,9 @@ public class NewProjectAction extends AbstractClassyAction{
         try {
             MyNodeMutable selected = MainFrame.getInstance().getSelectedNode();
             if (selected.getClassyNode() instanceof PackageNode) {
-                MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-                TabbedPane.getInstance().addNewPane(createdChild.getClassyNode().getName(), createdChild.getClassyNode().getId(), null);
+                new AddToPackageView();
+               /// MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
+               // TabbedPane.getInstance().addNewPane(createdChild.getClassyNode().getName(), createdChild.getClassyNode().getId(), null);
             } else {
                 MainFrame.getInstance().getClassyTree().addChild(selected, null);
             }

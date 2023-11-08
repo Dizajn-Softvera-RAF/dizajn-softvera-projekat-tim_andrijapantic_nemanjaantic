@@ -23,7 +23,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTreeImplementation classyTree;
 
     private JPanel leftPanel = new JPanel();
-    private JPanel rightPanel = new JPanel();
 
     private MyNodeMutable selectedNode;
 
@@ -77,9 +76,15 @@ public class MainFrame extends JFrame implements ISubscriber {
         leftPanel.add(projectExplorer, BorderLayout.CENTER);
         leftPanel.add(new JSeparator(1), BorderLayout.EAST);
 
+        JLabel autor = new JLabel();
+        JLabel projekat = new JLabel();
+        autor.setText("Autor");
+        projekat.setText("Projekat");
+        add(autor);
+        add(projekat);
+
 
         add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
 
         revalidate();
 
@@ -91,7 +96,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar.setSize(100, 50);
         add(toolBar, BorderLayout.NORTH);
 
-        add(TabbedPane.getInstance());
+        add(new PackageView());
 
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
             @Override

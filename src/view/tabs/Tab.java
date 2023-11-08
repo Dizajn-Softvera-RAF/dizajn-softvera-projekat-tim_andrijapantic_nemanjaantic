@@ -51,15 +51,6 @@ public class Tab  {
         gbc.weightx = 0;
         this.header.add(btnClose, gbc);
         btnClose.addActionListener(new CloseTabAction(this));
-        /**
-        gbc.gridx--;
-        gbc.gridy++;
-        gbc.weighty = 1;
-        this.header.add(new JLabel("Author:"), gbc);
-
-        gbc.gridx++;
-        this.header.add(authorField, gbc);
-        */
 
     }
 

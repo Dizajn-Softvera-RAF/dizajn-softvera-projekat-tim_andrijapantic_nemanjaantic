@@ -14,6 +14,10 @@ public class Menu extends JMenuBar {
         JMenuItem miNew = new JMenuItem("New");
         JMenuItem miAboutUs = new JMenuItem("About Us");
         JMenuItem miDelete = new JMenuItem("Delete");
+        JMenuItem miChangeAuthor = new JMenuItem("Change Author");
+
+        miNew.addActionListener(MainFrame.getInstance().getActionManager().getNewProjectAction());
+        miChangeAuthor.addActionListener(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);
@@ -21,10 +25,11 @@ public class Menu extends JMenuBar {
         file.add(miNew);
         edit.add(miAboutUs);
         functions.add(miDelete);
+        edit.add(miChangeAuthor);
 
-        JMenuItem miOpen = new JMenuItem("Open");
-        JMenuItem miClose = new JMenuItem("Close Window");
-        JMenuItem miCloseAll = new JMenuItem("Close All");
+        JMenuItem miExit = new JMenuItem("Exit");
+        miExit.addActionListener(MainFrame.getInstance().getActionManager().getExitAction());
+        file.add(miExit);
 
         add(file);
         add(edit);
