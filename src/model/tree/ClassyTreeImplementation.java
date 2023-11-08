@@ -23,6 +23,9 @@ public class ClassyTreeImplementation implements ClassyTree{
         return treeView;
     }
 
+
+
+
     @Override
     public MyNodeMutable addChild(MyNodeMutable parent, Element element) {
         ClassyNodeComposite child = createChild(parent.getClassyNode());

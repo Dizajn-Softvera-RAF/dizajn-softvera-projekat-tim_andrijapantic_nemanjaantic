@@ -85,6 +85,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
 
         add(leftPanel, BorderLayout.WEST);
+        leftPanel.add(new JScrollPane(projectExplorer));
 
         revalidate();
 
