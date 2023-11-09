@@ -120,20 +120,16 @@ public class Tab  implements ISubscriber {
     @Override
     public void update(Notification notification) {
         if (notification.getType().equals(NotificationType.DELETE_DIAGRAM)) {
-            //try {
-                System.out.println("Dobio sam delete diagram poruku!~");
-                if (this.getId().equals(notification.getId())) {
-                    MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
-                    parent.getListaTabova().remove(this);
-                    parent.removeTab(title, id);
-                }
-         //   } catch (ConcurrentModificationException exception) {}
+            if (this.getId().equals(notification.getId())) {
+                MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
+                parent.getListaTabova().remove(this);
+                parent.removeTab(title, id);
+            }
 
 
         } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
-            System.out.println("Dobio sam delete package poruku!~");
             int counter = notification.getNode().getChildCount();
-            System.out.println("Deca koju treba da obrisem: " + counter);
+            System.out.println("Broj dece koju treba da obrisem: " + counter);
             System.out.println(notification.getNode().getChildCount());
             for (int i = 0; i < counter; i = i + 1) {
 

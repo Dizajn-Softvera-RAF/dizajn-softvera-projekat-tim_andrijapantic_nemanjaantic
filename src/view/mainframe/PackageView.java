@@ -21,6 +21,7 @@ public class PackageView extends JPanel implements ISubscriber {
     JLabel imeAutora = new JLabel("NoInput");
     JLabel imeProjekta = new JLabel("No Project Selected");
     ProjectNode projectNode;
+    PackageNode packageNode;
 
     public PackageView() {
         projectNode = new ProjectNode();

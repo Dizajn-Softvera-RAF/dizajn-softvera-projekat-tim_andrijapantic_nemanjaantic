@@ -69,11 +69,10 @@ public class DeleteAction extends AbstractClassyAction{
                     Notification notification = new Notification(NotificationType.DELETE_PROJECT, nodeToDelete);
                     projectExplorer.notifySubscribers(notification);
                     int n = nodeToDelete.getChildCount();
-                    System.out.println("N je: " + n);
+                    System.out.println("Broj dece koje brisem mog projekta: " + n);
                     TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().clear();
                     for (int index=0; index<n; index++) {
                         if (nodeToDelete.getClassyNode().getChildren().get(index) instanceof PackageNode) {
-                            System.out.println("Provalio sam da je paket");
                             projectExplorer.notifySubscribers(new Notification(NotificationType.DELETE_PACKAGE, (MyNodeMutable) nodeToDelete.getChildAt(index)));
                         }
                     }
