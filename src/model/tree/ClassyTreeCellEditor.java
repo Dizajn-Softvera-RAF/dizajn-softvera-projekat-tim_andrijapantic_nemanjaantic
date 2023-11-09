@@ -1,5 +1,10 @@
 package model.tree;
 
+import model.event.Notification;
+import model.event.NotificationType;
+import model.message.Message;
+import model.message.MessageGenerator;
+import model.message.PossibleErr;
 import view.tree.ClassyTreeView;
 
 import javax.swing.*;
@@ -49,15 +54,18 @@ public class ClassyTreeCellEditor  extends DefaultTreeCellEditor implements Acti
         if (!e.getActionCommand().equals("")) {
             MyNodeMutable clicked = (MyNodeMutable) clickedOn;
             clicked.getClassyNode().setName(e.getActionCommand());
-            ClassyTreeView mapTreeView = (ClassyTreeView) tree;
+            Notification notification = new Notification(NotificationType.RENAME, clicked.getClassyNode().getName());
 
+            notification.setId(clicked.getClassyNode().getId());
+
+            ClassyTreeView mapTreeView = (ClassyTreeView) tree;
+            mapTreeView.notifySubscribers(notification);
         }
 
         else {
-            /*Message message = new Message(PossibleErr.NAME_CANNOT_BE_EMPTY);
+            Message message = new Message(PossibleErr.NAME_CANNOT_BE_EMPTY);
             MessageGenerator msggenerator = new MessageGenerator();
             msggenerator.generateMsg(message);
-            ErrorPane ep = new ErrorPane(message);*/
         }
 
 

@@ -17,12 +17,12 @@ public class Notification {
         this.type = type;
         this.title = title;
     }
-    /**
+
     public Notification(NotificationType type, MyNodeMutable projectToDelete) {
         this.type = type;
         this.nodeToDelete = projectToDelete;
     }
-    **/
+
     public Notification(NotificationType type, UUID id) {
         this.type = type;
         this.id = id;

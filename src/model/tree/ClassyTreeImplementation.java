@@ -15,6 +15,9 @@ public class ClassyTreeImplementation implements ClassyTree{
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
     private MyNodeMutable root;
+
+    public ClassyTreeImplementation() {}
+
     @Override
     public ClassyTreeView generateTree(ProjectExplorer projectExplorer) {
         root = new MyNodeMutable(projectExplorer);
@@ -92,5 +95,13 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     public void setTreeView(ClassyTreeView treeView) {
         this.treeView = treeView;
+    }
+
+    public DefaultTreeModel getTreeModel() {
+        return treeModel;
+    }
+
+    public void setTreeModel(DefaultTreeModel treeModel) {
+        this.treeModel = treeModel;
     }
 }

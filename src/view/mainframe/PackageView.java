@@ -1,15 +1,19 @@
 package view.mainframe;
 
+import model.event.ISubscriber;
+import model.event.Notification;
+import model.event.NotificationType;
 import view.tabs.TabbedPane;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
-public class PackageView extends JPanel {
+public class PackageView extends JPanel implements ISubscriber {
     JLabel autorJe = new JLabel();
     JLabel projekatJe = new JLabel();
-    JLabel imeAutora = new JLabel("AutorSample");
+    String imeZaAutora = "NoInput";
+    JLabel imeAutora = new JLabel();
     JLabel imeProjekta = new JLabel("ProjekatSample");
 
     public PackageView() {
@@ -28,5 +32,12 @@ public class PackageView extends JPanel {
         setLayout(new BorderLayout());
         add(containerPanel, BorderLayout.PAGE_START);
         add(TabbedPane.getInstance(), BorderLayout.CENTER);
+    }
+
+    @Override
+    public void update(Notification notification) {
+        if (notification.getType().equals(NotificationType.CHANGE_AUTHOR)) {
+            imeZaAutora = notification.getTitle();
+        }
     }
 }

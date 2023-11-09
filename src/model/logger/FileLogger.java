@@ -37,6 +37,7 @@ public class FileLogger extends Logger{
 
     @Override
     public void update(Notification notification) {
+        System.out.println("Uso sam u notification~!~ DObio sam poruku za message");
         log(notification.getMessage());
     }
 }

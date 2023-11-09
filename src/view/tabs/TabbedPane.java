@@ -16,6 +16,7 @@ public class TabbedPane  extends JTabbedPane {
 
     private static TabbedPane instance = null;
     private ArrayList<Tab> listaTabova = new ArrayList<>();
+    private ArrayList<Tab> trenutniTaboviZaBrisanje = new ArrayList<>();
 
     private Tab selectedTab;
 
@@ -76,7 +77,8 @@ public class TabbedPane  extends JTabbedPane {
         tab.setDiagramView(diagramView);
         this.addTab(tab.getTitle(), diagramView);
         this.setTabComponentAt(indexOfTab(tab.getTitle()), tab.getHeader());
-       // MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(tab);
+        MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(tab);
+        System.out.println(MainFrame.getInstance().getClassyTree().getTreeView().getSubscribers());
         listaTabova.add(tab);
     }
 
@@ -91,6 +93,16 @@ public class TabbedPane  extends JTabbedPane {
             }
         }
         return false;
+    }
+
+    public int getIndexOfTab(String title, UUID id) {
+        int counter = this.getTabCount();
+        for (int i = 0; i < counter; i++) {
+            if (this.getListaTabova().get(i).getId().equals(id) && this.getListaTabova().get(i).getTitle().equals(title)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void removeTab(String tabName, UUID id) {
@@ -111,5 +123,13 @@ public class TabbedPane  extends JTabbedPane {
                 }
             }
         }
+    }
+
+    public ArrayList<Tab> getTrenutniTaboviZaBrisanje() {
+        return trenutniTaboviZaBrisanje;
+    }
+
+    public void setTrenutniTaboviZaBrisanje(ArrayList<Tab> trenutniTaboviZaBrisanje) {
+        this.trenutniTaboviZaBrisanje = trenutniTaboviZaBrisanje;
     }
 }

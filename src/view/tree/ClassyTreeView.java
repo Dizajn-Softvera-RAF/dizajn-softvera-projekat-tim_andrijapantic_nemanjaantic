@@ -14,10 +14,10 @@ import java.util.List;
 
 public class ClassyTreeView extends JTree implements IPublisher {
 
-    private List<ISubscriber> subscriberList;
+    private List<ISubscriber> subscribers;
 
     public ClassyTreeView(DefaultTreeModel defaultTreeModel) {
-        subscriberList = new ArrayList<>();
+        subscribers = new ArrayList<>();
         setModel(defaultTreeModel);
         ClassyTreeCellRenderer ruTreeCellRenderer = new ClassyTreeCellRenderer();
         addTreeSelectionListener(new ClassyTreeSelectionListener());
@@ -27,16 +27,23 @@ public class ClassyTreeView extends JTree implements IPublisher {
     }
     @Override
     public void addSubscriber(ISubscriber sub) {
-
+        subscribers.add(sub);
     }
 
     @Override
     public void removeSubscriber(ISubscriber sub) {
-
+        subscribers.remove(sub);
     }
 
     @Override
     public void notifySubscribers(Notification notification) {
+        for (ISubscriber subscriber : subscribers) {
 
+            subscriber.update(notification);
+        }
+    }
+
+    public List<ISubscriber> getSubscribers() {
+        return subscribers;
     }
 }

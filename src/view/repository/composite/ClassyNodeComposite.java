@@ -29,4 +29,9 @@ public abstract class ClassyNodeComposite<T>  extends AbstractClassyNode{
     }
 
     public abstract void addChild(AbstractClassyNode child);
+
+    @Override
+    public String toString() {
+        return super.name;
+    }
 }

@@ -1,13 +1,19 @@
 package view.tabs;
 
 import diagramActions.CloseTabAction;
+import model.event.ISubscriber;
+import model.event.Notification;
+import model.event.NotificationType;
+import model.tree.MyNodeMutable;
 import view.mainframe.DiagramView;
+import view.mainframe.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ConcurrentModificationException;
 import java.util.UUID;
 
-public class Tab  {
+public class Tab  implements ISubscriber {
     private TabbedPane parent;
     private String title;
 
@@ -109,5 +115,60 @@ public class Tab  {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @Override
+    public void update(Notification notification) {
+        if (notification.getType().equals(NotificationType.DELETE_DIAGRAM)) {
+            //try {
+                System.out.println("Dobio sam delete diagram poruku!~");
+                if (this.getId().equals(notification.getId())) {
+                    MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
+                    parent.getListaTabova().remove(this);
+                    parent.removeTab(title, id);
+                }
+         //   } catch (ConcurrentModificationException exception) {}
+
+
+        } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
+            System.out.println("Dobio sam delete package poruku!~");
+            int counter = notification.getNodeToDelete().getChildCount();
+            System.out.println("Deca koju treba da obrisem: " + counter);
+            System.out.println(notification.getNodeToDelete().getChildCount());
+            for (int i = 0; i < counter; i = i + 1) {
+
+                MyNodeMutable checkForDeletion = (MyNodeMutable) notification.getNodeToDelete().getChildAt(i);
+                if (this.getId().equals(checkForDeletion.getClassyNode().getId())) {
+                    /**
+                    System.out.println("Node za izbrisati: " + checkForDeletion.getClassyNode().getName());
+                    parent.removeTab(title, id);
+                    parent.getListaTabova().remove(this);
+                    MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
+                     */
+                    parent.getTrenutniTaboviZaBrisanje().add(this);
+                }
+
+            }
+
+        } else if (notification.getType().equals(NotificationType.RENAME)) {
+
+            if (this.getId().equals(notification.getId())) {
+
+                int count = parent.getTabCount();
+
+
+                for (int i = 0; i < count; i++) {
+
+                    if (parent.getTitleAt(i).equals(this.getTitle())) {
+
+                        parent.setTitleAt(i, notification.getTitle());
+                        headerLabel.setText(notification.getTitle());
+                        headerLabel.revalidate();
+                        headerLabel.repaint();
+                    }
+                }
+                this.setTitle(notification.getTitle());
+            }
+        }
     }
 }

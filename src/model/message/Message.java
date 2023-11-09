@@ -53,6 +53,9 @@ public class Message {
         } else if (err.equals(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR)) {
             stringContent = "Moras selektovati projekat da bi dodao autora.";
             this.type = ErrType.ERROR;
+        } else if (err.equals(PossibleErr.CANNOT_DELETE_PROJECT_EXPLORER)) {
+            stringContent = "Ne mozes izbrisati Project Explorer.";
+            this.type = ErrType.ERROR;
         }
         time = LocalDateTime.now();
         formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
