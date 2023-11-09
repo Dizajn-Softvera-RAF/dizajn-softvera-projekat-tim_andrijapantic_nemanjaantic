@@ -19,10 +19,11 @@ public class PackageView extends JPanel implements ISubscriber {
     public PackageView() {
         autorJe.setText("Autor: ");
         projekatJe.setText("Projekat: ");
-
-        JPanel containerPanel = new JPanel(); // Leave the layout to the default FlowLayout
+        MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(this);
+        JPanel containerPanel = new JPanel();
         containerPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         containerPanel.setSize(100,50);
+        imeAutora.setText(imeZaAutora);
         containerPanel.add(autorJe);
         containerPanel.add(imeAutora);
         containerPanel.add(Box.createRigidArea(new Dimension(100, 0)));
@@ -38,6 +39,7 @@ public class PackageView extends JPanel implements ISubscriber {
     public void update(Notification notification) {
         if (notification.getType().equals(NotificationType.CHANGE_AUTHOR)) {
             imeZaAutora = notification.getTitle();
+            imeAutora.setText(imeZaAutora);
         }
     }
 }

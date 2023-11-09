@@ -27,8 +27,6 @@ public class NewProjectAction extends AbstractClassyAction{
             MyNodeMutable selected = MainFrame.getInstance().getSelectedNode();
             if (selected.getClassyNode() instanceof PackageNode) {
                 new AddToPackageView();
-               /// MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-               // TabbedPane.getInstance().addNewPane(createdChild.getClassyNode().getName(), createdChild.getClassyNode().getId(), null);
             } else {
                 MainFrame.getInstance().getClassyTree().addChild(selected, null);
             }
