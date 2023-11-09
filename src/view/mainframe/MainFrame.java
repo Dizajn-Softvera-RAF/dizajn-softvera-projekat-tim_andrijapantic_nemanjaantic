@@ -5,6 +5,7 @@ import diagramActions.DoubleClickAction;
 import model.core.AppCore;
 import model.event.ISubscriber;
 import model.event.Notification;
+import model.event.NotificationType;
 import model.tree.ClassyTreeImplementation;
 import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
@@ -104,7 +105,7 @@ public class MainFrame extends JFrame implements ISubscriber {
             public void valueChanged(TreeSelectionEvent e) {
 
                 selectedNode = (MyNodeMutable) projectExplorer.getLastSelectedPathComponent();
-
+                classyTree.getTreeView().notifySubscribers(new Notification(NotificationType.NODE_SELECTION_CHANGED, selectedNode));
             }
         });
 

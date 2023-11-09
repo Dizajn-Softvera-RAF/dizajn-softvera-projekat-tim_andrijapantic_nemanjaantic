@@ -10,7 +10,7 @@ public class Notification {
     private String title;
     private NotificationType type;
     private UUID id;
-    private MyNodeMutable nodeToDelete;
+    private MyNodeMutable node;
     public Notification() {}
 
     public Notification(NotificationType type, String title) {
@@ -18,9 +18,9 @@ public class Notification {
         this.title = title;
     }
 
-    public Notification(NotificationType type, MyNodeMutable projectToDelete) {
+    public Notification(NotificationType type, MyNodeMutable node) {
         this.type = type;
-        this.nodeToDelete = projectToDelete;
+        this.node = node;
     }
 
     public Notification(NotificationType type, UUID id) {
@@ -60,11 +60,11 @@ public class Notification {
         this.id = id;
     }
 
-    public MyNodeMutable getNodeToDelete() {
-        return nodeToDelete;
+    public MyNodeMutable getNode() {
+        return node;
     }
 
-    public void setNodeToDelete(MyNodeMutable nodeToDelete) {
-        this.nodeToDelete = nodeToDelete;
+    public void setNode(MyNodeMutable nodeToDelete) {
+        this.node = nodeToDelete;
     }
 }

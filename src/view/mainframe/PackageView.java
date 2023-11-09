@@ -1,8 +1,14 @@
 package view.mainframe;
 
+import controller.AbstractClassyAction;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.event.NotificationType;
+import model.tree.MyNodeMutable;
+import view.repository.composite.AbstractClassyNode;
+import view.repository.implementation.PackageNode;
+import view.repository.implementation.ProjectExplorer;
+import view.repository.implementation.ProjectNode;
 import view.tabs.TabbedPane;
 
 import javax.swing.*;
@@ -12,18 +18,20 @@ import java.awt.*;
 public class PackageView extends JPanel implements ISubscriber {
     JLabel autorJe = new JLabel();
     JLabel projekatJe = new JLabel();
-    String imeZaAutora = "NoInput";
-    JLabel imeAutora = new JLabel();
-    JLabel imeProjekta = new JLabel("ProjekatSample");
+    JLabel imeAutora = new JLabel("NoInput");
+    JLabel imeProjekta = new JLabel("No Project Selected");
+    ProjectNode projectNode;
 
     public PackageView() {
+        projectNode = new ProjectNode();
         autorJe.setText("Autor: ");
         projekatJe.setText("Projekat: ");
+
         MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(this);
         JPanel containerPanel = new JPanel();
         containerPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         containerPanel.setSize(100,50);
-        imeAutora.setText(imeZaAutora);
+
         containerPanel.add(autorJe);
         containerPanel.add(imeAutora);
         containerPanel.add(Box.createRigidArea(new Dimension(100, 0)));
@@ -38,8 +46,34 @@ public class PackageView extends JPanel implements ISubscriber {
     @Override
     public void update(Notification notification) {
         if (notification.getType().equals(NotificationType.CHANGE_AUTHOR)) {
-            imeZaAutora = notification.getTitle();
-            imeAutora.setText(imeZaAutora);
+            projectNode.setAuthor(notification.getTitle());
+            imeAutora.setText(projectNode.getAuthor());
+        } else if (notification.getType().equals(NotificationType.NODE_SELECTION_CHANGED)) {
+            MyNodeMutable selected = notification.getNode();
+            if (selected!=null) {
+                if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
+                    if (selected.getClassyNode() instanceof ProjectNode) {
+                        projectNode = (ProjectNode)selected.getClassyNode();
+                        if (projectNode.getAuthor()!=null)
+                            imeAutora.setText(projectNode.getAuthor());
+                        else
+                            imeAutora.setText("NoInput");
+                    } else {
+                        AbstractClassyNode currentNode = selected.getClassyNode();
+                        while (!(currentNode instanceof ProjectNode)) {
+                            AbstractClassyNode temp = currentNode;
+                            temp = currentNode.getParent();
+                            currentNode = temp;
+                        }
+                        projectNode = (ProjectNode) currentNode;
+                    }
+                    imeProjekta.setText(projectNode.getName());
+                }
+            } else {
+                imeProjekta.setText("No Project Selected");
+                imeAutora.setText("NoInput");
+            }
         }
+
     }
 }

@@ -78,7 +78,6 @@ public class TabbedPane  extends JTabbedPane {
         this.addTab(tab.getTitle(), diagramView);
         this.setTabComponentAt(indexOfTab(tab.getTitle()), tab.getHeader());
         MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(tab);
-        System.out.println(MainFrame.getInstance().getClassyTree().getTreeView().getSubscribers());
         listaTabova.add(tab);
     }
 

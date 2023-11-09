@@ -132,19 +132,13 @@ public class Tab  implements ISubscriber {
 
         } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
             System.out.println("Dobio sam delete package poruku!~");
-            int counter = notification.getNodeToDelete().getChildCount();
+            int counter = notification.getNode().getChildCount();
             System.out.println("Deca koju treba da obrisem: " + counter);
-            System.out.println(notification.getNodeToDelete().getChildCount());
+            System.out.println(notification.getNode().getChildCount());
             for (int i = 0; i < counter; i = i + 1) {
 
-                MyNodeMutable checkForDeletion = (MyNodeMutable) notification.getNodeToDelete().getChildAt(i);
+                MyNodeMutable checkForDeletion = (MyNodeMutable) notification.getNode().getChildAt(i);
                 if (this.getId().equals(checkForDeletion.getClassyNode().getId())) {
-                    /**
-                    System.out.println("Node za izbrisati: " + checkForDeletion.getClassyNode().getName());
-                    parent.removeTab(title, id);
-                    parent.getListaTabova().remove(this);
-                    MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
-                     */
                     parent.getTrenutniTaboviZaBrisanje().add(this);
                 }
 
