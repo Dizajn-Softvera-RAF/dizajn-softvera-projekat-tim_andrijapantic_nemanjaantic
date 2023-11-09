@@ -3,7 +3,7 @@ package main;
 import core.AppCore;
 import core.SwingGui;
 import core.SwingGuiJava;
-import model.core.*;
+import core.*;
 import model.repository.ClassyRepImplementation;
 import model.repository.ClassyRepository;
 

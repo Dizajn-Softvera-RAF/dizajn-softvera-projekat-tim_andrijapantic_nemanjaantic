@@ -2,7 +2,7 @@ package model.repository.factory;
 
 import model.repository.composite.ClassyNodeComposite;
 import model.repository.implementation.*;
-import view.repository.implementation.*;
+import model.repository.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory{
     @Override
