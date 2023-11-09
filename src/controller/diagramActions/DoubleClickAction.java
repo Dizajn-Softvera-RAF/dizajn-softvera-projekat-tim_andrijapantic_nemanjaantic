@@ -1,13 +1,13 @@
-package diagramActions;
+package controller.diagramActions;
 
 import controller.AbstractClassyAction;
 import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import view.mainframe.MainFrame;
-import view.repository.composite.ClassyNodeComposite;
-import view.repository.implementation.DiagramNode;
-import view.repository.implementation.PackageNode;
+import model.repository.composite.ClassyNodeComposite;
+import model.repository.implementation.DiagramNode;
+import model.repository.implementation.PackageNode;
 import view.tabs.TabbedPane;
 
 import java.awt.event.ActionEvent;

@@ -1,6 +1,6 @@
 package view.tabs;
 
-import diagramActions.CloseTabAction;
+import controller.diagramActions.CloseTabAction;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.event.NotificationType;
@@ -10,7 +10,6 @@ import view.mainframe.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ConcurrentModificationException;
 import java.util.UUID;
 
 public class Tab  implements ISubscriber {

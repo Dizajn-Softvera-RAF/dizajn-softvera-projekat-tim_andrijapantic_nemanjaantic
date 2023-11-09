@@ -1,4 +1,4 @@
-package diagramActions;
+package controller.diagramActions;
 
 import controller.AbstractClassyAction;
 import view.tabs.Tab;

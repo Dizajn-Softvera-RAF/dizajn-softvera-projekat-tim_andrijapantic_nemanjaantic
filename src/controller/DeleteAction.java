@@ -6,25 +6,19 @@ import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import model.tree.MyNodeMutable;
-import view.dialogs.MessagePane;
 import view.mainframe.MainFrame;
-import view.repository.composite.AbstractClassyNode;
-import view.repository.composite.ClassyNodeComposite;
-import view.repository.implementation.DiagramNode;
-import view.repository.implementation.PackageNode;
-import view.repository.implementation.ProjectExplorer;
-import view.repository.implementation.ProjectNode;
+import model.repository.implementation.DiagramNode;
+import model.repository.implementation.PackageNode;
+import model.repository.implementation.ProjectExplorer;
+import model.repository.implementation.ProjectNode;
 import view.tabs.Tab;
 import view.tabs.TabbedPane;
 import view.tree.ClassyTreeView;
 
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.UUID;
-
-import static javafx.scene.input.KeyCode.T;
 
 public class DeleteAction extends AbstractClassyAction{
     public DeleteAction() {

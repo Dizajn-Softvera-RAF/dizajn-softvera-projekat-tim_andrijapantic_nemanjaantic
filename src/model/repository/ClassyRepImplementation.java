@@ -1,8 +1,8 @@
-package view.repository;
+package model.repository;
 
-import view.repository.composite.ClassyNodeComposite;
-import view.repository.factory.NodeFactory;
-import view.repository.implementation.ProjectExplorer;
+import model.repository.composite.ClassyNodeComposite;
+import model.repository.factory.NodeFactory;
+import model.repository.implementation.ProjectExplorer;
 
 public class ClassyRepImplementation implements ClassyRepository{
 

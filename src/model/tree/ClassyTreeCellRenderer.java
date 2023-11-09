@@ -1,9 +1,9 @@
 package model.tree;
 
-import view.repository.implementation.DiagramNode;
-import view.repository.implementation.PackageNode;
-import view.repository.implementation.ProjectExplorer;
-import view.repository.implementation.ProjectNode;
+import model.repository.implementation.DiagramNode;
+import model.repository.implementation.PackageNode;
+import model.repository.implementation.ProjectExplorer;
+import model.repository.implementation.ProjectNode;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;

@@ -1,8 +1,8 @@
 package model.tree;
 
-import model.core.AppCore;
-import view.repository.composite.ClassyNodeComposite;
-import view.repository.implementation.*;
+import core.AppCore;
+import model.repository.composite.ClassyNodeComposite;
+import model.repository.implementation.*;
 import view.tree.ClassyTreeView;
 
 import javax.lang.model.element.Element;

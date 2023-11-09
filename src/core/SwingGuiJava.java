@@ -1,4 +1,4 @@
-package model.core;
+package core;
 
 
 import view.mainframe.MainFrame;

@@ -4,10 +4,9 @@ import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import model.tree.MyNodeMutable;
-import view.dialogs.MessagePane;
 import view.mainframe.MainFrame;
-import view.repository.implementation.PackageNode;
-import view.repository.implementation.ProjectNode;
+import model.repository.implementation.PackageNode;
+import model.repository.implementation.ProjectNode;
 
 import java.awt.event.ActionEvent;
 

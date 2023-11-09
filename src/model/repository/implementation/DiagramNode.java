@@ -1,9 +1,7 @@
-package view.repository.implementation;
+package model.repository.implementation;
 
-import view.repository.composite.AbstractClassyNode;
-import view.repository.composite.ClassyNodeComposite;
-
-import java.util.List;
+import model.repository.composite.AbstractClassyNode;
+import model.repository.composite.ClassyNodeComposite;
 
 public class DiagramNode extends ClassyNodeComposite<ElementNode> {
 

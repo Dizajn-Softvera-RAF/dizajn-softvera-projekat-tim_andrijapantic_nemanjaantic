@@ -3,13 +3,11 @@ package view.tabs;
 import model.tree.MyNodeMutable;
 import view.mainframe.DiagramView;
 import view.mainframe.MainFrame;
-import view.repository.implementation.ElementNode;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 public class TabbedPane  extends JTabbedPane {

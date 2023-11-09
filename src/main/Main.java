@@ -1,10 +1,11 @@
 package main;
 
-import model.core.AppCore;
-import model.core.SwingGui;
+import core.AppCore;
+import core.SwingGui;
+import core.SwingGuiJava;
 import model.core.*;
-import view.repository.ClassyRepImplementation;
-import view.repository.ClassyRepository;
+import model.repository.ClassyRepImplementation;
+import model.repository.ClassyRepository;
 
 public class Main {
 

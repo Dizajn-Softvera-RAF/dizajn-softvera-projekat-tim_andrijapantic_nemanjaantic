@@ -1,15 +1,14 @@
 package view.mainframe;
 
 import controller.ActionManager;
-import diagramActions.DoubleClickAction;
-import model.core.AppCore;
+import controller.diagramActions.DoubleClickAction;
+import core.AppCore;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.event.NotificationType;
 import model.tree.ClassyTreeImplementation;
 import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
-import view.tabs.TabbedPane;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

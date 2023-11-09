@@ -1,6 +1,6 @@
-package model.core;
+package core;
 
-import view.repository.ClassyRepository;
+import model.repository.ClassyRepository;
 
 public class AppCore {
 
@@ -21,7 +21,7 @@ public class AppCore {
         return instance;
     }
 
-    public void initialise(model.core.SwingGui gui) {
+    public void initialise(SwingGui gui) {
         this.gui = gui;
     }
 
@@ -33,11 +33,11 @@ public class AppCore {
         this.gui.start();
     }
 
-    public model.core.SwingGui getGui() {
+    public SwingGui getGui() {
         return gui;
     }
 
-    public void setGui(model.core.SwingGui gui) {
+    public void setGui(SwingGui gui) {
         this.gui = gui;
     }
 

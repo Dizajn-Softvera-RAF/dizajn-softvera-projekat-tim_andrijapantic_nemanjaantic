@@ -6,7 +6,7 @@ import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import view.mainframe.MainFrame;
-import view.repository.implementation.ProjectNode;
+import model.repository.implementation.ProjectNode;
 import view.tree.ClassyTreeView;
 
 import javax.swing.*;

@@ -5,10 +5,8 @@ import model.message.MessageGenerator;
 import model.message.PossibleErr;
 import model.tree.MyNodeMutable;
 import view.dialogs.AddToPackageView;
-import view.dialogs.MessagePane;
 import view.mainframe.MainFrame;
-import view.repository.implementation.PackageNode;
-import view.tabs.TabbedPane;
+import model.repository.implementation.PackageNode;
 
 import java.awt.event.ActionEvent;
 

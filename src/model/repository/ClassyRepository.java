@@ -1,7 +1,7 @@
-package view.repository;
+package model.repository;
 
-import view.repository.composite.ClassyNodeComposite;
-import view.repository.implementation.ProjectExplorer;
+import model.repository.composite.ClassyNodeComposite;
+import model.repository.implementation.ProjectExplorer;
 
 public interface ClassyRepository {
 

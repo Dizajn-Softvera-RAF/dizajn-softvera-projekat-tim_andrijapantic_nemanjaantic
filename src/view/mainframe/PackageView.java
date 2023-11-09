@@ -1,14 +1,13 @@
 package view.mainframe;
 
-import controller.AbstractClassyAction;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.event.NotificationType;
 import model.tree.MyNodeMutable;
-import view.repository.composite.AbstractClassyNode;
-import view.repository.implementation.PackageNode;
-import view.repository.implementation.ProjectExplorer;
-import view.repository.implementation.ProjectNode;
+import model.repository.composite.AbstractClassyNode;
+import model.repository.implementation.PackageNode;
+import model.repository.implementation.ProjectExplorer;
+import model.repository.implementation.ProjectNode;
 import view.tabs.TabbedPane;
 
 import javax.swing.*;

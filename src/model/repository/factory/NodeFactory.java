@@ -1,6 +1,7 @@
-package view.repository.factory;
+package model.repository.factory;
 
-import view.repository.composite.ClassyNodeComposite;
+import model.repository.composite.ClassyNodeComposite;
+import model.repository.implementation.*;
 import view.repository.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory{
