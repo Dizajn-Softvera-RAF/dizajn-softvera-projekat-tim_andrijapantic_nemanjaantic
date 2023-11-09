@@ -8,6 +8,7 @@ import model.message.PossibleErr;
 import model.tree.MyNodeMutable;
 import view.dialogs.MessagePane;
 import view.mainframe.MainFrame;
+import view.repository.composite.AbstractClassyNode;
 import view.repository.composite.ClassyNodeComposite;
 import view.repository.implementation.DiagramNode;
 import view.repository.implementation.PackageNode;
@@ -22,6 +23,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.UUID;
+
+import static javafx.scene.input.KeyCode.T;
 
 public class DeleteAction extends AbstractClassyAction{
     public DeleteAction() {
@@ -65,6 +68,21 @@ public class DeleteAction extends AbstractClassyAction{
                 else if (nodeToDelete.getClassyNode() instanceof ProjectNode) {
                     Notification notification = new Notification(NotificationType.DELETE_PROJECT, nodeToDelete);
                     projectExplorer.notifySubscribers(notification);
+                    int n = nodeToDelete.getChildCount();
+                    System.out.println("N je: " + n);
+                    TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().clear();
+                    for (int index=0; index<n; index++) {
+                        if (nodeToDelete.getClassyNode().getChildren().get(index) instanceof PackageNode) {
+                            System.out.println("Provalio sam da je paket");
+                            projectExplorer.notifySubscribers(new Notification(NotificationType.DELETE_PACKAGE, (MyNodeMutable) nodeToDelete.getChildAt(index)));
+                        }
+                    }
+                    for (Tab tab: TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
+                        int indexTaba = TabbedPane.getInstance().getIndexOfTab(tab.getTitle(), tab.getId());
+                        TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
+                        MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
+                        TabbedPane.getInstance().getListaTabova().remove(indexTaba);
+                    }
                 }
             }
 

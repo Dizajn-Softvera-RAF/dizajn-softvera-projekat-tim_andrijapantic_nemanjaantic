@@ -143,6 +143,9 @@ public class Tab  implements ISubscriber {
                 }
 
             }
+        }
+        else if (notification.getType().equals(NotificationType.DELETE_PROJECT)){
+
 
         } else if (notification.getType().equals(NotificationType.RENAME)) {
 
