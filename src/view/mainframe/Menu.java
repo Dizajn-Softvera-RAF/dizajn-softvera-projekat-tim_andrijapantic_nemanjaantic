@@ -19,6 +19,7 @@ public class Menu extends JMenuBar {
         miNew.addActionListener(MainFrame.getInstance().getActionManager().getNewProjectAction());
         miChangeAuthor.addActionListener(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
         miAboutUs.addActionListener(MainFrame.getInstance().getActionManager().getInfoAction());
+        miDelete.addActionListener(MainFrame.getInstance().getActionManager().getDeleteAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);

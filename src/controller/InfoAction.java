@@ -20,6 +20,6 @@ public class InfoAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new InfoDialog(MainFrame.getInstance(), "Info Window");
+        new InfoDialog();
     }
 }

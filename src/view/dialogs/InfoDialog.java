@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InfoDialog extends JDialog {
-    public InfoDialog(MainFrame mainframe, String title) {
+    public InfoDialog() {
         ImageIcon i1 = new ImageIcon(getClass().getResource("/images/Andrija.jpg"));
         ImageIcon i2 = new ImageIcon(getClass().getResource("/images/Nemanja.png"));
         JLabel textArea = new JLabel("Andrija Pantic 33/21 RN", i1, JLabel.LEFT);
