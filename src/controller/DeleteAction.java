@@ -55,7 +55,7 @@ public class DeleteAction extends AbstractClassyAction{
                     for (Tab tab: TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
                         int indexTaba = TabbedPane.getInstance().getIndexOfTab(tab.getTitle(), tab.getId());
                         //TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
-                        if(indexTaba == -1) {
+                        if(indexTaba != -1) {
                             TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
                             MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
                             TabbedPane.getInstance().getListaTabova().remove(indexTaba);
