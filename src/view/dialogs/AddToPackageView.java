@@ -1,7 +1,9 @@
 package view.dialogs;
 
 import controller.NewDiagramAction;
+import controller.NewPackageAction;
 import controller.NewProjectAction;
+import main.Main;
 import view.mainframe.MainFrame;
 
 import javax.swing.*;
@@ -12,6 +14,7 @@ import java.awt.event.MouseEvent;
 
 public class AddToPackageView {
     NewDiagramAction newDiagramAction;
+    NewPackageAction newPackageAction;
     public AddToPackageView() {
         JDialog typePicker = new JDialog(MainFrame.getInstance(), "Create in package:");
         typePicker.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -30,13 +33,12 @@ public class AddToPackageView {
         packageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                /**
-                 * ovo je za sad diagram action dok ne dodamo da se paket moze dodati u paket
-                 * onda cemo promeniti action u NewPackageAction
-                 */
-                newDiagramAction = MainFrame.getInstance().getActionManager().getNewDiagramAction();
+
+                newPackageAction = MainFrame.getInstance().getActionManager().getNewPackageAction();
+                newPackageAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+               /* newDiagramAction = MainFrame.getInstance().getActionManager().getNewDiagramAction();
                 // Zovemo actionPerformed method iz NewDiagramAction
-                newDiagramAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
+                newDiagramAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));*/
                 typePicker.dispose();
             }
 

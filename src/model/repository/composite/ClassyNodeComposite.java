@@ -7,6 +7,8 @@ public abstract class ClassyNodeComposite<T>  extends AbstractClassyNode{
 
     List<T> children;
 
+    boolean packageCheck = false;
+
     public List<T> getChildren() {
         return children;
     }
@@ -33,5 +35,13 @@ public abstract class ClassyNodeComposite<T>  extends AbstractClassyNode{
     @Override
     public String toString() {
         return super.name;
+    }
+
+    public boolean isPackageCheck() {
+        return packageCheck;
+    }
+
+    public void setPackageCheck(boolean packageCheck) {
+        this.packageCheck = packageCheck;
     }
 }

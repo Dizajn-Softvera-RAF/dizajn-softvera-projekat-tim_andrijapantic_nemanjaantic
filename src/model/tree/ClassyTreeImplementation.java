@@ -64,7 +64,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             return AppCore.getInstance().getClassyRepository().createNode("Project", "Project" + new Random().nextInt(100), parent);
         }
-        if (parent instanceof ProjectNode) {
+        if (parent instanceof ProjectNode || parent.isPackageCheck()) {
 
             return AppCore.getInstance().getClassyRepository().createNode("Package", "Package" + new Random().nextInt(100), parent);
         }

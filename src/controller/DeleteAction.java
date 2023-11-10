@@ -54,9 +54,15 @@ public class DeleteAction extends AbstractClassyAction{
                     projectExplorer.notifySubscribers(notification);
                     for (Tab tab: TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
                         int indexTaba = TabbedPane.getInstance().getIndexOfTab(tab.getTitle(), tab.getId());
-                        TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
-                        MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
-                        TabbedPane.getInstance().getListaTabova().remove(indexTaba);
+                        //TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
+                        if(indexTaba == -1) {
+                            TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
+                            MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
+                            TabbedPane.getInstance().getListaTabova().remove(indexTaba);
+
+                        }
+                        /*MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
+                        TabbedPane.getInstance().getListaTabova().remove(indexTaba);*/
                     }
                 }
                 else if (nodeToDelete.getClassyNode() instanceof ProjectNode) {

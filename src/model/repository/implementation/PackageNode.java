@@ -5,6 +5,8 @@ import model.repository.composite.ClassyNodeComposite;
 
 public class PackageNode extends ClassyNodeComposite<DiagramNode> {
 
+
+
     public PackageNode() {
     }
 

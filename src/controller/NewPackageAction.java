@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 
 public class NewPackageAction extends AbstractClassyAction{
 
+     boolean packageCheck = false;
+
     public NewPackageAction() {
 
         putValue(SMALL_ICON, loadIcon("/images/new-package.png"));
@@ -26,7 +28,10 @@ public class NewPackageAction extends AbstractClassyAction{
          */
         try {
             MyNodeMutable selected = MainFrame.getInstance().getSelectedNode();
-            if (selected.getClassyNode() instanceof ProjectNode || selected.getClassyNode() instanceof PackageNode) {
+            if (selected.getClassyNode() instanceof PackageNode) {
+                selected.getClassyNode().setPackageCheck(true);
+                MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
+
 
             } else {
                 Message message = new Message(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
@@ -39,5 +44,13 @@ public class NewPackageAction extends AbstractClassyAction{
             msggenerator.generateMsg(message);
         }
 
+    }
+
+    public boolean isPackageCheck() {
+        return packageCheck;
+    }
+
+    public void setPackageCheck(boolean packageCheck) {
+        this.packageCheck = packageCheck;
     }
 }
