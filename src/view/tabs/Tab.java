@@ -4,6 +4,7 @@ import controller.diagramActions.CloseTabAction;
 import model.event.ISubscriber;
 import model.event.Notification;
 import model.event.NotificationType;
+import model.repository.implementation.DiagramNode;
 import model.tree.MyNodeMutable;
 import view.mainframe.DiagramView;
 import view.mainframe.MainFrame;
@@ -36,7 +37,8 @@ public class Tab implements ISubscriber {
 
         this.header = new JPanel(new GridBagLayout());
         this.header.setOpaque(false);
-        headerLabel = new JLabel(title);
+        headerLabel = new JLabel();
+        headerLabel.setText(title);
         JButton btnClose = new JButton("x");
         authorField = new JTextField();
         authorField.setText("Author");
@@ -122,12 +124,10 @@ public class Tab implements ISubscriber {
                 parent.getTrenutniTaboviZaBrisanje().add(this);
                 parent.getListaTabova().remove(this);
                 parent.removeTab(title, id);
-                // MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
             }
 
         } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
             int counter = notification.getNode().getChildCount();
-            System.out.println("Broj dece koju treba da obrisem: " + counter);
             System.out.println(notification.getNode().getChildCount());
             for (int i = 0; i < counter; i = i + 1) {
 
@@ -137,12 +137,11 @@ public class Tab implements ISubscriber {
                 }
 
             }
-        } else if (notification.getType().equals(NotificationType.DELETE_PROJECT)) {
-
-
-        } else if (notification.getType().equals(NotificationType.RENAME)) {
+        }  else if (notification.getType().equals(NotificationType.RENAME)) {
 
             if (this.getId().equals(notification.getId())) {
+
+                System.out.println("Naso sam da hocu da promenim tab: " + this.getTitle());
 
                 int count = parent.getTabCount();
 
@@ -158,7 +157,10 @@ public class Tab implements ISubscriber {
                     }
                 }
                 this.setTitle(notification.getTitle());
+                System.out.println("Promenio sam ime u: " + this.getTitle());
             }
         }
+
+
     }
 }

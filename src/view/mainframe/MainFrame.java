@@ -26,7 +26,6 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JPanel leftPanel = new JPanel();
     private MyNodeMutable selectedNode;
     private ActionManager actionManager;
-    private List<MyNodeMutable> myNodeMutables;
     private Menu menu;
 
     public static MainFrame getInstance() {
@@ -59,7 +58,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         }
 
         actionManager = new ActionManager();
-        myNodeMutables = new ArrayList<MyNodeMutable>();
         classyTree = new ClassyTreeImplementation();
         JTree projectExplorer = classyTree.generateTree(AppCore.getInstance().getClassyRepository().getProjectExplorer());
 
@@ -143,14 +141,6 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setSelectedNode(MyNodeMutable selectedNode) {
         this.selectedNode = selectedNode;
-    }
-
-    public List<MyNodeMutable> getMyNodeMutables() {
-        return myNodeMutables;
-    }
-
-    public void setMyNodeMutables(List<MyNodeMutable> myNodeMutables) {
-        this.myNodeMutables = myNodeMutables;
     }
 
     public ClassyTreeImplementation getClassyTree() {

@@ -36,7 +36,7 @@ public class DoubleClickAction extends AbstractClassyAction implements MouseList
                         PackageNode paket = (PackageNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
                         for (DiagramNode diagramNode : paket.getChildren()) {
                             if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
-                                TabbedPane.getInstance().addNewPane(diagramNode.getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId(), MainFrame.getInstance().getSelectedNode());
+                                TabbedPane.getInstance().addNewPane(diagramNode.getName(), diagramNode.getId(), MainFrame.getInstance().getSelectedNode());
                             }
                         }
                     }

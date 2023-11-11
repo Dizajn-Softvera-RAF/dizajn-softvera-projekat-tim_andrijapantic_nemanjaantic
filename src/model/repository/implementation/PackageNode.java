@@ -21,12 +21,11 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> {
     }
 
     public static void prodjiKrozDecu(MyNodeMutable node) {
-        int childCount = node.getChildCount();
+        int brojDece = node.getChildCount();
 
-        for (int i = 0; i < childCount; i++) {
+        for (int i = 0; i < brojDece; i++) {
             MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
 
-            System.out.println("Child Node: " + childNode.getUserObject());
             MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
 
             prodjiKrozDecu(childNode);

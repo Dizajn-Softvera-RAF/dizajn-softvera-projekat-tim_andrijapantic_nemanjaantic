@@ -54,7 +54,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         if (!e.getActionCommand().equals("")) {
             MyNodeMutable clicked = (MyNodeMutable) clickedOn;
             clicked.getClassyNode().setName(e.getActionCommand());
-            Notification notification = new Notification(NotificationType.RENAME, clicked.getClassyNode().getName());
+            Notification notification = new Notification(NotificationType.RENAME, clicked.getClassyNode().getId(), clicked.getClassyNode().getName());
 
             notification.setId(clicked.getClassyNode().getId());
 

@@ -77,6 +77,11 @@ public class PackageView extends JPanel implements ISubscriber {
             TabbedPane.getInstance().setTrenutniPaket((PackageNode) notification.getNode().getClassyNode());
             packageNode = (PackageNode) notification.getNode().getClassyNode();
 
+        } else if (notification.getType().equals(NotificationType.RENAME)) {
+            if (projectNode.getId().equals(notification.getId())) {
+                projectNode.setName(notification.getTitle());
+                imeProjekta.setText(projectNode.getName());
+            }
         }
 
     }

@@ -30,6 +30,12 @@ public class Notification {
         this.id = id;
     }
 
+    public Notification(NotificationType type, UUID id, String title) {
+        this.type = type;
+        this.id = id;
+        this.title = title;
+    }
+
     public Message getMessage() {
         return message;
     }

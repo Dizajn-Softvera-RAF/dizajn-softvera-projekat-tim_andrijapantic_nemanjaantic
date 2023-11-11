@@ -30,9 +30,6 @@ public class NewDiagramAction extends AbstractClassyAction {
             if (selected.getClassyNode() instanceof PackageNode) {
                 selected.getClassyNode().setPackageCheck(false);
                 MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-                if (!MainFrame.getInstance().getMyNodeMutables().contains(MainFrame.getInstance().getSelectedNode()))
-                    MainFrame.getInstance().getMyNodeMutables().add(MainFrame.getInstance().getSelectedNode());
-                MainFrame.getInstance().getSelectedNode().getChildren().add(createdChild);
                 TabbedPane.getInstance().addNewPane(createdChild.getClassyNode().getName(), createdChild.getClassyNode().getId(), null);
                 if (TabbedPane.getInstance().getTrenutniPaket() == null)
                     TabbedPane.getInstance().closeAllTabs();
@@ -41,7 +38,7 @@ public class NewDiagramAction extends AbstractClassyAction {
                     PackageNode paket = TabbedPane.getInstance().getTrenutniPaket();
                     for (DiagramNode diagramNode : paket.getChildren()) {
                         if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
-                            TabbedPane.getInstance().addNewPane(diagramNode.getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId(), MainFrame.getInstance().getSelectedNode());
+                            TabbedPane.getInstance().addNewPane(diagramNode.getName(), diagramNode.getId(), MainFrame.getInstance().getSelectedNode());
                         }
                     }
                 }

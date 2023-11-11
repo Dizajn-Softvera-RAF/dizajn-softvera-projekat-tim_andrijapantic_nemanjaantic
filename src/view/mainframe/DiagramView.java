@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class DiagramView extends JPanel {
     static final int xOffset = 30, yOffset = 30;
     int openFrameCount = 0;
-    JLabel projectName;
 
     private Tab tab;
 
@@ -20,11 +19,6 @@ public class DiagramView extends JPanel {
         ++openFrameCount;
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
 
-        /**
-         * TODO
-         * projectTitle negde
-         * kao i autor
-         */
         setSize(700, 700);
         setVisible(true);
 

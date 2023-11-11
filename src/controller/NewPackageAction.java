@@ -28,9 +28,6 @@ public class NewPackageAction extends AbstractClassyAction{
             if (selected.getClassyNode() instanceof PackageNode) {
                 selected.getClassyNode().setPackageCheck(true);
                 MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-                MainFrame.getInstance().getSelectedNode().getChildren().add(createdChild);
-                if (!MainFrame.getInstance().getMyNodeMutables().contains(MainFrame.getInstance().getSelectedNode()))
-                    MainFrame.getInstance().getMyNodeMutables().add(MainFrame.getInstance().getSelectedNode());
 
 
             } else {
