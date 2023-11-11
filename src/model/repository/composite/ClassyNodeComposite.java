@@ -3,19 +3,11 @@ package model.repository.composite;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClassyNodeComposite<T>  extends AbstractClassyNode{
+public abstract class ClassyNodeComposite<T> extends AbstractClassyNode {
 
     List<T> children;
 
     boolean packageCheck = false;
-
-    public List<T> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<T> children) {
-        this.children = children;
-    }
 
     public ClassyNodeComposite() {
     }
@@ -30,7 +22,17 @@ public abstract class ClassyNodeComposite<T>  extends AbstractClassyNode{
         this.children = new ArrayList<T>();
     }
 
+    public List<T> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<T> children) {
+        this.children = children;
+    }
+
     public abstract void addChild(AbstractClassyNode child);
+
+    public abstract void removeChildren();
 
     @Override
     public String toString() {

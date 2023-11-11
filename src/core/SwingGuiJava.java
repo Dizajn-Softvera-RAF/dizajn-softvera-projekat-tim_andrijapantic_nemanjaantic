@@ -12,6 +12,7 @@ public class SwingGuiJava implements SwingGui {
     public SwingGuiJava() {
 
     }
+
     @Override
     public void start() {
         try {

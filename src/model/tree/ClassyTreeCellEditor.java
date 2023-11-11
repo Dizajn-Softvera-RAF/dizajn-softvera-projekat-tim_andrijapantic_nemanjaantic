@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
-public class ClassyTreeCellEditor  extends DefaultTreeCellEditor implements ActionListener {
+public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements ActionListener {
 
 
     private Object clickedOn = null;
@@ -50,7 +50,7 @@ public class ClassyTreeCellEditor  extends DefaultTreeCellEditor implements Acti
         if (!(clickedOn instanceof MyNodeMutable))
             return;
 
-
+        // TRIPLE CLICK
         if (!e.getActionCommand().equals("")) {
             MyNodeMutable clicked = (MyNodeMutable) clickedOn;
             clicked.getClassyNode().setName(e.getActionCommand());
@@ -60,14 +60,11 @@ public class ClassyTreeCellEditor  extends DefaultTreeCellEditor implements Acti
 
             ClassyTreeView mapTreeView = (ClassyTreeView) tree;
             mapTreeView.notifySubscribers(notification);
-        }
-
-        else {
+        } else {
             Message message = new Message(PossibleErr.NAME_CANNOT_BE_EMPTY);
             MessageGenerator msggenerator = new MessageGenerator();
             msggenerator.generateMsg(message);
         }
-
 
 
     }

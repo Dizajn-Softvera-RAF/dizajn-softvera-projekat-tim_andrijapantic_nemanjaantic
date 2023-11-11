@@ -27,6 +27,11 @@ public class ElementNode<T> extends ClassyNodeComposite<Void> {
 
     }
 
+    @Override
+    public void removeChildren() {
+
+    }
+
 
 }
 

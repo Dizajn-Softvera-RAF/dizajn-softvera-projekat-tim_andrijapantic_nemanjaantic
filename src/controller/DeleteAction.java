@@ -37,52 +37,11 @@ public class DeleteAction extends AbstractClassyAction{
                 msggenerator.generateMsg(message);
             }
             else {
+                System.out.println("Lista mynodemutable: " + MainFrame.getInstance().getMyNodeMutables());
                 DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
+                nodeToDelete.getClassyNode().removeChildren();
                 model.removeNodeFromParent(nodeToDelete);
-                ClassyTreeView projectExplorer = MainFrame.getInstance().getClassyTree().getTreeView();
-                System.out.println(nodeToDelete);
-                UUID id = nodeToDelete.getClassyNode().getId();
 
-                if (nodeToDelete.getClassyNode() instanceof DiagramNode) {
-                    try {
-                        Notification notification = new Notification(NotificationType.DELETE_DIAGRAM, nodeToDelete.getClassyNode().getId());
-                        projectExplorer.notifySubscribers(notification);
-                    } catch (ConcurrentModificationException exception) {}
-                } else if (nodeToDelete.getClassyNode() instanceof PackageNode) {
-                    Notification notification = new Notification(NotificationType.DELETE_PACKAGE, nodeToDelete);
-                    TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().clear();
-                    projectExplorer.notifySubscribers(notification);
-                    for (Tab tab: TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
-                        int indexTaba = TabbedPane.getInstance().getIndexOfTab(tab.getTitle(), tab.getId());
-                        //TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
-                        if(indexTaba != -1) {
-                            TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
-                            MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
-                            TabbedPane.getInstance().getListaTabova().remove(indexTaba);
-
-                        }
-                        /*MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
-                        TabbedPane.getInstance().getListaTabova().remove(indexTaba);*/
-                    }
-                }
-                else if (nodeToDelete.getClassyNode() instanceof ProjectNode) {
-                    Notification notification = new Notification(NotificationType.DELETE_PROJECT, nodeToDelete);
-                    projectExplorer.notifySubscribers(notification);
-                    int n = nodeToDelete.getChildCount();
-                    System.out.println("Broj dece koje brisem mog projekta: " + n);
-                    TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().clear();
-                    for (int index=0; index<n; index++) {
-                        if (nodeToDelete.getClassyNode().getChildren().get(index) instanceof PackageNode) {
-                            projectExplorer.notifySubscribers(new Notification(NotificationType.DELETE_PACKAGE, (MyNodeMutable) nodeToDelete.getChildAt(index)));
-                        }
-                    }
-                    for (Tab tab: TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
-                        int indexTaba = TabbedPane.getInstance().getIndexOfTab(tab.getTitle(), tab.getId());
-                        TabbedPane.getInstance().removeTab(tab.getTitle(), tab.getId());
-                        MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(TabbedPane.getInstance().getListaTabova().get(indexTaba));
-                        TabbedPane.getInstance().getListaTabova().remove(indexTaba);
-                    }
-                }
             }
 
 

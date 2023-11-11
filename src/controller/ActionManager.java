@@ -1,11 +1,9 @@
 package controller;
 
-import javax.security.auth.login.CredentialExpiredException;
-
 public class ActionManager {
 
-    private  ExitAction exitAction;
-    private NewProjectAction newProjectAction;
+    private ExitAction exitAction;
+    private NewTreeChildAction newTreeChildAction;
     private NewPackageAction newPackageAction;
     private NewComponentAction newComponentAction;
     private InfoAction infoAction;
@@ -13,11 +11,13 @@ public class ActionManager {
     private NewDiagramAction newDiagramAction;
     private ChangeAuthorAction changeAuthorAction;
 
-    public ActionManager() {initilizeActions();}
+    public ActionManager() {
+        initilizeActions();
+    }
 
     public void initilizeActions() {
         exitAction = new ExitAction();
-        newProjectAction = new NewProjectAction();
+        newTreeChildAction = new NewTreeChildAction();
         newPackageAction = new NewPackageAction();
         newComponentAction = new NewComponentAction();
         infoAction = new InfoAction();
@@ -34,12 +34,12 @@ public class ActionManager {
         this.exitAction = exitAction;
     }
 
-    public NewProjectAction getNewProjectAction() {
-        return newProjectAction;
+    public NewTreeChildAction getNewProjectAction() {
+        return newTreeChildAction;
     }
 
-    public void setNewProjectAction(NewProjectAction newProjectAction) {
-        this.newProjectAction = newProjectAction;
+    public void setNewProjectAction(NewTreeChildAction newTreeChildAction) {
+        this.newTreeChildAction = newTreeChildAction;
     }
 
     public NewPackageAction getNewPackageAction() {

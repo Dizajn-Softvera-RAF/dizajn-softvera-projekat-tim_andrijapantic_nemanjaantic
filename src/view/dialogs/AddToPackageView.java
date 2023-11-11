@@ -2,8 +2,6 @@ package view.dialogs;
 
 import controller.NewDiagramAction;
 import controller.NewPackageAction;
-import controller.NewProjectAction;
-import main.Main;
 import view.mainframe.MainFrame;
 
 import javax.swing.*;

@@ -4,7 +4,7 @@ import model.repository.composite.ClassyNodeComposite;
 import model.repository.implementation.*;
 import model.repository.implementation.*;
 
-public class NodeFactory extends AbstractNodeFactory{
+public class NodeFactory extends AbstractNodeFactory {
     @Override
     public ClassyNodeComposite create(String type, String name, ClassyNodeComposite parent) throws IllegalArgumentException {
         if (type.equals("Diagram")) {
@@ -17,11 +17,11 @@ public class NodeFactory extends AbstractNodeFactory{
 
             return new PackageNode(name, parent);
 
-        } else if(type.equals("Element")){
+        } else if (type.equals("Element")) {
             return new ElementNode(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);
     }
-    }
+}
 

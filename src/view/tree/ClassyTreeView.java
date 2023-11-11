@@ -25,6 +25,7 @@ public class ClassyTreeView extends JTree implements IPublisher {
         setCellRenderer(ruTreeCellRenderer);
         setEditable(true);
     }
+
     @Override
     public void addSubscriber(ISubscriber sub) {
         subscribers.add(sub);

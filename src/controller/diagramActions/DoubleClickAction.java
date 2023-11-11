@@ -1,6 +1,8 @@
 package controller.diagramActions;
 
 import controller.AbstractClassyAction;
+import model.event.Notification;
+import model.event.NotificationType;
 import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
@@ -9,6 +11,7 @@ import model.repository.composite.ClassyNodeComposite;
 import model.repository.implementation.DiagramNode;
 import model.repository.implementation.PackageNode;
 import view.tabs.TabbedPane;
+import view.tree.ClassyTreeView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -25,11 +28,13 @@ public class DoubleClickAction extends AbstractClassyAction implements MouseList
                             TabbedPane.getInstance().addNewPane(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId(), MainFrame.getInstance().getSelectedNode());
                         }
                     }
-                }
-                else if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof PackageNode) {
+                } else if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof PackageNode) {
                     if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                        PackageNode paket = (PackageNode)MainFrame.getInstance().getSelectedNode().getClassyNode();
-                        for (DiagramNode diagramNode: paket.getChildren()) {
+                        TabbedPane.getInstance().closeAllTabs();
+                        ClassyTreeView projectExplorer = MainFrame.getInstance().getClassyTree().getTreeView();
+                        projectExplorer.notifySubscribers(new Notification(NotificationType.PACKAGE_SELECTED, MainFrame.getInstance().getSelectedNode()));
+                        PackageNode paket = (PackageNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
+                        for (DiagramNode diagramNode : paket.getChildren()) {
                             if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
                                 TabbedPane.getInstance().addNewPane(diagramNode.getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId(), MainFrame.getInstance().getSelectedNode());
                             }

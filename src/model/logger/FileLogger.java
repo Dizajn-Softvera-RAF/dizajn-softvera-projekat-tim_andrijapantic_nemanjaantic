@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class FileLogger extends Logger{
+public class FileLogger extends Logger {
     @Override
     public void log(Message message) {
         FileWriter fw = null;

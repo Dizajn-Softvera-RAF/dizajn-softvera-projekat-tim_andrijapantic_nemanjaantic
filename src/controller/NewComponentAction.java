@@ -19,7 +19,7 @@ public class NewComponentAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         /**
-         *  OVO ISPOD JE TEST, DODACE SE VEROVATNO U NULLPOINTEREXCEPTION
+         *  OVO ISPOD JE TEST, DODACE SE VEROVATNO U NULLPOINTEREXCEPTION KADA SE DODAJE KOMPONENTA
          */
         Message message = new Message(PossibleErr.DIAGRAM_MUST_BE_SELECTED_TO_CREATE_A_COMPONENT);
         MessageGenerator msggenerator = new MessageGenerator();

@@ -13,5 +13,6 @@ public interface ClassyTree {
     MyNodeMutable addChild(MyNodeMutable parent, Element element);
 
     MyNodeMutable getSelectedNode();
+
     void loadProject(ProjectNode node);
 }

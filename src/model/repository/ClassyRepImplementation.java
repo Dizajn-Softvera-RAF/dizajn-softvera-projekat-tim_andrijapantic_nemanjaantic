@@ -4,7 +4,7 @@ import model.repository.composite.ClassyNodeComposite;
 import model.repository.factory.NodeFactory;
 import model.repository.implementation.ProjectExplorer;
 
-public class ClassyRepImplementation implements ClassyRepository{
+public class ClassyRepImplementation implements ClassyRepository {
 
     private ProjectExplorer projectExplorer;
 
@@ -14,6 +14,7 @@ public class ClassyRepImplementation implements ClassyRepository{
         projectExplorer = new ProjectExplorer("My Project Explorer");
         nodeFactory = new NodeFactory();
     }
+
     @Override
     public ProjectExplorer getProjectExplorer() {
         return projectExplorer;

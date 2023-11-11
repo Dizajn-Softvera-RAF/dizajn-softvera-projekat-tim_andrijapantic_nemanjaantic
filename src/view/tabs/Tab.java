@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
-public class Tab  implements ISubscriber {
+public class Tab implements ISubscriber {
     private TabbedPane parent;
     private String title;
 
@@ -25,8 +25,6 @@ public class Tab  implements ISubscriber {
     private JPanel body;
 
     private DiagramView diagramView;
-
-
 
 
     public Tab(TabbedPane parent, String title, UUID id) {
@@ -64,28 +62,32 @@ public class Tab  implements ISubscriber {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public TabbedPane getParent() {
         return parent;
+    }
+
+    public void setParent(TabbedPane parent) {
+        this.parent = parent;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public JPanel getBody() {
-        return body;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setBody(JPanel body) {
-        this.body = body;
+    public JPanel getBody() {
+        return body;
     }
 
-    public void setParent(TabbedPane parent) {
-        this.parent = parent;
+    public void setBody(JPanel body) {
+        this.body = body;
     }
 
     public DiagramView getDiagramView() {
@@ -112,19 +114,16 @@ public class Tab  implements ISubscriber {
         this.header = header;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
     @Override
     public void update(Notification notification) {
         if (notification.getType().equals(NotificationType.DELETE_DIAGRAM)) {
+
             if (this.getId().equals(notification.getId())) {
-                MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
+                parent.getTrenutniTaboviZaBrisanje().add(this);
                 parent.getListaTabova().remove(this);
                 parent.removeTab(title, id);
+                // MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(this);
             }
-
 
         } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
             int counter = notification.getNode().getChildCount();
@@ -138,8 +137,7 @@ public class Tab  implements ISubscriber {
                 }
 
             }
-        }
-        else if (notification.getType().equals(NotificationType.DELETE_PROJECT)){
+        } else if (notification.getType().equals(NotificationType.DELETE_PROJECT)) {
 
 
         } else if (notification.getType().equals(NotificationType.RENAME)) {

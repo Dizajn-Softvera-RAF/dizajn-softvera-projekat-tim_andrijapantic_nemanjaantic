@@ -7,8 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DiagramView extends JPanel {
-    int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
+    int openFrameCount = 0;
     JLabel projectName;
 
     private Tab tab;

@@ -12,16 +12,16 @@ public class ToolBar extends JToolBar {
         setBackground(new Color(169, 204, 227));
         Dimension sizeT = new Dimension(200, 50);
         this.setPreferredSize(sizeT.getSize());
-        add (MainFrame.getInstance().getActionManager().getNewProjectAction());
+        add(MainFrame.getInstance().getActionManager().getNewProjectAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getNewComponentAction());
+        add(MainFrame.getInstance().getActionManager().getNewComponentAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getInfoAction());
+        add(MainFrame.getInstance().getActionManager().getInfoAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getDeleteAction());
+        add(MainFrame.getInstance().getActionManager().getDeleteAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getChangeAuthorAction());
+        add(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
         addSeparator();
-        add (MainFrame.getInstance().getActionManager().getExitAction());
+        add(MainFrame.getInstance().getActionManager().getExitAction());
     }
 }

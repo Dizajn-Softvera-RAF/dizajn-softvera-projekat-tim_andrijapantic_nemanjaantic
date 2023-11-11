@@ -6,12 +6,14 @@ import model.tree.MyNodeMutable;
 import java.util.UUID;
 
 public class Notification {
-    private Message message;
+    private Message message = null;
     private String title;
     private NotificationType type;
     private UUID id;
     private MyNodeMutable node;
-    public Notification() {}
+
+    public Notification() {
+    }
 
     public Notification(NotificationType type, String title) {
         this.type = type;

@@ -4,12 +4,9 @@ import model.repository.ClassyRepository;
 
 public class AppCore {
 
-    protected SwingGui gui;
-
-    private ClassyRepository classyRepository;
-
-
     private static AppCore instance = null;
+    protected SwingGui gui;
+    private ClassyRepository classyRepository;
 
     private AppCore() {
 
@@ -29,6 +26,7 @@ public class AppCore {
         this.gui = gui;
         this.classyRepository = classyRepository;
     }
+
     public void run() {
         this.gui.start();
     }

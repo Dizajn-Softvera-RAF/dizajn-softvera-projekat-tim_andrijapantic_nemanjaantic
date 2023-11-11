@@ -5,7 +5,10 @@ import model.event.Notification;
 import model.message.Message;
 
 public abstract class Logger implements ISubscriber {
-    public void log(Message message) {}
+    public void log(Message message) {
+    }
+
     @Override
-    public void update(Notification notification) {}
+    public void update(Notification notification) {
+    }
 }

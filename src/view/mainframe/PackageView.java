@@ -30,7 +30,7 @@ public class PackageView extends JPanel implements ISubscriber {
         MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(this);
         JPanel containerPanel = new JPanel();
         containerPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-        containerPanel.setSize(100,50);
+        containerPanel.setSize(100, 50);
 
         containerPanel.add(autorJe);
         containerPanel.add(imeAutora);
@@ -50,11 +50,11 @@ public class PackageView extends JPanel implements ISubscriber {
             imeAutora.setText(projectNode.getAuthor());
         } else if (notification.getType().equals(NotificationType.NODE_SELECTION_CHANGED)) {
             MyNodeMutable selected = notification.getNode();
-            if (selected!=null) {
+            if (selected != null) {
                 if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
                     if (selected.getClassyNode() instanceof ProjectNode) {
-                        projectNode = (ProjectNode)selected.getClassyNode();
-                        if (projectNode.getAuthor()!=null)
+                        projectNode = (ProjectNode) selected.getClassyNode();
+                        if (projectNode.getAuthor() != null)
                             imeAutora.setText(projectNode.getAuthor());
                         else
                             imeAutora.setText("NoInput");
@@ -73,6 +73,10 @@ public class PackageView extends JPanel implements ISubscriber {
                 imeProjekta.setText("No Project Selected");
                 imeAutora.setText("NoInput");
             }
+        } else if (notification.getType().equals(NotificationType.PACKAGE_SELECTED)) {
+            TabbedPane.getInstance().setTrenutniPaket((PackageNode) notification.getNode().getClassyNode());
+            packageNode = (PackageNode) notification.getNode().getClassyNode();
+
         }
 
     }

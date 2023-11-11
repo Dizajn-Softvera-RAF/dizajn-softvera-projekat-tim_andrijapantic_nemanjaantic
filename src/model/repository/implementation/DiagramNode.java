@@ -19,4 +19,9 @@ public class DiagramNode extends ClassyNodeComposite<ElementNode> {
         }
 
     }
+
+    @Override
+    public void removeChildren() {
+
+    }
 }

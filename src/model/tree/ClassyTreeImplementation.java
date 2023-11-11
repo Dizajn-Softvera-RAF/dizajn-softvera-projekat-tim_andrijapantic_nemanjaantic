@@ -10,13 +10,14 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import java.util.Random;
 
-public class ClassyTreeImplementation implements ClassyTree{
+public class ClassyTreeImplementation implements ClassyTree {
 
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
     private MyNodeMutable root;
 
-    public ClassyTreeImplementation() {}
+    public ClassyTreeImplementation() {
+    }
 
     @Override
     public ClassyTreeView generateTree(ProjectExplorer projectExplorer) {
@@ -27,8 +28,6 @@ public class ClassyTreeImplementation implements ClassyTree{
     }
 
 
-
-
     @Override
     public MyNodeMutable addChild(MyNodeMutable parent, Element element) {
         ClassyNodeComposite child = createChild(parent.getClassyNode());
@@ -36,7 +35,6 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             ElementNode elementNode = (ElementNode) child;
             elementNode.setElement(element);
-
 
 
             MyNodeMutable toReturn = new MyNodeMutable(elementNode);
@@ -72,7 +70,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
             return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram" + new Random().nextInt(1000), parent);
         }
-        if(parent instanceof DiagramNode){
+        if (parent instanceof DiagramNode) {
 
             return AppCore.getInstance().getClassyRepository().createNode("Element", "Element" + new Random().nextInt(100), parent);
         }

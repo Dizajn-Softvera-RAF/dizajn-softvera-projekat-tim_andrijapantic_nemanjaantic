@@ -1,5 +1,6 @@
 package view.tabs;
 
+import model.repository.implementation.PackageNode;
 import model.tree.MyNodeMutable;
 import view.mainframe.DiagramView;
 import view.mainframe.MainFrame;
@@ -10,13 +11,14 @@ import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class TabbedPane  extends JTabbedPane {
+public class TabbedPane extends JTabbedPane {
 
     private static TabbedPane instance = null;
     private ArrayList<Tab> listaTabova = new ArrayList<>();
     private ArrayList<Tab> trenutniTaboviZaBrisanje = new ArrayList<>();
 
     private Tab selectedTab;
+    private PackageNode trenutniPaket = null;
 
     public TabbedPane() {
 
@@ -35,15 +37,10 @@ public class TabbedPane  extends JTabbedPane {
                         }
                     }
                 } catch (IndexOutOfBoundsException exception) {
-
                 }
 
             }
         });
-    }
-
-    public void addNewPane(String paket, UUID id, MyNodeMutable nodeMutable) {
-        addTab(new Tab(this, paket, id), nodeMutable);
     }
 
     public static TabbedPane getInstance() {
@@ -51,6 +48,10 @@ public class TabbedPane  extends JTabbedPane {
             instance = new TabbedPane();
         }
         return instance;
+    }
+
+    public void addNewPane(String paket, UUID id, MyNodeMutable nodeMutable) {
+        addTab(new Tab(this, paket, id), nodeMutable);
     }
 
     public ArrayList<Tab> getListaTabova() {
@@ -122,11 +123,26 @@ public class TabbedPane  extends JTabbedPane {
         }
     }
 
+    public void closeAllTabs() {
+        int tabCount = this.getTabCount();
+        for (int i = tabCount - 1; i >= 0; i--) {
+            this.remove(i);
+        }
+    }
+
     public ArrayList<Tab> getTrenutniTaboviZaBrisanje() {
         return trenutniTaboviZaBrisanje;
     }
 
     public void setTrenutniTaboviZaBrisanje(ArrayList<Tab> trenutniTaboviZaBrisanje) {
         this.trenutniTaboviZaBrisanje = trenutniTaboviZaBrisanje;
+    }
+
+    public PackageNode getTrenutniPaket() {
+        return trenutniPaket;
+    }
+
+    public void setTrenutniPaket(PackageNode trenutniPaket) {
+        this.trenutniPaket = trenutniPaket;
     }
 }

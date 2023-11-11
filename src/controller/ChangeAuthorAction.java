@@ -12,12 +12,13 @@ import view.tree.ClassyTreeView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class ChangeAuthorAction extends AbstractClassyAction{
+public class ChangeAuthorAction extends AbstractClassyAction {
     public ChangeAuthorAction() {
         putValue(SMALL_ICON, loadIcon("/images/author.png"));
         putValue(NAME, "Change Author");
         putValue(SHORT_DESCRIPTION, "Change Author");
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
@@ -26,8 +27,7 @@ public class ChangeAuthorAction extends AbstractClassyAction{
                 ClassyTreeView projectExplorer = MainFrame.getInstance().getClassyTree().getTreeView();
                 Notification notification = new Notification(NotificationType.CHANGE_AUTHOR, input);
                 projectExplorer.notifySubscribers(notification);
-            }
-            else {
+            } else {
                 Message message = new Message(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR);
                 MessageGenerator msggenerator = new MessageGenerator();
                 msggenerator.generateMsg(message);

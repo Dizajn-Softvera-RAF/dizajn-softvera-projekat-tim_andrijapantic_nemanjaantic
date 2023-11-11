@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 
 import static javax.swing.Action.*;
 
-public class ExitAction extends AbstractClassyAction{
+public class ExitAction extends AbstractClassyAction {
 
     public ExitAction() {
         putValue(SMALL_ICON, loadIcon("/images/exit.png"));
@@ -16,6 +16,7 @@ public class ExitAction extends AbstractClassyAction{
         putValue(SHORT_DESCRIPTION, "Exit");
 
     }
+
     public void actionPerformed(ActionEvent arg0) {
         System.exit(0);
     }

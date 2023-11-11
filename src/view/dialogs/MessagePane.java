@@ -6,7 +6,7 @@ import view.mainframe.MainFrame;
 
 import javax.swing.*;
 
-public class MessagePane extends JOptionPane{
+public class MessagePane extends JOptionPane {
 
     public MessagePane(Message m) {
         if (m.getType().equals(ErrType.ERROR)) {

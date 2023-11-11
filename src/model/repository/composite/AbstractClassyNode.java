@@ -11,6 +11,12 @@ public abstract class AbstractClassyNode {
     public AbstractClassyNode() {
     }
 
+    public AbstractClassyNode(String name, AbstractClassyNode parent) {
+        this.name = name;
+        this.parent = parent;
+        this.id = UUID.randomUUID();
+    }
+
     public String getName() {
         return name;
     }
@@ -25,12 +31,6 @@ public abstract class AbstractClassyNode {
 
     public void setParent(AbstractClassyNode parent) {
         this.parent = parent;
-    }
-
-    public AbstractClassyNode(String name, AbstractClassyNode parent) {
-        this.name = name;
-        this.parent = parent;
-        this.id = UUID.randomUUID();
     }
 
     public UUID getId() {

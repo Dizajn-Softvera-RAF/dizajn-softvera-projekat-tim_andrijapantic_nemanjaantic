@@ -15,20 +15,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainFrame extends JFrame implements ISubscriber {
 
     private static MainFrame instance = null;
-
-    private ClassyTreeImplementation classyTree;
-
-    private JPanel leftPanel = new JPanel();
-
-    private MyNodeMutable selectedNode;
-
     private static ToolBar toolBar;
-
+    private ClassyTreeImplementation classyTree;
+    private JPanel leftPanel = new JPanel();
+    private MyNodeMutable selectedNode;
     private ActionManager actionManager;
+    private List<MyNodeMutable> myNodeMutables;
     private Menu menu;
 
     public static MainFrame getInstance() {
@@ -41,6 +39,18 @@ public class MainFrame extends JFrame implements ISubscriber {
         return instance;
     }
 
+    public static void setInstance(MainFrame instance) {
+        MainFrame.instance = instance;
+    }
+
+    public static ToolBar getToolBar() {
+        return toolBar;
+    }
+
+    public static void setToolBar(ToolBar toolBar) {
+        MainFrame.toolBar = toolBar;
+    }
+
     private void instilize() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -49,9 +59,10 @@ public class MainFrame extends JFrame implements ISubscriber {
         }
 
         actionManager = new ActionManager();
-
+        myNodeMutables = new ArrayList<MyNodeMutable>();
         classyTree = new ClassyTreeImplementation();
         JTree projectExplorer = classyTree.generateTree(AppCore.getInstance().getClassyRepository().getProjectExplorer());
+
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screensize = kit.getScreenSize();
@@ -113,21 +124,6 @@ public class MainFrame extends JFrame implements ISubscriber {
         setIconImage(new ImageIcon(getClass().getResource("/images/ClassyCrafT.png")).getImage());
     }
 
-
-
-
-    public static void setInstance(MainFrame instance) {
-        MainFrame.instance = instance;
-    }
-
-    public static ToolBar getToolBar() {
-        return toolBar;
-    }
-
-    public static void setToolBar(ToolBar toolBar) {
-        MainFrame.toolBar = toolBar;
-    }
-
     public ActionManager getActionManager() {
         return actionManager;
     }
@@ -147,6 +143,14 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setSelectedNode(MyNodeMutable selectedNode) {
         this.selectedNode = selectedNode;
+    }
+
+    public List<MyNodeMutable> getMyNodeMutables() {
+        return myNodeMutables;
+    }
+
+    public void setMyNodeMutables(List<MyNodeMutable> myNodeMutables) {
+        this.myNodeMutables = myNodeMutables;
     }
 
     public ClassyTreeImplementation getClassyTree() {
