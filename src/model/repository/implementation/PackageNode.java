@@ -20,6 +20,19 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> {
         super(name, parent);
     }
 
+    public static void prodjiKrozDecu(MyNodeMutable node) {
+        int childCount = node.getChildCount();
+
+        for (int i = 0; i < childCount; i++) {
+            MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
+
+            System.out.println("Child Node: " + childNode.getUserObject());
+            MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
+
+            prodjiKrozDecu(childNode);
+        }
+    }
+
     @Override
     public void addChild(AbstractClassyNode child) {
         if (child instanceof DiagramNode) {
@@ -32,19 +45,6 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> {
 
     @Override
     public void removeChildren() {
-        for (MyNodeMutable myNodeMutable : MainFrame.getInstance().getMyNodeMutables()) {
-            if (myNodeMutable.getClassyNode().getId().equals(this.getId())) {
-                for (MyNodeMutable myNodeMutableChild : myNodeMutable.getChildren()) {
-                    MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, myNodeMutableChild.getClassyNode().getId()));
-                }
-            }
-        }
-        TabbedPane.getInstance().setTrenutniPaket(null);
-
-        for (Tab tab : TabbedPane.getInstance().getTrenutniTaboviZaBrisanje()) {
-            MainFrame.getInstance().getClassyTree().getTreeView().removeSubscriber(tab);
-        }
-        TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().clear();
-        this.getChildren().clear();
+        prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
     }
 }
