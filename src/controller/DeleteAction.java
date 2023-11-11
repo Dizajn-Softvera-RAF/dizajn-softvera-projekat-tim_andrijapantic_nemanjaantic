@@ -37,7 +37,6 @@ public class DeleteAction extends AbstractClassyAction{
                 msggenerator.generateMsg(message);
             }
             else {
-                System.out.println("Lista mynodemutable: " + MainFrame.getInstance().getMyNodeMutables());
                 DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
                 nodeToDelete.getClassyNode().removeChildren();
                 model.removeNodeFromParent(nodeToDelete);
