@@ -5,6 +5,9 @@ import model.event.NotificationType;
 import model.message.Message;
 import model.message.MessageGenerator;
 import model.message.PossibleErr;
+import model.repository.implementation.DiagramNode;
+import view.tabs.Tab;
+import view.tabs.TabbedPane;
 import view.tree.ClassyTreeView;
 
 import javax.swing.*;
@@ -60,6 +63,19 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
 
             ClassyTreeView mapTreeView = (ClassyTreeView) tree;
             mapTreeView.notifySubscribers(notification);
+
+            if (clicked.getClassyNode() instanceof DiagramNode) {
+
+                TabbedPane.getInstance().removeTab(clicked.getClassyNode().getName(), clicked.getClassyNode().getId());
+                TabbedPane.getInstance().addNewPane(clicked.getClassyNode().getName(), clicked.getClassyNode().getId(), clicked);
+
+                int tabIndex = TabbedPane.getInstance().indexOfTab(clicked.getClassyNode().getName());
+                if (tabIndex != -1) {
+                    TabbedPane.getInstance().setSelectedIndex(tabIndex);
+                }
+            }
+
+
         } else {
             Message message = new Message(PossibleErr.NAME_CANNOT_BE_EMPTY);
             MessageGenerator msggenerator = new MessageGenerator();

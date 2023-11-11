@@ -141,8 +141,6 @@ public class Tab implements ISubscriber {
 
             if (this.getId().equals(notification.getId())) {
 
-                System.out.println("Naso sam da hocu da promenim tab: " + this.getTitle());
-
                 int count = parent.getTabCount();
 
 
@@ -157,7 +155,6 @@ public class Tab implements ISubscriber {
                     }
                 }
                 this.setTitle(notification.getTitle());
-                System.out.println("Promenio sam ime u: " + this.getTitle());
             }
         }
 

@@ -66,6 +66,7 @@ public class TabbedPane extends JTabbedPane {
         this.selectedTab = selectedTab;
     }
 
+
     private void addTab(Tab tab, MyNodeMutable nodeMutable) {
         if (selectedTab == null) {
             selectedTab = tab;
