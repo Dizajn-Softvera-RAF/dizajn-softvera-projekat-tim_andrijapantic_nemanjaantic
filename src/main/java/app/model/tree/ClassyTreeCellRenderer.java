@@ -16,13 +16,13 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
         URL imageURL = null;
         if (((MyNodeMutable) value).getClassyNode() instanceof ProjectNode) {
-            imageURL = getClass().getResource("/projectImage.png");
+            imageURL = getClass().getResource("/images/projectImage.png");
         } else if (((MyNodeMutable) value).getClassyNode() instanceof DiagramNode) {
-            imageURL = getClass().getResource("/diagramImage.png");
+            imageURL = getClass().getResource("/images/diagramImage.png");
         } else if (((MyNodeMutable) value).getClassyNode() instanceof ProjectExplorer) {
-            imageURL = getClass().getResource("/projectExplorer.png");
+            imageURL = getClass().getResource("/images/projectExplorer.png");
         } else if (((MyNodeMutable) value).getClassyNode() instanceof PackageNode) {
-            imageURL = getClass().getResource("/packageImage.png");
+            imageURL = getClass().getResource("/images/packageImage.png");
         }
         Icon icon = null;
         if (imageURL != null)
