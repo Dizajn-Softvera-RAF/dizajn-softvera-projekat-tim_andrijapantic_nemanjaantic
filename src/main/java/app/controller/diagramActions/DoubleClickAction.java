@@ -1,15 +1,15 @@
 package app.controller.diagramActions;
 
 import app.controller.AbstractClassyAction;
-import app.model.logger.event.Notification;
-import app.model.logger.event.NotificationType;
+import app.model.event.Notification;
+import app.model.event.NotificationType;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
 import app.view.mainframe.MainFrame;
-import app.model.repository.composite.ClassyNodeComposite;
-import app.model.repository.implementation.DiagramNode;
-import app.model.repository.implementation.PackageNode;
+import app.model.composite.ClassyNodeComposite;
+import app.model.implementation.DiagramNode;
+import app.model.implementation.PackageNode;
 import app.view.tabs.TabbedPane;
 import app.view.tree.ClassyTreeView;
 

@@ -1,13 +1,13 @@
 package app.view.mainframe;
 
-import app.model.logger.event.ISubscriber;
-import app.model.logger.event.Notification;
-import app.model.logger.event.NotificationType;
+import app.model.event.ISubscriber;
+import app.model.event.Notification;
+import app.model.event.NotificationType;
 import app.model.tree.MyNodeMutable;
-import app.model.repository.composite.AbstractClassyNode;
-import app.model.repository.implementation.PackageNode;
-import app.model.repository.implementation.ProjectExplorer;
-import app.model.repository.implementation.ProjectNode;
+import app.model.composite.AbstractClassyNode;
+import app.model.implementation.PackageNode;
+import app.model.implementation.ProjectExplorer;
+import app.model.implementation.ProjectNode;
 import app.view.tabs.TabbedPane;
 
 import javax.swing.*;

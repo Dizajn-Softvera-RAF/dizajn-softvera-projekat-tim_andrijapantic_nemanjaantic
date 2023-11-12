@@ -5,7 +5,7 @@ import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
-import app.model.repository.implementation.ProjectExplorer;
+import app.model.implementation.ProjectExplorer;
 
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.ActionEvent;

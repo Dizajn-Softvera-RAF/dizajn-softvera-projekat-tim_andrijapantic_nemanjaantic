@@ -1,12 +1,12 @@
 package app.controller;
 
-import app.model.logger.event.Notification;
-import app.model.logger.event.NotificationType;
+import app.model.event.Notification;
+import app.model.event.NotificationType;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
 import app.view.mainframe.MainFrame;
-import app.model.repository.implementation.ProjectNode;
+import app.model.implementation.ProjectNode;
 import app.view.tree.ClassyTreeView;
 
 import javax.swing.*;

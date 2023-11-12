@@ -1,6 +1,7 @@
-package app.model.repository.factory;
+package app.model.factory;
 
-import app.model.repository.composite.ClassyNodeComposite;
+import app.model.implementation.*;
+import app.model.composite.ClassyNodeComposite;
 import app.model.repository.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory {

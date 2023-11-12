@@ -1,7 +1,7 @@
-package app.model.repository.implementation;
+package app.model.implementation;
 
-import app.model.repository.composite.AbstractClassyNode;
-import app.model.repository.composite.ClassyNodeComposite;
+import app.model.composite.AbstractClassyNode;
+import app.model.composite.ClassyNodeComposite;
 
 public class DiagramNode extends ClassyNodeComposite<ElementNode> {
 

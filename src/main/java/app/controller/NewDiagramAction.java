@@ -3,10 +3,10 @@ package app.controller;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
-import app.model.repository.implementation.DiagramNode;
+import app.model.implementation.DiagramNode;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
-import app.model.repository.implementation.PackageNode;
+import app.model.implementation.PackageNode;
 import app.view.tabs.TabbedPane;
 
 import java.awt.event.ActionEvent;

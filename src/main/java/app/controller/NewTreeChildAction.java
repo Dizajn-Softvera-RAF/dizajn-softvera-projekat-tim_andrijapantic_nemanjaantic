@@ -6,7 +6,7 @@ import app.model.message.PossibleErr;
 import app.model.tree.MyNodeMutable;
 import app.view.dialogs.AddToPackageView;
 import app.view.mainframe.MainFrame;
-import app.model.repository.implementation.PackageNode;
+import app.model.implementation.PackageNode;
 
 import java.awt.event.ActionEvent;
 

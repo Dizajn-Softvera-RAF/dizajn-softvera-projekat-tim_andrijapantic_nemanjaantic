@@ -1,7 +1,7 @@
 package app.model.tree;
 
-import app.model.repository.implementation.ProjectExplorer;
-import app.model.repository.implementation.ProjectNode;
+import app.model.implementation.ProjectExplorer;
+import app.model.implementation.ProjectNode;
 import app.view.tree.ClassyTreeView;
 
 import javax.lang.model.element.Element;

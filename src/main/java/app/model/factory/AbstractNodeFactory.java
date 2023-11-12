@@ -1,6 +1,6 @@
-package app.model.repository.factory;
+package app.model.factory;
 
-import app.model.repository.composite.ClassyNodeComposite;
+import app.model.composite.ClassyNodeComposite;
 
 public abstract class AbstractNodeFactory {
     public abstract ClassyNodeComposite create(String type, String name, ClassyNodeComposite parent) throws IllegalArgumentException;

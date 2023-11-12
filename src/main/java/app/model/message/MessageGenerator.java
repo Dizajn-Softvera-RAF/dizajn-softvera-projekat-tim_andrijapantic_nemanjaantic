@@ -1,8 +1,8 @@
 package app.model.message;
 
-import app.model.logger.event.IPublisher;
-import app.model.logger.event.ISubscriber;
-import app.model.logger.event.Notification;
+import app.model.event.IPublisher;
+import app.model.event.ISubscriber;
+import app.model.event.Notification;
 import app.model.logger.LoggerFactory;
 import app.model.logger.LoggerType;
 import app.view.mainframe.MainFrame;

@@ -1,6 +1,6 @@
 package app.model.tree;
 
-import app.model.repository.composite.ClassyNodeComposite;
+import app.model.composite.ClassyNodeComposite;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 

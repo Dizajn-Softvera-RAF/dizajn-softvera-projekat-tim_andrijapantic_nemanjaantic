@@ -1,4 +1,4 @@
-package app.model.repository.composite;
+package app.model.composite;
 
 import java.util.UUID;
 

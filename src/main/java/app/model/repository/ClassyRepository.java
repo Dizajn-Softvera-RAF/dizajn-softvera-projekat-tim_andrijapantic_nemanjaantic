@@ -1,7 +1,7 @@
 package app.model.repository;
 
-import app.model.repository.composite.ClassyNodeComposite;
-import app.model.repository.implementation.ProjectExplorer;
+import app.model.composite.ClassyNodeComposite;
+import app.model.implementation.ProjectExplorer;
 
 public interface ClassyRepository {
 

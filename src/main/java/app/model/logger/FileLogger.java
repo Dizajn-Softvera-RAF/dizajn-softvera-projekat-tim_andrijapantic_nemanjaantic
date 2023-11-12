@@ -1,6 +1,6 @@
 package app.model.logger;
 
-import app.model.logger.event.Notification;
+import app.model.event.Notification;
 import app.model.message.Message;
 
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package app.model.logger.event;
+package app.model.event;
 
 import app.model.message.Message;
 import app.model.tree.MyNodeMutable;

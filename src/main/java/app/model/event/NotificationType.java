@@ -1,4 +1,4 @@
-package app.model.logger.event;
+package app.model.event;
 
 public enum NotificationType {
     RENAME, DELETE_PROJECT, DELETE_DIAGRAM, DELETE_PACKAGE, DELETE_COMPONENT, CHANGE_AUTHOR, NODE_SELECTION_CHANGED, PACKAGE_SELECTED

@@ -1,6 +1,6 @@
 package app.view.tabs;
 
-import app.model.repository.implementation.PackageNode;
+import app.model.implementation.PackageNode;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
