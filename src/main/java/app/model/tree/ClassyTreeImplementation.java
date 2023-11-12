@@ -3,7 +3,6 @@ package app.model.tree;
 import app.core.AppCore;
 import app.model.composite.ClassyNodeComposite;
 import app.model.implementation.*;
-import app.model.repository.implementation.*;
 import app.view.tree.ClassyTreeView;
 
 import javax.lang.model.element.Element;
