@@ -1,5 +1,6 @@
 package app.model.message;
 
+import app.core.AppCore;
 import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
@@ -17,8 +18,8 @@ public class MessageGenerator implements IPublisher {
     public MessageGenerator() {
         this.subscribers = new ArrayList<>();
 
-        subscribers.add(LoggerFactory.createLogger(LoggerType.CONSOLE));
-        subscribers.add(LoggerFactory.createLogger(LoggerType.FILE));
+        subscribers.add(AppCore.getInstance().getConsoleLogger());
+        subscribers.add(AppCore.getInstance().getFileLogger());
         subscribers.add(MainFrame.getInstance());
     }
 

@@ -10,6 +10,7 @@ public class ActionManager {
     private DeleteAction deleteAction;
     private NewDiagramAction newDiagramAction;
     private ChangeAuthorAction changeAuthorAction;
+    private ChangePathAction changePathAction;
 
     public ActionManager() {
         initilizeActions();
@@ -24,6 +25,7 @@ public class ActionManager {
         deleteAction = new DeleteAction();
         newDiagramAction = new NewDiagramAction();
         changeAuthorAction = new ChangeAuthorAction();
+        changePathAction = new ChangePathAction();
     }
 
     public ExitAction getExitAction() {
@@ -90,6 +92,13 @@ public class ActionManager {
         this.changeAuthorAction = changeAuthorAction;
     }
 
+    public ChangePathAction getChangePathAction() {
+        return changePathAction;
+    }
+
+    public void setChangePathAction(ChangePathAction changePathAction) {
+        this.changePathAction = changePathAction;
+    }
 }
 
 

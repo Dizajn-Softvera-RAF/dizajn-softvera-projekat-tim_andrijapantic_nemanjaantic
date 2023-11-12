@@ -14,11 +14,13 @@ public class Menu extends JMenuBar {
         JMenuItem miAboutUs = new JMenuItem("About Us");
         JMenuItem miDelete = new JMenuItem("Delete");
         JMenuItem miChangeAuthor = new JMenuItem("Change Author");
+        JMenuItem miChangePath = new JMenuItem("Change Path");
 
         miNew.addActionListener(MainFrame.getInstance().getActionManager().getNewProjectAction());
         miChangeAuthor.addActionListener(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
         miAboutUs.addActionListener(MainFrame.getInstance().getActionManager().getInfoAction());
         miDelete.addActionListener(MainFrame.getInstance().getActionManager().getDeleteAction());
+        miChangePath.addActionListener(MainFrame.getInstance().getActionManager().getChangePathAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);
@@ -27,6 +29,7 @@ public class Menu extends JMenuBar {
         edit.add(miAboutUs);
         functions.add(miDelete);
         edit.add(miChangeAuthor);
+        edit.add(miChangePath);
 
         JMenuItem miExit = new JMenuItem("Exit");
         miExit.addActionListener(MainFrame.getInstance().getActionManager().getExitAction());

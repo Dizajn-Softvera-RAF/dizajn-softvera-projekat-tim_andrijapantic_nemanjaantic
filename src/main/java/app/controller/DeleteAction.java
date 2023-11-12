@@ -35,7 +35,6 @@ public class DeleteAction extends AbstractClassyAction{
 
 
         } catch (NullPointerException exception) {
-            exception.printStackTrace();
 
             Message message = new Message(PossibleErr.CANNOT_DELETE_ELEMENT);
             MessageGenerator msggenerator = new MessageGenerator();
