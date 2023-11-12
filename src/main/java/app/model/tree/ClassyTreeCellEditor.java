@@ -1,7 +1,7 @@
 package app.model.tree;
 
-import app.model.event.Notification;
-import app.model.event.NotificationType;
+import app.model.logger.event.Notification;
+import app.model.logger.event.NotificationType;
 import app.model.message.Message;
 import app.model.repository.implementation.DiagramNode;
 import app.model.message.MessageGenerator;

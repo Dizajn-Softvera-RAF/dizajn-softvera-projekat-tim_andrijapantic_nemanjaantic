@@ -1,4 +1,4 @@
-package app.model.event;
+package app.model.logger.event;
 
 public interface IPublisher {
     void addSubscriber(ISubscriber sub);

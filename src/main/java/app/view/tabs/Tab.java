@@ -1,9 +1,9 @@
 package app.view.tabs;
 
 import app.controller.diagramActions.CloseTabAction;
-import app.model.event.ISubscriber;
-import app.model.event.Notification;
-import app.model.event.NotificationType;
+import app.model.logger.event.ISubscriber;
+import app.model.logger.event.Notification;
+import app.model.logger.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.DiagramView;
 

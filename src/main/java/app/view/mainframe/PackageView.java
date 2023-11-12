@@ -1,8 +1,8 @@
 package app.view.mainframe;
 
-import app.model.event.ISubscriber;
-import app.model.event.Notification;
-import app.model.event.NotificationType;
+import app.model.logger.event.ISubscriber;
+import app.model.logger.event.Notification;
+import app.model.logger.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.model.repository.composite.AbstractClassyNode;
 import app.model.repository.implementation.PackageNode;
