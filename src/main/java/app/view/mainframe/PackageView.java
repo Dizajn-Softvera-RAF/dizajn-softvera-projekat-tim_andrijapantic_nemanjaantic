@@ -17,7 +17,9 @@ import java.awt.*;
 public class PackageView extends JPanel implements ISubscriber {
     JLabel autorJe = new JLabel();
     JLabel projekatJe = new JLabel();
+    JLabel pathJe = new JLabel();
     JLabel imeAutora = new JLabel("NoInput");
+    JLabel path = new JLabel("NoInput");
     JLabel imeProjekta = new JLabel("No Project Selected");
     ProjectNode projectNode;
     PackageNode packageNode;
@@ -26,6 +28,7 @@ public class PackageView extends JPanel implements ISubscriber {
         projectNode = new ProjectNode();
         autorJe.setText("Autor: ");
         projekatJe.setText("Projekat: ");
+        pathJe.setText("Path: ");
 
         MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(this);
         JPanel containerPanel = new JPanel();
@@ -37,6 +40,9 @@ public class PackageView extends JPanel implements ISubscriber {
         containerPanel.add(Box.createRigidArea(new Dimension(100, 0)));
         containerPanel.add(projekatJe);
         containerPanel.add(imeProjekta);
+        containerPanel.add(Box.createRigidArea(new Dimension(100, 0)));
+        containerPanel.add(pathJe);
+        containerPanel.add(path);
 
         setLayout(new BorderLayout());
         add(containerPanel, BorderLayout.PAGE_START);
@@ -54,10 +60,18 @@ public class PackageView extends JPanel implements ISubscriber {
                 if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
                     if (selected.getClassyNode() instanceof ProjectNode) {
                         projectNode = (ProjectNode) selected.getClassyNode();
-                        if (projectNode.getAuthor() != null)
+                        if (projectNode.getAuthor() != null) {
                             imeAutora.setText(projectNode.getAuthor());
-                        else
+                        } else {
                             imeAutora.setText("NoInput");
+                        }
+                        if (projectNode.getPath() != null) {
+                            path.setText(projectNode.getPath());
+                        }
+                        else {
+                            path.setText("NoInput");
+                        }
+
                     } else {
                         AbstractClassyNode currentNode = selected.getClassyNode();
                         while (!(currentNode instanceof ProjectNode)) {
@@ -66,12 +80,19 @@ public class PackageView extends JPanel implements ISubscriber {
                             currentNode = temp;
                         }
                         projectNode = (ProjectNode) currentNode;
+                        if (projectNode.getPath()!=null) {
+                            path.setText(projectNode.getPath());
+                        }
+                        if (projectNode.getAuthor()!=null) {
+                            imeAutora.setText(projectNode.getAuthor());
+                        }
                     }
                     imeProjekta.setText(projectNode.getName());
                 }
             } else {
                 imeProjekta.setText("No Project Selected");
                 imeAutora.setText("NoInput");
+                path.setText("NoInput");
             }
         } else if (notification.getType().equals(NotificationType.PACKAGE_SELECTED)) {
             TabbedPane.getInstance().setTrenutniPaket((PackageNode) notification.getNode().getClassyNode());
@@ -81,6 +102,11 @@ public class PackageView extends JPanel implements ISubscriber {
             if (projectNode.getId().equals(notification.getId())) {
                 projectNode.setName(notification.getTitle());
                 imeProjekta.setText(projectNode.getName());
+            }
+        } else if (notification.getType().equals(NotificationType.PATH_CHANGED)) {
+            if (projectNode.getId().equals(notification.getId())) {
+                projectNode.setPath(notification.getTitle());
+                path.setText(projectNode.getPath());
             }
         }
 

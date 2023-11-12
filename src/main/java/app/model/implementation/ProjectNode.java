@@ -10,6 +10,7 @@ import app.view.tabs.TabbedPane;
 
 public class ProjectNode extends ClassyNodeComposite<PackageNode> {
     String author;
+    String path;
 
     public ProjectNode(String name, ProjectExplorer parent) {
         super(name, parent);
@@ -53,5 +54,13 @@ public class ProjectNode extends ClassyNodeComposite<PackageNode> {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

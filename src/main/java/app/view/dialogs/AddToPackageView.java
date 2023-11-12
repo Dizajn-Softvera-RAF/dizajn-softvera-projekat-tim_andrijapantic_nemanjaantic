@@ -34,9 +34,6 @@ public class AddToPackageView {
 
                 newPackageAction = MainFrame.getInstance().getActionManager().getNewPackageAction();
                 newPackageAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
-               /* newDiagramAction = MainFrame.getInstance().getActionManager().getNewDiagramAction();
-                // Zovemo actionPerformed method iz NewDiagramAction
-                newDiagramAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));*/
                 typePicker.dispose();
             }
 
@@ -54,7 +51,6 @@ public class AddToPackageView {
             @Override
             public void mouseClicked(MouseEvent e) {
                 newDiagramAction = MainFrame.getInstance().getActionManager().getNewDiagramAction();
-                // Zovemo actionPerformed method iz NewDiagramAction
                 newDiagramAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
                 typePicker.dispose();
             }
