@@ -1,5 +1,6 @@
 package model.repository.implementation;
 
+import com.sun.source.tree.Tree;
 import model.event.Notification;
 import model.event.NotificationType;
 import model.repository.composite.AbstractClassyNode;
@@ -8,6 +9,11 @@ import model.tree.MyNodeMutable;
 import view.mainframe.MainFrame;
 import view.tabs.Tab;
 import view.tabs.TabbedPane;
+
+import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 public class ProjectNode extends ClassyNodeComposite<PackageNode> {
     String author;
@@ -33,7 +39,9 @@ public class ProjectNode extends ClassyNodeComposite<PackageNode> {
     public void removeChildren() {
         for (MyNodeMutable myNodeMutable : MainFrame.getInstance().getMyNodeMutables()) {
             if (myNodeMutable.getClassyNode().getId().equals(this.getId())) {
-                for (MyNodeMutable myNodeMutableChild : myNodeMutable.getChildren()) {
+                ArrayList<MyNodeMutable> childrenToDelete = new ArrayList<>();
+                collectAllChildren(myNodeMutable, childrenToDelete);
+                for (MyNodeMutable myNodeMutableChild : childrenToDelete) {
                     MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, myNodeMutableChild.getClassyNode().getId()));
                 }
             }
@@ -53,5 +61,17 @@ public class ProjectNode extends ClassyNodeComposite<PackageNode> {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    private void collectAllChildren(MyNodeMutable node, List<MyNodeMutable> childrenList){
+        Enumeration<TreeNode> children = node.children();
+
+        while(children.hasMoreElements()){
+            TreeNode child = children.nextElement();
+            MyNodeMutable childrenNode = (MyNodeMutable) child;
+            childrenList.add(childrenNode);
+
+            collectAllChildren(childrenNode, childrenList);
+        }
     }
 }
