@@ -5,6 +5,10 @@ import app.model.composite.ClassyNodeComposite;
 import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
+import app.model.event.NotificationType;
+import app.model.tree.MyNodeMutable;
+import app.view.mainframe.MainFrame;
+import app.view.tabs.TabbedPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,7 @@ public class DiagramNode extends ClassyNodeComposite<ElementNode> implements IPu
 
     @Override
     public void removeChildren() {
+        MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
 
     }
 

@@ -46,6 +46,10 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> implements ISu
         TabbedPane.getInstance().setPackageView(null);
     }
 
+    public void removeChild(DiagramNode diagramNode) {
+        this.getChildren().remove(diagramNode);
+    }
+
     @Override
     public void update(Notification notification) {
 

@@ -4,6 +4,7 @@ import app.controller.diagramActions.CloseTabAction;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import app.model.implementation.PackageNode;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.DiagramView;
 
@@ -11,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
-public class Tab implements ISubscriber {
+public class Tab extends Component implements ISubscriber {
     private TabbedPane parent;
     private String title;
 
@@ -24,6 +25,7 @@ public class Tab implements ISubscriber {
     private JPanel body;
 
     private DiagramView diagramView;
+    private boolean blocked = false;
 
 
     public Tab(TabbedPane parent, String title, UUID id) {
@@ -119,10 +121,15 @@ public class Tab implements ISubscriber {
         if (notification.getType().equals(NotificationType.DELETE_DIAGRAM)) {
 
             if (this.getId().equals(notification.getId())) {
-                parent.getTrenutniTaboviZaBrisanje().add(this);
-                parent.getListaTabova().remove(this);
-                parent.removeTab(title, id);
+                TabbedPane.getInstance().getTrenutniTaboviZaBrisanje().add(this);
+                TabbedPane.getInstance().getListaTabova().remove(this);
+                TabbedPane.getInstance().removeTab(title, id);
+                diagramView.getParentView().getPackageNode().removeChild(diagramView.getDiagramNode());
+                //TabbedPane.getInstance().remove(this);
+               // this.setBlocked(true);
+                //TabbedPane.getInstance().getBlockedTaboviId().add(id);
             }
+
 
         } else if (notification.getType().equals(NotificationType.DELETE_PACKAGE)) {
             int counter = notification.getNode().getChildCount();
@@ -132,6 +139,7 @@ public class Tab implements ISubscriber {
                 MyNodeMutable checkForDeletion = (MyNodeMutable) notification.getNode().getChildAt(i);
                 if (this.getId().equals(checkForDeletion.getClassyNode().getId())) {
                     parent.getTrenutniTaboviZaBrisanje().add(this);
+                    TabbedPane.getInstance().getListaTabova().remove(this);
                 }
 
             }
@@ -157,5 +165,13 @@ public class Tab implements ISubscriber {
         }
 
 
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }

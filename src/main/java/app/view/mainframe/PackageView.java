@@ -141,4 +141,12 @@ public class PackageView extends JPanel implements ISubscriber {
         stateManager.getCurrentState().misOtpusten(x,y,diagramView);
     }
 
+
+    public PackageNode getPackageNode() {
+        return packageNode;
+    }
+
+    public void setPackageNode(PackageNode packageNode) {
+        this.packageNode = packageNode;
+    }
 }
