@@ -49,6 +49,7 @@ public class ProjectNode extends ClassyNodeComposite<PackageNode> implements IPu
         prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
         TabbedPane.getInstance().setTrenutniPaket(null);
         TabbedPane.getInstance().setPackageView(null);
+        this.getChildren().clear();
     }
 
     public String getAuthor() {
