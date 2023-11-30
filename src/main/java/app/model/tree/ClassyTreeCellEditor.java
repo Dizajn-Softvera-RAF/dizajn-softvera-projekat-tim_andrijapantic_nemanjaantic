@@ -66,7 +66,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
             if (clicked.getClassyNode() instanceof DiagramNode) {
 
                 TabbedPane.getInstance().removeTab(clicked.getClassyNode().getName(), clicked.getClassyNode().getId());
-                TabbedPane.getInstance().addNewPane(clicked.getClassyNode().getName(), clicked.getClassyNode().getId(), clicked);
+                TabbedPane.getInstance().addNewPane(clicked.getClassyNode().getName(), clicked.getClassyNode().getId(), (DiagramNode)clicked.getClassyNode());
 
                 int tabIndex = TabbedPane.getInstance().indexOfTab(clicked.getClassyNode().getName());
                 if (tabIndex != -1) {

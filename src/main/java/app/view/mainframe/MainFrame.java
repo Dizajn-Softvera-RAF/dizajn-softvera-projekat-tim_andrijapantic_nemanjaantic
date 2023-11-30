@@ -25,6 +25,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private MyNodeMutable selectedNode;
     private ActionManager actionManager;
     private app.view.mainframe.Menu menu;
+    private StateToolBar stateToolBar;
 
     public static MainFrame getInstance() {
 
@@ -103,8 +104,11 @@ public class MainFrame extends JFrame implements ISubscriber {
         toolBar = new ToolBar();
         toolBar.setSize(100, 50);
         add(toolBar, BorderLayout.NORTH);
+        stateToolBar = new StateToolBar();
+        add(stateToolBar, BorderLayout.EAST);
 
         add(new PackageView());
+
 
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
             @Override

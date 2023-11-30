@@ -2,13 +2,14 @@ package app.model.implementation;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
 import app.view.tabs.TabbedPane;
 
-public class PackageNode extends ClassyNodeComposite<DiagramNode> {
+public class PackageNode extends ClassyNodeComposite<DiagramNode> implements ISubscriber {
 
 
     public PackageNode() {
@@ -42,5 +43,11 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> {
     public void removeChildren() {
         prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
         TabbedPane.getInstance().setTrenutniPaket(null);
+        TabbedPane.getInstance().setPackageView(null);
+    }
+
+    @Override
+    public void update(Notification notification) {
+
     }
 }

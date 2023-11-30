@@ -1,5 +1,7 @@
 package app.controller;
 
+import app.controller.stateActions.*;
+
 public class ActionManager {
 
     private ExitAction exitAction;
@@ -11,6 +13,11 @@ public class ActionManager {
     private NewDiagramAction newDiagramAction;
     private ChangeAuthorAction changeAuthorAction;
     private ChangePathAction changePathAction;
+    private IntoAddInterclassState intoAddInterclassState;
+    private IntoAddConnectionState intoAddConnectionState;
+    private IntoSelectionState intoSelectionState;
+    private IntoDeleteState intoDeleteState;
+    private IntoEditState intoEditState;
 
     public ActionManager() {
         initilizeActions();
@@ -26,6 +33,11 @@ public class ActionManager {
         newDiagramAction = new NewDiagramAction();
         changeAuthorAction = new ChangeAuthorAction();
         changePathAction = new ChangePathAction();
+        intoAddInterclassState = new IntoAddInterclassState();
+        intoAddConnectionState = new IntoAddConnectionState();
+        intoDeleteState = new IntoDeleteState();
+        intoEditState = new IntoEditState();
+        intoSelectionState = new IntoSelectionState();
     }
 
     public ExitAction getExitAction() {
@@ -98,6 +110,46 @@ public class ActionManager {
 
     public void setChangePathAction(ChangePathAction changePathAction) {
         this.changePathAction = changePathAction;
+    }
+
+    public IntoAddInterclassState getIntoAddInterclassState() {
+        return intoAddInterclassState;
+    }
+
+    public void setIntoAddInterclassState(IntoAddInterclassState intoAddInterclassState) {
+        this.intoAddInterclassState = intoAddInterclassState;
+    }
+
+    public IntoAddConnectionState getIntoAddConnectionState() {
+        return intoAddConnectionState;
+    }
+
+    public void setIntoAddConnectionState(IntoAddConnectionState intoAddConnectionState) {
+        this.intoAddConnectionState = intoAddConnectionState;
+    }
+
+    public IntoSelectionState getIntoSelectionState() {
+        return intoSelectionState;
+    }
+
+    public void setIntoSelectionState(IntoSelectionState intoSelectionState) {
+        this.intoSelectionState = intoSelectionState;
+    }
+
+    public IntoDeleteState getIntoDeleteState() {
+        return intoDeleteState;
+    }
+
+    public void setIntoDeleteState(IntoDeleteState intoDeleteState) {
+        this.intoDeleteState = intoDeleteState;
+    }
+
+    public IntoEditState getIntoEditState() {
+        return intoEditState;
+    }
+
+    public void setIntoEditState(IntoEditState intoEditState) {
+        this.intoEditState = intoEditState;
     }
 }
 
