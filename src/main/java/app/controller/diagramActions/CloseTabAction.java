@@ -22,6 +22,6 @@ public class CloseTabAction extends AbstractClassyAction implements ActionListen
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        TabbedPane.getInstance().removeTab(tab.getTitle(), null);
+        TabbedPane.getInstance().closeTab(tab.getTitle(), null);
     }
 }
