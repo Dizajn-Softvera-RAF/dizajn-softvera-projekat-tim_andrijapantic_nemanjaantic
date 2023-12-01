@@ -1,8 +1,8 @@
 package app.model.factory;
 
-import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
-import app.model.diagcomposite.DiagramElement;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.implementation.*;
 
@@ -19,10 +19,20 @@ public class NodeFactory extends AbstractNodeFactory {
 
             return new PackageNode(name, parent);
 
-        } else if (type.equals("DiagramElement")) {
+        } else if (type.equals("Klasa")) {
 
             return new Klasa(name, parent);
 
+        } else if (type.equals("Interface")) {
+
+            return new Interface(name, parent);
+
+        } else if (type.equals("Enum")) {
+
+            return new EnumComp(name, parent);
+        } else if (type.equals("Aggregation")) {
+
+            return new EnumComp(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);

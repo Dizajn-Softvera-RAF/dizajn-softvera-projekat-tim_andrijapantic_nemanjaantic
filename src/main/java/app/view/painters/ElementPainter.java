@@ -6,6 +6,8 @@ import java.awt.*;
 
 public abstract class ElementPainter {
 
+    DiagramElement element;
+
     public ElementPainter() {
     }
 
@@ -13,5 +15,11 @@ public abstract class ElementPainter {
 
     public abstract boolean elementAt(DiagramElement element, Point point);
 
+    public DiagramElement getElement() {
+        return element;
+    }
 
+    public void setElement(DiagramElement element) {
+        this.element = element;
+    }
 }

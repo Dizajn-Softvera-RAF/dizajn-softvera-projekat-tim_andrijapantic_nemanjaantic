@@ -160,6 +160,8 @@ public class TabbedPane extends JTabbedPane {
         }
     }
 
+
+
     public ArrayList<Tab> getTrenutniTaboviZaBrisanje() {
         return trenutniTaboviZaBrisanje;
     }

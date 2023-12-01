@@ -2,6 +2,7 @@ package app.model.diagcomposite;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.DiagramElement;
+import javafx.scene.effect.Light;
 
 import javax.swing.text.Position;
 import java.awt.*;
@@ -14,9 +15,11 @@ public abstract class Interclass extends DiagramElement {
     protected Paint paint;
 
     protected String description;
+    protected Point position;
 
-    public Interclass(Paint paint) {
+    public Interclass(Paint paint, Point position) {
         this.paint = paint;
+        this.position = position;
     }
 
     public Interclass(String name, AbstractClassyNode parent) {
@@ -53,4 +56,11 @@ public abstract class Interclass extends DiagramElement {
         this.paint = paint;
     }
 
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
 }

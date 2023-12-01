@@ -1,6 +1,7 @@
 package app.view.mainframe;
 
 import app.controller.MouseController;
+import app.model.diagcomposite.Connection;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.implementation.DiagramNode;
@@ -21,6 +22,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     private MouseController mouseController;
     private PackageView parentView;
     private ArrayList<ElementPainter> elementPainters;
+    private Connection currentLink;
 
     public DiagramView(Tab tab) {
         super();
@@ -87,5 +89,13 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setElementPainters(ArrayList<ElementPainter> elementPainters) {
         this.elementPainters = elementPainters;
+    }
+
+    public Connection getCurrentLink() {
+        return currentLink;
+    }
+
+    public void setCurrentLink(Connection currentLink) {
+        this.currentLink = currentLink;
     }
 }

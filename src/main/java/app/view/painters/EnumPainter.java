@@ -1,25 +1,27 @@
 package app.view.painters;
 
 import app.model.diagcomposite.DiagramElement;
-import app.model.diagimplementation.interclass.Klasa;
-import org.w3c.dom.css.RGBColor;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public class ClassPainter extends ElementPainter{
-    protected Rectangle2D.Double shape;
-    Klasa element;
+public class EnumPainter extends ElementPainter{
 
-    public ClassPainter(Klasa element) {
+    protected Rectangle2D.Double shape;
+    EnumComp element;
+
+    public EnumPainter(EnumComp element) {
         this.element = element;
     }
 
+
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(new Color(238,230,194));
+        g2.setColor(new Color(172,170,219));
         g2.setStroke(new BasicStroke(element.getStroke()));
-        this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 105);
+        this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 100);
 
 
         g2.fill(shape);
@@ -27,8 +29,6 @@ public class ClassPainter extends ElementPainter{
         g2.draw(shape);
         g2.setFont(new Font("Arial", Font.BOLD, 13));
         g2.drawString(element.getName(), (int) shape.getX()+20, (int) shape.getY()+20);
-
-
     }
 
     @Override
@@ -36,10 +36,11 @@ public class ClassPainter extends ElementPainter{
         return getShape().contains(pos);
     }
 
-
-    public Shape getShape() {
+    public Rectangle2D.Double getShape() {
         return shape;
     }
 
-
+    public void setShape(Rectangle2D.Double shape) {
+        this.shape = shape;
+    }
 }

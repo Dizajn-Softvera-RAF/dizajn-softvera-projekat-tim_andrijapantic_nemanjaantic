@@ -1,35 +1,28 @@
 package app.model.diagimplementation.interclass;
 
-import app.model.classcontent.ClassContent;
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.Interclass;
 
 import java.awt.*;
 import java.util.List;
 
-public class Klasa extends Interclass {
+public class EnumComp extends Interclass {
 
-    private List<ClassContent> children;
+    private List<String> children;
     private Dimension size;
     int stroke;
-    //protected Point position;
-
-    public Klasa() {
+    public EnumComp(String name, AbstractClassyNode parent) {
+        super(name,parent);
     }
 
-    public Klasa(Dimension size, Point position) {
-        this.size= size;
-        this.position = position;
-    }
+    public EnumComp() {}
 
-    public Klasa(String name, AbstractClassyNode parent) {
-        super(name, parent);
-    }
-    public Klasa(int stroke, Point position, Paint paint, Dimension size) {
+    public EnumComp(int stroke, Point position, Paint paint, Dimension size) {
         super(paint, position);
         this.stroke = stroke;
         this.size = size;
     }
+
     @Override
     public void addChild(AbstractClassyNode child) {
 
@@ -38,6 +31,14 @@ public class Klasa extends Interclass {
     @Override
     public void removeChildren() {
 
+    }
+
+    public Dimension getSize() {
+        return size;
+    }
+
+    public void setSize(Dimension size) {
+        this.size = size;
     }
 
     public int getStroke() {

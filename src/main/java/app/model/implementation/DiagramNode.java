@@ -7,6 +7,9 @@ import app.model.diagcomposite.DiagramElement;
 import java.util.List;
 
 import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
@@ -36,6 +39,24 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
                 this.getChildren().add(node);
                 notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
             }
+        } else if (child instanceof Interface) {
+            Interface node = (Interface) child;
+            if (!this.getChildren().contains(node)) {
+                this.getChildren().add(node);
+                notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
+            }
+        } else if (child instanceof EnumComp) {
+            EnumComp node = (EnumComp) child;
+            if (!this.getChildren().contains(node)) {
+                this.getChildren().add(node);
+                notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
+            }
+        } else if (child instanceof Aggregation) {
+            Aggregation node = (Aggregation) child;
+            if (!this.getChildren().contains(node)) {
+                this.getChildren().add(node);
+                notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
+            }
         }
 
     }
@@ -44,6 +65,22 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
     public void removeChildren() {
         MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
 
+    }
+
+    public void removeChildren(ArrayList<DiagramElement> lista) {
+        for (DiagramElement element: lista) {
+            if (this.getChildren().contains(element)) {
+                this.getChildren().remove(element);
+                notifySubscribers(new Notification(NotificationType.PAINTER_REMOVED));
+            }
+        }
+    }
+
+    public void removeChild(DiagramElement child) {
+        if (this.getChildren().contains(child)) {
+            this.getChildren().remove(child);
+            notifySubscribers(new Notification(NotificationType.PAINTER_REMOVED));
+        }
     }
 
     @Override
