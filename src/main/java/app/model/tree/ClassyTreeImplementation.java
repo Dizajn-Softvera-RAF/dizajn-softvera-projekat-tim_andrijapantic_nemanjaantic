@@ -31,21 +31,7 @@ public class ClassyTreeImplementation implements ClassyTree {
     @Override
     public MyNodeMutable addChild(MyNodeMutable parent, Element element) {
         ClassyNodeComposite child = createChild(parent.getClassyNode());
-        if (child instanceof ElementNode) {
 
-            ElementNode elementNode = (ElementNode) child;
-            elementNode.setElement(element);
-
-
-            MyNodeMutable toReturn = new MyNodeMutable(elementNode);
-            parent.add(toReturn);
-            parent.getClassyNode().addChild(elementNode);
-            treeView.expandPath(treeView.getSelectionPath());
-            SwingUtilities.updateComponentTreeUI(treeView);
-            return toReturn;
-
-
-        } else {
             MyNodeMutable toReturn = new MyNodeMutable(child);
 
             parent.add(toReturn);
@@ -53,7 +39,7 @@ public class ClassyTreeImplementation implements ClassyTree {
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
             return toReturn;
-        }
+
     }
 
     private ClassyNodeComposite createChild(ClassyNodeComposite parent) {

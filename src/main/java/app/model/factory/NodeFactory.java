@@ -1,6 +1,8 @@
 package app.model.factory;
 
+import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagcomposite.DiagramElement;
 import app.model.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory {
@@ -16,8 +18,6 @@ public class NodeFactory extends AbstractNodeFactory {
 
             return new PackageNode(name, parent);
 
-        } else if (type.equals("Element")) {
-            return new ElementNode(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);
