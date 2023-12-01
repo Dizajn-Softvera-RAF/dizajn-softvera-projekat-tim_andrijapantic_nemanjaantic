@@ -10,9 +10,7 @@ import java.awt.*;
 public class AddInterclassState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        //System.out.println("DijagramView je: " + diagramView.getName() + " a diagramNode je: " + diagramView.getDiagramNode().getName());
-        /**
-         *
+
          Klasa klasa = new Klasa();
          klasa.setPosition(new Point(x,y));
          klasa.setStroke(3);
@@ -21,8 +19,7 @@ public class AddInterclassState implements State {
          ClassPainter classPainter = new ClassPainter(klasa);
          diagramView.getElementPainters().add(classPainter);
          diagramView.getDiagramNode().addChild(klasa);
-         */
-        System.out.println("Trenutno si u AddInterClassState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+
 
     }
 

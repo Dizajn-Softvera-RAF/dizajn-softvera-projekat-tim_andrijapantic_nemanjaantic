@@ -23,7 +23,6 @@ import java.util.List;
 
 public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements IPublisher {
     private List<ISubscriber> subscribers;
-    private List<DiagramElement> children;
     public DiagramNode(String name, AbstractClassyNode parent) {
         super(name, parent);
         this.subscribers = new ArrayList<>();
@@ -59,7 +58,10 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
 
     @Override
     public void notifySubscribers(Notification notification) {
+        for (ISubscriber subscriber : subscribers) {
 
+            subscriber.update(notification);
+        }
     }
 
     public List<ISubscriber> getSubscribers() {
@@ -70,13 +72,4 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         this.subscribers = subscribers;
     }
 
-    @Override
-    public List<DiagramElement> getChildren() {
-        return children;
-    }
-
-    @Override
-    public void setChildren(List<DiagramElement> children) {
-        this.children = children;
-    }
 }

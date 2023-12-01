@@ -44,6 +44,7 @@ public class DiagramView extends JPanel implements ISubscriber {
     @Override
     public void update(Notification notification) {
         repaint();
+        System.out.println("Pozvao sam repaint");
     }
 
     public DiagramNode getDiagramNode() {
