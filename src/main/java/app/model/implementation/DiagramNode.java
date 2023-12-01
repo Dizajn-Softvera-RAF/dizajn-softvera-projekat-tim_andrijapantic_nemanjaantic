@@ -5,6 +5,9 @@ import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
 
 import java.util.List;
+
+import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
@@ -28,10 +31,11 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
 
     @Override
     public void addChild(AbstractClassyNode child) {
-        if (child instanceof DiagramElement) {
-            DiagramElement node = (DiagramElement) child;
+        if (child instanceof Klasa) {
+            Klasa node = (Klasa) child;
             if (!this.getChildren().contains(node)) {
                 this.getChildren().add(node);
+                notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
             }
         }
 

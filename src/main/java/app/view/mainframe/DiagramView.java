@@ -4,11 +4,13 @@ import app.controller.MouseController;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.implementation.DiagramNode;
+import app.view.painters.ElementPainter;
 import app.view.tabs.Tab;
 import app.view.tabs.TabbedPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class DiagramView extends JPanel implements ISubscriber {
     static final int xOffset = 30, yOffset = 30;
@@ -18,11 +20,12 @@ public class DiagramView extends JPanel implements ISubscriber {
     private DiagramNode diagramNode;
     private MouseController mouseController;
     private PackageView parentView;
-    //Treba da ima listu Paintera
+    private ArrayList<ElementPainter> elementPainters;
 
     public DiagramView(Tab tab) {
         super();
         this.tab = tab;
+        this.elementPainters = new ArrayList<>();
         parentView = TabbedPane.getInstance().getPackageView();
         ++openFrameCount;
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
@@ -40,7 +43,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Notification notification) {
-
+        repaint();
     }
 
     public DiagramNode getDiagramNode() {
@@ -65,5 +68,23 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setParentView(PackageView parentView) {
         this.parentView = parentView;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        for (ElementPainter e : elementPainters) {
+            e.paint(g2);
+        }
+
+    }
+
+    public ArrayList<ElementPainter> getElementPainters() {
+        return elementPainters;
+    }
+
+    public void setElementPainters(ArrayList<ElementPainter> elementPainters) {
+        this.elementPainters = elementPainters;
     }
 }

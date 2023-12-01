@@ -78,7 +78,6 @@ public class TabbedPane extends JTabbedPane {
                 selectedTab = tab;
             }
             DiagramView diagramView = new DiagramView(tab);
-            diagramView.setDiagramNode(node);
             node.addSubscriber(diagramView);
 
             tab.setDiagramView(diagramView);

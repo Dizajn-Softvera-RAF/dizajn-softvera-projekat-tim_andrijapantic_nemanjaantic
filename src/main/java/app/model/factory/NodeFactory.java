@@ -3,6 +3,7 @@ package app.model.factory;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.implementation.*;
 
 public class NodeFactory extends AbstractNodeFactory {
@@ -17,6 +18,10 @@ public class NodeFactory extends AbstractNodeFactory {
         } else if (type.equals("Package")) {
 
             return new PackageNode(name, parent);
+
+        } else if (type.equals("DiagramElement")) {
+
+            return new Klasa(name, parent);
 
         }
 

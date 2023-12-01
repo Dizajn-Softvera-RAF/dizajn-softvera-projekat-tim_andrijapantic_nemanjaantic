@@ -25,6 +25,10 @@ public class Notification {
         this.node = node;
     }
 
+    public Notification(NotificationType type) {
+        this.type = type;
+    }
+
     public Notification(NotificationType type, UUID id) {
         this.type = type;
         this.id = id;

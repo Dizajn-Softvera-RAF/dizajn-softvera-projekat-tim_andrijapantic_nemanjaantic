@@ -58,7 +58,7 @@ public class ClassyTreeImplementation implements ClassyTree {
         }
         if (parent instanceof DiagramNode) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("Element", "Element" + new Random().nextInt(100), parent);
+            return AppCore.getInstance().getClassyRepository().createNode("DiagramElement", "DiagrammElement" + new Random().nextInt(100), parent);
         }
         return null;
     }

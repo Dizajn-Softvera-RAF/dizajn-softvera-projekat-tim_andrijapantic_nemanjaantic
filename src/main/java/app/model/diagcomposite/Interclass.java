@@ -1,15 +1,31 @@
 package app.model.diagcomposite;
 
+import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.DiagramElement;
 
 import javax.swing.text.Position;
+import java.awt.*;
 
 public abstract class Interclass extends DiagramElement {
 
     private String name;
     private Visibility visibility;
-    private Position position;
-    private int size;
+
+    protected Paint paint;
+
+    protected String description;
+
+    public Interclass(Paint paint) {
+        this.paint = paint;
+    }
+
+    public Interclass(String name, AbstractClassyNode parent) {
+        super(name, parent);
+    }
+
+    public Interclass() {
+
+    }
 
     @Override
     public String getName() {
@@ -29,19 +45,12 @@ public abstract class Interclass extends DiagramElement {
         this.visibility = visibility;
     }
 
-    public Position getPosition() {
-        return position;
+    public Paint getPaint() {
+        return paint;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setPaint(Paint paint) {
+        this.paint = paint;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 }
