@@ -14,8 +14,8 @@ public class SelectionState implements State {
     public void misKliknut(int x, int y, DiagramView diagramView) {
         if (lasso == null) {
             System.out.println("pravi lasso");
-            Point newPoint = new Point(x, y);
-            lasso = new SelectionPainter(newPoint, new Point());
+            Point newPoint = diagramView.getAbsolutePoint(x, y);
+            lasso = new SelectionPainter(newPoint, newPoint);
             lasso.setStartPoint(newPoint);
             diagramView.getElementPainters().add(lasso);
         }
@@ -25,7 +25,7 @@ public class SelectionState implements State {
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
 
-        Point e = new Point(x, y);
+        Point e = diagramView.getAbsolutePoint(x, y);
 
         if (lasso != null) {
             Point endPoint = e;
@@ -42,7 +42,7 @@ public class SelectionState implements State {
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
 
-        Point e = new Point(x, y);
+        Point e = diagramView.getAbsolutePoint(x, y);
 
         if (lasso != null) {
             Point endPoint = e;

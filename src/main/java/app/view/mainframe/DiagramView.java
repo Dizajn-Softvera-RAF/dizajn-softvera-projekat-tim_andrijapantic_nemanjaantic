@@ -118,7 +118,7 @@ public class DiagramView extends JPanel implements ISubscriber {
             e.paint(g2);
             System.out.println("Repaintam element: " + e);
             System.out.println("Repaintam element cije je ime: " + e.getName());
-            System.out.println("Repaintam element cije je ime: " + e.getElement().getName());
+
         }
 
     }
