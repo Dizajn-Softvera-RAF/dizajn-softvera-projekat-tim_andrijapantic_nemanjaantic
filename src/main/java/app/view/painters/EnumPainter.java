@@ -10,18 +10,18 @@ import java.awt.geom.Rectangle2D;
 public class EnumPainter extends ElementPainter{
 
     protected Rectangle2D.Double shape;
-    EnumComp element;
 
     public EnumPainter(EnumComp element) {
-        this.element = element;
+        setElement(element);
+        this.setName(element.getName());
     }
 
 
     @Override
     public void paint(Graphics2D g2) {
         g2.setColor(new Color(172,170,219));
-        g2.setStroke(new BasicStroke(element.getStroke()));
-        this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 100);
+        g2.setStroke(new BasicStroke(((EnumComp)getElement()).getStroke()));
+        this.shape = new Rectangle2D.Double(((EnumComp)getElement()).getPosition().getX()-90, ((EnumComp)getElement()).getPosition().getY()-50, 180, 100);
 
 
         g2.fill(shape);

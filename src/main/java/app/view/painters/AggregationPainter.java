@@ -2,6 +2,7 @@ package app.view.painters;
 
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.interclass.EnumComp;
 import javafx.scene.shape.Line;
 
 
@@ -9,17 +10,17 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 public class AggregationPainter extends ElementPainter{
-    private Aggregation element;
     private Line2D.Float shape;
 
     public AggregationPainter(Aggregation element ) {
-        this.element = element;
+        setElement(element);
+        this.setName(element.getName());
     }
 
     @Override
     public void paint(Graphics2D g2) {
-        shape = new Line2D.Float((int)element.getFromInterclass().getPosition().getX(), (int)element.getFromInterclass().getPosition().getY(),
-                (int)element.getToInterclass().getPosition().getX(), (int)element.getToInterclass().getPosition().getY());
+        shape = new Line2D.Float((int)((Aggregation)getElement()).getFromInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getFromInterclass().getPosition().getY(),
+                (int)((Aggregation)getElement()).getToInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getToInterclass().getPosition().getY());
 
         g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(3));
@@ -41,12 +42,4 @@ public class AggregationPainter extends ElementPainter{
         this.shape = shape;
     }
 
-    @Override
-    public Aggregation getElement() {
-        return element;
-    }
-
-    public void setElement(Aggregation element) {
-        this.element = element;
-    }
 }

@@ -22,6 +22,11 @@ public abstract class Interclass extends DiagramElement {
         this.position = position;
     }
 
+    public Interclass(Point position, String name) {
+        this.position = position;
+        this.name = name;
+    }
+
     public Interclass(String name, AbstractClassyNode parent) {
         super(name, parent);
     }

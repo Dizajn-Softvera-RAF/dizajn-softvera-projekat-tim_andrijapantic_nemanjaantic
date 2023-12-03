@@ -18,6 +18,9 @@ public class ActionManager {
     private IntoSelectionState intoSelectionState;
     private IntoDeleteState intoDeleteState;
     private IntoEditState intoEditState;
+    private IntoMoveState intoMoveState;
+    private IntoZoomInState intoZoomInState;
+    private IntoZoomOutState intoZoomOutState;
 
     public ActionManager() {
         initilizeActions();
@@ -38,6 +41,9 @@ public class ActionManager {
         intoDeleteState = new IntoDeleteState();
         intoEditState = new IntoEditState();
         intoSelectionState = new IntoSelectionState();
+        intoMoveState = new IntoMoveState();
+        intoZoomInState = new IntoZoomInState();
+        intoZoomOutState = new IntoZoomOutState();
     }
 
     public ExitAction getExitAction() {
@@ -150,6 +156,30 @@ public class ActionManager {
 
     public void setIntoEditState(IntoEditState intoEditState) {
         this.intoEditState = intoEditState;
+    }
+
+    public IntoMoveState getIntoMoveState() {
+        return intoMoveState;
+    }
+
+    public void setIntoMoveState(IntoMoveState intoMoveState) {
+        this.intoMoveState = intoMoveState;
+    }
+
+    public IntoZoomInState getIntoZoomInState() {
+        return intoZoomInState;
+    }
+
+    public void setIntoZoomInState(IntoZoomInState intoZoomInState) {
+        this.intoZoomInState = intoZoomInState;
+    }
+
+    public IntoZoomOutState getIntoZoomOutState() {
+        return intoZoomOutState;
+    }
+
+    public void setIntoZoomOutState(IntoZoomOutState intoZoomOutState) {
+        this.intoZoomOutState = intoZoomOutState;
     }
 }
 

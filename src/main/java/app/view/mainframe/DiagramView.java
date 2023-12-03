@@ -2,20 +2,33 @@ package app.view.mainframe;
 
 import app.controller.MouseController;
 import app.model.diagcomposite.Connection;
+import app.model.diagcomposite.DiagramElement;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
+import app.model.event.NotificationType;
 import app.model.implementation.DiagramNode;
-import app.view.painters.ElementPainter;
+import app.view.painters.*;
 import app.view.tabs.Tab;
 import app.view.tabs.TabbedPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class DiagramView extends JPanel implements ISubscriber {
     static final int xOffset = 30, yOffset = 30;
+    double MAX_ZOOM = 2.0;
+    double MIN_ZOOM = 0.3;
+    double scale = 1.0;
     int openFrameCount = 0;
+
+    int deltaX = 0;
+    int deltaY = 0;
 
     private Tab tab;
     private DiagramNode diagramNode;
@@ -31,7 +44,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         parentView = TabbedPane.getInstance().getPackageView();
         ++openFrameCount;
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
-
         setSize(700, 700);
         setVisible(true);
         mouseController = new MouseController(this);
@@ -45,6 +57,27 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     @Override
     public void update(Notification notification) {
+        if (notification.getType().equals(NotificationType.EXISTING_TAB_OPENED)) {
+
+            for (DiagramElement element: getDiagramNode().getChildren()) {
+
+                if (element instanceof Klasa) {
+                    getElementPainters().add(new ClassPainter((Klasa)element));
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof Interface){
+                    getElementPainters().add(new InterfacePainter((Interface)element));
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof EnumComp){
+                    getElementPainters().add(new EnumPainter((EnumComp)element));
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof Aggregation){
+                    getElementPainters().add(0, new AggregationPainter((Aggregation)element));
+                    System.out.println("Dodao sam element: " + element.getName());
+                }
+
+            }
+
+        }
         repaint();
         System.out.println("Pozvao sam repaint");
     }
@@ -77,8 +110,14 @@ public class DiagramView extends JPanel implements ISubscriber {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        AffineTransform affineTransform = AffineTransform.getTranslateInstance(deltaX, deltaY);
+        affineTransform.scale(scale, scale);
+        g2.transform(affineTransform);
         for (ElementPainter e : elementPainters) {
             e.paint(g2);
+            System.out.println("Repaintam element: " + e);
+            System.out.println("Repaintam element cije je ime: " + e.getName());
+            System.out.println("Repaintam element cije je ime: " + e.getElement().getName());
         }
 
     }
@@ -97,5 +136,48 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setCurrentLink(Connection currentLink) {
         this.currentLink = currentLink;
+    }
+
+    public void setZoomIn() {
+        if (scale < MAX_ZOOM)
+            scale *= 1.2;
+        if (scale > MAX_ZOOM)
+            scale = MAX_ZOOM;
+        repaint();
+    }
+    public void setZoomOut() {
+        if (scale > MIN_ZOOM)
+            scale /= 1.2;
+        if (scale < MIN_ZOOM)
+            scale = MIN_ZOOM;
+        repaint();
+    }
+
+    public int getDeltaX() {
+        return deltaX;
+    }
+
+    public void setDeltaX(int deltaX) {
+        this.deltaX = deltaX;
+    }
+
+    public int getDeltaY() {
+        return deltaY;
+    }
+
+    public void setDeltaY(int deltaY) {
+        this.deltaY = deltaY;
+    }
+
+    public double getScale() {
+        return scale;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public Point getAbsolutePoint(int x, int y) {
+        return new Point((int) ((x-getDeltaX())/getScale()), (int) ((y-getDeltaY())/getScale()));
     }
 }

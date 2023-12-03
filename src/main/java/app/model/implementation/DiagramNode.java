@@ -76,6 +76,10 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         }
     }
 
+    public void tabOpened() {
+        notifySubscribers(new Notification(NotificationType.EXISTING_TAB_OPENED));
+    }
+
     public void removeChild(DiagramElement child) {
         if (this.getChildren().contains(child)) {
             this.getChildren().remove(child);

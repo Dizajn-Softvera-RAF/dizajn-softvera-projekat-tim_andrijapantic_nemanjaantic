@@ -23,6 +23,11 @@ public class Interface extends Interclass {
     public Interface() {
     }
 
+    public Interface(Point position, String name, int stroke) {
+        super(position, name);
+        this.stroke = stroke;
+    }
+
     public Interface(int stroke, Point position, Paint paint, Dimension size) {
         super(paint, position);
         this.stroke = stroke;

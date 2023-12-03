@@ -10,7 +10,7 @@ import app.view.painters.EnumPainter;
 import app.view.painters.InterfacePainter;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.Random;
 
 public class AddInterclassState implements State {
     @Override
@@ -21,30 +21,20 @@ public class AddInterclassState implements State {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, tipInterklase, tipInterklase[0]);
          System.out.println("Izabrana je opcija "  + odg);
          if (odg==0) {
-             Klasa klasa = new Klasa();
-             klasa.setPosition(new Point(x,y));
-             klasa.setStroke(2);
-             klasa.setName("Klasa");
-
+             Klasa klasa = new Klasa(diagramView.getAbsolutePoint(x, y), "Klasa" + new Random().nextInt(100), 2);
              ClassPainter classPainter = new ClassPainter(klasa);
-             classPainter.setElement(klasa);
              diagramView.getElementPainters().add(classPainter);
              diagramView.getDiagramNode().addChild(klasa);
+            // MyNodeMutable parentToAdd = new MyNodeMutable(diagramView.getDiagramNode());
          } else if (odg==1) {
-             Interface interfejs = new Interface();
-             interfejs.setPosition(new Point(x,y));
-             interfejs.setStroke(2);
-             interfejs.setName("Interface");
+             Interface interfejs = new Interface(diagramView.getAbsolutePoint(x, y), "Interface" + new Random().nextInt(100), 2);
 
              InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
              interfejsPainter.setElement(interfejs);
              diagramView.getElementPainters().add(interfejsPainter);
              diagramView.getDiagramNode().addChild(interfejs);
          } else if (odg==2) {
-             EnumComp enumComp = new EnumComp();
-             enumComp.setPosition(new Point(x,y));
-             enumComp.setStroke(2);
-             enumComp.setName("Enum");
+             EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), "Enum" + new Random().nextInt(100), 2);
 
              EnumPainter enumPainter = new EnumPainter(enumComp);
              enumPainter.setElement(enumComp);

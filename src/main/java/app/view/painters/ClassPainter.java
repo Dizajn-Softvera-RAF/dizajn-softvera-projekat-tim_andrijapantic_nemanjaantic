@@ -9,17 +9,17 @@ import java.awt.geom.Rectangle2D;
 
 public class ClassPainter extends ElementPainter{
     protected Rectangle2D.Double shape;
-    Klasa element;
 
     public ClassPainter(Klasa element) {
-        this.element = element;
+        setElement(element);
+        this.setName(element.getName());
     }
 
     @Override
     public void paint(Graphics2D g2) {
         g2.setColor(new Color(238,230,194));
-        g2.setStroke(new BasicStroke(element.getStroke()));
-        this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 105);
+        g2.setStroke(new BasicStroke(((Klasa)getElement()).getStroke()));
+        this.shape = new Rectangle2D.Double(((Klasa)getElement()).getPosition().getX()-90, ((Klasa)getElement()).getPosition().getY()-50, 180, 105);
 
 
         g2.fill(shape);
@@ -40,6 +40,5 @@ public class ClassPainter extends ElementPainter{
     public Shape getShape() {
         return shape;
     }
-
 
 }

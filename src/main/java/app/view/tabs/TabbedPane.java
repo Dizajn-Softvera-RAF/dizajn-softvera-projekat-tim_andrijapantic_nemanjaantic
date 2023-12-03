@@ -72,7 +72,7 @@ public class TabbedPane extends JTabbedPane {
     }
 
 
-    private void addTab(Tab tab, DiagramNode node) {
+    public void addTab(Tab tab, DiagramNode node) {
        // if (!tab.isBlocked()) {
             if (selectedTab == null) {
                 selectedTab = tab;
@@ -160,7 +160,20 @@ public class TabbedPane extends JTabbedPane {
         }
     }
 
+    public Tab findTab(String title, UUID id) {
+        for (Tab tab: this.getListaTabova()) {
+            if (tab.getTitle().equals(title) && tab.getId().equals(id)) {
+                return tab;
+            }
+        }
+        return null;
+    }
 
+    public void addTab(Tab tab) {
+        if (!isTabPresent(tab.getTitle())) {
+
+        }
+    }
 
     public ArrayList<Tab> getTrenutniTaboviZaBrisanje() {
         return trenutniTaboviZaBrisanje;

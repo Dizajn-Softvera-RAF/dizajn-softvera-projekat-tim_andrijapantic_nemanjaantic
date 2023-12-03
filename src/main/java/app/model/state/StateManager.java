@@ -8,6 +8,9 @@ public class StateManager {
     private SelectionState selectionState;
     private EditState editState;
     private DeleteState deleteState;
+    private MoveState moveState;
+    private ZoomInState zoomInState;
+    private ZoomOutState zoomOutState;
     private State currentState;
 
     public StateManager() {
@@ -20,6 +23,9 @@ public class StateManager {
         selectionState = new SelectionState();
         editState = new EditState();
         deleteState = new DeleteState();
+        moveState = new MoveState();
+        zoomInState = new ZoomInState();
+        zoomOutState = new ZoomOutState();
     }
 
     public State getCurrentState() {
@@ -68,5 +74,29 @@ public class StateManager {
 
     public void setDeleteState(DeleteState deleteState) {
         this.deleteState = deleteState;
+    }
+
+    public MoveState getMoveState() {
+        return moveState;
+    }
+
+    public void setMoveState(MoveState moveState) {
+        this.moveState = moveState;
+    }
+
+    public ZoomInState getZoomInState() {
+        return zoomInState;
+    }
+
+    public void setZoomInState(ZoomInState zoomInState) {
+        this.zoomInState = zoomInState;
+    }
+
+    public ZoomOutState getZoomOutState() {
+        return zoomOutState;
+    }
+
+    public void setZoomOutState(ZoomOutState zoomOutState) {
+        this.zoomOutState = zoomOutState;
     }
 }

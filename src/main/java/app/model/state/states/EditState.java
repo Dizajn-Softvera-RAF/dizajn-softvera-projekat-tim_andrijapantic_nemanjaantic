@@ -1,12 +1,26 @@
 package app.model.state.states;
 
+import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
+import app.view.painters.ElementPainter;
+
+import java.awt.*;
 
 public class EditState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u EditState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+
+        for (ElementPainter elementPainter: diagramView.getElementPainters()) {
+            if (elementPainter.elementAt(elementPainter.getElement(), new Point(x,y))) {
+                //System.out.println("Element na toj poziciji postoji");
+                System.out.println("Element na toj poziciji je: " + (Klasa)elementPainter.getElement());
+                break;
+            }
+        }
+
+
     }
 
     @Override

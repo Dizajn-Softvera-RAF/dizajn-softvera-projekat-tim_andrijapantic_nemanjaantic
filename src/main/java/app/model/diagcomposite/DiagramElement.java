@@ -8,11 +8,8 @@ import java.util.List;
 
 public abstract class DiagramElement extends ClassyNodeComposite<Void> {
 
-
-
     public DiagramElement() {
     }
-
 
     public DiagramElement(String name, AbstractClassyNode parent, List<Void> children) {
         super(name, parent, children);

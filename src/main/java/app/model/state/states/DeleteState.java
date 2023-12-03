@@ -2,13 +2,10 @@ package app.model.state.states;
 
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
-import app.model.diagcomposite.Interclass;
-import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
 import app.view.painters.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class DeleteState implements State {
@@ -17,7 +14,7 @@ public class DeleteState implements State {
         int indexZaBrisanje = -1;
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
 
-            if (elementPainter.elementAt(elementPainter.getElement(), new Point(x,y))) {
+            if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 indexZaBrisanje = diagramView.getElementPainters().indexOf(elementPainter);
                 break;
@@ -31,8 +28,8 @@ public class DeleteState implements State {
             for (ElementPainter elementPainter: diagramView.getElementPainters()) {
                 if (elementPainter instanceof AggregationPainter) {
                     AggregationPainter link = (AggregationPainter) elementPainter;
-                    if (link.getElement().getFromInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())
-                        || link.getElement().getToInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())){
+                    if (((Connection)link.getElement()).getFromInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())
+                        || ((Connection)link.getElement()).getToInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())){
                         toDelete.add(elementPainter);
                         toDeleteChild.add(elementPainter.getElement());
                     }

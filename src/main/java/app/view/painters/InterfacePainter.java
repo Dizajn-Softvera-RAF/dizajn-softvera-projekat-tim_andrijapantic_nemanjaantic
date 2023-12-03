@@ -10,17 +10,17 @@ import java.awt.geom.Rectangle2D;
 public class InterfacePainter extends ElementPainter{
 
     protected Rectangle2D.Double shape;
-    Interface element;
 
     public InterfacePainter(Interface element) {
-        this.element = element;
+        setElement(element);
+        this.setName(element.getName());
     }
 
     @Override
     public void paint(Graphics2D g2) {
         g2.setColor(new Color(194,238,219));
-        g2.setStroke(new BasicStroke(element.getStroke()));
-        this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 105);
+        g2.setStroke(new BasicStroke(((Interface)getElement()).getStroke()));
+        this.shape = new Rectangle2D.Double(((Interface)getElement()).getPosition().getX()-90, ((Interface)getElement()).getPosition().getY()-50, 180, 105);
 
 
         g2.fill(shape);

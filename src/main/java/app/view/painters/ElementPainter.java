@@ -7,6 +7,7 @@ import java.awt.*;
 public abstract class ElementPainter {
 
     DiagramElement element;
+    String name;
 
     public ElementPainter() {
     }
@@ -21,5 +22,13 @@ public abstract class ElementPainter {
 
     public void setElement(DiagramElement element) {
         this.element = element;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

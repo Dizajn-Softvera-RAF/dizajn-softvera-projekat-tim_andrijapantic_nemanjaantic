@@ -1,14 +1,11 @@
 package app.model.state.states;
 
-import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
 import app.view.painters.*;
-
-import java.awt.*;
 
 public class AddConnectionState implements State {
     @Override
@@ -17,10 +14,10 @@ public class AddConnectionState implements State {
         //System.out.println("Trenutno si u ConnectionState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
             if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
-                if (elementPainter.elementAt(elementPainter.getElement(), new Point(x,y))) {
+                if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                     System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                     link.setFromInterclass((Interclass) elementPainter.getElement());
-                    link.setToInterclass(new Klasa(null, new Point(x,y)));
+                    link.setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
                     break;
                 }
             }
@@ -32,7 +29,7 @@ public class AddConnectionState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
-        diagramView.getCurrentLink().setToInterclass(new Klasa(null, new Point(x,y)));
+        diagramView.getCurrentLink().setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
         diagramView.repaint();
        // System.out.println("Trenutno si u ConnectionState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
 
@@ -43,7 +40,7 @@ public class AddConnectionState implements State {
         boolean isOnTheme = false;
         for (ElementPainter elementPainter : diagramView.getElementPainters()) {
             if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
-                if (elementPainter.elementAt(elementPainter.getElement(), new Point(x,y))) {
+                if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                     System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                     diagramView.getCurrentLink().setToInterclass((Interclass) elementPainter.getElement());
                     isOnTheme = true;
