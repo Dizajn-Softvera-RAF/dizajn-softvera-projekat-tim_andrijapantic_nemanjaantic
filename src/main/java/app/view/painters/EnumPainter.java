@@ -23,7 +23,6 @@ public class EnumPainter extends ElementPainter{
         g2.setStroke(new BasicStroke(element.getStroke()));
         this.shape = new Rectangle2D.Double(element.getPosition().getX()-90, element.getPosition().getY()-50, 180, 100);
 
-
         g2.fill(shape);
         g2.setColor(Color.BLACK);
         g2.draw(shape);

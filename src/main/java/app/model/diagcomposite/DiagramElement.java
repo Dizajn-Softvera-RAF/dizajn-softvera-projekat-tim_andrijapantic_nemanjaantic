@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class DiagramElement extends ClassyNodeComposite<Void> {
 
-
+    private Shape shape;
 
     public DiagramElement() {
     }
@@ -33,4 +33,11 @@ public abstract class DiagramElement extends ClassyNodeComposite<Void> {
         this.name = name;
     }
 
+    public Shape getShape() {
+        return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 }

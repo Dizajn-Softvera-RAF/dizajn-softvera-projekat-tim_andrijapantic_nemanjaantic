@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 public class ClassPainter extends ElementPainter{
     protected Rectangle2D.Double shape;
     Klasa element;
+    private Color color;
 
     public ClassPainter(Klasa element) {
         this.element = element;
@@ -23,7 +24,7 @@ public class ClassPainter extends ElementPainter{
 
 
         g2.fill(shape);
-        g2.setColor(Color.BLACK);
+        g2.setColor(color);
         g2.draw(shape);
         g2.setFont(new Font("Arial", Font.BOLD, 13));
         g2.drawString(element.getName(), (int) shape.getX()+20, (int) shape.getY()+20);
@@ -41,5 +42,11 @@ public class ClassPainter extends ElementPainter{
         return shape;
     }
 
+    public Color getColor() {
+        return color;
+    }
 
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
