@@ -15,13 +15,14 @@ public class AggregationPainter extends ElementPainter{
     public AggregationPainter(Aggregation element ) {
         setElement(element);
         this.setName(element.getName());
+        setShape(shape);
     }
 
     @Override
     public void paint(Graphics2D g2) {
         shape = new Line2D.Float((int)((Aggregation)getElement()).getFromInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getFromInterclass().getPosition().getY(),
                 (int)((Aggregation)getElement()).getToInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getToInterclass().getPosition().getY());
-
+        setShape(shape);
         g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(3));
 
@@ -38,8 +39,5 @@ public class AggregationPainter extends ElementPainter{
         return shape;
     }
 
-    public void setShape(Line2D.Float shape) {
-        this.shape = shape;
-    }
 
 }

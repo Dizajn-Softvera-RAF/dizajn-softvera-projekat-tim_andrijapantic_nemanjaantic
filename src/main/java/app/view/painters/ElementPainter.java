@@ -8,6 +8,7 @@ public abstract class ElementPainter {
 
     DiagramElement element;
     String name;
+    Shape shape;
 
     public ElementPainter() {
     }
@@ -30,5 +31,13 @@ public abstract class ElementPainter {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
 }

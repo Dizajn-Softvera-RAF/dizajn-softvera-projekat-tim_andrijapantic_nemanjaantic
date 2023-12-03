@@ -13,6 +13,7 @@ public class ClassPainter extends ElementPainter{
     public ClassPainter(Klasa element) {
         setElement(element);
         this.setName(element.getName());
+        setShape(shape);
     }
 
     @Override
@@ -20,7 +21,7 @@ public class ClassPainter extends ElementPainter{
         g2.setColor(new Color(238,230,194));
         g2.setStroke(new BasicStroke(((Klasa)getElement()).getStroke()));
         this.shape = new Rectangle2D.Double(((Klasa)getElement()).getPosition().getX()-90, ((Klasa)getElement()).getPosition().getY()-50, 180, 105);
-
+        setShape(shape);
 
         g2.fill(shape);
         g2.setColor(Color.BLACK);
@@ -37,8 +38,6 @@ public class ClassPainter extends ElementPainter{
     }
 
 
-    public Shape getShape() {
-        return shape;
-    }
+
 
 }

@@ -14,6 +14,7 @@ public class InterfacePainter extends ElementPainter{
     public InterfacePainter(Interface element) {
         setElement(element);
         this.setName(element.getName());
+        setShape(shape);
     }
 
     @Override
@@ -21,7 +22,7 @@ public class InterfacePainter extends ElementPainter{
         g2.setColor(new Color(194,238,219));
         g2.setStroke(new BasicStroke(((Interface)getElement()).getStroke()));
         this.shape = new Rectangle2D.Double(((Interface)getElement()).getPosition().getX()-90, ((Interface)getElement()).getPosition().getY()-50, 180, 105);
-
+        setShape(shape);
 
         g2.fill(shape);
         g2.setColor(Color.BLACK);
@@ -35,11 +36,5 @@ public class InterfacePainter extends ElementPainter{
         return getShape().contains(pos);
     }
 
-    public Rectangle2D.Double getShape() {
-        return shape;
-    }
 
-    public void setShape(Rectangle2D.Double shape) {
-        this.shape = shape;
-    }
 }

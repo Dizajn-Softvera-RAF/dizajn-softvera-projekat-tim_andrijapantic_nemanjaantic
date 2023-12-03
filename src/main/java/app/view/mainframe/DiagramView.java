@@ -3,6 +3,7 @@ package app.view.mainframe;
 import app.controller.MouseController;
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
@@ -180,4 +181,6 @@ public class DiagramView extends JPanel implements ISubscriber {
     public Point getAbsolutePoint(int x, int y) {
         return new Point((int) ((x-getDeltaX())/getScale()), (int) ((y-getDeltaY())/getScale()));
     }
+
+
 }

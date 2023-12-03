@@ -14,6 +14,7 @@ public class EnumPainter extends ElementPainter{
     public EnumPainter(EnumComp element) {
         setElement(element);
         this.setName(element.getName());
+        setShape(shape);
     }
 
 
@@ -22,7 +23,7 @@ public class EnumPainter extends ElementPainter{
         g2.setColor(new Color(172,170,219));
         g2.setStroke(new BasicStroke(((EnumComp)getElement()).getStroke()));
         this.shape = new Rectangle2D.Double(((EnumComp)getElement()).getPosition().getX()-90, ((EnumComp)getElement()).getPosition().getY()-50, 180, 100);
-
+        setShape(shape);
 
         g2.fill(shape);
         g2.setColor(Color.BLACK);
@@ -36,11 +37,5 @@ public class EnumPainter extends ElementPainter{
         return getShape().contains(pos);
     }
 
-    public Rectangle2D.Double getShape() {
-        return shape;
-    }
 
-    public void setShape(Rectangle2D.Double shape) {
-        this.shape = shape;
-    }
 }
