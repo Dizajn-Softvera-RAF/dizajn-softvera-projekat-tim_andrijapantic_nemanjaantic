@@ -4,8 +4,12 @@ import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
+import app.model.tree.MyNodeMutable;
 import app.view.mainframe.DiagramView;
+import app.view.mainframe.MainFrame;
 import app.view.painters.*;
+
+import java.util.Random;
 
 public class AddConnectionState implements State {
     @Override
@@ -22,9 +26,13 @@ public class AddConnectionState implements State {
                 }
             }
         }
+        MyNodeMutable parentNode = new MyNodeMutable(diagramView.getDiagramNode());
+        MainFrame.getInstance().setChildToCreateType("aggregation");
+        link.setName("Aggregation " + new Random().nextInt(100));
         diagramView.getElementPainters().add(0, new AggregationPainter(link));
         diagramView.setCurrentLink(link);
         diagramView.getDiagramNode().addChild(link);
+        MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), link);
     }
 
     @Override

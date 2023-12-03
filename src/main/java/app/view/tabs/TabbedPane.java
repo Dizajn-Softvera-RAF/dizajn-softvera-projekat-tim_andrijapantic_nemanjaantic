@@ -2,6 +2,7 @@ package app.view.tabs;
 
 import app.model.implementation.DiagramNode;
 import app.model.implementation.PackageNode;
+import app.model.tree.MyNodeMutable;
 import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
 import app.view.mainframe.PackageView;
@@ -55,8 +56,8 @@ public class TabbedPane extends JTabbedPane {
         return instance;
     }
 
-    public void addNewPane(String ime, UUID id, DiagramNode node) {
-        addTab(new Tab(this, ime, id), node);
+    public void addNewPane(String ime, UUID id, DiagramNode node, MyNodeMutable nodeMutable) {
+        addTab(new Tab(this, ime, id), node, nodeMutable);
     }
 
     public ArrayList<Tab> getListaTabova() {
@@ -72,13 +73,14 @@ public class TabbedPane extends JTabbedPane {
     }
 
 
-    public void addTab(Tab tab, DiagramNode node) {
+    public void addTab(Tab tab, DiagramNode node, MyNodeMutable nodeMutable) {
        // if (!tab.isBlocked()) {
             if (selectedTab == null) {
                 selectedTab = tab;
             }
             DiagramView diagramView = new DiagramView(tab);
             diagramView.setDiagramNode(node);
+            diagramView.setMyNodeMutable(nodeMutable);
             node.addSubscriber(diagramView);
 
             tab.setDiagramView(diagramView);

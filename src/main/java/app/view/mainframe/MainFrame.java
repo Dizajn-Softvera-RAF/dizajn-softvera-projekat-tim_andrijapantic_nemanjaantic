@@ -26,6 +26,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ActionManager actionManager;
     private app.view.mainframe.Menu menu;
     private StateToolBar stateToolBar;
+    private String childToCreateType;
 
     public static MainFrame getInstance() {
 
@@ -151,5 +152,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setClassyTree(ClassyTreeImplementation classyTree) {
         this.classyTree = classyTree;
+    }
+
+    public String getChildToCreateType() {
+        return childToCreateType;
+    }
+
+    public void setChildToCreateType(String childToCreateType) {
+        this.childToCreateType = childToCreateType;
     }
 }

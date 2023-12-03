@@ -26,6 +26,7 @@ import java.util.List;
 
 public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements IPublisher {
     private List<ISubscriber> subscribers;
+    private MyNodeMutable myNodeMutable;
     public DiagramNode(String name, AbstractClassyNode parent) {
         super(name, parent);
         this.subscribers = new ArrayList<>();
@@ -61,10 +62,20 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
 
     }
 
+    public static void prodjiKrozDecu(MyNodeMutable node) {
+        int brojDece = node.getChildCount();
+        for (int i = 0; i < brojDece; i++) {
+            MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
+            MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
+            prodjiKrozDecu(childNode);
+        }
+    }
+
     @Override
     public void removeChildren() {
         MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
-
+        prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
+        this.getChildren().clear();
     }
 
     public void removeChildren(ArrayList<DiagramElement> lista) {
@@ -113,4 +124,11 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         this.subscribers = subscribers;
     }
 
+    public MyNodeMutable getMyNodeMutable() {
+        return myNodeMutable;
+    }
+
+    public void setMyNodeMutable(MyNodeMutable myNodeMutable) {
+        this.myNodeMutable = myNodeMutable;
+    }
 }

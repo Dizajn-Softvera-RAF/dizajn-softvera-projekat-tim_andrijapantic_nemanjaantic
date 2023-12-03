@@ -1,6 +1,7 @@
 package app.model.diagcomposite;
 
 import app.model.composite.AbstractClassyNode;
+import app.model.composite.ClassyNodeComposite;
 
 import java.awt.*;
 
@@ -19,6 +20,10 @@ public abstract class Connection extends DiagramElement {
 
     public Connection () {
 
+    }
+
+    public Connection(String name, ClassyNodeComposite parent) {
+        super(name,parent);
     }
 
     public Color getColor() {

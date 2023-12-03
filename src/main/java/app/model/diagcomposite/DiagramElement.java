@@ -7,9 +7,9 @@ import java.awt.*;
 import java.util.List;
 
 public abstract class DiagramElement extends ClassyNodeComposite<Void> {
-
     public DiagramElement() {
     }
+
 
     public DiagramElement(String name, AbstractClassyNode parent, List<Void> children) {
         super(name, parent, children);
@@ -20,14 +20,7 @@ public abstract class DiagramElement extends ClassyNodeComposite<Void> {
     }
 
 
-    @Override
-    public String getName() {
-        return name;
+    public DiagramElement(String name) {
+        super(name);
     }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }

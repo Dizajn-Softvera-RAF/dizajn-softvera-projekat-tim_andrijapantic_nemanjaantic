@@ -9,7 +9,6 @@ import java.awt.*;
 
 public abstract class Interclass extends DiagramElement {
 
-    private String name;
     private Visibility visibility;
 
     protected Paint paint;
@@ -22,10 +21,7 @@ public abstract class Interclass extends DiagramElement {
         this.position = position;
     }
 
-    public Interclass(Point position, String name) {
-        this.position = position;
-        this.name = name;
-    }
+
 
     public Interclass(String name, AbstractClassyNode parent) {
         super(name, parent);
@@ -35,15 +31,11 @@ public abstract class Interclass extends DiagramElement {
 
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public Interclass(Point position, String name) {
+        super(name);
+        this.position = position;
     }
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Visibility getVisibility() {
         return visibility;

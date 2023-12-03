@@ -4,6 +4,7 @@ import app.core.AppCore;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
 import app.model.implementation.*;
+import app.view.mainframe.MainFrame;
 import app.view.tree.ClassyTreeView;
 
 import javax.lang.model.element.Element;
@@ -31,7 +32,7 @@ public class ClassyTreeImplementation implements ClassyTree {
 
     @Override
     public MyNodeMutable addChild(MyNodeMutable parent, DiagramElement element) {
-        ClassyNodeComposite child = createChild(parent.getClassyNode());
+            ClassyNodeComposite child = createChild(parent.getClassyNode());
 
             MyNodeMutable toReturn = new MyNodeMutable(child);
 
@@ -41,6 +42,16 @@ public class ClassyTreeImplementation implements ClassyTree {
             SwingUtilities.updateComponentTreeUI(treeView);
             return toReturn;
 
+    }
+
+    public MyNodeMutable addDiagramElementChild(MyNodeMutable diagram, DiagramElement element) {
+
+            MyNodeMutable toReturn = new MyNodeMutable(element);
+            diagram.add(toReturn);
+            diagram.getClassyNode().addChild(element);
+            treeView.expandPath(treeView.getSelectionPath());
+            SwingUtilities.updateComponentTreeUI(treeView);
+            return toReturn;
     }
 
     private ClassyNodeComposite createChild(ClassyNodeComposite parent) {
@@ -57,9 +68,21 @@ public class ClassyTreeImplementation implements ClassyTree {
 
             return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram" + new Random().nextInt(1000), parent);
         }
-        if (parent instanceof DiagramNode) {
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("klasa")) {
 
-            return AppCore.getInstance().getClassyRepository().createNode("DiagramElement", "DiagrammElement" + new Random().nextInt(100), parent);
+            return AppCore.getInstance().getClassyRepository().createNode("Klasa", "Klasa " + new Random().nextInt(100), parent);
+        }
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("interface")) {
+
+            return AppCore.getInstance().getClassyRepository().createNode("Interface", "Interface " + new Random().nextInt(100), parent);
+        }
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("enum")) {
+
+            return AppCore.getInstance().getClassyRepository().createNode("Enum", "Enum " + new Random().nextInt(100), parent);
+        }
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("interface")) {
+
+            return AppCore.getInstance().getClassyRepository().createNode("Aggregation", "Aggregation " + new Random().nextInt(100), parent);
         }
         return null;
     }

@@ -17,6 +17,10 @@ public abstract class AbstractClassyNode {
         this.id = UUID.randomUUID();
     }
 
+    public AbstractClassyNode(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

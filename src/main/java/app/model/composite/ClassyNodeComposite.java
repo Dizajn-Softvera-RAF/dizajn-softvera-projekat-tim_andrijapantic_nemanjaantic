@@ -22,6 +22,10 @@ public abstract class ClassyNodeComposite<T> extends AbstractClassyNode {
         this.children = new ArrayList<T>();
     }
 
+    public ClassyNodeComposite(String name) {
+        super(name);
+    }
+
     public List<T> getChildren() {
         return children;
     }

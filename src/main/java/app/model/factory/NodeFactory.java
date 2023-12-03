@@ -1,6 +1,7 @@
 package app.model.factory;
 
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
@@ -32,7 +33,7 @@ public class NodeFactory extends AbstractNodeFactory {
             return new EnumComp(name, parent);
         } else if (type.equals("Aggregation")) {
 
-            return new EnumComp(name, parent);
+            return new Aggregation(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);

@@ -12,6 +12,7 @@ import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.implementation.DiagramNode;
+import app.model.tree.MyNodeMutable;
 import app.view.painters.*;
 import app.view.tabs.Tab;
 import app.view.tabs.TabbedPane;
@@ -33,6 +34,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     private Tab tab;
     private DiagramNode diagramNode;
+    private MyNodeMutable myNodeMutable;
     private MouseController mouseController;
     private PackageView parentView;
     private ArrayList<ElementPainter> elementPainters;
@@ -182,5 +184,11 @@ public class DiagramView extends JPanel implements ISubscriber {
         return new Point((int) ((x-getDeltaX())/getScale()), (int) ((y-getDeltaY())/getScale()));
     }
 
+    public MyNodeMutable getMyNodeMutable() {
+        return myNodeMutable;
+    }
 
+    public void setMyNodeMutable(MyNodeMutable myNodeMutable) {
+        this.myNodeMutable = myNodeMutable;
+    }
 }

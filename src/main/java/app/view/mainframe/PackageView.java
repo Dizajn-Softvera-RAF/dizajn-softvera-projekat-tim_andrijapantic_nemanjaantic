@@ -1,8 +1,10 @@
 package app.view.mainframe;
 
+import app.model.diagcomposite.DiagramElement;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import app.model.implementation.DiagramNode;
 import app.model.state.State;
 import app.model.state.StateManager;
 import app.model.tree.MyNodeMutable;
@@ -61,44 +63,50 @@ public class PackageView extends JPanel implements ISubscriber {
             imeAutora.setText(projectNode.getAuthor());
         } else if (notification.getType().equals(NotificationType.NODE_SELECTION_CHANGED)) {
             MyNodeMutable selected = notification.getNode();
-            if (selected != null) {
-                if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
-                    if (selected.getClassyNode() instanceof ProjectNode) {
-                        projectNode = (ProjectNode) selected.getClassyNode();
-                        if (projectNode.getAuthor() != null) {
-                            imeAutora.setText(projectNode.getAuthor());
-                        } else {
-                            imeAutora.setText("NoInput");
-                        }
-                        if (projectNode.getPath() != null) {
-                            path.setText(projectNode.getPath());
-                        }
-                        else {
-                            path.setText("NoInput");
-                        }
+            if (!(selected.getClassyNode() instanceof DiagramElement)) {
+                if (selected != null) {
+                    if (!(selected.getClassyNode() instanceof ProjectExplorer)) {
+                        if (selected.getClassyNode() instanceof ProjectNode) {
+                            projectNode = (ProjectNode) selected.getClassyNode();
+                            if (projectNode.getAuthor() != null) {
+                                imeAutora.setText(projectNode.getAuthor());
+                            } else {
+                                imeAutora.setText("NoInput");
+                            }
+                            if (projectNode.getPath() != null) {
+                                path.setText(projectNode.getPath());
+                            }
+                            else {
+                                path.setText("NoInput");
+                            }
 
-                    } else {
-                        AbstractClassyNode currentNode = selected.getClassyNode();
-                        while (!(currentNode instanceof ProjectNode)) {
-                            AbstractClassyNode temp = currentNode;
-                            temp = currentNode.getParent();
-                            currentNode = temp;
+                        } else {
+                            AbstractClassyNode currentNode = selected.getClassyNode();
+                            if (!(selected.getClassyNode().getParent() instanceof DiagramNode) || currentNode==null) {
+                                while (!(currentNode instanceof ProjectNode)) {
+                                    AbstractClassyNode temp = currentNode;
+                                    temp = currentNode.getParent();
+                                    currentNode = temp;
+                                }
+                                projectNode = (ProjectNode) currentNode;
+                                if (projectNode.getPath()!=null) {
+                                    path.setText(projectNode.getPath());
+                                }
+                                if (projectNode.getAuthor()!=null) {
+                                    imeAutora.setText(projectNode.getAuthor());
+                                }
+                            }
+
                         }
-                        projectNode = (ProjectNode) currentNode;
-                        if (projectNode.getPath()!=null) {
-                            path.setText(projectNode.getPath());
-                        }
-                        if (projectNode.getAuthor()!=null) {
-                            imeAutora.setText(projectNode.getAuthor());
-                        }
+                        imeProjekta.setText(projectNode.getName());
                     }
-                    imeProjekta.setText(projectNode.getName());
+                } else {
+                    imeProjekta.setText("No Project Selected");
+                    imeAutora.setText("NoInput");
+                    path.setText("NoInput");
                 }
-            } else {
-                imeProjekta.setText("No Project Selected");
-                imeAutora.setText("NoInput");
-                path.setText("NoInput");
             }
+
         } else if (notification.getType().equals(NotificationType.PACKAGE_SELECTED)) {
             TabbedPane.getInstance().setTrenutniPaket((PackageNode) notification.getNode().getClassyNode());
             TabbedPane.getInstance().setPackageView(this);
