@@ -2,6 +2,7 @@ package app.model.tree;
 
 import app.core.AppCore;
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagcomposite.DiagramElement;
 import app.model.implementation.*;
 import app.view.tree.ClassyTreeView;
 
@@ -29,7 +30,7 @@ public class ClassyTreeImplementation implements ClassyTree {
 
 
     @Override
-    public MyNodeMutable addChild(MyNodeMutable parent, Element element) {
+    public MyNodeMutable addChild(MyNodeMutable parent, DiagramElement element) {
         ClassyNodeComposite child = createChild(parent.getClassyNode());
 
             MyNodeMutable toReturn = new MyNodeMutable(child);
