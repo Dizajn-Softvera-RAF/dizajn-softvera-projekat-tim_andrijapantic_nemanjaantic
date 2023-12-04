@@ -5,11 +5,12 @@ import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.Interclass;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Klasa extends Interclass {
 
-    private List<ClassContent> children;
+
     private Dimension size;
     int stroke;
     //protected Point position;
@@ -26,11 +27,6 @@ public class Klasa extends Interclass {
 
     public Klasa(String name, AbstractClassyNode parent) {
         super(name, parent);
-    }
-    public Klasa(int stroke, Point position, Paint paint, Dimension size) {
-        super(paint, position);
-        this.stroke = stroke;
-        this.size = size;
     }
     @Override
     public void addChild(AbstractClassyNode child) {
@@ -57,4 +53,6 @@ public class Klasa extends Interclass {
     public void setPosition(Point position) {
         this.position = position;
     }
+
+
 }

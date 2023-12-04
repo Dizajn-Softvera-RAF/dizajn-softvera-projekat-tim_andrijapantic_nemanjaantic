@@ -1,5 +1,9 @@
 package app.model.state.states;
 
+import app.model.classcontent.Attribute;
+import app.model.classcontent.EnumType;
+import app.model.classcontent.Method;
+import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
@@ -27,8 +31,13 @@ public class AddInterclassState implements State {
 
              MainFrame.getInstance().setChildToCreateType("klasa");
              System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
-            // diagramView.getDiagramNode().addChild(klasa);
-            // MyNodeMutable parentToAdd = new MyNodeMutable(diagramView.getDiagramNode());
+             klasa.getContent().add(new Attribute("height", "double", Visibility.PRIVATE));
+             klasa.getContent().add(new Attribute("height2", "double", Visibility.PRIVATE));
+             klasa.getContent().add(new Attribute("height3", "double", Visibility.PRIVATE));
+             klasa.getContent().add(new Attribute("height4", "double", Visibility.PRIVATE));
+             klasa.getContent().add(new Attribute("height5", "double", Visibility.PRIVATE));
+             klasa.getContent().add(new Method("calculateHeight", "double", Visibility.PUBLIC));
+
              MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa);
              ClassPainter classPainter = new ClassPainter(klasa);
              classPainter.setElement(klasa);
@@ -37,25 +46,28 @@ public class AddInterclassState implements State {
              System.out.println("Ime klase je: " + klasa);
          } else if (odg==1) {
              Interface interfejs = new Interface(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Interface" + new Random().nextInt(100), 2);
-
+             interfejs.getContent().add(new Method("funkcija1", "int", Visibility.PUBLIC));
+             interfejs.getContent().add(new Method("funkcija2", "double", Visibility.PUBLIC));
+             interfejs.getContent().add(new Method("funkcija3", "String", Visibility.PUBLIC));
+             interfejs.getContent().add(new Method("funkcija4", "Vehicle", Visibility.PUBLIC));
              InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
              interfejsPainter.setElement(interfejs);
 
              MainFrame.getInstance().setChildToCreateType("interface");
              System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
              diagramView.getElementPainters().add(interfejsPainter);
-            // diagramView.getDiagramNode().addChild(interfejs);
              MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), interfejs);
              System.out.println("Ime interfejsa je: " + interfejs);
          } else if (odg==2) {
              EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Enum" + new Random().nextInt(100), 2);
-
+             enumComp.getContent().add(new EnumType("car"));
+             enumComp.getContent().add(new EnumType("plane"));
+             enumComp.getContent().add(new EnumType("boat"));
              EnumPainter enumPainter = new EnumPainter(enumComp);
              MainFrame.getInstance().setChildToCreateType("enum");
              System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
              enumPainter.setElement(enumComp);
              diagramView.getElementPainters().add(enumPainter);
-             //diagramView.getDiagramNode().addChild(enumComp);
              MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), enumComp);
              System.out.println("Ime enuma je: " + enumComp);
          }

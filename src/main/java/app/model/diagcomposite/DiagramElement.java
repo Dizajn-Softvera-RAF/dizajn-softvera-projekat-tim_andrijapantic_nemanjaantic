@@ -23,4 +23,5 @@ public abstract class DiagramElement extends ClassyNodeComposite<Void> {
     public DiagramElement(String name) {
         super(name);
     }
+
 }

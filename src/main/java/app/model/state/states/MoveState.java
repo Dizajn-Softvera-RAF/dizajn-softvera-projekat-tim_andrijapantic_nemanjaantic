@@ -20,11 +20,11 @@ public class MoveState implements State {
         double offsetX = - (startPoint.x - endPoint.getX());
         double offsetY = - (startPoint.y - endPoint.getY());
 
-        double xNew = (diagramView.getDeltaX() + offsetX);
-        double yNew = (diagramView.getDeltaY() + offsetY);
+        double xNew = (diagramView.getDeltaX() + offsetX*diagramView.getScale());
+        double yNew = (diagramView.getDeltaY() + offsetY*diagramView.getScale());
 
-        diagramView.setDeltaX((int) ((int) xNew*diagramView.getScale()));
-        diagramView.setDeltaY((int) ((int) yNew*diagramView.getScale()));
+        diagramView.setDeltaX((int) xNew);
+        diagramView.setDeltaY((int) yNew);
 
         diagramView.repaint();
     }
