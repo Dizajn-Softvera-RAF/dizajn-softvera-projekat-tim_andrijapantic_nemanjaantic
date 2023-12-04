@@ -17,8 +17,8 @@ public class EnumComp extends Interclass {
 
     public EnumComp() {}
 
-    public EnumComp(Point position, String name, int stroke) {
-        super(position, name);
+    public EnumComp(Point position, AbstractClassyNode parent, String name, int stroke) {
+        super(name, parent, position);
         this.stroke = stroke;
     }
 

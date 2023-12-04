@@ -14,8 +14,8 @@ public class Klasa extends Interclass {
     int stroke;
     //protected Point position;
 
-    public Klasa(Point position, String name, int stroke) {
-        super(position, name);
+    public Klasa(Point position, AbstractClassyNode parent, String name, int stroke) {
+        super(name,parent,position);
         this.stroke = stroke;
     }
 

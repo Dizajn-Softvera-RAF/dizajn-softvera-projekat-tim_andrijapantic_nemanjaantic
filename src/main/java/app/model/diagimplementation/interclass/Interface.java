@@ -23,8 +23,8 @@ public class Interface extends Interclass {
     public Interface() {
     }
 
-    public Interface(Point position, String name, int stroke) {
-        super(position, name);
+    public Interface(Point position, AbstractClassyNode parent, String name, int stroke) {
+        super(name,parent,position);
         this.stroke = stroke;
     }
 

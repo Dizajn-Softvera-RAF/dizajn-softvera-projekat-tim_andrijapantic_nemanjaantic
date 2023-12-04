@@ -23,7 +23,7 @@ public class AddInterclassState implements State {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, tipInterklase, tipInterklase[0]);
          System.out.println("Izabrana je opcija "  + odg);
          if (odg==0) {
-             Klasa klasa = new Klasa(diagramView.getAbsolutePoint(x, y), "Klasa" + new Random().nextInt(100), 2);
+             Klasa klasa = new Klasa(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Klasa" + new Random().nextInt(100), 2);
 
              MainFrame.getInstance().setChildToCreateType("klasa");
              System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
@@ -36,7 +36,7 @@ public class AddInterclassState implements State {
              diagramView.getElementPainters().add(classPainter);
              System.out.println("Ime klase je: " + klasa);
          } else if (odg==1) {
-             Interface interfejs = new Interface(diagramView.getAbsolutePoint(x, y), "Interface" + new Random().nextInt(100), 2);
+             Interface interfejs = new Interface(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Interface" + new Random().nextInt(100), 2);
 
              InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
              interfejsPainter.setElement(interfejs);
@@ -48,7 +48,7 @@ public class AddInterclassState implements State {
              MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), interfejs);
              System.out.println("Ime interfejsa je: " + interfejs);
          } else if (odg==2) {
-             EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), "Enum" + new Random().nextInt(100), 2);
+             EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Enum" + new Random().nextInt(100), 2);
 
              EnumPainter enumPainter = new EnumPainter(enumComp);
              MainFrame.getInstance().setChildToCreateType("enum");

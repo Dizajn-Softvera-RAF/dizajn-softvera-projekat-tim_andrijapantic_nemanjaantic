@@ -66,16 +66,19 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         int brojDece = node.getChildCount();
         for (int i = 0; i < brojDece; i++) {
             MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
-            MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
-            prodjiKrozDecu(childNode);
+            //MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
+            //prodjiKrozDecu(childNode);
         }
     }
 
     @Override
     public void removeChildren() {
+     //   prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
+        System.out.println("Usao sam u remove children");
         MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
-        prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
+        System.out.println("Bacio sam notif");
         this.getChildren().clear();
+        System.out.println("Clearovao sam decu");
     }
 
     public void removeChildren(ArrayList<DiagramElement> lista) {
