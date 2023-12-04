@@ -26,6 +26,7 @@ public class ClassPainter extends ElementPainter{
         g2.fill(shape);
         g2.setColor(Color.BLACK);
         g2.draw(shape);
+        //g2.drawLine((int) shape.getX(), (int) shape.getY()+25, 180, 105);
         g2.setFont(new Font("Arial", Font.BOLD, 13));
         g2.drawString(element.getName(), (int) shape.getX()+20, (int) shape.getY()+20);
 

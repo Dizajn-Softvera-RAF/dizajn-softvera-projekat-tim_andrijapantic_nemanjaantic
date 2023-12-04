@@ -31,7 +31,12 @@ public class DeleteAction extends AbstractClassyAction{
                 System.out.println("Uzeo sam model");
                 nodeToDelete.getClassyNode().removeChildren();
                 System.out.println("Zavrsio sam removeChildren");
-                model.removeNodeFromParent(nodeToDelete);
+                try {
+                    model.removeNodeFromParent(nodeToDelete);
+                } catch (NullPointerException e1) {
+
+                }
+
                 System.out.println("Izbrisao sam node iz parenta");
 
             }
