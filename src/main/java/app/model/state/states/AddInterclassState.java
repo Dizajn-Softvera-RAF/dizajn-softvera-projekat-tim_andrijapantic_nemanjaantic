@@ -39,6 +39,7 @@ public class AddInterclassState implements State {
              klasa.getContent().add(new Method("calculateHeight", "double", Visibility.PUBLIC));
 
              MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa);
+             klasa.addSubscriber(diagramView);
              ClassPainter classPainter = new ClassPainter(klasa);
              classPainter.setElement(klasa);
 
@@ -50,6 +51,7 @@ public class AddInterclassState implements State {
              interfejs.getContent().add(new Method("funkcija2", "double", Visibility.PUBLIC));
              interfejs.getContent().add(new Method("funkcija3", "String", Visibility.PUBLIC));
              interfejs.getContent().add(new Method("funkcija4", "Vehicle", Visibility.PUBLIC));
+             interfejs.addSubscriber(diagramView);
              InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
              interfejsPainter.setElement(interfejs);
 
@@ -63,6 +65,7 @@ public class AddInterclassState implements State {
              enumComp.getContent().add(new EnumType("car"));
              enumComp.getContent().add(new EnumType("plane"));
              enumComp.getContent().add(new EnumType("boat"));
+             enumComp.addSubscriber(diagramView);
              EnumPainter enumPainter = new EnumPainter(enumComp);
              MainFrame.getInstance().setChildToCreateType("enum");
              System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());

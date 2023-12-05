@@ -8,9 +8,9 @@ import java.awt.*;
 public class ZoomInState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        Point absolutePoint = diagramView.getAbsolutePoint(x,y);
-        diagramView.setDeltaX(-(int) absolutePoint.getX()/3);
-        diagramView.setDeltaY(-(int) absolutePoint.getY()/3);
+        //Point absolutePoint = diagramView.getAbsolutePoint(x,y);
+        diagramView.setDeltaX(x/4);
+        diagramView.setDeltaY(y/4);
         diagramView.setZoomIn();
     }
 

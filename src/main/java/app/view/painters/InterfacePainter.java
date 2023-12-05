@@ -2,6 +2,7 @@ package app.view.painters;
 
 import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
+import app.model.classcontent.EnumType;
 import app.model.classcontent.Method;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.interclass.Interface;
@@ -51,15 +52,14 @@ public class InterfacePainter extends ElementPainter{
     private int calculateWidth(Interface interfejs, Graphics2D g2) {
         int currWidth = 140;
         for (ClassContent classContent : interfejs.getContent()) {
-            if (classContent instanceof Attribute) {
+            if (classContent instanceof Method) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((Attribute) classContent).getAttributeString());
+                int stringWidth = fontMetrics.stringWidth(((Method) classContent).getMethodString());
                 currWidth = Math.max(currWidth, stringWidth);
             }
 
-            return currWidth;
         }
-        return 140;
+        return currWidth;
     }
     private void ispisiContent(Graphics2D g2, Interface interfejs, int startX, int startY) {
         for (ClassContent classContent : interfejs.getContent()) {

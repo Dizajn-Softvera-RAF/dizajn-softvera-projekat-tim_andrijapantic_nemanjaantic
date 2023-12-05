@@ -4,29 +4,26 @@ import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
 import app.model.classcontent.EnumType;
 import app.model.classcontent.Method;
-import app.model.diagcomposite.DiagramElement;
 import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.view.mainframe.DiagramView;
-import app.view.mainframe.MainFrame;
+
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class EditView extends JFrame {
 
     private JTextField nameTextField;
+    private JComboBox contentListBox1;
+    private JComboBox contentListBox2;
     private DiagramView diagramView;
 
     public EditView(Interclass element, DiagramView diagramView) {
@@ -110,15 +107,14 @@ public class EditView extends JFrame {
 
         JComboBox contentTypeBox=new JComboBox(contentType);
         JComboBox visibilityBox=new JComboBox(visibilities);
-        JComboBox contentListBox1 = new JComboBox(contentList1);
-        JComboBox contentListBox2 = new JComboBox(contentList2);
+        contentListBox1 = new JComboBox(contentList1);
+        contentListBox2 = new JComboBox(contentList2);
         JComboBox changeVisibilityBox = new JComboBox(visibilities);
 
         changeNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 element.setName(nameTextField.getText());
-                diagramView.repaint();
             }
         });
 
@@ -135,10 +131,8 @@ public class EditView extends JFrame {
                            visibility = Visibility.PUBLIC;
                        Method metoda = new Method(newNameField.getText(), newTypeField.getText(), visibility);
                        System.out.println("Napravila se metoda: "  + metoda.getMethodString());
-                       element.getContent().add(metoda);
-                       contentListBox1.addItem(metoda.getMethodString());
-                       contentListBox2.addItem(metoda.getMethodString());
-                       diagramView.repaint();
+                       element.addNewContent(metoda);
+                       addToBoxes(metoda.getMethodString());
                    } else if (t.equals("Attribute")) {
                        Visibility visibility;
                        if (visibilityBox.getSelectedItem().equals("Private"))
@@ -147,17 +141,13 @@ public class EditView extends JFrame {
                            visibility = Visibility.PUBLIC;
                        Attribute attribute = new Attribute(newNameField.getText(), newTypeField.getText(), visibility);
                        System.out.println("Napravio se atribut: "  + attribute.getAttributeString());
-                       element.getContent().add(attribute);
-                       contentListBox1.addItem(attribute.getAttributeString());
-                       contentListBox2.addItem(attribute.getAttributeString());
-                       diagramView.repaint();
+                       element.addNewContent(attribute);
+                       addToBoxes(attribute.getAttributeString());
                    } else if (t.equals("Enumerable")) {
                        EnumType enumerable = new EnumType(newNameField.getText());
                        System.out.println("Napravio se enumerable: "  + enumerable.getEnumerableString());
-                       element.getContent().add(enumerable);
-                       contentListBox1.addItem(enumerable.getEnumerableString());
-                       contentListBox2.addItem(enumerable.getEnumerableString());
-                       diagramView.repaint();
+                       element.addNewContent(enumerable);
+                       addToBoxes(enumerable.getEnumerableString());
                    }
                } else {
                    System.out.println("Nista selektovano");
@@ -169,10 +159,8 @@ public class EditView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int indexContenta = contentListBox1.getSelectedIndex();
-                contentListBox1.removeItemAt(indexContenta);
-                contentListBox2.removeItemAt(indexContenta);
-                element.getContent().remove(indexContenta);
-                diagramView.repaint();
+                removeFromBoxes(indexContenta);
+                element.deleteContent(indexContenta);
             }
         });
         changeContentButton.addActionListener(new ActionListener() {
@@ -190,23 +178,17 @@ public class EditView extends JFrame {
                         visibility = Visibility.PUBLIC;
                     String newName = changeNameField.getText();
                     String newType = changeTypeField.getText();
-                    element.getContent().get(indexContenta).setName(newName);
-                    element.getContent().get(indexContenta).setType(newType);
-                    element.getContent().get(indexContenta).setVisibility(visibility);
+                    element.changeContent(indexContenta,newName,newType,visibility);
                     populateBox(contentList1, element.getContent());
                     populateBox(contentList2, element.getContent());
-                    refreshComboBox(contentListBox1, contentList1);
-                    refreshComboBox(contentListBox2, contentList2);
-                    diagramView.repaint();
+                    refreshComboBoxes(contentList1);
                 } else if (element.getContent().get(indexContenta) instanceof EnumType) {
                     System.out.println("Uso sam ovde2");
                     String newName = changeNameField.getText();
-                    element.getContent().get(indexContenta).setName(newName.toUpperCase());
+                    element.changeContent(indexContenta, newName.toUpperCase(), null, null);
                     populateBox(contentList1, element.getContent());
                     populateBox(contentList2, element.getContent());
-                    refreshComboBox(contentListBox1, contentList1);
-                    refreshComboBox(contentListBox2, contentList2);
-                    diagramView.repaint();
+                    refreshComboBoxes(contentList1);
                 }
 
             }
@@ -262,11 +244,23 @@ public class EditView extends JFrame {
         }
     }
 
-    public void refreshComboBox(JComboBox comboBox, String[] content) {
-        comboBox.removeAllItems();
+    public void refreshComboBoxes(String[] content) {
+        contentListBox1.removeAllItems();
+        contentListBox2.removeAllItems();
         for (String s: content) {
-            comboBox.addItem(s);
+            contentListBox1.addItem(s);
+            contentListBox2.addItem(s);
         }
+    }
+
+    public void addToBoxes(String content) {
+        contentListBox1.addItem(content);
+        contentListBox2.addItem(content);
+    }
+
+    public void removeFromBoxes(int index) {
+        contentListBox1.removeItemAt(index);
+        contentListBox2.removeItemAt(index);
     }
 
 }

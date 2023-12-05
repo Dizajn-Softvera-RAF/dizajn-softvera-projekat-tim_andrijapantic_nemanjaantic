@@ -2,6 +2,7 @@ package app.view.painters;
 
 import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
+import app.model.classcontent.EnumType;
 import app.model.classcontent.Method;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.interclass.Interface;
@@ -52,12 +53,16 @@ public class ClassPainter extends ElementPainter{
         for (ClassContent classContent : klasa.getContent()) {
             if (classContent instanceof Attribute) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((Attribute) classContent).getAttributeString());
+                int stringWidth = fontMetrics.stringWidth(((Attribute)(classContent)).getAttributeString());
+                currWidth = Math.max(currWidth, stringWidth);
+            } else if (classContent instanceof Method) {
+                FontMetrics fontMetrics = g2.getFontMetrics();
+                int stringWidth = fontMetrics.stringWidth(((Method) classContent).getMethodString());
                 currWidth = Math.max(currWidth, stringWidth);
             }
-            return currWidth;
+
         }
-        return 140;
+        return currWidth;
     }
     private void ispisiContent(Graphics2D g2, Klasa klasa, int startX, int startY) {
         for (ClassContent classContent : klasa.getContent()) {

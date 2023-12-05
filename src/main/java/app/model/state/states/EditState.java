@@ -15,7 +15,6 @@ public class EditState implements State {
 
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
             if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
-                //System.out.println("Element na toj poziciji postoji");
                 new EditView((Interclass) elementPainter.getElement(), diagramView);
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 break;

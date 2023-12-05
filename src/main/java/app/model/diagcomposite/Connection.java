@@ -2,6 +2,8 @@ package app.model.diagcomposite;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.event.Notification;
+import app.model.event.NotificationType;
 
 import java.awt.*;
 
@@ -48,6 +50,7 @@ public abstract class Connection extends DiagramElement {
 
     public void setFromInterclass(Interclass fromInterclass) {
         this.fromInterclass = fromInterclass;
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
     }
 
     public Interclass getToInterclass() {
@@ -56,5 +59,6 @@ public abstract class Connection extends DiagramElement {
 
     public void setToInterclass(Interclass toInterclass) {
         this.toInterclass = toInterclass;
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
     }
 }

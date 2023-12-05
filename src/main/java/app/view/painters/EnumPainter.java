@@ -3,6 +3,7 @@ package app.view.painters;
 import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
 import app.model.classcontent.EnumType;
+import app.model.classcontent.Method;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.interclass.EnumComp;
 
@@ -46,7 +47,7 @@ public class EnumPainter extends ElementPainter{
     }
 
     private Rectangle2D.Double createShape(EnumComp enumComp, Graphics2D g2) {
-        int width = calculateWidth(enumComp, g2) + 20;
+        int width = calculateWidth(enumComp, g2) + 50;
         int height = 40 + enumComp.getContent().size() * 20;
         return new Rectangle2D.Double(enumComp.getPosition().getX() - width / 2, enumComp.getPosition().getY() - height / 2, width, height);
     }
@@ -54,15 +55,14 @@ public class EnumPainter extends ElementPainter{
     private int calculateWidth(EnumComp enumComp, Graphics2D g2) {
         int currWidth = 140;
         for (ClassContent classContent : enumComp.getContent()) {
-            if (classContent instanceof Attribute) {
+            if (classContent instanceof EnumType) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((Attribute) classContent).getAttributeString());
+                int stringWidth = fontMetrics.stringWidth(((EnumType) classContent).getEnumerableString());
                 currWidth = Math.max(currWidth, stringWidth);
             }
 
-            return currWidth;
         }
-        return 140;
+        return currWidth;
     }
     private void ispisiContent(Graphics2D g2, EnumComp enumComp, int startX, int startY) {
         for (ClassContent classContent : enumComp.getContent()) {

@@ -1,19 +1,17 @@
 package app.model.diagimplementation.interclass;
 
-import app.model.classcontent.ClassContent;
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.Interclass;
+import app.model.event.ISubscriber;
+import app.model.event.Notification;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Klasa extends Interclass {
 
 
     private Dimension size;
     int stroke;
-    //protected Point position;
 
     public Klasa(Point position, AbstractClassyNode parent, String name, int stroke) {
         super(name,parent,position);
@@ -46,13 +44,6 @@ public class Klasa extends Interclass {
         this.stroke = stroke;
     }
 
-    public Point getPosition() {
-        return position;
-    }
-
-    public void setPosition(Point position) {
-        this.position = position;
-    }
 
 
 }

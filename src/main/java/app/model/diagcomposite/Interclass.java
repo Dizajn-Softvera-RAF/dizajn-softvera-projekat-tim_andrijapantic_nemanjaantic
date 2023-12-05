@@ -3,6 +3,9 @@ package app.model.diagcomposite;
 import app.model.classcontent.*;
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.DiagramElement;
+import app.model.event.ISubscriber;
+import app.model.event.Notification;
+import app.model.event.NotificationType;
 import javafx.scene.effect.Light;
 
 import javax.swing.text.Position;
@@ -68,6 +71,7 @@ public abstract class Interclass extends DiagramElement {
 
     public void setPosition(Point position) {
         this.position = position;
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
     }
 
     public List<ClassContent> getContent() {
@@ -76,5 +80,32 @@ public abstract class Interclass extends DiagramElement {
 
     public void setContent(List<ClassContent> content) {
         this.content = content;
+    }
+
+    public void addNewContent(ClassContent classContent) {
+        getContent().add(classContent);
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+    }
+
+    public void deleteContent(int index) {
+        getContent().remove(index);
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+    }
+
+    public void changeContent(int index, String name, String type, Visibility visibility) {
+        if (getContent().get(index) instanceof EnumType) {
+            getContent().get(index).setName(name);
+        } else {
+            getContent().get(index).setName(name);
+            getContent().get(index).setType(type);
+            getContent().get(index).setVisibility(visibility);
+        }
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+    }
+
+    @Override
+    public void setName(String name) {
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+        super.setName(name);
     }
 }
