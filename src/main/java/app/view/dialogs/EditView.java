@@ -178,43 +178,37 @@ public class EditView extends JFrame {
         changeContentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String t = (String) contentTypeBox.getSelectedItem();
-                if (t!=null) {
-                    if (t.equals("Method")) {
-                        Visibility visibility;
-                        if (visibilityBox.getSelectedItem().equals("Private"))
-                            visibility = Visibility.PRIVATE;
-                        else
-                            visibility = Visibility.PUBLIC;
-                        Method metoda = new Method(newNameField.getText(), newTypeField.getText(), visibility);
-                        System.out.println("Napravila se metoda: "  + metoda.getMethodString());
-                        element.getContent().add(metoda);
-                        contentListBox1.addItem(metoda.getMethodString());
-                        contentListBox2.addItem(metoda.getMethodString());
-                        diagramView.repaint();
-                    } else if (t.equals("Attribute")) {
-                        Visibility visibility;
-                        if (visibilityBox.getSelectedItem().equals("Private"))
-                            visibility = Visibility.PRIVATE;
-                        else
-                            visibility = Visibility.PUBLIC;
-                        Attribute attribute = new Attribute(newNameField.getText(), newTypeField.getText(), visibility);
-                        System.out.println("Napravio se atribut: "  + attribute.getAttributeString());
-                        element.getContent().add(attribute);
-                        contentListBox1.addItem(attribute.getAttributeString());
-                        contentListBox2.addItem(attribute.getAttributeString());
-                        diagramView.repaint();
-                    } else if (t.equals("Enumerable")) {
-                        EnumType enumerable = new EnumType(newNameField.getText());
-                        System.out.println("Napravio se enumerable: "  + enumerable.getEnumerableString());
-                        element.getContent().add(enumerable);
-                        contentListBox1.addItem(enumerable.getEnumerableString());
-                        contentListBox2.addItem(enumerable.getEnumerableString());
-                        diagramView.repaint();
-                    }
-                } else {
-                    System.out.println("Nista selektovano");
+                int indexContenta = contentListBox2.getSelectedIndex();
+                System.out.println("Uso sam ovde1");
+                if (element.getContent().get(indexContenta) instanceof Attribute ||
+                        element.getContent().get(indexContenta) instanceof Method) {
+
+                    Visibility visibility;
+                    if (changeVisibilityBox.getSelectedItem().equals("Private"))
+                        visibility = Visibility.PRIVATE;
+                    else
+                        visibility = Visibility.PUBLIC;
+                    String newName = changeNameField.getText();
+                    String newType = changeTypeField.getText();
+                    element.getContent().get(indexContenta).setName(newName);
+                    element.getContent().get(indexContenta).setType(newType);
+                    element.getContent().get(indexContenta).setVisibility(visibility);
+                    populateBox(contentList1, element.getContent());
+                    populateBox(contentList2, element.getContent());
+                    refreshComboBox(contentListBox1, contentList1);
+                    refreshComboBox(contentListBox2, contentList2);
+                    diagramView.repaint();
+                } else if (element.getContent().get(indexContenta) instanceof EnumType) {
+                    System.out.println("Uso sam ovde2");
+                    String newName = changeNameField.getText();
+                    element.getContent().get(indexContenta).setName(newName.toUpperCase());
+                    populateBox(contentList1, element.getContent());
+                    populateBox(contentList2, element.getContent());
+                    refreshComboBox(contentListBox1, contentList1);
+                    refreshComboBox(contentListBox2, contentList2);
+                    diagramView.repaint();
                 }
+
             }
         });
 
@@ -248,8 +242,10 @@ public class EditView extends JFrame {
         add(empty_line7);
         add(contentListBox2);
         add(changeNameField);
-        add(changeTypeField);
-        add(changeVisibilityBox);
+        if (element instanceof Klasa || element instanceof Interface) {
+            add(changeTypeField);
+            add(changeVisibilityBox);
+        }
         add(changeContentButton);
     }
 
@@ -263,6 +259,13 @@ public class EditView extends JFrame {
             if (classContent instanceof EnumType)
                 content[i] = ((EnumType) classContent).getEnumerableString();
             i++;
+        }
+    }
+
+    public void refreshComboBox(JComboBox comboBox, String[] content) {
+        comboBox.removeAllItems();
+        for (String s: content) {
+            comboBox.addItem(s);
         }
     }
 
