@@ -3,6 +3,7 @@ package app.model.state.states;
 import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
+import app.view.dialogs.EditView;
 import app.view.mainframe.DiagramView;
 import app.view.painters.ElementPainter;
 
@@ -15,6 +16,7 @@ public class EditState implements State {
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
             if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
                 //System.out.println("Element na toj poziciji postoji");
+                new EditView((Interclass) elementPainter.getElement(), diagramView);
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 break;
             }
