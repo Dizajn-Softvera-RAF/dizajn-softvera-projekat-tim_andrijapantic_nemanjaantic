@@ -9,9 +9,10 @@ public class SelectionPainter  extends ElementPainter{
 
     private Rectangle2D.Double shape;
     private int x = 0, y = 0;
+    private int x2 = 0, y2 = 0;
     private Point startPoint, endPoint;
     private Graphics2D g2;
-    private int height = 0, width = 0;
+
     private Rectangle toPaint;
 
 
@@ -24,8 +25,14 @@ public class SelectionPainter  extends ElementPainter{
     @Override
     public void paint(Graphics2D g2) {
 
-        toPaint = new Rectangle((int) startPoint.getX(), (int) startPoint.getY(), height, width);
+        int height = Math.abs(y - y2);
+        int width = Math.abs(x - x2);
+        int pX = Math.min(x, x2);
+        int pY = Math.min(y, y2);
+        toPaint = new Rectangle(pX, pY, width, height);
         g2.draw(toPaint);
+        setToPaint(toPaint);
+        //g2.drawRect(pX, pY, width, height);
 
 
     }
@@ -63,16 +70,18 @@ public class SelectionPainter  extends ElementPainter{
         return startPoint;
     }
 
-    public void setStartPoint(Point startPoint) {
-        this.startPoint = startPoint;
+    public void setStartPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public Point getEndPoint() {
         return endPoint;
     }
 
-    public void setEndPoint(Point endPoint) {
-        this.endPoint = endPoint;
+    public void setEndPoint(int x, int y) {
+        this.x2 = x;
+        this.y2 = y;
     }
 
     public Graphics2D getG2() {
@@ -83,21 +92,6 @@ public class SelectionPainter  extends ElementPainter{
         this.g2 = g2;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
     public Rectangle getToPaint() {
         return toPaint;

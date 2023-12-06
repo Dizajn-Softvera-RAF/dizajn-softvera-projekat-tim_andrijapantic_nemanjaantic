@@ -9,6 +9,7 @@ public abstract class ElementPainter {
     DiagramElement element;
     String name;
     Shape shape;
+    boolean isSelected = false;
 
     public ElementPainter() {
     }
