@@ -24,7 +24,7 @@ public class InterfacePainter extends ElementPainter{
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(new Color(194,238,219));
+        g2.setColor(element.getCurrentColor());
         g2.setStroke(new BasicStroke(((Interface)getElement()).getStroke()));
         this.shape = createShape((Interface) getElement(), g2);
         setShape(shape);

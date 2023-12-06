@@ -64,6 +64,8 @@ public class AddInterclassState implements State {
                 interfejs.getContent().add(new Method("funkcija3", "String", Visibility.PUBLIC));
                 interfejs.getContent().add(new Method("funkcija4", "Vehicle", Visibility.PUBLIC));
                 interfejs.addSubscriber(diagramView);
+                interfejs.setInitialColor(new Color(194,238,219));
+                interfejs.setCurrentColor(new Color(194,238,219));
                 InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
                 interfejsPainter.setElement(interfejs);
 
@@ -78,6 +80,8 @@ public class AddInterclassState implements State {
                 enumComp.getContent().add(new EnumType("plane"));
                 enumComp.getContent().add(new EnumType("boat"));
                 enumComp.addSubscriber(diagramView);
+                enumComp.setInitialColor(new Color(172,170,219));
+                enumComp.setCurrentColor(new Color(172,170,219));
                 EnumPainter enumPainter = new EnumPainter(enumComp);
                 MainFrame.getInstance().setChildToCreateType("enum");
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());

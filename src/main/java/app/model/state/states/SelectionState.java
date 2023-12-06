@@ -52,16 +52,22 @@ public class SelectionState implements State {
 
         Point e = diagramView.getAbsolutePoint(x, y);
 
-        //if (lasso != null) {
+        if (lasso != null) {
             if(lasso.getToPaint() == null){
+                diagramView.getElementPainters().remove(lasso);
+                lasso = null;
                 for(ElementPainter elementPainter: diagramView.getElementPainters()){
-                    if(!(elementPainter instanceof SelectionPainter) && !(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
+                    if(!(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
                             elementPainter.getElement().isSelected())){
                         elementPainter.getElement().setSelected(false);
                     }
-                    if(!(elementPainter instanceof SelectionPainter) && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
+                    if(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
                         System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());
-                        elementPainter.getElement().setSelected(true);
+                        if (!elementPainter.getElement().isSelected())
+                            elementPainter.getElement().setSelected(true);
+                        else
+                            elementPainter.getElement().setSelected(false);
+
                     }
 
 
@@ -89,9 +95,8 @@ public class SelectionState implements State {
 
                 diagramView.getElementPainters().remove(lasso);
                 lasso = null;
-               // diagramView.repaint();
             }
-//        }
+        }
         System.out.println("Trenutno si u SelectState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 }

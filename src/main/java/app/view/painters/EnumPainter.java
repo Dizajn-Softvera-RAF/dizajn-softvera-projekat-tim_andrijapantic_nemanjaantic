@@ -26,7 +26,7 @@ public class EnumPainter extends ElementPainter{
     @Override
     public void paint(Graphics2D g2) {
         g2.setFont(new Font("Arial", Font.PLAIN, 11));
-        g2.setColor(new Color(172,170,219));
+        g2.setColor(element.getCurrentColor());
         g2.setStroke(new BasicStroke(((EnumComp)getElement()).getStroke()));
         this.shape =  createShape((EnumComp) getElement(), g2);
         Font originalFont = g2.getFont();
