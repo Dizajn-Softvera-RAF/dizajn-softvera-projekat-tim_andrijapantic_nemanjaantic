@@ -9,6 +9,7 @@ import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.view.mainframe.DiagramView;
+import app.view.mainframe.MainFrame;
 
 
 import javax.swing.*;
@@ -115,6 +116,7 @@ public class EditView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 element.setName(nameTextField.getText());
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getClassyTree().getTreeView());
             }
         });
 

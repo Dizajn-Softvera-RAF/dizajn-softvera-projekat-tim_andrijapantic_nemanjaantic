@@ -51,6 +51,7 @@ public class AggregationPainter extends ElementPainter{
         Shape transformedShape = transform.createTransformedShape(path);
         Rectangle bounds = transformedShape.getBounds();
         transform.translate(-bounds.getWidth() / 2, -bounds.getHeight() / 2);
+        setShape(transformedShape);
 
         g2.draw(transformedShape);
     }

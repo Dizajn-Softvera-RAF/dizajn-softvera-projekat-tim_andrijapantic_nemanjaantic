@@ -14,7 +14,7 @@ public class EditState implements State {
     public void misKliknut(int x, int y, DiagramView diagramView) {
 
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
-            if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
+            if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
                 new EditView((Interclass) elementPainter.getElement(), diagramView);
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 break;
