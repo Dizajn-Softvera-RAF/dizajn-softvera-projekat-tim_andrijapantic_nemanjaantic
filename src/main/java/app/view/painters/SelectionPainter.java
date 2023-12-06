@@ -30,9 +30,11 @@ public class SelectionPainter  extends ElementPainter{
         int pX = Math.min(x, x2);
         int pY = Math.min(y, y2);
         toPaint = new Rectangle(pX, pY, width, height);
+        float dash1[] = { 10.0f };
+        g2.setStroke(new BasicStroke(1.0f,
+                BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f));
         g2.draw(toPaint);
         setToPaint(toPaint);
-        //g2.drawRect(pX, pY, width, height);
 
 
     }
