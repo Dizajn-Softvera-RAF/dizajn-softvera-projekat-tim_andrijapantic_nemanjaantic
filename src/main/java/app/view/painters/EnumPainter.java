@@ -41,7 +41,7 @@ public class EnumPainter extends ElementPainter{
         g2.setFont(new Font("Arial", Font.BOLD, 13));
         g2.drawString(element.getName(), (int) shape.getX()+20, (int) shape.getY()+20);
         g2.setFont(originalFont);
-        ((Interface) element).getConnectionsDots().clear();
+        ((EnumComp) element).getConnectionsDots().clear();
         int sredinaX = (int) (shape.x + shape.width / 2);
         int sredinaY = (int) (shape.y + shape.height / 2);
         addConnectionDots(sredinaX, sredinaY, ((EnumComp) element).getConnectionsDots());
