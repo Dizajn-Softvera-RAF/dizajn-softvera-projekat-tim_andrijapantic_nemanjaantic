@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class ClassPainter extends ElementPainter{
     protected Rectangle2D.Double shape;
 
+
+
     public ClassPainter(Klasa element) {
         setElement(element);
         this.setName(element.getName());
@@ -23,7 +25,7 @@ public class ClassPainter extends ElementPainter{
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(new Color(238,230,194));
+        g2.setColor(element.getCurrentColor());
         g2.setStroke(new BasicStroke(((Klasa)getElement()).getStroke()));
         this.shape = createShape((Klasa) getElement(), g2);
         setShape(shape);

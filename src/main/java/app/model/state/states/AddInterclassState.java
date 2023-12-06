@@ -17,6 +17,7 @@ import app.view.painters.EnumPainter;
 import app.view.painters.InterfacePainter;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 public class AddInterclassState implements State {
@@ -47,6 +48,8 @@ public class AddInterclassState implements State {
                 klasa.getContent().add(new Attribute("height5", "double", Visibility.PRIVATE));
                 klasa.getContent().add(new Method("calculateHeight", "double", Visibility.PUBLIC));
 
+                klasa.setCurrentColor(new Color(238,230,194));
+                klasa.setInitialColor(new Color(238,230,194));
                 MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa);
                 klasa.addSubscriber(diagramView);
                 ClassPainter classPainter = new ClassPainter(klasa);
