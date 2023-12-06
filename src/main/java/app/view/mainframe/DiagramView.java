@@ -3,7 +3,6 @@ package app.view.mainframe;
 import app.controller.MouseController;
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
-import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
@@ -81,6 +80,17 @@ public class DiagramView extends JPanel implements ISubscriber {
             }
 
         }
+        if (notification.getType().equals(NotificationType.PAINTER_POSITION_CHANGED)) {
+            for (ElementPainter e : elementPainters) {
+                if (e.getElement() instanceof Aggregation) {
+                    Point[] points = getTwoClosestPoints(((Aggregation) e.getElement()).getFromInterclass().getConnectionsDots(), ((Aggregation) e.getElement()).getToInterclass().getConnectionsDots());
+                    ((Aggregation) e.getElement()).setStartPoint(points[0]);
+                    ((Aggregation) e.getElement()).setEndPoint(points[1]);
+                }
+
+
+            }
+        }
         repaint();
         System.out.println("Pozvao sam repaint");
     }
@@ -118,8 +128,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         g2.transform(affineTransform);
         for (ElementPainter e : elementPainters) {
             e.paint(g2);
-            System.out.println("Repaintam element: " + e);
-            System.out.println("Repaintam element cije je ime: " + e.getName());
 
         }
 
@@ -190,5 +198,29 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setMyNodeMutable(MyNodeMutable myNodeMutable) {
         this.myNodeMutable = myNodeMutable;
+    }
+
+    public Point[] getTwoClosestPoints(ArrayList<Point> dots1, ArrayList<Point> dots2) {
+        Point[] najblizeDve = new Point[2];
+        double min = Double.MAX_VALUE;
+
+        for (Point dot1 : dots1) {
+            for (Point dot2 : dots2) {
+                double razdaljina = razdaljina(dot1, dot2);
+                if (razdaljina < min) {
+                    min = razdaljina;
+                    najblizeDve[0] = dot1;
+                    najblizeDve[1] = dot2;
+                }
+            }
+        }
+
+        return najblizeDve;
+    }
+
+    private static double razdaljina(Point pos1, Point pos2) {
+        double xDistance = Math.abs(pos2.getX() - pos1.getX());
+        double yDistance = Math.abs(pos2.getY() - pos1.getY());
+        return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
     }
 }

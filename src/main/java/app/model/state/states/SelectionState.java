@@ -1,5 +1,6 @@
 package app.model.state.states;
 
+import app.model.diagcomposite.Interclass;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
 import app.view.painters.ElementPainter;
@@ -19,7 +20,12 @@ public class SelectionState implements State {
             lasso.setStartPoint(newPoint);
             diagramView.getElementPainters().add(lasso);
         }
-        System.out.println("Trenutno si u SelectState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+        //System.out.println("Trenutno si u SelectState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+        for (ElementPainter elementPainter: diagramView.getElementPainters()) {
+            if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
+                System.out.println("Element na ovoj tacki je: " + elementPainter.getElement().getName());
+            }
+        }
     }
 
     @Override

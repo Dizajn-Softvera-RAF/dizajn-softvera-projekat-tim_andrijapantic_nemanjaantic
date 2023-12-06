@@ -9,11 +9,16 @@ import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
 import app.view.painters.*;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class AddConnectionState implements State {
 
     private boolean startExists = false;
+
+
+    private ArrayList<Point> startPoints;
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         Aggregation link = new Aggregation("Aggregation " + new Random().nextInt(100), diagramView.getDiagramNode());
@@ -25,10 +30,12 @@ public class AddConnectionState implements State {
                     MainFrame.getInstance().setChildToCreateType("aggregation");
                     diagramView.getElementPainters().add(0, new AggregationPainter(link));
                     diagramView.setCurrentLink(link);
-
+                    link.setStartPoint(diagramView.getAbsolutePoint(x, y));
+                    link.setEndPoint(diagramView.getAbsolutePoint(x, y));
                     MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), link);
                     link.setFromInterclass((Interclass) elementPainter.getElement());
-                    link.setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
+                   // link.setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
+                    startPoints = ((Interclass) elementPainter.getElement()).getConnectionsDots();
                     link.addSubscriber(diagramView);
                     diagramView.getDiagramNode().addChild(link);
                     startExists = true;
@@ -44,6 +51,7 @@ public class AddConnectionState implements State {
     public void misPovucen(int x, int y, DiagramView diagramView) {
         if (startExists)
             diagramView.getCurrentLink().setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
+            diagramView.getCurrentLink().setEndPoint(diagramView.getAbsolutePoint(x,y));
 
     }
 
@@ -54,8 +62,12 @@ public class AddConnectionState implements State {
             for (ElementPainter elementPainter : diagramView.getElementPainters()) {
                 if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                     if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
-                        System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
+                       //// System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                         diagramView.getCurrentLink().setToInterclass((Interclass) elementPainter.getElement());
+                        Point[] tacke = diagramView.getTwoClosestPoints(startPoints, ((Interclass) elementPainter.getElement()).getConnectionsDots());
+                        diagramView.getCurrentLink().setStartPoint(tacke[0]);
+                        diagramView.getCurrentLink().setEndPoint(tacke[1]);
+
                         isOnTheme = true;
                         break;
                     }
@@ -74,4 +86,6 @@ public class AddConnectionState implements State {
 
 
     }
+
+
 }

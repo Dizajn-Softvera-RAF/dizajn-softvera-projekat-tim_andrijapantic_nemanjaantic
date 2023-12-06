@@ -3,12 +3,14 @@ package app.view.painters;
 import app.model.diagcomposite.DiagramElement;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class ElementPainter {
 
     DiagramElement element;
     String name;
     Shape shape;
+
 
     public ElementPainter() {
     }
@@ -40,4 +42,5 @@ public abstract class ElementPainter {
     public void setShape(Shape shape) {
         this.shape = shape;
     }
+
 }

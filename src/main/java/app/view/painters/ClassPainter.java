@@ -10,6 +10,7 @@ import app.model.diagimplementation.interclass.Klasa;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public class ClassPainter extends ElementPainter{
     protected Rectangle2D.Double shape;
@@ -35,6 +36,10 @@ public class ClassPainter extends ElementPainter{
         g2.setFont(new Font("Arial", Font.BOLD, 13));
         g2.drawString(element.getName(), (int) shape.getX()+20, (int) shape.getY()+20);
         g2.setFont(originalFont);
+        ((Klasa)element).getConnectionsDots().clear();
+        int sredinaX = (int) (shape.x + shape.width / 2);
+        int sredinaY = (int) (shape.y + shape.height / 2);
+        addConnectionDots(sredinaX, sredinaY, ((Klasa) element).getConnectionsDots());
     }
 
     @Override
@@ -74,4 +79,12 @@ public class ClassPainter extends ElementPainter{
             startY += 20;
         }
     }
+
+    private void addConnectionDots(int sredinaX, int sredinaY, ArrayList<Point> connectionDots) {
+        connectionDots.add(new Point(sredinaX, (int) shape.y));
+        connectionDots.add(new Point((int) (shape.x + shape.width), sredinaY));
+        connectionDots.add(new Point(sredinaX, (int) (shape.y + shape.height)));
+        connectionDots.add(new Point((int) shape.x, sredinaY));
+    }
+
 }

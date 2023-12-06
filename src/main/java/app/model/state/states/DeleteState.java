@@ -2,6 +2,7 @@ package app.model.state.states;
 
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagcomposite.Interclass;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
 import app.view.painters.*;
@@ -14,7 +15,7 @@ public class DeleteState implements State {
         int indexZaBrisanje = -1;
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
 
-            if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
+            if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 indexZaBrisanje = diagramView.getElementPainters().indexOf(elementPainter);
                 break;

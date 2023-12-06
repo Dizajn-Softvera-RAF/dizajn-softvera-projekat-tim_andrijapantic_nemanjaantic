@@ -14,6 +14,9 @@ public abstract class Connection extends DiagramElement {
     private Color color;
     private Integer lineWidth;
 
+    private Point startPoint;
+    private  Point endPoint;
+
     public Connection(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
         super(name, parent);
         this.color = color;
@@ -50,7 +53,6 @@ public abstract class Connection extends DiagramElement {
 
     public void setFromInterclass(Interclass fromInterclass) {
         this.fromInterclass = fromInterclass;
-        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
     }
 
     public Interclass getToInterclass() {
@@ -59,6 +61,23 @@ public abstract class Connection extends DiagramElement {
 
     public void setToInterclass(Interclass toInterclass) {
         this.toInterclass = toInterclass;
+    }
+
+    public Point getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(Point startPoint) {
+        this.startPoint = startPoint;
+        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+    }
+
+    public Point getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(Point endPoint) {
+        this.endPoint = endPoint;
         notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
     }
 }

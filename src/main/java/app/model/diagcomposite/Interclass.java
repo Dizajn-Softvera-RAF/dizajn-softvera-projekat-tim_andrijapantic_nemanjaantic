@@ -22,20 +22,24 @@ public abstract class Interclass extends DiagramElement {
     protected String description;
     protected Point position;
     private List<ClassContent> content;
+    ArrayList<Point> connectionsDots;
 
     public Interclass(Paint paint, Point position) {
         this.paint = paint;
         this.position = position;
         this.content = new ArrayList<>();
+        connectionsDots = new ArrayList<>();
     }
 
     public Interclass(String name, AbstractClassyNode parent) {
         super(name, parent);
+        connectionsDots = new ArrayList<>();
     }
     public Interclass(String name, AbstractClassyNode parent, Point position) {
         super(name, parent);
         this.position = position;
         this.content = new ArrayList<>();
+        connectionsDots = new ArrayList<>();
     }
 
     public Interclass() {
@@ -46,6 +50,7 @@ public abstract class Interclass extends DiagramElement {
         super(name);
         this.position = position;
         this.content = new ArrayList<>();
+        connectionsDots = new ArrayList<>();
     }
 
 
@@ -71,7 +76,7 @@ public abstract class Interclass extends DiagramElement {
 
     public void setPosition(Point position) {
         this.position = position;
-        notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+        notifySubscribers(new Notification(NotificationType.PAINTER_POSITION_CHANGED));
     }
 
     public List<ClassContent> getContent() {
@@ -107,5 +112,13 @@ public abstract class Interclass extends DiagramElement {
     public void setName(String name) {
         notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
         super.setName(name);
+    }
+
+    public ArrayList<Point> getConnectionsDots() {
+        return connectionsDots;
+    }
+
+    public void setConnectionsDots(ArrayList<Point> connectionsDots) {
+        this.connectionsDots = connectionsDots;
     }
 }
