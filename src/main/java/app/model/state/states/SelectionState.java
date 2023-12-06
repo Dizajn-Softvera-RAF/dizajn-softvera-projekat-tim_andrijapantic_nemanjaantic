@@ -11,13 +11,17 @@ import java.awt.*;
 public class SelectionState implements State {
 
     private static SelectionPainter lasso;
+    private Point startPoint, endPoint;
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+
+
         if (lasso == null) {
             System.out.println("pravi lasso");
-            Point newPoint = diagramView.getAbsolutePoint(x, y);
-            lasso = new SelectionPainter(newPoint, newPoint);
-            lasso.setStartPoint(newPoint);
+             startPoint = diagramView.getAbsolutePoint(x, y);
+
+            lasso = new SelectionPainter(startPoint, startPoint);
+            lasso.setStartPoint((int)startPoint.getX(), (int) startPoint.getY());
             diagramView.getElementPainters().add(lasso);
         }
         //System.out.println("Trenutno si u SelectState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
@@ -33,16 +37,15 @@ public class SelectionState implements State {
 
         Point e = diagramView.getAbsolutePoint(x, y);
 
+
         if (lasso != null) {
-            Point endPoint = e;
-            lasso.setEndPoint(endPoint);
-            int x2 = Math.abs((int) lasso.getStartPoint().getX() - (int) lasso.getEndPoint().getX());
-            int y2 = Math.abs((int) lasso.getStartPoint().getY() - (int) lasso.getEndPoint().getY());
-            lasso.setHeight(x2);
-            lasso.setWidth(y2);
+            endPoint = e;
+            lasso.setEndPoint((int)e.getX(), (int)e.getY());
+
+
             diagramView.repaint();
         }
-        System.out.println("Trenutno si u SelectState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+        //System.out.println("Trenutno si u SelectState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 
     @Override
@@ -51,13 +54,34 @@ public class SelectionState implements State {
         Point e = diagramView.getAbsolutePoint(x, y);
 
         if (lasso != null) {
-            Point endPoint = e;
-            lasso.setEndPoint(endPoint);
+            if(lasso.getToPaint() == null){
+                for(ElementPainter elementPainter: diagramView.getElementPainters()){
+                    if(!(elementPainter instanceof SelectionPainter) && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
+                        System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());
+                    }
 
 
-            diagramView.getElementPainters().remove(lasso);
-            lasso = null;
-            diagramView.repaint();
+                }
+
+            } else {
+                Point endPoint = e;
+                lasso.setEndPoint((int) e.getX(), (int) e.getY());
+
+                for (ElementPainter elementPainter : diagramView.getElementPainters()) {
+                    if (elementPainter.getElement() instanceof Interclass) {
+
+                        if (lasso.getToPaint().contains(((Interclass) elementPainter.getElement()).getPosition())) {
+                            System.out.println("Element u lasso-u:" + elementPainter.getElement().getName());
+                        }
+
+                    }
+
+                }
+
+                diagramView.getElementPainters().remove(lasso);
+                lasso = null;
+                diagramView.repaint();
+            }
         }
         System.out.println("Trenutno si u SelectState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
