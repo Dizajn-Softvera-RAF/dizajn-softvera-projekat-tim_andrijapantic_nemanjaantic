@@ -22,7 +22,6 @@ public class TabbedPane extends JTabbedPane {
 
     private Tab selectedTab;
     private PackageNode trenutniPaket = null;
-    private PackageView packageView;
 
     private ArrayList<UUID> blockedTaboviId;
 
@@ -187,13 +186,6 @@ public class TabbedPane extends JTabbedPane {
         this.trenutniPaket = trenutniPaket;
     }
 
-    public PackageView getPackageView() {
-        return packageView;
-    }
-
-    public void setPackageView(PackageView packageView) {
-        this.packageView = packageView;
-    }
 
     public ArrayList<UUID> getBlockedTaboviId() {
         return blockedTaboviId;
