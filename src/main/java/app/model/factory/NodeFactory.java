@@ -34,6 +34,9 @@ public class NodeFactory extends AbstractNodeFactory {
         } else if (type.equals("Aggregation")) {
 
             return new Aggregation(name, parent);
+        } else if (type.equals("Composition")) {
+
+            return new Aggregation(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);

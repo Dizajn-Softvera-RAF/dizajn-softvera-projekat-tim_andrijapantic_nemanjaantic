@@ -85,10 +85,10 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
         if (notification.getType().equals(NotificationType.PAINTER_POSITION_CHANGED)) {
             for (ElementPainter e : elementPainters) {
-                if (e.getElement() instanceof Aggregation) {
-                    Point[] points = getTwoClosestPoints(((Aggregation) e.getElement()).getFromInterclass().getConnectionsDots(), ((Aggregation) e.getElement()).getToInterclass().getConnectionsDots());
-                    ((Aggregation) e.getElement()).setStartPoint(points[0]);
-                    ((Aggregation) e.getElement()).setEndPoint(points[1]);
+                if (e.getElement() instanceof Connection) {
+                    Point[] points = getTwoClosestPoints(((Connection) e.getElement()).getFromInterclass().getConnectionsDots(), ((Connection) e.getElement()).getToInterclass().getConnectionsDots());
+                    ((Connection) e.getElement()).setStartPoint(points[0]);
+                    ((Connection) e.getElement()).setEndPoint(points[1]);
                 }
 
 

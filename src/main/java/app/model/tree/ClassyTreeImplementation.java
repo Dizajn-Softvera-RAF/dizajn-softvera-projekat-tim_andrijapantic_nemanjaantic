@@ -80,9 +80,13 @@ public class ClassyTreeImplementation implements ClassyTree {
 
             return AppCore.getInstance().getClassyRepository().createNode("Enum", "Enum " + new Random().nextInt(100), parent);
         }
-        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("interface")) {
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("aggregation")) {
 
             return AppCore.getInstance().getClassyRepository().createNode("Aggregation", "Aggregation " + new Random().nextInt(100), parent);
+        }
+        if (parent instanceof DiagramNode && MainFrame.getInstance().getChildToCreateType().equals("composition")) {
+
+            return AppCore.getInstance().getClassyRepository().createNode("Composition", "Composition " + new Random().nextInt(100), parent);
         }
         return null;
     }

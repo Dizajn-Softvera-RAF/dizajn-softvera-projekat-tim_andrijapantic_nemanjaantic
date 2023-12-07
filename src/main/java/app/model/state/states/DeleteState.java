@@ -3,6 +3,8 @@ package app.model.state.states;
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
 import app.view.painters.*;
@@ -48,8 +50,14 @@ public class DeleteState implements State {
                 ArrayList<DiagramElement> toDeleteChild = new ArrayList<>();
 
                 for (ElementPainter elementPainter: diagramView.getElementPainters()) {
-                    if (elementPainter instanceof AggregationPainter) {
-                        AggregationPainter link = (AggregationPainter) elementPainter;
+                    if (elementPainter.getElement() instanceof Connection) {
+                        ElementPainter link = null;
+                        if (elementPainter.getElement() instanceof Aggregation) {
+                            link = (AggregationPainter) elementPainter;
+                        } else if (elementPainter.getElement() instanceof Composition) {
+                            link = (CompositionPainter) elementPainter;
+                        }
+
                         if (((Connection)link.getElement()).getFromInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())
                                 || ((Connection)link.getElement()).getToInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())){
                             toDelete.add(elementPainter);
@@ -74,8 +82,14 @@ public class DeleteState implements State {
             ArrayList<ElementPainter> toDelete = new ArrayList<>();
             ArrayList<DiagramElement> toDeleteChild = new ArrayList<>();
             for (ElementPainter elementPainter: diagramView.getElementPainters()) {
-                if (elementPainter instanceof AggregationPainter) {
-                    AggregationPainter link = (AggregationPainter) elementPainter;
+                if (elementPainter.getElement() instanceof Connection) {
+                    ElementPainter link = null;
+                    if (elementPainter.getElement() instanceof Aggregation) {
+                        link = (AggregationPainter) elementPainter;
+                    } else if (elementPainter.getElement() instanceof Composition) {
+                        link = (CompositionPainter) elementPainter;
+                    }
+
                     for (int index: listaIndexa) {
                         if (((Connection)link.getElement()).getFromInterclass().getName().equals(diagramView.getElementPainters().get(index).getElement().getName())
                                 || ((Connection)link.getElement()).getToInterclass().getName().equals(diagramView.getElementPainters().get(index).getElement().getName())){

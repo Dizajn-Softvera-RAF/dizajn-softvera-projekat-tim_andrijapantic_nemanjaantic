@@ -8,6 +8,7 @@ import java.util.List;
 
 import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
@@ -54,6 +55,12 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
             }
         } else if (child instanceof Aggregation) {
             Aggregation node = (Aggregation) child;
+            if (!this.getChildren().contains(node)) {
+                this.getChildren().add(node);
+                notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
+            }
+        } else if (child instanceof Composition) {
+            Composition node = (Composition) child;
             if (!this.getChildren().contains(node)) {
                 this.getChildren().add(node);
                 notifySubscribers(new Notification(NotificationType.PAINTER_ADDED));
