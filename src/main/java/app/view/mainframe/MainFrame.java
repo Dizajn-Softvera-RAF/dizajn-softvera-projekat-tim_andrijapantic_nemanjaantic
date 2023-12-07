@@ -27,6 +27,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private app.view.mainframe.Menu menu;
     private StateToolBar stateToolBar;
     private String childToCreateType;
+    private int connectionType = 0;
 
     public static MainFrame getInstance() {
 
@@ -160,5 +161,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setChildToCreateType(String childToCreateType) {
         this.childToCreateType = childToCreateType;
+    }
+
+    public int getConnectionType() {
+        return connectionType;
+    }
+
+    public void setConnectionType(int connectionType) {
+        this.connectionType = connectionType;
     }
 }

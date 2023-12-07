@@ -12,7 +12,6 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 
 public class AggregationPainter extends ElementPainter{
-    private Line2D.Float shape;
 
     public AggregationPainter(Aggregation element ) {
         setElement(element);
@@ -29,30 +28,36 @@ public class AggregationPainter extends ElementPainter{
         int endX = (int)((Aggregation)getElement()).getEndPoint().getX();
         int endY = (int)((Aggregation)getElement()).getEndPoint().getY();
 
+        g2.setColor(Color.BLACK);
         g2.drawLine(startX,startY , endX, endY);
+
 
         double angle = Math.atan2(endY - startY, endX - startX);
 
-        int rhombusX = endX - (int) (50 * Math.cos(angle));
-        int rhombusY = endY - (int) (50 * Math.sin(angle));
+        int rhombusX = endX - (int) (40 * Math.cos(angle));
+        int rhombusY = endY - (int) (40 * Math.sin(angle));
 
 
         AffineTransform transform = new AffineTransform();
         transform.translate(rhombusX, rhombusY);
         transform.rotate(angle);
 
+
+
         Path2D path = new Path2D.Double();
-        path.moveTo(0, -50 / 2);
-        path.lineTo(50 / 2, 0);
-        path.lineTo(0, 50 / 2);
-        path.lineTo(-50 / 2, 0);
+        path.moveTo(0, -20);
+        path.lineTo(20, 0);
+        path.lineTo(0, 20);
+        path.lineTo(-20, 0);
         path.closePath();
 
         Shape transformedShape = transform.createTransformedShape(path);
         Rectangle bounds = transformedShape.getBounds();
         transform.translate(-bounds.getWidth() / 2, -bounds.getHeight() / 2);
         setShape(transformedShape);
-
+        g2.setColor(Color.WHITE);
+        g2.fill(getShape());
+        g2.setColor(Color.BLACK);
         g2.draw(transformedShape);
     }
 
@@ -61,9 +66,6 @@ public class AggregationPainter extends ElementPainter{
         return getShape().contains(pos);
     }
 
-    public Line2D.Float getShape() {
-        return shape;
-    }
 
 
 }

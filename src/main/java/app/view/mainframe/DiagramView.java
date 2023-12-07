@@ -95,7 +95,6 @@ public class DiagramView extends JPanel implements ISubscriber {
             }
         }
         repaint();
-        System.out.println("Pozvao sam repaint");
     }
 
     public DiagramNode getDiagramNode() {

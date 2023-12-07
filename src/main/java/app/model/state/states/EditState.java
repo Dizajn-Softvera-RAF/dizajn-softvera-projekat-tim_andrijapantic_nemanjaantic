@@ -1,10 +1,12 @@
 package app.model.state.states;
 
 import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
 import app.view.dialogs.EditView;
 import app.view.mainframe.DiagramView;
+import app.view.painters.AggregationPainter;
 import app.view.painters.ElementPainter;
 
 import java.awt.*;
@@ -14,6 +16,10 @@ public class EditState implements State {
     public void misKliknut(int x, int y, DiagramView diagramView) {
 
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
+            if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
+                    elementPainter.getElement() instanceof Aggregation) {
+                System.out.println("Linija ovde je: " + elementPainter.getElement().getName());
+            }
             if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
                 new EditView((Interclass) elementPainter.getElement(), diagramView);
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
