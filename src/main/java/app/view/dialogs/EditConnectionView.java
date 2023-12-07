@@ -1,12 +1,12 @@
 package app.view.dialogs;
 
-import app.model.classcontent.Attribute;
-import app.model.classcontent.ClassContent;
-import app.model.classcontent.EnumType;
-import app.model.classcontent.Method;
+import app.model.classcontent.*;
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Cardinalities;
+import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.view.mainframe.DiagramView;
@@ -16,13 +16,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EditConnectionView extends JFrame {
     private JTextField nameTextField;
-    private JComboBox contentListBox1;
-    private JComboBox contentListBox2;
     private DiagramView diagramView;
+    private JComboBox currentCardinalities = new JComboBox<>();
     public EditConnectionView(Connection element, DiagramView diagramView) {
         this.diagramView = diagramView;
         setTitle("Edit Connection");
@@ -46,6 +46,7 @@ public class EditConnectionView extends JFrame {
         container.add(nameTextField);
 
         JButton changeNameButton = new JButton("Change Name");
+        JButton addCardinalityButton = new JButton("Add cardinality");
 
         JLabel empty_line1 = new JLabel("");
         empty_line1.setPreferredSize(new Dimension(3000,0));
@@ -70,10 +71,58 @@ public class EditConnectionView extends JFrame {
         String visibilities[] = new String[2];
         visibilities[0] = "Private";
         visibilities[1] = "Public";
+        String interclasses[] = new String[2];
+        interclasses[0] = element.getFromInterclass().getName();
+        interclasses[1] = element.getToInterclass().getName();
 
-        JLabel createNewCardinalitiesLbl = new JLabel("Create a new Cardinality");
+        JLabel createNewCardinalitiesLbl = new JLabel("Create a new Cardinality: ");
+
+        ArrayList<String> attributes1 = new ArrayList<>();
+
+        for (ClassContent content: element.getFromInterclass().getContent()) {
+            if (content instanceof Attribute) {
+                attributes1.add(((Attribute) content).getAttributeString());
+            }
+        }
+
+        ArrayList<String> attributes2 = new ArrayList<>();
+
+        for (ClassContent content: element.getToInterclass().getContent()) {
+            if (content instanceof Attribute) {
+                attributes2.add(((Attribute) content).getAttributeString());
+            }
+        }
 
         JComboBox cardinalityBox = new JComboBox<>(cardinalityTypes);
+        JComboBox interclassesBox = new JComboBox<>(interclasses);
+        JComboBox attributesBox = new JComboBox<>(attributes2.toArray());
+
+        JLabel chooseCardinalityTypeLbl = new JLabel("Pick a cardinality type: ");
+        JLabel chooseAClassLbl = new JLabel("Class that instantiates: ");
+        JLabel chooseAttributeLbl = new JLabel("Attribute that gets instantiated from other Interclass: ");
+        JLabel savedAttributeLbl = new JLabel("Attribute created: ");
+        JLabel currentCardinalitiesLbl = new JLabel("Current cardinalities: ");
+
+        JTextField newNameField = new JTextField();
+        newNameField.setText("Enter name here");
+        JComboBox visibilityBox = new JComboBox(visibilities);
+
+        newNameField.setPreferredSize(new Dimension(100,20));
+
+        interclassesBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex =  interclassesBox.getSelectedIndex();
+                switch (selectedIndex) {
+                    case 0:
+                        attributesBox.setModel(new DefaultComboBoxModel(attributes2.toArray()));
+                        break;
+                    case 1:
+                        attributesBox.setModel(new DefaultComboBoxModel(attributes1.toArray()));
+                        break;
+                }
+            }
+        });
 
         changeNameButton.addActionListener(new ActionListener() {
             @Override
@@ -83,37 +132,107 @@ public class EditConnectionView extends JFrame {
             }
         });
 
+        addCardinalityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Visibility visibility;
+                if (visibilityBox.getSelectedIndex()==1)
+                    visibility = Visibility.PUBLIC;
+                else
+                    visibility = Visibility.PRIVATE;
+                int kardinalnostIndex = cardinalityBox.getSelectedIndex();
+                Cardinality newCardinality = null;
+                switch (kardinalnostIndex) {
+                    case 0:
+                        newCardinality = Cardinality.ZERO_OR_ONE;
+                        break;
+                    case 1:
+                        newCardinality = Cardinality.ONE_ONLY;
+                        break;
+                    case 2:
+                        newCardinality = Cardinality.ZERO_OR_MORE;
+                        break;
+                    case 3:
+                        newCardinality = Cardinality.ONE_OR_MORE;
+                        break;
+                }
+                Interclass interclassThatContains;
+                Interclass interclass2;
+                if (interclassesBox.getSelectedIndex()==0) {
+                    interclassThatContains = element.getFromInterclass();
+                    interclass2 = element.getToInterclass();
+                }
+                else {
+                    interclass2 = element.getFromInterclass();
+                    interclassThatContains = element.getToInterclass();
+                }
+                Attribute attributeUsed = new Attribute(null, null, null);
+                for (ClassContent content: interclass2.getContent()) {
+                    if (content instanceof Attribute) {
+                        if (((Attribute) content).getAttributeString().equals((String) attributesBox.getSelectedItem())) {
+                            attributeUsed = (Attribute) content;
+                        }
+                    }
+                }
+                Attribute newAttribute = new Attribute(nameTextField.getText(),attributeUsed.getType(),visibility);
+                ArrayList<String> cardinalities = new ArrayList<>();
+                if (element instanceof Aggregation) {
+                    ((Aggregation) element).getCardinalitiesList().add(new Cardinalities(newCardinality, interclassThatContains, attributeUsed, newAttribute));
+
+                    for (Cardinalities cardinality: ((Aggregation) element).getCardinalitiesList()) {
+                        cardinalities.add(cardinality.toString());
+                    }
+                    refreshCurrentCardinalities(cardinalities);
+                }
+                if (element instanceof Composition) {
+                    ((Composition) element).getCardinalitiesList().add(new Cardinalities(newCardinality, interclassThatContains, attributeUsed, newAttribute));
+                    for (Cardinalities cardinality: ((Composition) element).getCardinalitiesList()) {
+                        cardinalities.add(cardinality.toString());
+                    }
+                    refreshCurrentCardinalities(cardinalities);
+                }
+
+
+            }
+        });
+
         nameTextField.setPreferredSize(new Dimension(200,20));
+        ///JComboBox currentCardinalities = new JComboBox<>();
 
         add(changeName);
         add(empty_line1);
         add(nameTextField);
         add(changeNameButton);
         add(empty_line2);
-        add(createNewCardinalitiesLbl);
-        add(cardinalityBox);
-    }
-
-    public void populateBox(String[] content, List<ClassContent> classContents) {
-        int i = 0;
-        for (ClassContent classContent: classContents) {
-            if (classContent instanceof Attribute)
-                content[i] = ((Attribute) classContent).getAttributeString();
-            if (classContent instanceof Method)
-                content[i] = ((Method) classContent).getMethodString();
-            if (classContent instanceof EnumType)
-                content[i] = ((EnumType) classContent).getEnumerableString();
-            i++;
+        if (element instanceof Composition || element instanceof Aggregation) {
+            add(currentCardinalitiesLbl);
+            add(currentCardinalities);
+            add(empty_line7);
+            add(createNewCardinalitiesLbl);
+            add(empty_line3);
+            add(chooseCardinalityTypeLbl);
+            add(cardinalityBox);
+            add(empty_line4);
+            add(chooseAClassLbl);
+            add(interclassesBox);
+            add(empty_line5);
+            add(chooseAttributeLbl);
+            add(attributesBox);
+            add(empty_line6);
+            add(savedAttributeLbl);
+            add(newNameField);
+            add(visibilityBox);
+            add(addCardinalityButton);
         }
+
     }
 
-    public void refreshComboBoxes(String[] content) {
-        contentListBox1.removeAllItems();
-        contentListBox2.removeAllItems();
+    public void refreshCurrentCardinalities(ArrayList<String> content) {
+        currentCardinalities.removeAllItems();
         for (String s: content) {
-            contentListBox1.addItem(s);
-            contentListBox2.addItem(s);
+            currentCardinalities.addItem(s);
         }
     }
+
 
 }

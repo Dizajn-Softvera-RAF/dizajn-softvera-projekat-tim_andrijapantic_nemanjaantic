@@ -8,11 +8,13 @@ public class Cardinalities {
     private Cardinality cardinality;
     private Interclass interclassThatContains;
     private Attribute attributeUsed;
+    private Attribute newAttribute;
 
-    public Cardinalities(Cardinality cardinality, Interclass interclassThatContains, Attribute attributeUsed) {
+    public Cardinalities(Cardinality cardinality, Interclass interclassThatContains, Attribute attributeUsed, Attribute newAttribute) {
         this.cardinality = cardinality;
         this.interclassThatContains = interclassThatContains;
         this.attributeUsed = attributeUsed;
+        this.newAttribute = newAttribute;
     }
 
     public Cardinality getCardinality() {
@@ -37,5 +39,18 @@ public class Cardinalities {
 
     public void setAttributeUsed(Attribute attributeUsed) {
         this.attributeUsed = attributeUsed;
+    }
+
+    public Attribute getNewAttribute() {
+        return newAttribute;
+    }
+
+    public void setNewAttribute(Attribute newAttribute) {
+        this.newAttribute = newAttribute;
+    }
+
+    @Override
+    public String toString() {
+        return "Interclass " + interclassThatContains.getName() + ", Attribute name: " + newAttribute.getName() + ", Cardinalty: " + cardinality.toString() + " of Attribute " + attributeUsed.getName();
     }
 }
