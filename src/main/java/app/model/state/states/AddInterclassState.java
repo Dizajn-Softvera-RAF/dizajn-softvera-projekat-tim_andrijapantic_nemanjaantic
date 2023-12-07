@@ -3,6 +3,7 @@ package app.model.state.states;
 import app.model.classcontent.Attribute;
 import app.model.classcontent.EnumType;
 import app.model.classcontent.Method;
+import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
@@ -25,7 +26,7 @@ public class AddInterclassState implements State {
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
         for (ElementPainter elementPainter:  diagramView.getElementPainters()) {
-            if (elementPainter.elementAt(elementPainter.getElement(),diagramView.getAbsolutePoint(x, y))) {
+            if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(),diagramView.getAbsolutePoint(x, y))) {
                 elementExists = true;
                 System.out.println("Vec postoji element na ovoj tacki");
             }

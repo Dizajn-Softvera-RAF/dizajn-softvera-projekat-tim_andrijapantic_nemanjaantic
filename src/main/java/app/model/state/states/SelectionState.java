@@ -57,11 +57,11 @@ public class SelectionState implements State {
                 diagramView.getElementPainters().remove(lasso);
                 lasso = null;
                 for(ElementPainter elementPainter: diagramView.getElementPainters()){
-                    if(!(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
+                    if(elementPainter.getElement() instanceof Interclass && !(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
                             elementPainter.getElement().isSelected())){
                         elementPainter.getElement().setSelected(false);
                     }
-                    if(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
+                    if(elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
                         System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());
                         if (!elementPainter.getElement().isSelected())
                             elementPainter.getElement().setSelected(true);
@@ -74,7 +74,6 @@ public class SelectionState implements State {
                 }
 
             } else {
-                Point endPoint = e;
                 lasso.setEndPoint((int) e.getX(), (int) e.getY());
 
                 for (ElementPainter elementPainter : diagramView.getElementPainters()) {

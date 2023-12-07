@@ -171,12 +171,6 @@ public class TabbedPane extends JTabbedPane {
         return null;
     }
 
-    public void addTab(Tab tab) {
-        if (!isTabPresent(tab.getTitle())) {
-
-        }
-    }
-
     public ArrayList<Tab> getTrenutniTaboviZaBrisanje() {
         return trenutniTaboviZaBrisanje;
     }

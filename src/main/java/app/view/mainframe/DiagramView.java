@@ -60,20 +60,23 @@ public class DiagramView extends JPanel implements ISubscriber {
     @Override
     public void update(Notification notification) {
         if (notification.getType().equals(NotificationType.EXISTING_TAB_OPENED)) {
-
             for (DiagramElement element: getDiagramNode().getChildren()) {
 
                 if (element instanceof Klasa) {
                     getElementPainters().add(new ClassPainter((Klasa)element));
+                    element.addSubscriber(this);
                     System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Interface){
                     getElementPainters().add(new InterfacePainter((Interface)element));
+                    element.addSubscriber(this);
                     System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof EnumComp){
                     getElementPainters().add(new EnumPainter((EnumComp)element));
+                    element.addSubscriber(this);
                     System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Aggregation){
                     getElementPainters().add(0, new AggregationPainter((Aggregation)element));
+                    element.addSubscriber(this);
                     System.out.println("Dodao sam element: " + element.getName());
                 }
 

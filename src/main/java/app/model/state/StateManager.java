@@ -11,6 +11,7 @@ public class StateManager {
     private MoveState moveState;
     private ZoomInState zoomInState;
     private ZoomOutState zoomOutState;
+    private DuplicationState duplicationState;
     private State currentState;
 
     public StateManager() {
@@ -26,6 +27,7 @@ public class StateManager {
         moveState = new MoveState();
         zoomInState = new ZoomInState();
         zoomOutState = new ZoomOutState();
+        duplicationState = new DuplicationState();
     }
 
     public State getCurrentState() {
@@ -98,5 +100,13 @@ public class StateManager {
 
     public void setZoomOutState(ZoomOutState zoomOutState) {
         this.zoomOutState = zoomOutState;
+    }
+
+    public DuplicationState getDuplicationState() {
+        return duplicationState;
+    }
+
+    public void setDuplicationState(DuplicationState duplicationState) {
+        this.duplicationState = duplicationState;
     }
 }

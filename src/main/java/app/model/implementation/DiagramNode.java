@@ -74,11 +74,9 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
     @Override
     public void removeChildren() {
      //   prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
-        System.out.println("Usao sam u remove children");
-        MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
-        System.out.println("Bacio sam notif");
+
         this.getChildren().clear();
-        System.out.println("Clearovao sam decu");
+        MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
     }
 
     public void removeChildren(ArrayList<DiagramElement> lista) {

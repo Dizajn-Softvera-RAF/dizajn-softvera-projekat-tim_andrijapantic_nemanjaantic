@@ -21,6 +21,7 @@ public class ActionManager {
     private IntoMoveState intoMoveState;
     private IntoZoomInState intoZoomInState;
     private IntoZoomOutState intoZoomOutState;
+    private IntoDuplicationState intoDuplicationState;
 
     public ActionManager() {
         initilizeActions();
@@ -44,6 +45,7 @@ public class ActionManager {
         intoMoveState = new IntoMoveState();
         intoZoomInState = new IntoZoomInState();
         intoZoomOutState = new IntoZoomOutState();
+        intoDuplicationState = new IntoDuplicationState();
     }
 
     public ExitAction getExitAction() {
@@ -180,6 +182,14 @@ public class ActionManager {
 
     public void setIntoZoomOutState(IntoZoomOutState intoZoomOutState) {
         this.intoZoomOutState = intoZoomOutState;
+    }
+
+    public IntoDuplicationState getIntoDuplicationState() {
+        return intoDuplicationState;
+    }
+
+    public void setIntoDuplicationState(IntoDuplicationState intoDuplicationState) {
+        this.intoDuplicationState = intoDuplicationState;
     }
 }
 
