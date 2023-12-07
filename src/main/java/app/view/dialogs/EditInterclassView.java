@@ -20,14 +20,14 @@ import java.awt.event.ActionListener;
 
 import java.util.List;
 
-public class EditView extends JFrame {
+public class EditInterclassView extends JFrame {
 
     private JTextField nameTextField;
     private JComboBox contentListBox1;
     private JComboBox contentListBox2;
     private DiagramView diagramView;
 
-    public EditView(Interclass element, DiagramView diagramView) {
+    public EditInterclassView(Interclass element, DiagramView diagramView) {
         this.diagramView = diagramView;
         setTitle("Edit Content");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

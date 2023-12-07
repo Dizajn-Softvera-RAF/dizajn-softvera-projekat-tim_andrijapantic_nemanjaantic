@@ -4,6 +4,9 @@ import app.controller.MouseController;
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.Generalization;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
@@ -76,6 +79,18 @@ public class DiagramView extends JPanel implements ISubscriber {
                     System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Aggregation){
                     getElementPainters().add(0, new AggregationPainter((Aggregation)element));
+                    element.addSubscriber(this);
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof Composition){
+                    getElementPainters().add(0, new CompositionPainter((Composition) element));
+                    element.addSubscriber(this);
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof Generalization){
+                    getElementPainters().add(0, new GeneralizationPainter((Generalization) element));
+                    element.addSubscriber(this);
+                    System.out.println("Dodao sam element: " + element.getName());
+                } else if(element instanceof Dependency){
+                    getElementPainters().add(0, new DependencyPainter((Dependency) element));
                     element.addSubscriber(this);
                     System.out.println("Dodao sam element: " + element.getName());
                 }

@@ -4,6 +4,8 @@ import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.Generalization;
 import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
 import app.model.tree.MyNodeMutable;
@@ -11,6 +13,7 @@ import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
 import app.view.painters.*;
 
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -34,9 +37,13 @@ public class AddConnectionState implements State {
         }
         if (startExists) {
             if (MainFrame.getInstance().getConnectionType()==0) {
-                link = new Aggregation("Aggregation " + new Random().nextInt(100), diagramView.getDiagramNode());
+                link = new Aggregation("Aggregation" + new Random().nextInt(100), diagramView.getDiagramNode());
             } else if (MainFrame.getInstance().getConnectionType()==1) {
-                link = new Composition("Composition " + new Random().nextInt(100), diagramView.getDiagramNode());
+                link = new Composition("Composition" + new Random().nextInt(100), diagramView.getDiagramNode());
+            } else if (MainFrame.getInstance().getConnectionType()==3) {
+                link = new Generalization("Generalization" + new Random().nextInt(100), diagramView.getDiagramNode());
+            } else if (MainFrame.getInstance().getConnectionType()==2) {
+                link = new Dependency("Dependency" + new Random().nextInt(100), diagramView.getDiagramNode());
             }
 
             System.out.println("Trenutno si u ConnectionState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
@@ -50,6 +57,12 @@ public class AddConnectionState implements State {
                         } else if (link instanceof Composition) {
                             MainFrame.getInstance().setChildToCreateType("composition");
                             diagramView.getElementPainters().add(0, new CompositionPainter((Composition) link));
+                        } else if (link instanceof Generalization) {
+                            MainFrame.getInstance().setChildToCreateType("generalization");
+                            diagramView.getElementPainters().add(0, new GeneralizationPainter((Generalization) link));
+                        } else if (link instanceof Dependency) {
+                            MainFrame.getInstance().setChildToCreateType("dependency");
+                            diagramView.getElementPainters().add(0, new DependencyPainter((Dependency) link));
                         }
 
                         diagramView.setCurrentLink(link);
@@ -61,11 +74,13 @@ public class AddConnectionState implements State {
 
                         link.setStartPoint(tacke[0]);
                         link.setEndPoint(diagramView.getAbsolutePoint(x, y));
-                        MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), link);
+                        link.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), link));
                         link.setFromInterclass((Interclass) elementPainter.getElement());
                         // link.setToInterclass(new Klasa(null, diagramView.getAbsolutePoint(x, y)));
                         startPoints = ((Interclass) elementPainter.getElement()).getConnectionsDots();
+
                         link.addSubscriber(diagramView);
+
                         diagramView.getDiagramNode().addChild(link);
                         break;
                     }
@@ -95,7 +110,7 @@ public class AddConnectionState implements State {
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
         if (startExists) {
-            boolean isOnTheme = false;
+            boolean isOnInterclass = false;
             for (ElementPainter elementPainter : diagramView.getElementPainters()) {
                 if (elementPainter instanceof ClassPainter || elementPainter instanceof EnumPainter || elementPainter instanceof InterfacePainter) {
                     if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
@@ -106,18 +121,20 @@ public class AddConnectionState implements State {
                         diagramView.getCurrentLink().setStartPoint(tacke[0]);
                         diagramView.getCurrentLink().setEndPoint(tacke[1]);
 
-                        isOnTheme = true;
+                        isOnInterclass = true;
                         break;
                     }
                 }
 
             }
-            if (isOnTheme) {
+            if (isOnInterclass) {
                 System.out.println("Povezani su " + diagramView.getCurrentLink().getFromInterclass().getName() + " i " + diagramView.getCurrentLink().getToInterclass().getName());
                 diagramView.setCurrentLink(null);
             } else {
                 diagramView.getElementPainters().remove(0);
                 diagramView.getDiagramNode().removeChild(diagramView.getCurrentLink());
+                DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
+                model.removeNodeFromParent(diagramView.getCurrentLink().getMyNodeMutable());
             }
         }
         startExists = false;

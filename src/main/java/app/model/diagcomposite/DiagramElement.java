@@ -6,6 +6,7 @@ import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import app.model.tree.MyNodeMutable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public abstract class DiagramElement extends ClassyNodeComposite<Void> implement
     private Color currentColor;
 
     private Color initialColor;
+    private MyNodeMutable myNodeMutable;
 
 
     public DiagramElement() {
@@ -88,5 +90,13 @@ public abstract class DiagramElement extends ClassyNodeComposite<Void> implement
 
             subscriber.update(notification);
         }
+    }
+
+    public MyNodeMutable getMyNodeMutable() {
+        return myNodeMutable;
+    }
+
+    public void setMyNodeMutable(MyNodeMutable myNodeMutable) {
+        this.myNodeMutable = myNodeMutable;
     }
 }

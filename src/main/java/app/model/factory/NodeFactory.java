@@ -2,6 +2,9 @@ package app.model.factory;
 
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.Generalization;
 import app.model.diagimplementation.interclass.EnumComp;
 import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
@@ -36,7 +39,13 @@ public class NodeFactory extends AbstractNodeFactory {
             return new Aggregation(name, parent);
         } else if (type.equals("Composition")) {
 
-            return new Aggregation(name, parent);
+            return new Composition(name, parent);
+        } else if (type.equals("Generalization")) {
+
+            return new Generalization(name, parent);
+        } else if (type.equals("Dependency")) {
+
+            return new Dependency(name, parent);
         }
 
         throw new IllegalArgumentException("Type not supported: " + type);

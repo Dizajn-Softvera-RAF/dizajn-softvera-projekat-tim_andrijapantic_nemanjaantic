@@ -2,15 +2,11 @@ package app.model.state.states;
 
 import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
-import app.model.diagimplementation.connection.Aggregation;
-import app.model.diagimplementation.interclass.Klasa;
 import app.model.state.State;
-import app.view.dialogs.EditView;
+import app.view.dialogs.EditConnectionView;
+import app.view.dialogs.EditInterclassView;
 import app.view.mainframe.DiagramView;
-import app.view.painters.AggregationPainter;
 import app.view.painters.ElementPainter;
-
-import java.awt.*;
 
 public class EditState implements State {
     @Override
@@ -20,9 +16,10 @@ public class EditState implements State {
             if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
                     elementPainter.getElement() instanceof Connection) {
                 System.out.println("Linija ovde je: " + elementPainter.getElement().getName());
+                new EditConnectionView((Connection) elementPainter.getElement(), diagramView);
             }
             if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
-                new EditView((Interclass) elementPainter.getElement(), diagramView);
+                new EditInterclassView((Interclass) elementPainter.getElement(), diagramView);
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 break;
             }

@@ -51,7 +51,7 @@ public class AddInterclassState implements State {
 
                 klasa.setCurrentColor(new Color(238,230,194));
                 klasa.setInitialColor(new Color(238,230,194));
-                MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa);
+                klasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa));
                 klasa.addSubscriber(diagramView);
                 ClassPainter classPainter = new ClassPainter(klasa);
                 classPainter.setElement(klasa);
@@ -73,7 +73,7 @@ public class AddInterclassState implements State {
                 MainFrame.getInstance().setChildToCreateType("interface");
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
                 diagramView.getElementPainters().add(interfejsPainter);
-                MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), interfejs);
+                interfejs.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), interfejs));
                 System.out.println("Ime interfejsa je: " + interfejs);
             } else if (odg==2) {
                 EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Enum" + new Random().nextInt(100), 2);
@@ -88,7 +88,7 @@ public class AddInterclassState implements State {
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
                 enumPainter.setElement(enumComp);
                 diagramView.getElementPainters().add(enumPainter);
-                MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), enumComp);
+                enumComp.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), enumComp));
                 System.out.println("Ime enuma je: " + enumComp);
             }
         }

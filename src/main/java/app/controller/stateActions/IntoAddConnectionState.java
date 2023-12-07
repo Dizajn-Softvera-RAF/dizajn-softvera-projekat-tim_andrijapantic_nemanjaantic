@@ -15,7 +15,7 @@ public class IntoAddConnectionState extends AbstractClassyAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        String[] tipKonekcije = {"Aggregation", "Composition", "Dependency", "Equivalence"};
+        String[] tipKonekcije = {"Aggregation", "Composition", "Dependency", "Generalization"};
         int odg = JOptionPane.showOptionDialog(null, "Choose the Connection Type",
                 "Click a button",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, tipKonekcije, tipKonekcije[0]);
