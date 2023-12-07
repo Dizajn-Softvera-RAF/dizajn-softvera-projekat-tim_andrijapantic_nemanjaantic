@@ -25,7 +25,7 @@ public class DuplicationState implements State {
                 elementExists = true;
                 if (elementPainter.getElement() instanceof Klasa) {
                     Klasa copyFrom = (Klasa) elementPainter.getElement();
-                    Point newPoint = diagramView.getAbsolutePoint((int) (((Klasa) elementPainter.getElement()).getPosition().getX()+15),
+                    Point newPoint = new Point((int) (((Klasa) elementPainter.getElement()).getPosition().getX()+15),
                             (int) (((Klasa) elementPainter.getElement()).getPosition().getY()-15));
                     Klasa newKlasa = new Klasa(newPoint, copyFrom.getParent(), copyFrom.getName(), copyFrom.getStroke());
                     newKlasa.setContent(copyFrom.getContent());
@@ -37,7 +37,7 @@ public class DuplicationState implements State {
                     painterToCreate.setElement(newKlasa);
                 } else if (elementPainter.getElement() instanceof Interface) {
                     Interface copyFrom = (Interface) elementPainter.getElement();
-                    Point newPoint = diagramView.getAbsolutePoint((int) (((Interface) elementPainter.getElement()).getPosition().getX()+15),
+                    Point newPoint = new Point((int) (((Interface) elementPainter.getElement()).getPosition().getX()+15),
                             (int) (((Interface) elementPainter.getElement()).getPosition().getY()-15));
                     Interface newInterface = new Interface(newPoint, copyFrom.getParent(), copyFrom.getName(), copyFrom.getStroke());
                     newInterface.setContent(copyFrom.getContent());
@@ -49,7 +49,7 @@ public class DuplicationState implements State {
                     painterToCreate.setElement(newInterface);
                 } else if (elementPainter.getElement() instanceof EnumComp) {
                     EnumComp copyFrom = (EnumComp) elementPainter.getElement();
-                    Point newPoint = diagramView.getAbsolutePoint((int) (((EnumComp) elementPainter.getElement()).getPosition().getX()+15),
+                    Point newPoint = new Point((int) (((EnumComp) elementPainter.getElement()).getPosition().getX()+15),
                             (int) (((EnumComp) elementPainter.getElement()).getPosition().getY()-15));
                     EnumComp newEnum = new EnumComp(newPoint, copyFrom.getParent(), copyFrom.getName(), copyFrom.getStroke());
                     newEnum.setContent(copyFrom.getContent());
