@@ -14,7 +14,7 @@ public class IntoDeleteState extends AbstractClassyAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        TabbedPane.getInstance().getPackageView().startState(TabbedPane.getInstance().getPackageView().getStateManager().getDeleteState());
+        MainFrame.getInstance().getPackageView().startState(MainFrame.getInstance().getPackageView().getStateManager().getDeleteState());
         System.out.println("Usao sam u delete state.");
     }
 }

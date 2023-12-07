@@ -50,7 +50,7 @@ public class PackageView extends JPanel implements ISubscriber {
         containerPanel.add(Box.createRigidArea(new Dimension(100, 0)));
         containerPanel.add(pathJe);
         containerPanel.add(path);
-        TabbedPane.getInstance().setPackageView(this);
+        MainFrame.getInstance().setPackageView(this);
         setLayout(new BorderLayout());
         add(containerPanel, BorderLayout.PAGE_START);
         add(TabbedPane.getInstance(), BorderLayout.CENTER);
@@ -109,7 +109,7 @@ public class PackageView extends JPanel implements ISubscriber {
 
         } else if (notification.getType().equals(NotificationType.PACKAGE_SELECTED)) {
             TabbedPane.getInstance().setTrenutniPaket((PackageNode) notification.getNode().getClassyNode());
-            TabbedPane.getInstance().setPackageView(this);
+            MainFrame.getInstance().setPackageView(this);
             packageNode = (PackageNode) notification.getNode().getClassyNode();
 
         } else if (notification.getType().equals(NotificationType.RENAME)) {

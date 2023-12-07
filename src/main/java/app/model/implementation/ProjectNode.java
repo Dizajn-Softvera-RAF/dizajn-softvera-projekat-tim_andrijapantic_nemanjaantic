@@ -48,7 +48,7 @@ public class ProjectNode extends ClassyNodeComposite<PackageNode> implements IPu
     public void removeChildren() {
         prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
         TabbedPane.getInstance().setTrenutniPaket(null);
-        TabbedPane.getInstance().setPackageView(null);
+        MainFrame.getInstance().setPackageView(null);
         this.getChildren().clear();
     }
 

@@ -21,7 +21,7 @@ public class IntoAddConnectionState extends AbstractClassyAction {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, tipKonekcije, tipKonekcije[0]);
         System.out.println("Izabrana je opcija "  + tipKonekcije[odg]);
         MainFrame.getInstance().setConnectionType(odg);
-        TabbedPane.getInstance().getPackageView().startState(TabbedPane.getInstance().getPackageView().getStateManager().getAddConnectionState());
+        MainFrame.getInstance().getPackageView().startState(MainFrame.getInstance().getPackageView().getStateManager().getAddConnectionState());
         System.out.println("Usao sam u add connection state.");
     }
 }

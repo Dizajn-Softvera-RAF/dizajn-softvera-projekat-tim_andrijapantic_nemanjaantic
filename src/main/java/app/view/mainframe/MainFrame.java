@@ -27,6 +27,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private app.view.mainframe.Menu menu;
     private StateToolBar stateToolBar;
     private String childToCreateType;
+    private PackageView packageView;
     private int connectionType = 0;
 
     public static MainFrame getInstance() {
@@ -109,7 +110,9 @@ public class MainFrame extends JFrame implements ISubscriber {
         stateToolBar = new StateToolBar();
         add(stateToolBar, BorderLayout.EAST);
 
-        add(new PackageView());
+        packageView = new PackageView();
+
+        add(packageView);
 
 
         projectExplorer.addTreeSelectionListener(new TreeSelectionListener() {
@@ -169,5 +172,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setConnectionType(int connectionType) {
         this.connectionType = connectionType;
+    }
+
+    public PackageView getPackageView() {
+        return packageView;
+    }
+
+    public void setPackageView(PackageView packageView) {
+        this.packageView = packageView;
     }
 }

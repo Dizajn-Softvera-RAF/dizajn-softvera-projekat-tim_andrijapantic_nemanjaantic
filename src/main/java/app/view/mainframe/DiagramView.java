@@ -43,7 +43,7 @@ public class DiagramView extends JPanel implements ISubscriber {
         super();
         this.tab = tab;
         this.elementPainters = new ArrayList<>();
-        parentView = TabbedPane.getInstance().getPackageView();
+        parentView = MainFrame.getInstance().getPackageView();
         ++openFrameCount;
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         setSize(700, 700);

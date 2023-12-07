@@ -1,6 +1,7 @@
 package app.controller.stateActions;
 
 import app.controller.AbstractClassyAction;
+import app.view.mainframe.MainFrame;
 import app.view.tabs.TabbedPane;
 
 import java.awt.event.ActionEvent;
@@ -14,7 +15,7 @@ public class IntoZoomOutState extends AbstractClassyAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        TabbedPane.getInstance().getPackageView().startState(TabbedPane.getInstance().getPackageView().getStateManager().getZoomOutState());
+        MainFrame.getInstance().getPackageView().startState(MainFrame.getInstance().getPackageView().getStateManager().getZoomOutState());
         System.out.println("Usao sam u zoom-out state.");
     }
 }
