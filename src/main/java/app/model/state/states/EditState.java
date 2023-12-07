@@ -1,5 +1,6 @@
 package app.model.state.states;
 
+import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.interclass.Klasa;
@@ -17,7 +18,7 @@ public class EditState implements State {
 
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
             if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
-                    elementPainter.getElement() instanceof Aggregation) {
+                    elementPainter.getElement() instanceof Connection) {
                 System.out.println("Linija ovde je: " + elementPainter.getElement().getName());
             }
             if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
