@@ -5,10 +5,12 @@ import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.connection.Aggregation;
-import app.model.diagimplementation.connection.Cardinalities;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.editcomponents.Cardinalities;
 import app.model.diagimplementation.connection.Composition;
-import app.model.diagimplementation.interclass.Interface;
-import app.model.diagimplementation.interclass.Klasa;
+import app.model.diagimplementation.connection.editcomponents.Cardinality;
+import app.model.diagimplementation.connection.editcomponents.Dependencies;
+import app.model.diagimplementation.connection.editcomponents.DependencyType;
 import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
 
@@ -17,12 +19,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EditConnectionView extends JFrame {
     private JTextField nameTextField;
     private DiagramView diagramView;
     private JComboBox currentCardinalities = new JComboBox<>();
+    private JComboBox currentDependencies = new JComboBox<>();
     public EditConnectionView(Connection element, DiagramView diagramView) {
         this.diagramView = diagramView;
         setTitle("Edit Connection");
@@ -46,7 +48,8 @@ public class EditConnectionView extends JFrame {
         container.add(nameTextField);
 
         JButton changeNameButton = new JButton("Change Name");
-        JButton addCardinalityButton = new JButton("Add cardinality");
+        JButton addCardinalityButton = new JButton("Add Cardinality");
+        JButton addDependencyButton = new JButton("Add Dependency");
 
         JLabel empty_line1 = new JLabel("");
         empty_line1.setPreferredSize(new Dimension(3000,0));
@@ -63,6 +66,7 @@ public class EditConnectionView extends JFrame {
         JLabel empty_line7 = new JLabel("");
         empty_line7.setPreferredSize(new Dimension(3000,0));
 
+
         String cardinalityTypes[] = new String[4];
         cardinalityTypes[0] = "ZERO OR ONE";
         cardinalityTypes[1] = "ONE ONLY";
@@ -74,6 +78,11 @@ public class EditConnectionView extends JFrame {
         String interclasses[] = new String[2];
         interclasses[0] = element.getFromInterclass().getName();
         interclasses[1] = element.getToInterclass().getName();
+
+        String[] dependencyTypes = new String[3];
+        dependencyTypes[0] = "INSTANTATE";
+        dependencyTypes[1] = "CALL";
+        dependencyTypes[2] = "USE";
 
         JLabel createNewCardinalitiesLbl = new JLabel("Create a new Cardinality: ");
 
@@ -93,9 +102,22 @@ public class EditConnectionView extends JFrame {
             }
         }
 
+        ArrayList<String> toInterclassContentList = new ArrayList<>();
+
+        for (ClassContent content: element.getToInterclass().getContent()) {
+            if (content instanceof Attribute) {
+                toInterclassContentList.add(((Attribute) content).getAttributeString());
+            } else if (content instanceof Method) {
+                toInterclassContentList.add(((Method) content).getMethodString());
+            }
+        }
+
         JComboBox cardinalityBox = new JComboBox<>(cardinalityTypes);
         JComboBox interclassesBox = new JComboBox<>(interclasses);
         JComboBox attributesBox = new JComboBox<>(attributes2.toArray());
+        JComboBox dependencyTypeBox = new JComboBox(dependencyTypes);
+        JComboBox listOfAttrributesAndMethodsBox = new JComboBox(toInterclassContentList.toArray());
+
 
         JLabel chooseCardinalityTypeLbl = new JLabel("Pick a cardinality type: ");
         JLabel chooseAClassLbl = new JLabel("Class that instantiates: ");
@@ -108,6 +130,31 @@ public class EditConnectionView extends JFrame {
         JComboBox visibilityBox = new JComboBox(visibilities);
 
         newNameField.setPreferredSize(new Dimension(100,20));
+
+        JLabel currentDependenciesLbl = new JLabel("Current dependencies: ");
+        JLabel createDependenciesLbl = new JLabel("Create Dependency: ");
+
+        ArrayList<String> cardinalities = new ArrayList<>();
+        ArrayList<String> dependenciesList  = new ArrayList<>();
+
+        if (element instanceof Aggregation) {
+            for (Cardinalities cardinality: ((Aggregation) element).getCardinalitiesList()) {
+                cardinalities.add(cardinality.toString());
+            }
+        }
+        if (element instanceof Composition) {
+            for (Cardinalities cardinality: (( Composition) element).getCardinalitiesList()) {
+                cardinalities.add(cardinality.toString());
+            }
+        }
+        if (element instanceof Dependency) {
+            for (Dependencies dependency: (( Dependency) element).getDependencies()) {
+                dependenciesList.add(dependency.toString());
+            }
+        }
+
+        currentDependencies.setModel(new DefaultComboBoxModel(dependenciesList.toArray()));
+        currentCardinalities.setModel(new DefaultComboBoxModel(cardinalities.toArray()));
 
         interclassesBox.addActionListener(new ActionListener() {
             @Override
@@ -175,7 +222,7 @@ public class EditConnectionView extends JFrame {
                     }
                 }
                 Attribute newAttribute = new Attribute(nameTextField.getText(),attributeUsed.getType(),visibility);
-                ArrayList<String> cardinalities = new ArrayList<>();
+
                 if (element instanceof Aggregation) {
                     ((Aggregation) element).getCardinalitiesList().add(new Cardinalities(newCardinality, interclassThatContains, attributeUsed, newAttribute));
 
@@ -193,6 +240,42 @@ public class EditConnectionView extends JFrame {
                 }
 
 
+            }
+        });
+
+
+
+        addDependencyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int indexSelectedContent = listOfAttrributesAndMethodsBox.getSelectedIndex();
+                DependencyType dependencyType = null;
+                int indexSelectedDependencyType = dependencyTypeBox.getSelectedIndex();
+                switch (indexSelectedDependencyType) {
+                    case 0:
+                        dependencyType = DependencyType.INSTANTIATE;
+                        break;
+                    case 1:
+                        dependencyType = DependencyType.CALL;
+                        break;
+                    case 2:
+                        dependencyType = DependencyType.USE;
+                        break;
+                }
+                if (element.getToInterclass().getContent().get(indexSelectedContent) instanceof Method) {
+                    Dependencies dependency = new Dependencies(element.getFromInterclass(),
+                            (Method) element.getToInterclass().getContent().get(indexSelectedContent),
+                            dependencyType);
+                    ((Dependency) element).getDependencies().add(dependency);
+                            dependenciesList.add(dependency.toString());
+                } else if (element.getToInterclass().getContent().get(indexSelectedContent) instanceof Attribute) {
+                    Dependencies dependency = new Dependencies(element.getFromInterclass(),
+                            (Attribute) element.getToInterclass().getContent().get(indexSelectedContent),
+                            dependencyType);
+                    ((Dependency) element).getDependencies().add(dependency);
+                            dependenciesList.add(dependency.toString());
+                }
+                refreshCurrentDependencies(dependenciesList);
             }
         });
 
@@ -223,6 +306,15 @@ public class EditConnectionView extends JFrame {
             add(newNameField);
             add(visibilityBox);
             add(addCardinalityButton);
+        } else if (element instanceof Dependency) {
+            add(currentDependenciesLbl);
+            add(currentDependencies);
+            add(empty_line7);
+            add(createDependenciesLbl);
+            add(empty_line3);
+            add(dependencyTypeBox);
+            add(listOfAttrributesAndMethodsBox);
+            add(addDependencyButton);
         }
 
     }
@@ -231,6 +323,13 @@ public class EditConnectionView extends JFrame {
         currentCardinalities.removeAllItems();
         for (String s: content) {
             currentCardinalities.addItem(s);
+        }
+    }
+
+    public void refreshCurrentDependencies(ArrayList<String> content) {
+        currentDependencies.removeAllItems();
+        for (String s: content) {
+            currentDependencies.addItem(s);
         }
     }
 

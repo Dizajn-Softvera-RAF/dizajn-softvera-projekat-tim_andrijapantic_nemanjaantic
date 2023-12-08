@@ -1,4 +1,4 @@
-package app.model.classcontent;
+package app.model.diagimplementation.connection.editcomponents;
 
 public enum Cardinality {
     ZERO_OR_ONE,

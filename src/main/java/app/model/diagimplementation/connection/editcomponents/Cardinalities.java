@@ -1,7 +1,7 @@
-package app.model.diagimplementation.connection;
+package app.model.diagimplementation.connection.editcomponents;
 
 import app.model.classcontent.Attribute;
-import app.model.classcontent.Cardinality;
+import app.model.diagimplementation.connection.editcomponents.Cardinality;
 import app.model.diagcomposite.Interclass;
 
 public class Cardinalities {

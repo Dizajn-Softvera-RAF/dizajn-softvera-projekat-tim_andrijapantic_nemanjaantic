@@ -3,7 +3,7 @@ package app.model.diagimplementation.connection;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.Connection;
-import app.model.diagcomposite.Interclass;
+import app.model.diagimplementation.connection.editcomponents.Cardinalities;
 
 import java.awt.*;
 import java.util.ArrayList;
