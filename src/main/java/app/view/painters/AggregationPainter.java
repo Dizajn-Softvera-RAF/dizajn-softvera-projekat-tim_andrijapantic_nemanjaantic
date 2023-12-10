@@ -69,7 +69,6 @@ public class AggregationPainter extends ElementPainter{
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
         g2.setColor(new Color(0,0,0,0));
-        g2.setColor(Color.BLACK);
         g2.fill(transformedShape2);
         g2.setColor(Color.BLACK);
         g2.draw(transformedShape);

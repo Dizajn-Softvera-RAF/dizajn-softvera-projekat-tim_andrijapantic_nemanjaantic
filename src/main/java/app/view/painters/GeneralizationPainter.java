@@ -25,7 +25,8 @@ public class GeneralizationPainter extends ElementPainter{
         int endY = (int)((Generalization)getElement()).getEndPoint().getY();
 
         g2.setColor(Color.BLACK);
-        g2.drawLine(startX,startY , endX, endY);
+        Line2D line = new Line2D.Double(startX, startY, endX, endY);
+        g2.draw(line);
 
         double angle = Math.atan2(endY - startY, endX - startX);
 
@@ -40,13 +41,27 @@ public class GeneralizationPainter extends ElementPainter{
 
 
         AffineTransform transform = AffineTransform.getTranslateInstance(triangleX, triangleY);
-        transform.rotate(angle + Math.PI + Math.toRadians(45));
-        setShape(transform.createTransformedShape(path));
+        transform.rotate(angle);
+        Shape transformedShape = transform.createTransformedShape(path);
+        setShape(transformedShape);
+
+        transform.translate(0, 0);
+
+        Path2D path2 = new Path2D.Double();
+        path2.moveTo(-triangleX, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY())))/15, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY())))/15, 10);
+        path2.lineTo(-triangleX, 10);
+        path2.closePath();
 
         g2.setColor(Color.WHITE);
         g2.fill(getShape());
+        g2.setColor(new Color(0,0,0,0));
+        Shape transformedShape2 = transform.createTransformedShape(path2);
+        setShape(transformedShape2);
+        g2.fill(transformedShape2);
         g2.setColor(Color.BLACK);
-        g2.draw(getShape());
+        g2.draw(transformedShape);
 
     }
 

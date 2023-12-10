@@ -52,32 +52,24 @@ public class DependencyPainter extends ElementPainter{
         Shape transformedShape = transform.createTransformedShape(path);
         setShape(transformedShape);
 
-
-        int rectX = startX + (int) (20 * Math.cos(angle));
-        int rectY = startY + (int) (20 * Math.sin(angle));
         transform.translate(0, 0);
 
         Path2D path2 = new Path2D.Double();
-        path2.moveTo(-rectX, -10);
-        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY()))), -10);
-        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY()))), 10);
-        path2.lineTo(-rectX, 10);
+        path2.moveTo(-triangleX, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY())))/15, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY())))/15, 10);
+        path2.lineTo(-triangleX, 10);
         path2.closePath();
-
-
-
 
         g2.setStroke(new BasicStroke(1));
         g2.setColor(Color.WHITE);
         g2.fill(getShape());
-        g2.setColor(Color.BLACK);
+        g2.setColor(new Color(0,0,0,0));
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
-        g2.setColor(Color.BLACK);
         g2.fill(transformedShape2);
         g2.setColor(Color.BLACK);
         g2.draw(transformedShape);
-
 
     }
 
