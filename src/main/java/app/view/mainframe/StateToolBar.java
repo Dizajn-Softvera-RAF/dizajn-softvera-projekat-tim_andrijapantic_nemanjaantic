@@ -28,7 +28,10 @@ public class StateToolBar extends JToolBar {
         addSeparator();
         add(MainFrame.getInstance().getActionManager().getIntoZoomOutState());
         addSeparator();
+        add(MainFrame.getInstance().getActionManager().getIntoZoomToFitState());
+        addSeparator();
         add(MainFrame.getInstance().getActionManager().getIntoDuplicationState());
+
 
         this.setPreferredSize(sizeT.getSize());
 

@@ -67,10 +67,8 @@ public class DeleteState implements State {
                     for (ElementPainter elementPainter: diagramView.getElementPainters()) {
                         if (elementPainter.getElement() instanceof Connection) {
                             ElementPainter link = null;
-                            if (elementPainter.getElement() instanceof Aggregation) {
-                                link = (AggregationPainter) elementPainter;
-                            } else if (elementPainter.getElement() instanceof Composition) {
-                                link = (CompositionPainter) elementPainter;
+                            if (elementPainter.getElement() instanceof Connection) {
+                                link = elementPainter;
                             }
 
                             if (((Connection)link.getElement()).getFromInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())

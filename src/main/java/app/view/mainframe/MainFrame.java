@@ -69,7 +69,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         int screenHeight = screensize.height;
         int screenWidth = screensize.width;
 
-        setSize(screenWidth / 2, screenHeight / 2);
+        setSize(screenWidth / 2, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("ClassyCrafT");

@@ -14,7 +14,6 @@ public class MoveState implements State {
     private boolean movingElements = false;
     private boolean movingOneElement = false;
     private Interclass selectedElement;
-    //private List<Interclass> selectedElements;
     private ElementPainter selectedPainter;
     private Point startPoint;
     private int lastPointX;
