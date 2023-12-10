@@ -6,7 +6,9 @@ import app.model.diagimplementation.connection.Generalization;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 
 public class DependencyPainter extends ElementPainter{
     public DependencyPainter(Dependency element ) {
@@ -28,12 +30,14 @@ public class DependencyPainter extends ElementPainter{
         BasicStroke dashedStroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dashPattern, 0.0f);
         g2.setStroke(dashedStroke);
         g2.setColor(Color.BLACK);
-        g2.drawLine(startX,startY , endX, endY);
+        Line2D line = new Line2D.Double(startX, startY, endX, endY);
+        g2.draw(line);
 
         double angle = Math.atan2(endY - startY, endX - startX);
 
+
         int triangleX = endX - (int) (30 * Math.cos(angle));
-        int triangleY = endY - (int) (30 * Math.sin(angle)) ;
+        int triangleY = endY - (int) (30 * Math.sin(angle));
 
         Path2D path = new Path2D.Double();
         path.moveTo(0, -15);
@@ -42,15 +46,37 @@ public class DependencyPainter extends ElementPainter{
         path.closePath();
 
 
-        AffineTransform transform = AffineTransform.getTranslateInstance(triangleX, triangleY);
-        transform.rotate(angle + Math.PI + Math.toRadians(45));
-        setShape(transform.createTransformedShape(path));
+        AffineTransform transform = new AffineTransform();
+        transform.translate(triangleX, triangleY);
+        transform.rotate(angle);
+        Shape transformedShape = transform.createTransformedShape(path);
+        setShape(transformedShape);
+
+
+        int rectX = startX + (int) (20 * Math.cos(angle));
+        int rectY = startY + (int) (20 * Math.sin(angle));
+        transform.translate(0, 0);
+
+        Path2D path2 = new Path2D.Double();
+        path2.moveTo(-rectX, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY()))), -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()), (int) (line.getP2().getY()))), 10);
+        path2.lineTo(-rectX, 10);
+        path2.closePath();
+
+
+
 
         g2.setStroke(new BasicStroke(1));
         g2.setColor(Color.WHITE);
         g2.fill(getShape());
         g2.setColor(Color.BLACK);
-        g2.draw(getShape());
+        Shape transformedShape2 = transform.createTransformedShape(path2);
+        setShape(transformedShape2);
+        g2.setColor(Color.BLACK);
+        g2.fill(transformedShape2);
+        g2.setColor(Color.BLACK);
+        g2.draw(transformedShape);
 
 
     }

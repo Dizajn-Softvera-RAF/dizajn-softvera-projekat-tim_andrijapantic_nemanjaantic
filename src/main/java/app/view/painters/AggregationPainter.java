@@ -10,8 +10,12 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 
 public class AggregationPainter extends ElementPainter{
+
+    int rectX = 0;
+    int rectY = 0;
 
     public AggregationPainter(Aggregation element ) {
         setElement(element);
@@ -21,15 +25,14 @@ public class AggregationPainter extends ElementPainter{
 
     @Override
     public void paint(Graphics2D g2) {
-       // shape = new Line2D.Float((int)((Aggregation)getElement()).getFromInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getFromInterclass().getPosition().getY(),
-            //    (int)((Aggregation)getElement()).getToInterclass().getPosition().getX(), (int)((Aggregation)getElement()).getToInterclass().getPosition().getY());
         int startX = (int)((Aggregation)getElement()).getStartPoint().getX();
         int startY = (int)((Aggregation)getElement()).getStartPoint().getY();
         int endX = (int)((Aggregation)getElement()).getEndPoint().getX();
         int endY = (int)((Aggregation)getElement()).getEndPoint().getY();
 
         g2.setColor(Color.BLACK);
-        g2.drawLine(startX,startY , endX, endY);
+        Line2D line = new Line2D.Double(startX, startY, endX, endY);
+        g2.draw(line);
 
 
         double angle = Math.atan2(endY - startY, endX - startX);
@@ -37,11 +40,9 @@ public class AggregationPainter extends ElementPainter{
         int rhombusX = startX + (int) (20 * Math.cos(angle));
         int rhombusY = startY + (int) (20 * Math.sin(angle));
 
-
         AffineTransform transform = new AffineTransform();
         transform.translate(rhombusX, rhombusY);
         transform.rotate(angle);
-
 
 
         Path2D path = new Path2D.Double();
@@ -52,17 +53,31 @@ public class AggregationPainter extends ElementPainter{
         path.closePath();
 
         Shape transformedShape = transform.createTransformedShape(path);
-        Rectangle bounds = transformedShape.getBounds();
-        transform.translate(-bounds.getWidth() / 2, -bounds.getHeight() / 2);
         setShape(transformedShape);
+
+
+        Path2D path2 = new Path2D.Double();
+        path2.moveTo(-20, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()-35), (int) (line.getP2().getY()-20))), -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()-35), (int) (line.getP2().getY()-20))), 10);
+        path2.lineTo(-20, 10 );
+        path2.closePath();
+
         g2.setColor(Color.WHITE);
         g2.fill(getShape());
+        transform.translate(0, 0);
+        Shape transformedShape2 = transform.createTransformedShape(path2);
+        setShape(transformedShape2);
+        g2.setColor(new Color(0,0,0,0));
+        g2.setColor(Color.BLACK);
+        g2.fill(transformedShape2);
         g2.setColor(Color.BLACK);
         g2.draw(transformedShape);
     }
 
     @Override
     public boolean elementAt(DiagramElement element, Point pos) {
+
         return getShape().contains(pos);
     }
 

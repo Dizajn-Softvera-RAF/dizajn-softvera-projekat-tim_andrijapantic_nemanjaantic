@@ -6,6 +6,7 @@ import app.model.diagimplementation.connection.Composition;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 
 public class CompositionPainter extends ElementPainter{
@@ -24,7 +25,8 @@ public class CompositionPainter extends ElementPainter{
         int endY = (int)((Composition)getElement()).getEndPoint().getY();
 
         g2.setColor(Color.BLACK);
-        g2.drawLine(startX,startY , endX, endY);
+        Line2D line = new Line2D.Double(startX, startY, endX, endY);
+        g2.draw(line);
 
 
         double angle = Math.atan2(endY - startY, endX - startX);
@@ -47,11 +49,22 @@ public class CompositionPainter extends ElementPainter{
         path.closePath();
 
         Shape transformedShape = transform.createTransformedShape(path);
-        Rectangle bounds = transformedShape.getBounds();
-        transform.translate(-bounds.getWidth() / 2, -bounds.getHeight() / 2);
         setShape(transformedShape);
+
+        Path2D path2 = new Path2D.Double();
+        path2.moveTo(-20, -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()-35), (int) (line.getP2().getY()-20))), -10);
+        path2.lineTo(line.getP1().distance(new Point((int) (line.getP2().getX()-35), (int) (line.getP2().getY()-20))), 10);
+        path2.lineTo(-20, 10 );
+        path2.closePath();
+
         g2.setColor(Color.BLACK);
         g2.fill(getShape());
+        transform.translate(0, 0);
+        Shape transformedShape2 = transform.createTransformedShape(path2);
+        setShape(transformedShape2);
+        g2.setColor(new Color(0,0,0,0));
+        g2.fill(transformedShape2);
         g2.setColor(Color.BLACK);
         g2.draw(transformedShape);
     }
