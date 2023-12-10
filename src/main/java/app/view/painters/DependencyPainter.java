@@ -36,14 +36,14 @@ public class DependencyPainter extends ElementPainter{
         double angle = Math.atan2(endY - startY, endX - startX);
 
 
-        int triangleX = endX - (int) (30 * Math.cos(angle));
-        int triangleY = endY - (int) (30 * Math.sin(angle));
+        int triangleX = endX - (int) (15 * Math.cos(angle));
+        int triangleY = endY - (int) (15 * Math.sin(angle));
 
         Path2D path = new Path2D.Double();
         path.moveTo(0, -15);
         path.lineTo(15, 15);
         path.lineTo(-15, 15);
-        path.closePath();
+        //path.closePath();
 
 
         AffineTransform transform = new AffineTransform();
@@ -62,8 +62,6 @@ public class DependencyPainter extends ElementPainter{
         path2.closePath();
 
         g2.setStroke(new BasicStroke(1));
-        g2.setColor(Color.WHITE);
-        g2.fill(getShape());
         g2.setColor(new Color(0,0,0,0));
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
