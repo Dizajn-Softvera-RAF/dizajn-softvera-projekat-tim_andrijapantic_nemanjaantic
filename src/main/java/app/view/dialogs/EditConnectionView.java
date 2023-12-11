@@ -6,9 +6,9 @@ import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Dependency;
-import app.model.diagimplementation.connection.editcomponents.Cardinalities;
-import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.editcomponents.Cardinality;
+import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.editcomponents.CardinalityType;
 import app.model.diagimplementation.connection.editcomponents.Dependencies;
 import app.model.diagimplementation.connection.editcomponents.DependencyType;
 import app.view.mainframe.DiagramView;
@@ -22,11 +22,9 @@ import java.util.ArrayList;
 
 public class EditConnectionView extends JFrame {
     private JTextField nameTextField;
-    private DiagramView diagramView;
     private JComboBox currentCardinalities = new JComboBox<>();
     private JComboBox currentDependencies = new JComboBox<>();
-    public EditConnectionView(Connection element, DiagramView diagramView) {
-        this.diagramView = diagramView;
+    public EditConnectionView(Connection element) {
         setTitle("Edit Connection");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         init(element);
@@ -34,6 +32,7 @@ public class EditConnectionView extends JFrame {
         setSize(600, 300);
         setVisible(true);
         setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/images/settings-icon2.png")).getImage());
     }
 
     private void init(Connection element) {
@@ -79,10 +78,12 @@ public class EditConnectionView extends JFrame {
         interclasses[0] = element.getFromInterclass().getName();
         interclasses[1] = element.getToInterclass().getName();
 
-        String[] dependencyTypes = new String[3];
+        String[] dependencyTypes = new String[5];
         dependencyTypes[0] = "INSTANTATE";
         dependencyTypes[1] = "CALL";
         dependencyTypes[2] = "USE";
+        dependencyTypes[3] = "INCLUDE";
+        dependencyTypes[4] = "EXTEND";
 
         JLabel createNewCardinalitiesLbl = new JLabel("Create a new Cardinality: ");
 
@@ -113,15 +114,11 @@ public class EditConnectionView extends JFrame {
         }
 
         JComboBox cardinalityBox = new JComboBox<>(cardinalityTypes);
-        JComboBox interclassesBox = new JComboBox<>(interclasses);
-        JComboBox attributesBox = new JComboBox<>(attributes2.toArray());
         JComboBox dependencyTypeBox = new JComboBox(dependencyTypes);
-        JComboBox listOfAttrributesAndMethodsBox = new JComboBox(toInterclassContentList.toArray());
 
 
         JLabel chooseCardinalityTypeLbl = new JLabel("Pick a cardinality type: ");
-        JLabel chooseAClassLbl = new JLabel("Class that instantiates: ");
-        JLabel chooseAttributeLbl = new JLabel("Attribute that gets instantiated from other Interclass: ");
+        JLabel classThatInstantiates = new JLabel("Class that instantiates: ");
         JLabel savedAttributeLbl = new JLabel("Attribute created: ");
         JLabel currentCardinalitiesLbl = new JLabel("Current cardinalities: ");
 
@@ -133,17 +130,19 @@ public class EditConnectionView extends JFrame {
 
         JLabel currentDependenciesLbl = new JLabel("Current dependencies: ");
         JLabel createDependenciesLbl = new JLabel("Create Dependency: ");
+        JLabel instanceClassLbl = new JLabel();
+        JLabel connectsLbl = new JLabel("Connects: " + element.getFromInterclass().getName() + " and " + element.getToInterclass());
 
         ArrayList<String> cardinalities = new ArrayList<>();
         ArrayList<String> dependenciesList  = new ArrayList<>();
 
         if (element instanceof Aggregation) {
-            for (Cardinalities cardinality: ((Aggregation) element).getCardinalitiesList()) {
+            for (Cardinality cardinality: ((Aggregation) element).getCardinalitiesList()) {
                 cardinalities.add(cardinality.toString());
             }
         }
         if (element instanceof Composition) {
-            for (Cardinalities cardinality: (( Composition) element).getCardinalitiesList()) {
+            for (Cardinality cardinality: (( Composition) element).getCardinalitiesList()) {
                 cardinalities.add(cardinality.toString());
             }
         }
@@ -156,20 +155,6 @@ public class EditConnectionView extends JFrame {
         currentDependencies.setModel(new DefaultComboBoxModel(dependenciesList.toArray()));
         currentCardinalities.setModel(new DefaultComboBoxModel(cardinalities.toArray()));
 
-        interclassesBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int selectedIndex =  interclassesBox.getSelectedIndex();
-                switch (selectedIndex) {
-                    case 0:
-                        attributesBox.setModel(new DefaultComboBoxModel(attributes2.toArray()));
-                        break;
-                    case 1:
-                        attributesBox.setModel(new DefaultComboBoxModel(attributes1.toArray()));
-                        break;
-                }
-            }
-        });
 
         changeNameButton.addActionListener(new ActionListener() {
             @Override
@@ -188,54 +173,40 @@ public class EditConnectionView extends JFrame {
                 else
                     visibility = Visibility.PRIVATE;
                 int kardinalnostIndex = cardinalityBox.getSelectedIndex();
-                Cardinality newCardinality = null;
+                CardinalityType newCardinalityType = null;
                 switch (kardinalnostIndex) {
                     case 0:
-                        newCardinality = Cardinality.ZERO_OR_ONE;
+                        newCardinalityType = CardinalityType.ZERO_OR_ONE;
                         break;
                     case 1:
-                        newCardinality = Cardinality.ONE_ONLY;
+                        newCardinalityType = CardinalityType.ONE_ONLY;
                         break;
                     case 2:
-                        newCardinality = Cardinality.ZERO_OR_MORE;
+                        newCardinalityType = CardinalityType.ZERO_OR_MORE;
                         break;
                     case 3:
-                        newCardinality = Cardinality.ONE_OR_MORE;
+                        newCardinalityType = CardinalityType.ONE_OR_MORE;
                         break;
                 }
-                Interclass interclassThatContains;
-                Interclass interclass2;
-                if (interclassesBox.getSelectedIndex()==0) {
-                    interclassThatContains = element.getFromInterclass();
-                    interclass2 = element.getToInterclass();
-                }
-                else {
-                    interclass2 = element.getFromInterclass();
-                    interclassThatContains = element.getToInterclass();
-                }
-                Attribute attributeUsed = new Attribute(null, null, null);
-                for (ClassContent content: interclass2.getContent()) {
-                    if (content instanceof Attribute) {
-                        if (((Attribute) content).getAttributeString().equals((String) attributesBox.getSelectedItem())) {
-                            attributeUsed = (Attribute) content;
-                        }
-                    }
-                }
-                Attribute newAttribute = new Attribute(nameTextField.getText(),attributeUsed.getType(),visibility);
-
+                Interclass objectInstantiated = element.getToInterclass();
+                String attributeType;
+                if (newCardinalityType.equals(CardinalityType.ONE_ONLY))
+                    attributeType = objectInstantiated.getName();
+                else
+                    attributeType = "List<" + objectInstantiated.getName() + ">";
+                Attribute newAttribute = new Attribute(newNameField.getText(), attributeType, visibility);
+                System.out.println(newAttribute.getAttributeString());
                 if (element instanceof Aggregation) {
-                    ((Aggregation) element).getCardinalitiesList().add(new Cardinalities(newCardinality, interclassThatContains, attributeUsed, newAttribute));
+                    Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
+                    ((Aggregation) element).getCardinalitiesList().add(cardinality);
 
-                    for (Cardinalities cardinality: ((Aggregation) element).getCardinalitiesList()) {
-                        cardinalities.add(cardinality.toString());
-                    }
+                    cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);
                 }
                 if (element instanceof Composition) {
-                    ((Composition) element).getCardinalitiesList().add(new Cardinalities(newCardinality, interclassThatContains, attributeUsed, newAttribute));
-                    for (Cardinalities cardinality: ((Composition) element).getCardinalitiesList()) {
-                        cardinalities.add(cardinality.toString());
-                    }
+                    Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
+                    ((Composition) element).getCardinalitiesList().add(cardinality);
+                    cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);
                 }
 
@@ -248,7 +219,6 @@ public class EditConnectionView extends JFrame {
         addDependencyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int indexSelectedContent = listOfAttrributesAndMethodsBox.getSelectedIndex();
                 DependencyType dependencyType = null;
                 int indexSelectedDependencyType = dependencyTypeBox.getSelectedIndex();
                 switch (indexSelectedDependencyType) {
@@ -261,32 +231,32 @@ public class EditConnectionView extends JFrame {
                     case 2:
                         dependencyType = DependencyType.USE;
                         break;
+                    case 3:
+                        dependencyType = DependencyType.INCLUDE;
+                        break;
+                    case 4:
+                        dependencyType = DependencyType.EXTEND;
+                        break;
                 }
-                if (element.getToInterclass().getContent().get(indexSelectedContent) instanceof Method) {
-                    Dependencies dependency = new Dependencies(element.getFromInterclass(),
-                            (Method) element.getToInterclass().getContent().get(indexSelectedContent),
-                            dependencyType);
-                    ((Dependency) element).getDependencies().add(dependency);
-                            dependenciesList.add(dependency.toString());
-                } else if (element.getToInterclass().getContent().get(indexSelectedContent) instanceof Attribute) {
-                    Dependencies dependency = new Dependencies(element.getFromInterclass(),
-                            (Attribute) element.getToInterclass().getContent().get(indexSelectedContent),
-                            dependencyType);
-                    ((Dependency) element).getDependencies().add(dependency);
-                            dependenciesList.add(dependency.toString());
-                }
+                Dependencies dependencyToAdd = new Dependencies(element.getFromInterclass(), element.getToInterclass(), dependencyType);
+                ((Dependency) element).getDependencies().add(dependencyToAdd);
+                dependenciesList.add(dependencyToAdd.toString());
                 refreshCurrentDependencies(dependenciesList);
             }
         });
 
         nameTextField.setPreferredSize(new Dimension(200,20));
-        ///JComboBox currentCardinalities = new JComboBox<>();
+        instanceClassLbl.setText(element.getFromInterclass().getName());
+        JLabel addDependencyLbl1 = new JLabel("Interclass " + element.getFromInterclass().getName() + " is dependant on " + element.getToInterclass().getName() + " via: ");
+        JLabel generalizationLbl = new JLabel(element.getToInterclass().getName() + " is Parent, and " + element.getFromInterclass().getName() + " is it's Child. " + element.getFromInterclass().getName() +" inherits all of " + element.getToInterclass().getName() + "'s methods.");
 
         add(changeName);
         add(empty_line1);
         add(nameTextField);
         add(changeNameButton);
         add(empty_line2);
+        add(connectsLbl);
+        add(empty_line5);
         if (element instanceof Composition || element instanceof Aggregation) {
             add(currentCardinalitiesLbl);
             add(currentCardinalities);
@@ -296,11 +266,8 @@ public class EditConnectionView extends JFrame {
             add(chooseCardinalityTypeLbl);
             add(cardinalityBox);
             add(empty_line4);
-            add(chooseAClassLbl);
-            add(interclassesBox);
-            add(empty_line5);
-            add(chooseAttributeLbl);
-            add(attributesBox);
+            add(classThatInstantiates);
+            add(instanceClassLbl);
             add(empty_line6);
             add(savedAttributeLbl);
             add(newNameField);
@@ -312,10 +279,11 @@ public class EditConnectionView extends JFrame {
             add(empty_line7);
             add(createDependenciesLbl);
             add(empty_line3);
+            add(addDependencyLbl1);
             add(dependencyTypeBox);
-            add(listOfAttrributesAndMethodsBox);
             add(addDependencyButton);
-        }
+        } else
+            add(generalizationLbl);
 
     }
 

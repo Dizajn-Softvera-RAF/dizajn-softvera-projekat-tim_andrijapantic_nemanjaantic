@@ -6,19 +6,12 @@ import app.model.diagcomposite.Interclass;
 
 public class Dependencies {
     private Interclass thatUses;
-    private Method methodUsed = null;
-    private Attribute attributeUsed = null;
+    private Interclass  interclassDependedUpon;
     private DependencyType dependencyType;
 
-    public Dependencies(Interclass thatUses, Method methodUsed, DependencyType dependencyType) {
+    public Dependencies(Interclass thatUses, Interclass interclassDependedUpon, DependencyType dependencyType) {
         this.thatUses = thatUses;
-        this.methodUsed = methodUsed;
-        this.dependencyType = dependencyType;
-    }
-
-    public Dependencies(Interclass thatUses, Attribute attributeUsed, DependencyType dependencyType) {
-        this.thatUses = thatUses;
-        this.attributeUsed = attributeUsed;
+        this.interclassDependedUpon = interclassDependedUpon;
         this.dependencyType = dependencyType;
     }
 
@@ -28,22 +21,6 @@ public class Dependencies {
 
     public void setThatUses(Interclass thatUses) {
         this.thatUses = thatUses;
-    }
-
-    public Method getMethodUsed() {
-        return methodUsed;
-    }
-
-    public void setMethodUsed(Method methodUsed) {
-        this.methodUsed = methodUsed;
-    }
-
-    public Attribute getAttributeUsed() {
-        return attributeUsed;
-    }
-
-    public void setAttributeUsed(Attribute attributeUsed) {
-        this.attributeUsed = attributeUsed;
     }
 
     public DependencyType getDependencyType() {
@@ -56,9 +33,6 @@ public class Dependencies {
 
     @Override
     public String toString() {
-        if  (methodUsed != null)
-            return "Interclass: " + thatUses.getName() + " " + dependencyType.toString() + "S " + methodUsed.getMethodString();
-        else
-            return "Interclass: " + thatUses.getName() + " " + dependencyType.toString() + "S " + attributeUsed.getAttributeString();
+        return "Interclass " + thatUses.getName() + " " + dependencyType.toString() + "S " + interclassDependedUpon.getName();
     }
 }

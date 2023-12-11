@@ -3,27 +3,27 @@ package app.model.diagimplementation.connection;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.Connection;
-import app.model.diagimplementation.connection.editcomponents.Cardinalities;
+import app.model.diagimplementation.connection.editcomponents.Cardinality;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Aggregation extends Connection {
 
-    ArrayList<Cardinalities> cardinalitiesList;
+    ArrayList<Cardinality> cardinalityList;
 
     public Aggregation() {
-        cardinalitiesList = new ArrayList<>();
+        cardinalityList = new ArrayList<>();
     }
 
     public Aggregation(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
         super(name, parent, color, lineWidth);
-        cardinalitiesList = new ArrayList<>();
+        cardinalityList = new ArrayList<>();
     }
 
     public Aggregation(String name, ClassyNodeComposite parent) {
         super(name,parent);
-        cardinalitiesList = new ArrayList<>();
+        cardinalityList = new ArrayList<>();
     }
 
     @Override
@@ -36,11 +36,11 @@ public class Aggregation extends Connection {
 
     }
 
-    public ArrayList<Cardinalities> getCardinalitiesList() {
-        return cardinalitiesList;
+    public ArrayList<Cardinality> getCardinalitiesList() {
+        return cardinalityList;
     }
 
-    public void setCardinalitiesList(ArrayList<Cardinalities> cardinalitiesList) {
-        this.cardinalitiesList = cardinalitiesList;
+    public void setCardinalitiesList(ArrayList<Cardinality> cardinalityList) {
+        this.cardinalityList = cardinalityList;
     }
 }

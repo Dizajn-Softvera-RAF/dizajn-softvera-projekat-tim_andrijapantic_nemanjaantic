@@ -27,9 +27,9 @@ public class ZoomToFitState implements State {
         double width = donjeX - gornjeX;
         double height = donjeY - gornjeY;
 
-        double noviScale = Math.min((diagramView.getWidth()/1.15)/width, (diagramView.getHeight()/1.15)/height);
-        int deltaX = (int) (diagramView.getWidth() - noviScale * width/2) / 4;
-        int deltaY = (int) (diagramView.getHeight() - noviScale * height/2) / 4;
+        double noviScale = Math.min((diagramView.getWidth()/1.2)/width, (diagramView.getHeight()/1.2)/height);
+        int deltaX = (int) (diagramView.getWidth() - noviScale * width) / 10;
+        int deltaY = (int) (diagramView.getHeight() - noviScale * height) / 10;
 
         diagramView.setScale(noviScale);
         diagramView.setDeltaX(deltaX);

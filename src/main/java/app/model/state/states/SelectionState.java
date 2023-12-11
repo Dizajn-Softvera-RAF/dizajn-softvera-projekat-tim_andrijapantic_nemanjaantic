@@ -1,5 +1,6 @@
 package app.model.state.states;
 
+import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.Interclass;
 import app.model.state.State;
 import app.view.mainframe.DiagramView;
@@ -27,7 +28,7 @@ public class SelectionState implements State {
         }
         //System.out.println("Trenutno si u SelectState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
         for (ElementPainter elementPainter: diagramView.getElementPainters()) {
-            if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
+            if ((!(elementPainter instanceof SelectionPainter)) && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                 System.out.println("Element na ovoj tacki je: " + elementPainter.getElement().getName());
             }
         }
@@ -38,13 +39,31 @@ public class SelectionState implements State {
 
         Point e = diagramView.getAbsolutePoint(x, y);
 
-
+        boolean anySelected = false;
         if (lasso != null) {
             endPoint = e;
             lasso.setEndPoint((int)e.getX(), (int)e.getY());
-            diagramView.repaint();
+
+            if (lasso.getToPaint()!=null) {
+                for (ElementPainter elementPainter : diagramView.getElementPainters()) {
+                    if (!(elementPainter instanceof SelectionPainter)) {
+                        if(!lasso.getToPaint().intersects(elementPainter.getShape().getBounds()) && elementPainter.getElement().isSelected()){
+                            elementPainter.getElement().setSelected(false);
+                        }
+                        if (lasso.getToPaint().intersects(elementPainter.getShape().getBounds())) {
+                            elementPainter.getElement().setSelected(true);
+                            anySelected = true;
+
+                        }
+
+                    }
+
+                }
+            }
+
         }
-        //System.out.println("Trenutno si u SelectState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+        if (!anySelected)
+         diagramView.repaint();
     }
 
     @Override
@@ -57,12 +76,11 @@ public class SelectionState implements State {
                 diagramView.getElementPainters().remove(lasso);
                 lasso = null;
                 for(ElementPainter elementPainter: diagramView.getElementPainters()){
-                    if(elementPainter.getElement() instanceof Interclass && !(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
+                    if((!(elementPainter instanceof SelectionPainter)) && !(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
                             elementPainter.getElement().isSelected())){
                         elementPainter.getElement().setSelected(false);
                     }
-                    if(elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
-                        System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());
+                    if((!(elementPainter instanceof SelectionPainter)) && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
                         if (!elementPainter.getElement().isSelected())
                             elementPainter.getElement().setSelected(true);
                         else
@@ -75,16 +93,15 @@ public class SelectionState implements State {
 
             } else {
                 lasso.setEndPoint((int) e.getX(), (int) e.getY());
-
+                boolean anySelected = false;
                 for (ElementPainter elementPainter : diagramView.getElementPainters()) {
-                    if (elementPainter.getElement() instanceof Interclass) {
-                        if(!(lasso.getToPaint().intersects((Rectangle2D) elementPainter.getShape()) &&
-                                elementPainter.getElement().isSelected())){
+                    if (!(elementPainter instanceof SelectionPainter)) {
+                        if(!lasso.getToPaint().intersects(elementPainter.getShape().getBounds()) && elementPainter.getElement().isSelected()){
                             elementPainter.getElement().setSelected(false);
                         }
-                        if (lasso.getToPaint().intersects((Rectangle2D) elementPainter.getShape())) {
-                            System.out.println("Element u lasso-u:" + elementPainter.getElement().getName());
+                        if (lasso.getToPaint().intersects(elementPainter.getShape().getBounds())) {
                             elementPainter.getElement().setSelected(true);
+                            anySelected = true;
 
                         }
 
@@ -94,6 +111,8 @@ public class SelectionState implements State {
 
                 diagramView.getElementPainters().remove(lasso);
                 lasso = null;
+                if (!anySelected)
+                    diagramView.repaint();
             }
         }
         System.out.println("Trenutno si u SelectState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());

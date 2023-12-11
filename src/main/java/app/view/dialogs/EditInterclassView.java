@@ -25,10 +25,8 @@ public class EditInterclassView extends JFrame {
     private JTextField nameTextField;
     private JComboBox contentListBox1;
     private JComboBox contentListBox2;
-    private DiagramView diagramView;
 
-    public EditInterclassView(Interclass element, DiagramView diagramView) {
-        this.diagramView = diagramView;
+    public EditInterclassView(Interclass element) {
         setTitle("Edit Content");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -36,6 +34,7 @@ public class EditInterclassView extends JFrame {
         setSize(600, 300);
         setVisible(true);
         setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/images/settings-icon2.png")).getImage());
     }
 
     private void init(Interclass element) {
@@ -88,7 +87,7 @@ public class EditInterclassView extends JFrame {
             contentType[0] = "Method";
         } else {
             contentType = new String[1];
-            contentType[0] = "Enumerable";
+            contentType[0] = "EnumType";
         }
 
         String contentList1[] = new String[element.getContent().size()];
@@ -145,9 +144,9 @@ public class EditInterclassView extends JFrame {
                        System.out.println("Napravio se atribut: "  + attribute.getAttributeString());
                        element.addNewContent(attribute);
                        addToBoxes(attribute.getAttributeString());
-                   } else if (t.equals("Enumerable")) {
+                   } else if (t.equals("EnumType")) {
                        EnumType enumerable = new EnumType(newNameField.getText());
-                       System.out.println("Napravio se enumerable: "  + enumerable.getEnumerableString());
+                       System.out.println("Napravio se enumType: "  + enumerable.getEnumerableString());
                        element.addNewContent(enumerable);
                        addToBoxes(enumerable.getEnumerableString());
                    }

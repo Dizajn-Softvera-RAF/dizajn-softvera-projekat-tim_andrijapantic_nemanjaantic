@@ -83,9 +83,10 @@ public class DeleteState implements State {
                     toDelete.add(diagramView.getElementPainters().get(indexZaBrisanje));
                     toDeleteChild.add(diagramView.getElementPainters().get(indexZaBrisanje).getElement());
                     for (ElementPainter elementPainter: toDelete) {
-                        DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
-                        System.out.println("Za element " + elementPainter.getElement().getName() + " parent je: " + elementPainter.getElement().getMyNodeMutable().getParent());
-                        model.removeNodeFromParent(elementPainter.getElement().getMyNodeMutable());
+                        MainFrame.getInstance().getClassyTree().deleteChildFromTree(elementPainter.getElement().getMyNodeMutable());
+                        //DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
+                      //  System.out.println("Za element " + elementPainter.getElement().getName() + " parent je: " + elementPainter.getElement().getMyNodeMutable().getParent());
+                       // model.removeNodeFromParent(elementPainter.getElement().getMyNodeMutable());
                     }
 
                     diagramView.getElementPainters().removeAll(toDelete);
@@ -126,18 +127,16 @@ public class DeleteState implements State {
                 toDeleteChild.add(diagramView.getElementPainters().get(indexZaBrisanje).getElement());
             }
             for (ElementPainter elementPainter: toDelete) {
-                DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
-                System.out.println("Za element " + elementPainter.getElement().getName() + " parent je: " + elementPainter.getElement().getMyNodeMutable().getParent());
-                model.removeNodeFromParent(elementPainter.getElement().getMyNodeMutable());
+                MainFrame.getInstance().getClassyTree().deleteChildFromTree(elementPainter.getElement().getMyNodeMutable());
             }
             diagramView.getElementPainters().removeAll(toDelete);
             diagramView.getDiagramNode().removeChildren(toDeleteChild);
         } else if (isConnection) {
             System.out.println("Ulazim u else za brisanje veze");
             diagramView.getDiagramNode().removeChild(diagramView.getElementPainters().get(indexLinka).getElement());
-            DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
-            //System.out.println("Za element " + diagramView.getElementPainters().get(indexZaBrisanje) + " parent je: " + elementPainter.getElement().getMyNodeMutable().getParent());
-            model.removeNodeFromParent(diagramView.getElementPainters().get(indexLinka).getElement().getMyNodeMutable());
+           //DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
+           // model.removeNodeFromParent(diagramView.getElementPainters().get(indexLinka).getElement().getMyNodeMutable());
+            MainFrame.getInstance().getClassyTree().deleteChildFromTree(diagramView.getElementPainters().get(indexLinka).getElement().getMyNodeMutable());
             diagramView.getElementPainters().remove(diagramView.getElementPainters().get(indexLinka));
 
 

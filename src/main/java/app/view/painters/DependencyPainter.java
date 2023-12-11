@@ -29,7 +29,7 @@ public class DependencyPainter extends ElementPainter{
         float[] dashPattern = {5.0f, 5.0f};
         BasicStroke dashedStroke = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dashPattern, 0.0f);
         g2.setStroke(dashedStroke);
-        g2.setColor(Color.BLACK);
+        g2.setColor(element.getCurrentColor());
         Line2D line = new Line2D.Double(startX, startY, endX, endY);
         g2.draw(line);
 
@@ -66,7 +66,7 @@ public class DependencyPainter extends ElementPainter{
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
         g2.fill(transformedShape2);
-        g2.setColor(Color.BLACK);
+        g2.setColor(element.getCurrentColor());
         g2.draw(transformedShape);
 
     }

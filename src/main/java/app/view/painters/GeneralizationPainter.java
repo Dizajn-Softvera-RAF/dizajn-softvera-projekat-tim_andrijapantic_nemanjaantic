@@ -24,14 +24,14 @@ public class GeneralizationPainter extends ElementPainter{
         int endX = (int)((Generalization)getElement()).getEndPoint().getX();
         int endY = (int)((Generalization)getElement()).getEndPoint().getY();
 
-        g2.setColor(Color.BLACK);
+        g2.setColor(element.getCurrentColor());
         Line2D line = new Line2D.Double(startX, startY, endX, endY);
         g2.draw(line);
 
         double angle = Math.atan2(endY - startY, endX - startX);
 
-        int triangleX = endX - (int) (40 * Math.cos(angle));
-        int triangleY = endY - (int) (40 * Math.sin(angle)) ;
+        int triangleX = endX - (int) (30 * Math.cos(angle));
+        int triangleY = endY - (int) (30 * Math.sin(angle)) ;
 
         Path2D path = new Path2D.Double();
         path.moveTo(0, -20);
@@ -54,13 +54,14 @@ public class GeneralizationPainter extends ElementPainter{
         path2.lineTo(-triangleX, 10);
         path2.closePath();
 
+
         g2.setColor(Color.WHITE);
         g2.fill(getShape());
         g2.setColor(new Color(0,0,0,0));
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
         g2.fill(transformedShape2);
-        g2.setColor(Color.BLACK);
+        g2.setColor(element.getCurrentColor());
         g2.draw(transformedShape);
 
     }

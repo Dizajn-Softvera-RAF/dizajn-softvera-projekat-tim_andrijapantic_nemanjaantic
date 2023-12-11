@@ -16,10 +16,10 @@ public class EditState implements State {
             if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y)) &&
                     elementPainter.getElement() instanceof Connection) {
                 System.out.println("Linija ovde je: " + elementPainter.getElement().getName());
-                new EditConnectionView((Connection) elementPainter.getElement(), diagramView);
+                new EditConnectionView((Connection) elementPainter.getElement());
             }
             if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x,y))) {
-                new EditInterclassView((Interclass) elementPainter.getElement(), diagramView);
+                new EditInterclassView((Interclass) elementPainter.getElement());
                 System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
                 break;
             }

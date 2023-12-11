@@ -54,6 +54,12 @@ public class ClassyTreeImplementation implements ClassyTree {
             return toReturn;
     }
 
+    public void deleteChildFromTree(MyNodeMutable node) {
+
+        DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
+        model.removeNodeFromParent(node);
+    }
+
     private ClassyNodeComposite createChild(ClassyNodeComposite parent) {
 
         if (parent instanceof ProjectExplorer) {

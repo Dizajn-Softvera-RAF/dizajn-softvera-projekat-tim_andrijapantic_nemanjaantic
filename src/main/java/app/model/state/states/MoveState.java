@@ -45,7 +45,6 @@ public class MoveState implements State {
             for (ElementPainter elementPainter: diagramView.getElementPainters()) {
                 if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                     System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
-                    //movingElements = true;
                     selectedElementIndex = diagramView.getElementPainters().indexOf(elementPainter);
                     System.out.println("Pomeram element: " + elementPainter.getElement().getName());
                 }
@@ -64,14 +63,15 @@ public class MoveState implements State {
         } else if (movingElements) {
             int deltaX = (int) (diagramView.getAbsolutePoint(x, y).getX() - lastPointX);
             int deltaY = (int) (diagramView.getAbsolutePoint(x, y).getY() - lastPointY);
+            System.out.println(deltaX + ", " + deltaY);
 
             for (ElementPainter elementPainter: diagramView.getElementPainters()) {
                 if (elementPainter.getElement() instanceof Interclass) {
                     if (elementPainter.getElement().isSelected()) {
 
-                        int newX = (int) (((Interclass) elementPainter.getElement()).getPosition().getX() + deltaX);
-                        int newY = (int) (((Interclass) elementPainter.getElement()).getPosition().getY() + deltaY);
-                        ((Interclass) elementPainter.getElement()).setPosition(diagramView.getAbsolutePoint(newX, newY));
+                        int newX = (int) (((Interclass) elementPainter.getElement()).getPosition().getX()+ deltaX / diagramView.getScale());
+                        int newY = (int) (((Interclass) elementPainter.getElement()).getPosition().getY()+ deltaY / diagramView.getScale());
+                        ((Interclass) elementPainter.getElement()).setPosition(new Point(newX,newY));
                     }
                 }
             }
@@ -97,27 +97,24 @@ public class MoveState implements State {
         @Override
         public void misOtpusten(int x, int y, DiagramView diagramView) {
             System.out.println("Trenutno si u MoveState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
-            boolean vracaj = false;
             if (movingOneElement) {
-
-                ((Interclass)diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(diagramView.getAbsolutePoint(x, y));
+                boolean validan = true;
                 for (ElementPainter elementPainter: diagramView.getElementPainters()) {
                     if (!diagramView.getElementPainters().get(selectedElementIndex).getElement().equals(elementPainter.getElement())) {
                         if (elementPainter.getElement() instanceof Interclass && elementPainter.getShape().intersects((Rectangle2D) diagramView.getElementPainters().get(selectedElementIndex).getShape())) {
-                            //((Interclass)diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(startPoint);
-                            vracaj = true;
-                           // break;
+                            validan = false;
                         }
                     }
                 }
-            }
-            if (vracaj) {
-                for (ElementPainter e: diagramView.getElementPainters()) {
-                    if (e.getElement() instanceof Connection && ((((Connection) e.getElement()).getFromInterclass()).equals(diagramView.getElementPainters().get(selectedElementIndex)))) {
-                        ((Connection) e.getElement()).setStartPoint(startPoint);
-                    }
+                if (!validan) {
+                    System.out.println("Nije validan");
+                    ((Interclass)diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(startPoint);
                 }
-                ((Interclass) diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(startPoint);
+
+                else {
+                    System.out.println("Validan");
+                    ((Interclass)diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(diagramView.getAbsolutePoint(x, y));
+                }
 
             }
             selectedElementIndex = -1;
