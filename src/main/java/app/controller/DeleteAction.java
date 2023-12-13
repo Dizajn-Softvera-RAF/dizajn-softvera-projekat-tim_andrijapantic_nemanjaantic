@@ -28,16 +28,12 @@ public class DeleteAction extends AbstractClassyAction{
             }
             else {
                 DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
-                System.out.println("Uzeo sam model");
                 nodeToDelete.getClassyNode().removeChildren();
-                System.out.println("Zavrsio sam removeChildren");
                 try {
                     model.removeNodeFromParent(nodeToDelete);
                 } catch (NullPointerException e1) {
 
                 }
-
-                System.out.println("Izbrisao sam node iz parenta");
 
             }
 

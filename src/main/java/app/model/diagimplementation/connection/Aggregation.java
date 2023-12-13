@@ -12,15 +12,6 @@ public class Aggregation extends Connection {
 
     ArrayList<Cardinality> cardinalityList;
 
-    public Aggregation() {
-        cardinalityList = new ArrayList<>();
-    }
-
-    public Aggregation(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
-        super(name, parent, color, lineWidth);
-        cardinalityList = new ArrayList<>();
-    }
-
     public Aggregation(String name, ClassyNodeComposite parent) {
         super(name,parent);
         cardinalityList = new ArrayList<>();

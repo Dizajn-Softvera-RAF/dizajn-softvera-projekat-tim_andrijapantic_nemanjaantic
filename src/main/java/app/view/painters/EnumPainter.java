@@ -1,12 +1,9 @@
 package app.view.painters;
 
-import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
 import app.model.classcontent.EnumType;
-import app.model.classcontent.Method;
 import app.model.diagcomposite.DiagramElement;
 import app.model.diagimplementation.interclass.EnumComp;
-import app.model.diagimplementation.interclass.Interface;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

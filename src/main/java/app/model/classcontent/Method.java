@@ -14,8 +14,10 @@ public class Method extends ClassContent{
         String visibility;
         if (getVisibility().equals(Visibility.PUBLIC))
             visibility = "+";
-        else
+        else if (getVisibility().equals(Visibility.PRIVATE))
             visibility = "-";
+        else
+            visibility = "#";
         return visibility + " " + getName() + "() : " + getType();
     }
 }

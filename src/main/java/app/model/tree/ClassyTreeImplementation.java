@@ -54,7 +54,7 @@ public class ClassyTreeImplementation implements ClassyTree {
             return toReturn;
     }
 
-    public void deleteChildFromTree(MyNodeMutable node) {
+    public void deleteChildFromTree(MyNodeMutable node) throws NullPointerException{
 
         DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
         model.removeNodeFromParent(node);

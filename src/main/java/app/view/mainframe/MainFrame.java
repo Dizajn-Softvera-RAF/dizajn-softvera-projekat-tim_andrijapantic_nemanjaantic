@@ -8,7 +8,7 @@ import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.tree.ClassyTreeImplementation;
 import app.model.tree.MyNodeMutable;
-import app.view.dialogs.MessagePane;
+import app.view.popups.MessagePane;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

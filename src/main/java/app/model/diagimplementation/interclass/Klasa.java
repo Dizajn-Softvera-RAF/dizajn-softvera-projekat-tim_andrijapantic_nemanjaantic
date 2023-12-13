@@ -9,7 +9,6 @@ import java.awt.*;
 
 public class Klasa extends Interclass {
 
-
     private Dimension size;
     int stroke;
 

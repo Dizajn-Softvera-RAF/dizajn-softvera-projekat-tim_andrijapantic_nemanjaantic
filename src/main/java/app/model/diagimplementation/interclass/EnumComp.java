@@ -7,8 +7,6 @@ import java.awt.*;
 import java.util.List;
 
 public class EnumComp extends Interclass {
-
-    private List<String> children;
     private Dimension size;
     int stroke;
     public EnumComp(String name, AbstractClassyNode parent) {
@@ -20,12 +18,6 @@ public class EnumComp extends Interclass {
     public EnumComp(Point position, AbstractClassyNode parent, String name, int stroke) {
         super(name, parent, position);
         this.stroke = stroke;
-    }
-
-    public EnumComp(int stroke, Point position, Paint paint, Dimension size) {
-        super(paint, position);
-        this.stroke = stroke;
-        this.size = size;
     }
 
     @Override

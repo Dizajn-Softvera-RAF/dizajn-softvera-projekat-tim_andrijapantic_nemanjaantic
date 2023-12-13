@@ -83,19 +83,8 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
 
     }
 
-    public static void prodjiKrozDecu(MyNodeMutable node) {
-        int brojDece = node.getChildCount();
-        for (int i = 0; i < brojDece; i++) {
-            MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
-            //MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
-            //prodjiKrozDecu(childNode);
-        }
-    }
-
     @Override
     public void removeChildren() {
-     //   prodjiKrozDecu(MainFrame.getInstance().getSelectedNode());
-
         this.getChildren().clear();
         MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, this.getId()));
     }

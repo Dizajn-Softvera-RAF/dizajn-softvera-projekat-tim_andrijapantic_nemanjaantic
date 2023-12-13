@@ -1,13 +1,12 @@
 package app.controller;
 
-import app.controller.stateActions.*;
+import app.controller.state.stateActions.*;
 
 public class ActionManager {
 
     private ExitAction exitAction;
     private NewTreeChildAction newTreeChildAction;
     private NewPackageAction newPackageAction;
-    private NewComponentAction newComponentAction;
     private InfoAction infoAction;
     private DeleteAction deleteAction;
     private NewDiagramAction newDiagramAction;
@@ -32,7 +31,6 @@ public class ActionManager {
         exitAction = new ExitAction();
         newTreeChildAction = new NewTreeChildAction();
         newPackageAction = new NewPackageAction();
-        newComponentAction = new NewComponentAction();
         infoAction = new InfoAction();
         deleteAction = new DeleteAction();
         newDiagramAction = new NewDiagramAction();
@@ -73,15 +71,6 @@ public class ActionManager {
     public void setNewPackageAction(NewPackageAction newPackageAction) {
         this.newPackageAction = newPackageAction;
     }
-
-    public NewComponentAction getNewComponentAction() {
-        return newComponentAction;
-    }
-
-    public void setNewComponentAction(NewComponentAction newComponentAction) {
-        this.newComponentAction = newComponentAction;
-    }
-
     public InfoAction getInfoAction() {
         return infoAction;
     }

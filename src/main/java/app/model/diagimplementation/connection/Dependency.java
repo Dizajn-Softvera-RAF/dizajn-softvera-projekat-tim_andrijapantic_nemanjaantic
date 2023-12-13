@@ -12,11 +12,6 @@ public class Dependency extends Connection {
 
     ArrayList<Dependencies> dependencies;
 
-    public Dependency(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
-        super(name, parent, color, lineWidth);
-        dependencies = new ArrayList<>();
-    }
-
     public Dependency(String name, ClassyNodeComposite parent) {
         super(name,parent);
         dependencies = new ArrayList<>();

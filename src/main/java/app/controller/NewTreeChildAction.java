@@ -4,7 +4,7 @@ import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
 import app.model.tree.MyNodeMutable;
-import app.view.dialogs.AddToPackageView;
+import app.view.popups.AddToPackageView;
 import app.view.mainframe.MainFrame;
 import app.model.implementation.PackageNode;
 

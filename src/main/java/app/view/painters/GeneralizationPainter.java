@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 
 public class GeneralizationPainter extends ElementPainter{
     public GeneralizationPainter(Generalization element ) {
@@ -30,8 +31,8 @@ public class GeneralizationPainter extends ElementPainter{
 
         double angle = Math.atan2(endY - startY, endX - startX);
 
-        int triangleX = endX - (int) (30 * Math.cos(angle));
-        int triangleY = endY - (int) (30 * Math.sin(angle)) ;
+        int triangleX = endX - (int) (25 * Math.cos(angle));
+        int triangleY = endY - (int) (25 * Math.sin(angle));
 
         Path2D path = new Path2D.Double();
         path.moveTo(0, -20);
@@ -39,11 +40,14 @@ public class GeneralizationPainter extends ElementPainter{
         path.lineTo(-20, 20);
         path.closePath();
 
+        Rectangle2D whiteRect = new Rectangle2D.Double(-10, -5, 60, 10);
 
         AffineTransform transform = AffineTransform.getTranslateInstance(triangleX, triangleY);
         transform.rotate(angle);
         Shape transformedShape = transform.createTransformedShape(path);
         setShape(transformedShape);
+
+        Shape transformedRect = transform.createTransformedShape(whiteRect);
 
         transform.translate(0, 0);
 
@@ -54,8 +58,8 @@ public class GeneralizationPainter extends ElementPainter{
         path2.lineTo(-triangleX, 10);
         path2.closePath();
 
-
         g2.setColor(Color.WHITE);
+        g2.fill(transformedRect);
         g2.fill(getShape());
         g2.setColor(new Color(0,0,0,0));
         Shape transformedShape2 = transform.createTransformedShape(path2);

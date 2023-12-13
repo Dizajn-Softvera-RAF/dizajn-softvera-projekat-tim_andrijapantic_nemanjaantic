@@ -105,8 +105,6 @@ public class DiagramView extends JPanel implements ISubscriber {
                     ((Connection) e.getElement()).setStartPoint(points[0]);
                     ((Connection) e.getElement()).setEndPoint(points[1]);
                 }
-
-
             }
         }
         repaint();
@@ -187,6 +185,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setDeltaX(int deltaX) {
         this.deltaX = deltaX;
+        repaint();
     }
 
     public int getDeltaY() {
@@ -195,6 +194,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public void setDeltaY(int deltaY) {
         this.deltaY = deltaY;
+        repaint();
     }
 
     public double getScale() {

@@ -7,9 +7,6 @@ import app.model.diagcomposite.Connection;
 import java.awt.*;
 
 public class Generalization extends Connection {
-    public Generalization(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
-        super(name, parent, color, lineWidth);
-    }
 
     public Generalization(String name, ClassyNodeComposite parent) {
         super(name,parent);

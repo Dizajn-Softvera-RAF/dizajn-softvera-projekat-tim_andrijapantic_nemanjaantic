@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.view.dialogs.InfoDialog;
+import app.view.popups.InfoDialog;
 
 import java.awt.event.ActionEvent;
 

@@ -43,7 +43,6 @@ public class DependencyPainter extends ElementPainter{
         path.moveTo(0, -15);
         path.lineTo(15, 15);
         path.lineTo(-15, 15);
-        //path.closePath();
 
 
         AffineTransform transform = new AffineTransform();

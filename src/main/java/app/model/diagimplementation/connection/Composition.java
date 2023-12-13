@@ -11,10 +11,6 @@ import java.util.ArrayList;
 public class Composition extends Connection {
 
     ArrayList<Cardinality> cardinalityList;
-    public Composition(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
-        super(name, parent, color, lineWidth);
-        cardinalityList = new ArrayList<>();
-    }
 
     public Composition(String name, ClassyNodeComposite parent) {
         super(name,parent);

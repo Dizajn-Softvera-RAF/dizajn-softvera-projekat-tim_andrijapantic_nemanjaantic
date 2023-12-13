@@ -31,7 +31,6 @@ public class AggregationPainter extends ElementPainter{
         Line2D line = new Line2D.Double(startX, startY, endX, endY);
         g2.draw(line);
 
-
         double angle = Math.atan2(endY - startY, endX - startX);
 
         int rhombusX = startX + (int) (20 * Math.cos(angle));
@@ -40,7 +39,6 @@ public class AggregationPainter extends ElementPainter{
         AffineTransform transform = new AffineTransform();
         transform.translate(rhombusX, rhombusY);
         transform.rotate(angle);
-
 
         Path2D path = new Path2D.Double();
         path.moveTo(0, -20);
