@@ -62,7 +62,7 @@ public class MainFrame extends JFrame implements ISubscriber {
         actionManager = new ActionManager();
         classyTree = new ClassyTreeImplementation();
         JTree projectExplorer = classyTree.generateTree(AppCore.getInstance().getClassyRepository().getProjectExplorer());
-
+        projectExplorer.setToggleClickCount(0);
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screensize = kit.getScreenSize();
