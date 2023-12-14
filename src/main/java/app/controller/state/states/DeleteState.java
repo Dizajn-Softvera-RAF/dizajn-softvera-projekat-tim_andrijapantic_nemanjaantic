@@ -44,12 +44,7 @@ public class DeleteState implements State {
         if (deletingOneElement) {
             int indexZaBrisanje = -1;
             for (ElementPainter elementPainter : diagramView.getElementPainters()) {
-                if (elementPainter.getElement() instanceof Connection && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
-                    indexZaBrisanje = diagramView.getElementPainters().indexOf(elementPainter);
-                    break;
-                }
-                if (elementPainter.getElement() instanceof Interclass && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
-                    System.out.println("Element na toj poziciji je: " + elementPainter.getElement().getName());
+                if (elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                     indexZaBrisanje = diagramView.getElementPainters().indexOf(elementPainter);
                     break;
                 }
@@ -62,10 +57,7 @@ public class DeleteState implements State {
 
                     for (ElementPainter elementPainter : diagramView.getElementPainters()) {
                         if (elementPainter.getElement() instanceof Connection) {
-                            ElementPainter link = null;
-                            if (elementPainter.getElement() instanceof Connection) {
-                                link = elementPainter;
-                            }
+                            ElementPainter link = elementPainter;
 
                             if (((Connection) link.getElement()).getFromInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())
                                     || ((Connection) link.getElement()).getToInterclass().getName().equals(diagramView.getElementPainters().get(indexZaBrisanje).getElement().getName())) {

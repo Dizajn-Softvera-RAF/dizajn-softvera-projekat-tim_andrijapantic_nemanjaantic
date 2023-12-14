@@ -15,8 +15,6 @@ import java.util.List;
 
 public abstract class Interclass extends DiagramElement {
 
-    private Visibility visibility;
-
     protected Paint paint;
 
     protected String description;
@@ -51,15 +49,6 @@ public abstract class Interclass extends DiagramElement {
         this.position = position;
         this.content = new ArrayList<>();
         connectionsDots = new ArrayList<>();
-    }
-
-
-    public Visibility getVisibility() {
-        return visibility;
-    }
-
-    public void setVisibility(Visibility visibility) {
-        this.visibility = visibility;
     }
 
     public Paint getPaint() {
