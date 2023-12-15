@@ -83,11 +83,11 @@ public class MoveState implements State {
             lastPointY = (int) diagramView.getAbsolutePoint(x, y).getY();
         } else {
             Point endPoint = diagramView.getAbsolutePoint(x, y);
-            double offsetX = -(startPoint.x - endPoint.getX());
-            double offsetY = -(startPoint.y - endPoint.getY());
+            double deltaX = -(startPoint.x - endPoint.getX());
+            double deltaY = -(startPoint.y - endPoint.getY());
 
-            double xNew = (diagramView.getDeltaX() + offsetX * diagramView.getScale());
-            double yNew = (diagramView.getDeltaY() + offsetY * diagramView.getScale());
+            double xNew = (diagramView.getDeltaX() + deltaX * diagramView.getScale());
+            double yNew = (diagramView.getDeltaY() + deltaY * diagramView.getScale());
 
             diagramView.setDeltaX((int) xNew);
             diagramView.setDeltaY((int) yNew);

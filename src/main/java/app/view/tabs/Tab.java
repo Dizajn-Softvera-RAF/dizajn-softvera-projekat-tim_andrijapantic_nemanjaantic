@@ -125,9 +125,6 @@ public class Tab extends Component implements ISubscriber {
                 TabbedPane.getInstance().getListaTabova().remove(this);
                 TabbedPane.getInstance().removeTab(title, id);
                 ((PackageNode)diagramView.getDiagramNode().getParent()).removeChild(diagramView.getDiagramNode());
-                //TabbedPane.getInstance().remove(this);
-               // this.setBlocked(true);
-                //TabbedPane.getInstance().getBlockedTaboviId().add(id);
             }
 
 

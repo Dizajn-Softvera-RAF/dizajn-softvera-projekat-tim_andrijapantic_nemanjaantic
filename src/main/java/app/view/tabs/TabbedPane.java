@@ -73,22 +73,19 @@ public class TabbedPane extends JTabbedPane {
 
 
     public void addTab(Tab tab, DiagramNode node, MyNodeMutable nodeMutable) {
-       // if (!tab.isBlocked()) {
-            if (selectedTab == null) {
-                selectedTab = tab;
-            }
-            DiagramView diagramView = new DiagramView(tab);
-            diagramView.setDiagramNode(node);
-            diagramView.setMyNodeMutable(nodeMutable);
-            node.addSubscriber(diagramView);
+        if (selectedTab == null) {
+            selectedTab = tab;
+        }
+        DiagramView diagramView = new DiagramView(tab);
+        diagramView.setDiagramNode(node);
+        diagramView.setMyNodeMutable(nodeMutable);
+        node.addSubscriber(diagramView);
 
-            tab.setDiagramView(diagramView);
-            this.addTab(tab.getTitle(), diagramView);
-            this.setTabComponentAt(indexOfTab(tab.getTitle()), tab.getHeader());
-            MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(tab);
-            listaTabova.add(tab);
-       // }
-
+        tab.setDiagramView(diagramView);
+        this.addTab(tab.getTitle(), diagramView);
+        this.setTabComponentAt(indexOfTab(tab.getTitle()), tab.getHeader());
+        MainFrame.getInstance().getClassyTree().getTreeView().addSubscriber(tab);
+        listaTabova.add(tab);
 
     }
 
@@ -162,7 +159,7 @@ public class TabbedPane extends JTabbedPane {
     }
 
     public Tab findTab(String title, UUID id) {
-        for (Tab tab: this.getListaTabova()) {
+        for (Tab tab : this.getListaTabova()) {
             if (tab.getTitle().equals(title) && tab.getId().equals(id)) {
                 return tab;
             }
