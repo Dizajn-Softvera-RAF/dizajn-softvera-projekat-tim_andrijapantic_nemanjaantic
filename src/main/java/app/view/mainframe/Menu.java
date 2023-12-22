@@ -11,6 +11,7 @@ public class Menu extends JMenuBar {
 
 
         JMenuItem miNew = new JMenuItem("New");
+        JMenuItem miSaveAsImage = new JMenuItem("Save as Image");
         JMenuItem miAboutUs = new JMenuItem("About Us");
         JMenuItem miDelete = new JMenuItem("Delete");
         JMenuItem miChangeAuthor = new JMenuItem("Change Author");
@@ -21,11 +22,13 @@ public class Menu extends JMenuBar {
         miAboutUs.addActionListener(MainFrame.getInstance().getActionManager().getInfoAction());
         miDelete.addActionListener(MainFrame.getInstance().getActionManager().getDeleteAction());
         miChangePath.addActionListener(MainFrame.getInstance().getActionManager().getChangePathAction());
+        miSaveAsImage.addActionListener(MainFrame.getInstance().getActionManager().getScreenshotAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);
 
         file.add(miNew);
+        file.add(miSaveAsImage);
         edit.add(miAboutUs);
         functions.add(miDelete);
         edit.add(miChangeAuthor);
