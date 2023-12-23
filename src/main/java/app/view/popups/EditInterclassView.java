@@ -151,9 +151,9 @@ public class EditInterclassView extends JFrame {
                        addToBoxes(attribute.attributeString());
                    } else if (t.equals("EnumType")) {
                        EnumType enumerable = new EnumType(newNameField.getText());
-                       System.out.println("Napravio se enumType: "  + enumerable.getEnumerableString());
+                       System.out.println("Napravio se enumType: "  + enumerable.enumerableString());
                        element.addNewContent(enumerable);
-                       addToBoxes(enumerable.getEnumerableString());
+                       addToBoxes(enumerable.enumerableString());
                    }
                } else {
                    System.out.println("Nista selektovano");
@@ -251,7 +251,7 @@ public class EditInterclassView extends JFrame {
             if (classContent instanceof Method)
                 content.add(((Method) classContent).methodString());
             if (classContent instanceof EnumType)
-                content.add(((EnumType) classContent).getEnumerableString());
+                content.add(((EnumType) classContent).enumerableString());
         }
     }
 

@@ -16,6 +16,8 @@ public class Cardinality {
         this.newAttribute = newAttribute;
     }
 
+    public Cardinality() {}
+
     public CardinalityType getCardinality() {
         return cardinalityType;
     }

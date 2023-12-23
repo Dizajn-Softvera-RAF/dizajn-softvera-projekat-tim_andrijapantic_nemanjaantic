@@ -11,9 +11,12 @@ import app.view.mainframe.MainFrame;
 import app.model.composite.ClassyNodeComposite;
 import app.model.implementation.DiagramNode;
 import app.model.implementation.PackageNode;
+import app.view.mainframe.PackageView;
+import app.view.tabs.Tab;
 import app.view.tabs.TabbedPane;
 import app.view.tree.ClassyTreeView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +29,11 @@ public class DoubleClickAction extends AbstractClassyAction implements MouseList
                 if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof DiagramNode) {
                     if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                         if (!TabbedPane.getInstance().isTabPresent(MainFrame.getInstance().getSelectedNode().getClassyNode().getName())) {
-                            TabbedPane.getInstance().addTab(TabbedPane.getInstance().findTab(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId()), (DiagramNode)MainFrame.getInstance().getSelectedNode().getClassyNode(), MainFrame.getInstance().getSelectedNode());
+                            Tab tab  = TabbedPane.getInstance().findTab(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId());
+                            if (tab!=null) {
+                                TabbedPane.getInstance().addTab(TabbedPane.getInstance().findTab(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId()), (DiagramNode)MainFrame.getInstance().getSelectedNode().getClassyNode(), MainFrame.getInstance().getSelectedNode());
+                            } else
+                                TabbedPane.getInstance().addNewPane(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId(), (DiagramNode) MainFrame.getInstance().getSelectedNode().getClassyNode(), MainFrame.getInstance().getSelectedNode());
                             ((DiagramNode) MainFrame.getInstance().getSelectedNode().getClassyNode()).tabOpened();
                         }
                     }
@@ -37,11 +44,18 @@ public class DoubleClickAction extends AbstractClassyAction implements MouseList
                         projectExplorer.notifySubscribers(new Notification(NotificationType.PACKAGE_SELECTED, MainFrame.getInstance().getSelectedNode()));
                         PackageNode paket = (PackageNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
 
-                        for (DiagramNode diagramNode : paket.getChildren()) {
-                            if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
-                                TabbedPane.getInstance().addTab(TabbedPane.getInstance().findTab(diagramNode.getName(), diagramNode.getId()), diagramNode, diagramNode.getMyNodeMutable());
-                                diagramNode.tabOpened();
+                        for (ClassyNodeComposite diagramNode : paket.getChildren()) {
+                            if (diagramNode instanceof DiagramNode) {
+                                if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
+                                    Tab tab  = TabbedPane.getInstance().findTab(MainFrame.getInstance().getSelectedNode().getClassyNode().getName(), MainFrame.getInstance().getSelectedNode().getClassyNode().getId());
+                                    if (tab!=null) {
+                                        TabbedPane.getInstance().addTab(TabbedPane.getInstance().findTab(diagramNode.getName(), diagramNode.getId()), ((DiagramNode)diagramNode), ((DiagramNode)diagramNode).getMyNodeMutable());
+                                    } else
+                                        TabbedPane.getInstance().addNewPane(diagramNode.getName(), diagramNode.getId(), ((DiagramNode)diagramNode), ((DiagramNode)diagramNode).getMyNodeMutable());
+                                    ((DiagramNode)diagramNode).tabOpened();
+                                }
                             }
+
                         }
 
                     }

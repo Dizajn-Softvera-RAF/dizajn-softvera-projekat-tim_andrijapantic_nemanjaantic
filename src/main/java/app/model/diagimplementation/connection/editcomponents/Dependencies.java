@@ -14,6 +14,7 @@ public class Dependencies {
         this.interclassDependedUpon = interclassDependedUpon;
         this.dependencyType = dependencyType;
     }
+    public Dependencies() {}
 
     public Interclass getThatUses() {
         return thatUses;
@@ -29,6 +30,14 @@ public class Dependencies {
 
     public void setDependencyType(DependencyType dependencyType) {
         this.dependencyType = dependencyType;
+    }
+
+    public Interclass getInterclassDependedUpon() {
+        return interclassDependedUpon;
+    }
+
+    public void setInterclassDependedUpon(Interclass interclassDependedUpon) {
+        this.interclassDependedUpon = interclassDependedUpon;
     }
 
     @Override

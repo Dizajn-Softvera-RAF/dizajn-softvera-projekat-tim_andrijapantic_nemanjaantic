@@ -60,7 +60,7 @@ public class EnumPainter extends ElementPainter{
         for (ClassContent classContent : enumComp.getContent()) {
             if (classContent instanceof EnumType) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((EnumType) classContent).getEnumerableString());
+                int stringWidth = fontMetrics.stringWidth(((EnumType) classContent).enumerableString());
                 currWidth = Math.max(currWidth, stringWidth);
             }
 
@@ -70,7 +70,7 @@ public class EnumPainter extends ElementPainter{
     private void ispisiContent(Graphics2D g2, EnumComp enumComp, int startX, int startY) {
         for (ClassContent classContent : enumComp.getContent()) {
             if (classContent instanceof EnumType) {
-                g2.drawString(((EnumType) classContent).getEnumerableString(), startX, startY);
+                g2.drawString(((EnumType) classContent).enumerableString(), startX, startY);
             }
             startY += 20;
         }

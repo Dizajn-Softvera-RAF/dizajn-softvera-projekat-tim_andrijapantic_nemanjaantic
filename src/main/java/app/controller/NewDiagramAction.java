@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.model.composite.ClassyNodeComposite;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
@@ -34,10 +35,13 @@ public class NewDiagramAction extends AbstractClassyAction {
                 else if (!TabbedPane.getInstance().getTrenutniPaket().getId().equals(selected.getClassyNode().getId())) {
                     TabbedPane.getInstance().closeAllTabs();
                     PackageNode paket = TabbedPane.getInstance().getTrenutniPaket();
-                    for (DiagramNode diagramNode : paket.getChildren()) {
-                        if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
-                            TabbedPane.getInstance().addNewPane(diagramNode.getName(), diagramNode.getId(), diagramNode, diagramNode.getMyNodeMutable());
+                    for (ClassyNodeComposite diagramNode : paket.getChildren()) {
+                        if (diagramNode instanceof DiagramNode) {
+                            if (!TabbedPane.getInstance().isTabPresent(diagramNode.getName())) {
+                                TabbedPane.getInstance().addNewPane(diagramNode.getName(), diagramNode.getId(), ((DiagramNode)diagramNode), ((DiagramNode)diagramNode).getMyNodeMutable());
+                            }
                         }
+
                     }
                 }
             } else {

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = PackageNode.class, name = "PackageNode"),
-        @JsonSubTypes.Type(value = DiagramNode.class, name = "DiagramNode")
+
 })
 public class ProjectNode extends ClassyNodeComposite<PackageNode> implements IPublisher {
     String author;

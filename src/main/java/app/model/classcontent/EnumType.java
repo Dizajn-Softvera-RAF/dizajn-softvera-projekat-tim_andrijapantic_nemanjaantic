@@ -1,6 +1,5 @@
 package app.model.classcontent;
 
-import app.model.diagcomposite.Visibility;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
@@ -14,7 +13,7 @@ public class EnumType extends ClassContent{
     public EnumType() {}
 
 
-    public String getEnumerableString() {
+    public String enumerableString() {
         return getName();
     }
 }

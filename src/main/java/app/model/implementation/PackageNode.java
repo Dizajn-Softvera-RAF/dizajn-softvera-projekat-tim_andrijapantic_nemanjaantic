@@ -1,8 +1,5 @@
 package app.model.implementation;
 
-import app.model.classcontent.Attribute;
-import app.model.classcontent.EnumType;
-import app.model.classcontent.Method;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.event.IPublisher;
@@ -20,9 +17,10 @@ import java.util.ArrayList;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = DiagramNode.class, name = "DiagramNode")
+        @JsonSubTypes.Type(value = DiagramNode.class, name = "DiagramNode"),
+        @JsonSubTypes.Type(value = PackageNode.class, name = "PackageNode"),
 })
-public class PackageNode extends ClassyNodeComposite<DiagramNode> implements IPublisher {
+public class PackageNode extends ClassyNodeComposite<ClassyNodeComposite> implements IPublisher {
     @JsonIgnore
     ArrayList<ISubscriber> subscribers;
 
@@ -47,6 +45,11 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> implements IPu
     public void addChild(AbstractClassyNode child) {
         if (child instanceof DiagramNode) {
             DiagramNode node = (DiagramNode) child;
+            if (!this.getChildren().contains(node)) {
+                this.getChildren().add(node);
+            }
+        } else if (child instanceof PackageNode) {
+            PackageNode node = (PackageNode) child;
             if (!this.getChildren().contains(node)) {
                 this.getChildren().add(node);
             }

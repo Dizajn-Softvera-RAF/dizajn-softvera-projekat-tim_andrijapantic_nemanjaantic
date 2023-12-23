@@ -42,7 +42,7 @@ public class DuplicationState implements State {
                     newKlasa.setContent(content);
                     newKlasa.setInitialColor(copyFrom.getInitialColor());
                     newKlasa.setCurrentColor(copyFrom.getCurrentColor());
-                    newKlasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), newKlasa));
+                    newKlasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newKlasa));
                     newKlasa.addSubscriber(diagramView);
                     painterToCreate = new ClassPainter(newKlasa);
                     painterToCreate.setElement(newKlasa);
@@ -59,7 +59,7 @@ public class DuplicationState implements State {
                     newInterface.setContent(content);
                     newInterface.setInitialColor(copyFrom.getInitialColor());
                     newInterface.setCurrentColor(copyFrom.getCurrentColor());
-                    newInterface.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), newInterface));
+                    newInterface.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newInterface));
                     newInterface.addSubscriber(diagramView);
                     painterToCreate = new InterfacePainter(newInterface);
                     painterToCreate.setElement(newInterface);
@@ -76,7 +76,7 @@ public class DuplicationState implements State {
                     newEnum.setContent(content);
                     newEnum.setInitialColor(copyFrom.getInitialColor());
                     newEnum.setCurrentColor(copyFrom.getCurrentColor());
-                    newEnum.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), newEnum));
+                    newEnum.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newEnum));
                     newEnum.addSubscriber(diagramView);
                     painterToCreate = new EnumPainter(newEnum);
                     painterToCreate.setElement(newEnum);

@@ -1,13 +1,13 @@
 package app.model.tree;
 
 import app.core.AppCore;
+import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
 import app.model.implementation.*;
 import app.view.mainframe.MainFrame;
 import app.view.tree.ClassyTreeView;
 
-import javax.lang.model.element.Element;
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import java.util.Random;
@@ -31,7 +31,7 @@ public class ClassyTreeImplementation implements ClassyTree {
 
 
     @Override
-    public MyNodeMutable addChild(MyNodeMutable parent, DiagramElement element) {
+    public MyNodeMutable addChild(MyNodeMutable parent, ClassyNodeComposite element) {
             ClassyNodeComposite child = createChild(parent.getClassyNode());
 
             MyNodeMutable toReturn = new MyNodeMutable(child);
@@ -44,11 +44,11 @@ public class ClassyTreeImplementation implements ClassyTree {
 
     }
 
-    public MyNodeMutable addDiagramElementChild(MyNodeMutable diagram, DiagramElement element) {
+    public MyNodeMutable addExistingChild(MyNodeMutable element, ClassyNodeComposite child) {
 
-            MyNodeMutable toReturn = new MyNodeMutable(element);
-            diagram.add(toReturn);
-            diagram.getClassyNode().addChild(element);
+            MyNodeMutable toReturn = new MyNodeMutable(child);
+            element.add(toReturn);
+            element.getClassyNode().addChild(child);
             treeView.expandPath(treeView.getSelectionPath());
             SwingUtilities.updateComponentTreeUI(treeView);
             return toReturn;
@@ -66,11 +66,11 @@ public class ClassyTreeImplementation implements ClassyTree {
 
             return AppCore.getInstance().getClassyRepository().createNode("Project", "Project" + new Random().nextInt(100), parent);
         }
-        if (parent instanceof ProjectNode || parent.isPackageCheck()) {
+        if (parent instanceof ProjectNode || (parent instanceof PackageNode && parent.isPackageCheck())) {
 
             return AppCore.getInstance().getClassyRepository().createNode("Package", "Package" + new Random().nextInt(100), parent);
         }
-        if (parent instanceof PackageNode) {
+        else if (parent instanceof PackageNode) {
 
             return AppCore.getInstance().getClassyRepository().createNode("Diagram", "Diagram" + new Random().nextInt(1000), parent);
         }
@@ -118,6 +118,8 @@ public class ClassyTreeImplementation implements ClassyTree {
         ClassyNodeComposite projectExplorer = root.getClassyNode();
         projectExplorer.addChild(node);
 
+        addChildrenToTree(loadedProject, node);
+
         treeView.expandPath(treeView.getSelectionPath());
         SwingUtilities.updateComponentTreeUI(treeView);
     }
@@ -125,6 +127,18 @@ public class ClassyTreeImplementation implements ClassyTree {
     @Override
     public void loadDiagram(DiagramNode node) {
 
+    }
+
+    public void addChildrenToTree(MyNodeMutable parentNode, ClassyNodeComposite element) {
+        for (Object child : element.getChildren()) {
+            MyNodeMutable childNode = addExistingChild(parentNode, (ClassyNodeComposite) child);
+            childNode.getClassyNode().setParent(parentNode.getClassyNode());
+            parentNode.add(childNode);
+            if (childNode.getClassyNode() instanceof DiagramElement) {
+                ((DiagramElement) childNode.getClassyNode()).setMyNodeMutable(childNode);
+            }
+            addChildrenToTree(childNode, (ClassyNodeComposite) child);
+        }
     }
 
     public ClassyTreeView getTreeView() {

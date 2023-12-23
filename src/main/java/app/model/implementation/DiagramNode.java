@@ -25,6 +25,7 @@ import app.view.tabs.TabbedPane;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import java.util.List;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DiagramElement.class, name = "DiagramElement"),
 })
+@JsonTypeName("DiagramNode")
 public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements IPublisher {
     @JsonIgnore
     private List<ISubscriber> subscribers;

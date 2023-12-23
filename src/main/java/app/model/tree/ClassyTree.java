@@ -1,5 +1,6 @@
 package app.model.tree;
 
+import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
 import app.model.implementation.DiagramNode;
 import app.model.implementation.ProjectExplorer;
@@ -12,7 +13,7 @@ public interface ClassyTree {
 
     ClassyTreeView generateTree(ProjectExplorer projectExplorer);
 
-    MyNodeMutable addChild(MyNodeMutable parent, DiagramElement element);
+    MyNodeMutable addChild(MyNodeMutable parent, ClassyNodeComposite element);
 
     MyNodeMutable getSelectedNode();
 

@@ -75,7 +75,7 @@ public class AddConnectionState implements State {
 
                         link.setStartPoint(tacke[0]);
                         link.setEndPoint(diagramView.getAbsolutePoint(x, y));
-                        link.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), link));
+                        link.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), link));
                         link.setFromInterclass((Interclass) elementPainter.getElement());
                         startPoints = ((Interclass) elementPainter.getElement()).getConnectionsDots();
 

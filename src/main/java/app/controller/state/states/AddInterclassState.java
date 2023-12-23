@@ -17,7 +17,6 @@ import app.view.painters.EnumPainter;
 import app.view.painters.InterfacePainter;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Random;
 
 public class AddInterclassState implements State {
@@ -49,7 +48,7 @@ public class AddInterclassState implements State {
 
                 klasa.setCurrentColor(15656642);
                 klasa.setInitialColor(15656642);
-                klasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa));
+                klasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), klasa));
                 klasa.addSubscriber(diagramView);
                 ClassPainter classPainter = new ClassPainter(klasa);
                 classPainter.setElement(klasa);
@@ -69,7 +68,7 @@ public class AddInterclassState implements State {
                 MainFrame.getInstance().setChildToCreateType("interface");
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
                 diagramView.getElementPainters().add(interfejsPainter);
-                interfejs.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), interfejs));
+                interfejs.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), interfejs));
                 System.out.println("Ime interfejsa je: " + interfejs);
             } else if (odg==2) {
                 EnumComp enumComp = new EnumComp(diagramView.getAbsolutePoint(x, y), diagramView.getDiagramNode(), "Enum" + new Random().nextInt(100), 2);
@@ -84,7 +83,7 @@ public class AddInterclassState implements State {
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());
                 enumPainter.setElement(enumComp);
                 diagramView.getElementPainters().add(enumPainter);
-                enumComp.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), enumComp));
+                enumComp.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), enumComp));
                 System.out.println("Ime enuma je: " + enumComp);
             }
         }

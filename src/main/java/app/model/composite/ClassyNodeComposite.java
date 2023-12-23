@@ -1,9 +1,20 @@
 package app.model.composite;
 
 
+import app.model.diagcomposite.DiagramElement;
+import app.model.implementation.DiagramNode;
+import app.model.implementation.PackageNode;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DiagramNode.class, name = "DiagramNode"),
+        @JsonSubTypes.Type(value = PackageNode.class, name = "Package Node"),
+})
 public abstract class ClassyNodeComposite<T> extends AbstractClassyNode {
 
     List<T> children;
