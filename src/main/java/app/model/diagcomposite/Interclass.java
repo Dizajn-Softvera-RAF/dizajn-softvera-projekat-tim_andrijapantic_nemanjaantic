@@ -3,9 +3,14 @@ package app.model.diagcomposite;
 import app.model.classcontent.*;
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import javafx.scene.effect.Light;
 
 import javax.swing.text.Position;
@@ -13,11 +18,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Klasa.class, name = "Klasa"),
+        @JsonSubTypes.Type(value = Interface.class, name = "Interface"),
+        @JsonSubTypes.Type(value = EnumComp.class, name = "EnumComp"),
+})
 public abstract class Interclass extends DiagramElement {
 
     protected Paint paint;
-
-    protected String description;
     protected Point position;
     private List<ClassContent> content;
     ArrayList<Point> connectionsDots;
@@ -41,7 +50,9 @@ public abstract class Interclass extends DiagramElement {
     }
 
     public Interclass() {
-
+        super();
+        connectionsDots = new ArrayList<>();
+        content = new ArrayList<>();
     }
 
     public Interclass(Point position, String name) {
@@ -99,6 +110,10 @@ public abstract class Interclass extends DiagramElement {
 
     @Override
     public void setName(String name) {
+        super.setName(name);
+    }
+
+    public void changeName(String name) {
         notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
         super.setName(name);
     }

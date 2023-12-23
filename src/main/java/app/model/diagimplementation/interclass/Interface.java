@@ -5,10 +5,13 @@ import app.model.classcontent.Method;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.Interclass;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.awt.*;
 import java.util.List;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Interface extends Interclass {
 
     private Dimension size;
@@ -19,6 +22,7 @@ public class Interface extends Interclass {
     }
 
     public Interface() {
+        super();
     }
 
     public Interface(Point position, AbstractClassyNode parent, String name, int stroke) {

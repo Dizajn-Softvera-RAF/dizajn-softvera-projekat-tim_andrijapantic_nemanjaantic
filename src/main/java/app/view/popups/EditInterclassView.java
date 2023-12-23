@@ -115,7 +115,7 @@ public class EditInterclassView extends JFrame {
         changeNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                element.setName(nameTextField.getText());
+                element.changeName(nameTextField.getText());
                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getClassyTree().getTreeView());
             }
         });
@@ -134,9 +134,9 @@ public class EditInterclassView extends JFrame {
                        else
                            visibility = Visibility.PROTECTED;
                        Method metoda = new Method(newNameField.getText(), newTypeField.getText(), visibility);
-                       System.out.println("Napravila se metoda: "  + metoda.getMethodString());
+                       System.out.println("Napravila se metoda: "  + metoda.methodString());
                        element.addNewContent(metoda);
-                       addToBoxes(metoda.getMethodString());
+                       addToBoxes(metoda.methodString());
                    } else if (t.equals("Attribute")) {
                        Visibility visibility;
                        if (visibilityBox.getSelectedItem().equals("Private"))
@@ -146,9 +146,9 @@ public class EditInterclassView extends JFrame {
                        else
                            visibility = Visibility.PROTECTED;
                        Attribute attribute = new Attribute(newNameField.getText(), newTypeField.getText(), visibility);
-                       System.out.println("Napravio se atribut: "  + attribute.getAttributeString());
+                       System.out.println("Napravio se atribut: "  + attribute.attributeString());
                        element.addNewContent(attribute);
-                       addToBoxes(attribute.getAttributeString());
+                       addToBoxes(attribute.attributeString());
                    } else if (t.equals("EnumType")) {
                        EnumType enumerable = new EnumType(newNameField.getText());
                        System.out.println("Napravio se enumType: "  + enumerable.getEnumerableString());
@@ -247,9 +247,9 @@ public class EditInterclassView extends JFrame {
         content.clear();
         for (ClassContent classContent: classContents) {
             if (classContent instanceof Attribute)
-                content.add(((Attribute) classContent).getAttributeString());
+                content.add(((Attribute) classContent).attributeString());
             if (classContent instanceof Method)
-                content.add(((Method) classContent).getMethodString());
+                content.add(((Method) classContent).methodString());
             if (classContent instanceof EnumType)
                 content.add(((EnumType) classContent).getEnumerableString());
         }

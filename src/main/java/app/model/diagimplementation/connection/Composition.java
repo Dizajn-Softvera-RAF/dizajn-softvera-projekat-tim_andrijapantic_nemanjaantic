@@ -4,10 +4,12 @@ import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.Connection;
 import app.model.diagimplementation.connection.editcomponents.Cardinality;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.awt.*;
 import java.util.ArrayList;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Composition extends Connection {
 
     ArrayList<Cardinality> cardinalityList;
@@ -16,6 +18,8 @@ public class Composition extends Connection {
         super(name,parent);
         cardinalityList = new ArrayList<>();
     }
+
+    public Composition() {}
 
     @Override
     public void addChild(AbstractClassyNode child) {

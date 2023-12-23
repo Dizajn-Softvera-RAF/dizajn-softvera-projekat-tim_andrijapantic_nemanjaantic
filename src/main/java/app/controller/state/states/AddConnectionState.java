@@ -44,8 +44,8 @@ public class AddConnectionState implements State {
             } else if (MainFrame.getInstance().getConnectionType()==2) {
                 link = new Dependency("Dependency" + new Random().nextInt(100), diagramView.getDiagramNode());
             }
-            link.setInitialColor(Color.BLACK);
-            link.setCurrentColor(Color.BLACK);
+            link.setInitialColor(0);
+            link.setCurrentColor(0);
 
             System.out.println("Trenutno si u ConnectionState i kliknuo si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
             for (ElementPainter elementPainter: diagramView.getElementPainters()) {

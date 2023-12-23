@@ -47,8 +47,8 @@ public class AddInterclassState implements State {
                 klasa.getContent().add(new Method("methodExample1", "double", Visibility.PUBLIC));
                 klasa.getContent().add(new Method("methodExample2", "void", Visibility.PRIVATE));
 
-                klasa.setCurrentColor(new Color(238,230,194));
-                klasa.setInitialColor(new Color(238,230,194));
+                klasa.setCurrentColor(15656642);
+                klasa.setInitialColor(15656642);
                 klasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addDiagramElementChild(diagramView.getMyNodeMutable(), klasa));
                 klasa.addSubscriber(diagramView);
                 ClassPainter classPainter = new ClassPainter(klasa);
@@ -61,8 +61,8 @@ public class AddInterclassState implements State {
                 interfejs.getContent().add(new Method("methodExample1", "double", Visibility.PUBLIC));
                 interfejs.getContent().add(new Method("methodExample2", "void", Visibility.PUBLIC));
                 interfejs.addSubscriber(diagramView);
-                interfejs.setInitialColor(new Color(194,238,219));
-                interfejs.setCurrentColor(new Color(194,238,219));
+                interfejs.setInitialColor(12775131);
+                interfejs.setCurrentColor(12775131);
                 InterfacePainter interfejsPainter = new InterfacePainter(interfejs);
                 interfejsPainter.setElement(interfejs);
 
@@ -77,8 +77,8 @@ public class AddInterclassState implements State {
                 enumComp.getContent().add(new EnumType("enum2"));
                 enumComp.getContent().add(new EnumType("enum3"));
                 enumComp.addSubscriber(diagramView);
-                enumComp.setInitialColor(new Color(172,170,219));
-                enumComp.setCurrentColor(new Color(172,170,219));
+                enumComp.setInitialColor(11315931);
+                enumComp.setCurrentColor(11315931);
                 EnumPainter enumPainter = new EnumPainter(enumComp);
                 MainFrame.getInstance().setChildToCreateType("enum");
                 System.out.println("Setovan childToCreateType na: " + MainFrame.getInstance().getChildToCreateType());

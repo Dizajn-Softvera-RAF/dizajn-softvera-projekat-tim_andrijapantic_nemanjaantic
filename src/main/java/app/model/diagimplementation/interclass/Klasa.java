@@ -4,13 +4,20 @@ import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.Interclass;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.awt.*;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Klasa extends Interclass {
 
     private Dimension size;
     int stroke;
+
+    public Klasa() {
+        super();
+    }
 
     public Klasa(Point position, AbstractClassyNode parent, String name, int stroke) {
         super(name,parent,position);

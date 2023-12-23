@@ -1,7 +1,17 @@
 package app.model.classcontent;
 
+import app.model.diagcomposite.Connection;
+import app.model.diagcomposite.Interclass;
 import app.model.diagcomposite.Visibility;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Attribute.class, name = "Attribute"),
+        @JsonSubTypes.Type(value = Method.class, name = "Method"),
+        @JsonSubTypes.Type(value = EnumType.class, name = "EnumType"),
+})
 public abstract class ClassContent {
 
     private String name;
@@ -14,6 +24,8 @@ public abstract class ClassContent {
         this.visibility = visibility;
         this.type = type;
     }
+
+    public ClassContent() {}
 
     public ClassContent(String name) {
         this.name = name;

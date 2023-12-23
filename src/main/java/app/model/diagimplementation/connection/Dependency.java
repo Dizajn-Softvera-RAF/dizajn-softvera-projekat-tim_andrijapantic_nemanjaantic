@@ -4,10 +4,12 @@ import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.Connection;
 import app.model.diagimplementation.connection.editcomponents.Dependencies;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.awt.*;
 import java.util.ArrayList;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Dependency extends Connection {
 
     ArrayList<Dependencies> dependencies;
@@ -16,6 +18,8 @@ public class Dependency extends Connection {
         super(name,parent);
         dependencies = new ArrayList<>();
     }
+
+    public Dependency() {}
     @Override
     public void addChild(AbstractClassyNode child) {
 

@@ -25,7 +25,7 @@ public class GeneralizationPainter extends ElementPainter{
         int endX = (int)((Generalization)getElement()).getEndPoint().getX();
         int endY = (int)((Generalization)getElement()).getEndPoint().getY();
 
-        g2.setColor(element.getCurrentColor());
+        g2.setColor(new Color(element.getCurrentColor()));
         Line2D line = new Line2D.Double(startX, startY, endX, endY);
         g2.draw(line);
 
@@ -65,7 +65,7 @@ public class GeneralizationPainter extends ElementPainter{
         Shape transformedShape2 = transform.createTransformedShape(path2);
         setShape(transformedShape2);
         g2.fill(transformedShape2);
-        g2.setColor(element.getCurrentColor());
+        g2.setColor(new Color(element.getCurrentColor()));
         g2.draw(transformedShape);
 
     }

@@ -91,7 +91,7 @@ public class EditConnectionView extends JFrame {
 
         for (ClassContent content: element.getFromInterclass().getContent()) {
             if (content instanceof Attribute) {
-                attributes1.add(((Attribute) content).getAttributeString());
+                attributes1.add(((Attribute) content).attributeString());
             }
         }
 
@@ -99,7 +99,7 @@ public class EditConnectionView extends JFrame {
 
         for (ClassContent content: element.getToInterclass().getContent()) {
             if (content instanceof Attribute) {
-                attributes2.add(((Attribute) content).getAttributeString());
+                attributes2.add(((Attribute) content).attributeString());
             }
         }
 
@@ -107,9 +107,9 @@ public class EditConnectionView extends JFrame {
 
         for (ClassContent content: element.getToInterclass().getContent()) {
             if (content instanceof Attribute) {
-                toInterclassContentList.add(((Attribute) content).getAttributeString());
+                toInterclassContentList.add(((Attribute) content).attributeString());
             } else if (content instanceof Method) {
-                toInterclassContentList.add(((Method) content).getMethodString());
+                toInterclassContentList.add(((Method) content).methodString());
             }
         }
 
@@ -199,7 +199,7 @@ public class EditConnectionView extends JFrame {
                 else
                     attributeType = "List<" + objectInstantiated.getName() + ">";
                 Attribute newAttribute = new Attribute(newNameField.getText(), attributeType, visibility);
-                System.out.println(newAttribute.getAttributeString());
+                System.out.println(newAttribute.attributeString());
                 if (element instanceof Aggregation) {
                     Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
                     ((Aggregation) element).getCardinalitiesList().add(cardinality);

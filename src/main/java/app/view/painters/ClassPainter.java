@@ -2,10 +2,8 @@ package app.view.painters;
 
 import app.model.classcontent.Attribute;
 import app.model.classcontent.ClassContent;
-import app.model.classcontent.EnumType;
 import app.model.classcontent.Method;
 import app.model.diagcomposite.DiagramElement;
-import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 
 import java.awt.*;
@@ -25,7 +23,7 @@ public class ClassPainter extends ElementPainter{
 
     @Override
     public void paint(Graphics2D g2) {
-        g2.setColor(element.getCurrentColor());
+        g2.setColor(new Color(element.getCurrentColor()));
         g2.setStroke(new BasicStroke(((Klasa)getElement()).getStroke()));
         this.shape = createShape((Klasa) getElement(), g2);
         setShape(shape);
@@ -60,11 +58,11 @@ public class ClassPainter extends ElementPainter{
         for (ClassContent classContent : klasa.getContent()) {
             if (classContent instanceof Attribute) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((Attribute)(classContent)).getAttributeString());
+                int stringWidth = fontMetrics.stringWidth(((Attribute)(classContent)).attributeString());
                 currWidth = Math.max(currWidth, stringWidth);
             } else if (classContent instanceof Method) {
                 FontMetrics fontMetrics = g2.getFontMetrics();
-                int stringWidth = fontMetrics.stringWidth(((Method) classContent).getMethodString());
+                int stringWidth = fontMetrics.stringWidth(((Method) classContent).methodString());
                 currWidth = Math.max(currWidth, stringWidth);
             }
 
@@ -74,9 +72,9 @@ public class ClassPainter extends ElementPainter{
     private void ispisiContent(Graphics2D g2, Klasa klasa, int startX, int startY) {
         for (ClassContent classContent : klasa.getContent()) {
             if (classContent instanceof Attribute) {
-                g2.drawString(((Attribute) classContent).getAttributeString(), startX, startY);
+                g2.drawString(((Attribute) classContent).attributeString(), startX, startY);
             } else if (classContent instanceof Method) {
-                g2.drawString(((Method) classContent).getMethodString(), startX, startY);
+                g2.drawString(((Method) classContent).methodString(), startX, startY);
             }
             startY += 20;
         }

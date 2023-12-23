@@ -1,5 +1,8 @@
 package app.model.implementation;
 
+import app.model.classcontent.Attribute;
+import app.model.classcontent.EnumType;
+import app.model.classcontent.Method;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.event.IPublisher;
@@ -9,15 +12,26 @@ import app.model.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
 import app.view.tabs.TabbedPane;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.ArrayList;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DiagramNode.class, name = "DiagramNode")
+})
 public class PackageNode extends ClassyNodeComposite<DiagramNode> implements IPublisher {
-
+    @JsonIgnore
+    ArrayList<ISubscriber> subscribers;
 
     public PackageNode() {
     }
 
     public PackageNode(String name, AbstractClassyNode parent) {
         super(name, parent);
+        subscribers = new ArrayList<>();
     }
 
     public static void prodjiKrozDecu(MyNodeMutable node) {
@@ -54,16 +68,19 @@ public class PackageNode extends ClassyNodeComposite<DiagramNode> implements IPu
 
     @Override
     public void addSubscriber(ISubscriber sub) {
-
+        subscribers.add(sub);
     }
 
     @Override
     public void removeSubscriber(ISubscriber sub) {
-
+        subscribers.remove(sub);
     }
 
     @Override
     public void notifySubscribers(Notification notification) {
+        for (ISubscriber subscriber : subscribers) {
 
+            subscriber.update(notification);
+        }
     }
 }

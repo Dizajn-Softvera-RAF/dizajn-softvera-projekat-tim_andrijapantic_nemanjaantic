@@ -1,7 +1,10 @@
 package app.model.classcontent;
 
 import app.model.diagcomposite.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Method extends ClassContent{
 
 
@@ -9,8 +12,10 @@ public class Method extends ClassContent{
         super(name, type, visibility);
     }
 
+    public Method() {}
 
-    public String getMethodString() {
+    @JsonIgnore
+    public String methodString() {
         String visibility;
         if (getVisibility().equals(Visibility.PUBLIC))
             visibility = "+";

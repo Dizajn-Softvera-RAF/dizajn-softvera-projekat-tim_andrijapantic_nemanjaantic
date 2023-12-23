@@ -27,7 +27,7 @@ public class AggregationPainter extends ElementPainter{
         int endX = (int)((Aggregation)getElement()).getEndPoint().getX();
         int endY = (int)((Aggregation)getElement()).getEndPoint().getY();
 
-        g2.setColor(element.getCurrentColor());
+        g2.setColor(new Color(element.getCurrentColor()));
         Line2D line = new Line2D.Double(startX, startY, endX, endY);
         g2.draw(line);
 
@@ -65,7 +65,7 @@ public class AggregationPainter extends ElementPainter{
         setShape(transformedShape2);
         g2.setColor(new Color(0,0,0,0));
         g2.fill(transformedShape2);
-        g2.setColor(element.getCurrentColor());
+        g2.setColor(new Color(element.getCurrentColor()));
         g2.draw(transformedShape);
     }
 

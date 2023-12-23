@@ -2,6 +2,7 @@ package app.model.implementation;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
 
 import java.util.List;
@@ -21,15 +22,30 @@ import app.model.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
 import app.view.tabs.TabbedPane;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = DiagramElement.class, name = "DiagramElement"),
+})
 public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements IPublisher {
+    @JsonIgnore
     private List<ISubscriber> subscribers;
+    @JsonIgnore
     private MyNodeMutable myNodeMutable;
+    private String path;
+    private boolean changed = true;
+
+    public DiagramNode() {
+        this.subscribers = new ArrayList<>();
+    }
     public DiagramNode(String name, AbstractClassyNode parent) {
         super(name, parent);
         this.subscribers = new ArrayList<>();
@@ -109,6 +125,14 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         }
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     @Override
     public void addSubscriber(ISubscriber sub) {
         subscribers.add(sub);
@@ -141,5 +165,13 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
 
     public void setMyNodeMutable(MyNodeMutable myNodeMutable) {
         this.myNodeMutable = myNodeMutable;
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 }

@@ -1,7 +1,10 @@
 package app.model.classcontent;
 
 import app.model.diagcomposite.Visibility;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class Attribute extends ClassContent{
 
 
@@ -10,7 +13,10 @@ public class Attribute extends ClassContent{
 
     }
 
-    public String getAttributeString() {
+    public Attribute() {
+    }
+    @JsonIgnore
+    public String attributeString() {
         String visibility;
         if (getVisibility().equals(Visibility.PUBLIC))
             visibility = "+";

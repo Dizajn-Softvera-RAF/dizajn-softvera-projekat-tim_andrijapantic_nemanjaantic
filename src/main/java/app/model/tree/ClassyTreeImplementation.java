@@ -112,6 +112,18 @@ public class ClassyTreeImplementation implements ClassyTree {
 
     @Override
     public void loadProject(ProjectNode node) {
+        MyNodeMutable loadedProject = new MyNodeMutable(node);
+        root.add(loadedProject);
+
+        ClassyNodeComposite projectExplorer = root.getClassyNode();
+        projectExplorer.addChild(node);
+
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+
+    @Override
+    public void loadDiagram(DiagramNode node) {
 
     }
 

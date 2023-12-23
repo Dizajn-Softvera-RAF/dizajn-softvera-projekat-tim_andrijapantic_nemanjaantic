@@ -12,6 +12,7 @@ public class AppCore {
     private ClassyRepository classyRepository;
     private Logger consoleLogger;
     private Logger fileLogger;
+    private Serializer serializer;
 
     private AppCore() {
 
@@ -27,9 +28,10 @@ public class AppCore {
         this.gui = gui;
     }
 
-    public void initialise(SwingGui gui, ClassyRepository classyRepository) {
+    public void initialise(SwingGui gui, ClassyRepository classyRepository, Serializer serializer) {
         this.gui = gui;
         this.classyRepository = classyRepository;
+        this.serializer = serializer;
         consoleLogger =  LoggerFactory.createLogger(LoggerType.CONSOLE);
         fileLogger = LoggerFactory.createLogger(LoggerType.FILE);
     }
@@ -68,5 +70,13 @@ public class AppCore {
 
     public void setFileLogger(Logger fileLogger) {
         this.fileLogger = fileLogger;
+    }
+
+    public Serializer getSerializer() {
+        return serializer;
+    }
+
+    public void setSerializer(Serializer serializer) {
+        this.serializer = serializer;
     }
 }

@@ -23,6 +23,8 @@ public class ActionManager {
     private IntoDuplicationState intoDuplicationState;
     private IntoZoomToFitState intoZoomToFitState;
     private ScreenshotAction screenshotAction;
+    private SaveAction saveAction;
+    private OpenAction openAction;
 
     public ActionManager() {
         initilizeActions();
@@ -48,6 +50,8 @@ public class ActionManager {
         intoDuplicationState = new IntoDuplicationState();
         intoZoomToFitState = new IntoZoomToFitState();
         screenshotAction = new ScreenshotAction();
+        saveAction = new SaveAction();
+        openAction = new OpenAction();
     }
 
     public ExitAction getExitAction() {
@@ -199,6 +203,22 @@ public class ActionManager {
 
     public void setScreenshotAction(ScreenshotAction screenshotAction) {
         this.screenshotAction = screenshotAction;
+    }
+
+    public SaveAction getSaveAction() {
+        return saveAction;
+    }
+
+    public void setSaveAction(SaveAction saveAction) {
+        this.saveAction = saveAction;
+    }
+
+    public OpenAction getOpenAction() {
+        return openAction;
+    }
+
+    public void setOpenAction(OpenAction openAction) {
+        this.openAction = openAction;
     }
 }
 

@@ -2,11 +2,28 @@ package app.model.diagcomposite;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.Generalization;
+import app.model.diagimplementation.interclass.EnumComp;
+import app.model.diagimplementation.interclass.Interface;
+import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.awt.*;
+import java.util.ArrayList;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Aggregation.class, name = "Aggregation"),
+        @JsonSubTypes.Type(value = Composition.class, name = "Composition"),
+        @JsonSubTypes.Type(value = Dependency.class, name = "Dependency"),
+        @JsonSubTypes.Type(value = Generalization.class, name = "Generalization")
+})
 public abstract class Connection extends DiagramElement {
 
     private Interclass fromInterclass;
@@ -24,7 +41,7 @@ public abstract class Connection extends DiagramElement {
     }
 
     public Connection () {
-
+        super();
     }
 
     public Connection(String name, ClassyNodeComposite parent) {

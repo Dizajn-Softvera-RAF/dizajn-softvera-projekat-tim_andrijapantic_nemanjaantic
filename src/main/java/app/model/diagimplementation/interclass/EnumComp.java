@@ -2,10 +2,13 @@ package app.model.diagimplementation.interclass;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.diagcomposite.Interclass;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.awt.*;
 import java.util.List;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
 public class EnumComp extends Interclass {
     private Dimension size;
     int stroke;
@@ -13,7 +16,9 @@ public class EnumComp extends Interclass {
         super(name,parent);
     }
 
-    public EnumComp() {}
+    public EnumComp() {
+        super();
+    }
 
     public EnumComp(Point position, AbstractClassyNode parent, String name, int stroke) {
         super(name, parent, position);

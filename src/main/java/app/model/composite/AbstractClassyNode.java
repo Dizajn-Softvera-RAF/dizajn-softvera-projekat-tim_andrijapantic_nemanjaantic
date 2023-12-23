@@ -1,11 +1,14 @@
 package app.model.composite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 
 public abstract class AbstractClassyNode {
 
     protected String name;
-    protected transient AbstractClassyNode parent;
+    @JsonIgnore
+    transient protected AbstractClassyNode parent;
     protected UUID id;
 
     public AbstractClassyNode() {

@@ -50,6 +50,6 @@ public class Cardinality {
 
     @Override
     public String toString() {
-        return "Interclass " + interclassThatContains.getName() + " contains " +  cardinalityType.toString() + " of " + objectContained.getName() + " in attribute: " + newAttribute.getAttributeString();
+        return "Interclass " + interclassThatContains.getName() + " contains " +  cardinalityType.toString() + " of " + objectContained.getName() + " in attribute: " + newAttribute.attributeString();
     }
 }

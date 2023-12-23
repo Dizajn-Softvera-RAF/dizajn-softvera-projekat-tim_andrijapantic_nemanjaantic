@@ -27,6 +27,7 @@ public class NewTreeChildAction extends AbstractClassyAction {
                 new AddToPackageView();
             } else {
                 MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
+
             }
         } catch (NullPointerException exception) {
             Message message = new Message(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT);
