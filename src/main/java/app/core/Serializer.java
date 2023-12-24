@@ -10,5 +10,5 @@ public interface Serializer {
     ProjectNode loadProject(File file);
     DiagramNode loadDiagram(File file);
     void saveProject(ProjectNode node);
-    void saveDiagram(DiagramNode node);
+    void saveDiagram(DiagramNode node, String path);
 }

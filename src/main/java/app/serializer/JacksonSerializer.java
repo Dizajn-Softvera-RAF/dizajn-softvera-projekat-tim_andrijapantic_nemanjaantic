@@ -48,10 +48,10 @@ public class JacksonSerializer implements Serializer {
     }
 
     @Override
-    public void saveDiagram(DiagramNode node) {
+    public void saveDiagram(DiagramNode node, String path) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(new File(node.getPath()), node);
+            objectMapper.writeValue(new File(path), node);
         } catch (IOException e) {
             e.printStackTrace();
         }

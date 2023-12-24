@@ -50,9 +50,8 @@ public class AddToPackageView {
         diagramLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                newDiagramAction = MainFrame.getInstance().getActionManager().getNewDiagramAction();
-                newDiagramAction.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, ""));
                 typePicker.dispose();
+                new DiagramCreationView();
             }
 
             @Override

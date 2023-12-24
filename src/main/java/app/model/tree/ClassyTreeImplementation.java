@@ -125,8 +125,18 @@ public class ClassyTreeImplementation implements ClassyTree {
     }
 
     @Override
-    public void loadDiagram(DiagramNode node) {
+    public void loadTemplate(DiagramNode node) {
+        node.setParent(MainFrame.getInstance().getSelectedNode().getClassyNode());
+        MyNodeMutable loadedTemplate = new MyNodeMutable(node);
+        MainFrame.getInstance().getSelectedNode().add(loadedTemplate);
 
+        ClassyNodeComposite currrentPackage = MainFrame.getInstance().getSelectedNode().getClassyNode();
+        currrentPackage.addChild(node);
+
+        addChildrenToTree(loadedTemplate, node);
+
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     public void addChildrenToTree(MyNodeMutable parentNode, ClassyNodeComposite element) {

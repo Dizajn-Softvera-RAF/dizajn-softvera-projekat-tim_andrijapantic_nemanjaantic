@@ -1,5 +1,9 @@
 package app.controller;
 
+import app.controller.serializerActions.OpenProjectAction;
+import app.controller.serializerActions.SaveProjectAction;
+import app.controller.serializerActions.SaveProjectAsAction;
+import app.controller.serializerActions.SaveTemplateAction;
 import app.controller.state.stateActions.*;
 
 public class ActionManager {
@@ -23,8 +27,10 @@ public class ActionManager {
     private IntoDuplicationState intoDuplicationState;
     private IntoZoomToFitState intoZoomToFitState;
     private ScreenshotAction screenshotAction;
-    private SaveAction saveAction;
-    private OpenAction openAction;
+    private SaveProjectAction saveProjectAction;
+    private OpenProjectAction openAction;
+    private SaveProjectAsAction saveProjectAsAction;
+    private SaveTemplateAction saveTemplateAction;
 
     public ActionManager() {
         initilizeActions();
@@ -50,8 +56,10 @@ public class ActionManager {
         intoDuplicationState = new IntoDuplicationState();
         intoZoomToFitState = new IntoZoomToFitState();
         screenshotAction = new ScreenshotAction();
-        saveAction = new SaveAction();
-        openAction = new OpenAction();
+        saveProjectAction = new SaveProjectAction();
+        openAction = new OpenProjectAction();
+        saveProjectAsAction = new SaveProjectAsAction();
+        saveTemplateAction = new SaveTemplateAction();
     }
 
     public ExitAction getExitAction() {
@@ -205,20 +213,44 @@ public class ActionManager {
         this.screenshotAction = screenshotAction;
     }
 
-    public SaveAction getSaveAction() {
-        return saveAction;
+    public SaveProjectAction getSaveAction() {
+        return saveProjectAction;
     }
 
-    public void setSaveAction(SaveAction saveAction) {
-        this.saveAction = saveAction;
+    public void setSaveAction(SaveProjectAction saveProjectAction) {
+        this.saveProjectAction = saveProjectAction;
     }
 
-    public OpenAction getOpenAction() {
+    public OpenProjectAction getOpenAction() {
         return openAction;
     }
 
-    public void setOpenAction(OpenAction openAction) {
+    public void setOpenAction(OpenProjectAction openAction) {
         this.openAction = openAction;
+    }
+
+    public SaveProjectAction getSaveProjectAction() {
+        return saveProjectAction;
+    }
+
+    public void setSaveProjectAction(SaveProjectAction saveProjectAction) {
+        this.saveProjectAction = saveProjectAction;
+    }
+
+    public SaveProjectAsAction getSaveProjectAsAction() {
+        return saveProjectAsAction;
+    }
+
+    public void setSaveProjectAsAction(SaveProjectAsAction saveProjectAsAction) {
+        this.saveProjectAsAction = saveProjectAsAction;
+    }
+
+    public SaveTemplateAction getSaveTemplateAction() {
+        return saveTemplateAction;
+    }
+
+    public void setSaveTemplateAction(SaveTemplateAction saveTemplateAction) {
+        this.saveTemplateAction = saveTemplateAction;
     }
 }
 

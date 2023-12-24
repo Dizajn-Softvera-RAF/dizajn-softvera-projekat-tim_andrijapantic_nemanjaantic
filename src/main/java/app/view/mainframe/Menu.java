@@ -11,9 +11,11 @@ public class Menu extends JMenuBar {
 
 
         JMenuItem miNew = new JMenuItem("New");
-        JMenuItem miSaveAsImage = new JMenuItem("Save as Image");
-        JMenuItem miSave = new JMenuItem("Save");
-        JMenuItem miOpen = new JMenuItem("Open");
+        JMenuItem miSaveAsImage = new JMenuItem("Save Diagram as Image");
+        JMenuItem miSave = new JMenuItem("Save Project");
+        JMenuItem miSaveAs = new JMenuItem("Save Project As");
+        JMenuItem miOpen = new JMenuItem("Open Project");
+        JMenuItem miSaveTemplate = new JMenuItem("Save Diagram as Template");
         JMenuItem miAboutUs = new JMenuItem("About Us");
         JMenuItem miDelete = new JMenuItem("Delete");
         JMenuItem miChangeAuthor = new JMenuItem("Change Author");
@@ -27,14 +29,18 @@ public class Menu extends JMenuBar {
         miSaveAsImage.addActionListener(MainFrame.getInstance().getActionManager().getScreenshotAction());
         miSave.addActionListener(MainFrame.getInstance().getActionManager().getSaveAction());
         miOpen.addActionListener(MainFrame.getInstance().getActionManager().getOpenAction());
+        miSaveAs.addActionListener(MainFrame.getInstance().getActionManager().getSaveProjectAsAction());
+        miSaveTemplate.addActionListener(MainFrame.getInstance().getActionManager().getSaveTemplateAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);
 
         file.add(miNew);
         file.add(miSave);
-        file.add(miSaveAsImage);
+        file.add(miSaveAs);
         file.add(miOpen);
+        file.add(miSaveAsImage);
+        file.add(miSaveTemplate);
         edit.add(miAboutUs);
         functions.add(miDelete);
         edit.add(miChangeAuthor);

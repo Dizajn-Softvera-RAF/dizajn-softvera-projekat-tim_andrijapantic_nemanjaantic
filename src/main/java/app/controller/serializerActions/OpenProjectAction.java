@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.serializerActions;
 
+import app.controller.AbstractClassyAction;
 import app.core.AppCore;
 import app.model.implementation.ProjectNode;
 import app.view.mainframe.MainFrame;
@@ -9,8 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
-public class OpenAction extends AbstractClassyAction{
-    public OpenAction() {
+public class OpenProjectAction extends AbstractClassyAction {
+    public OpenProjectAction() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                 KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         putValue(NAME, "Open action");
