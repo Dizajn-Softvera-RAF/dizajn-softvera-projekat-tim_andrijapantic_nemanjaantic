@@ -4,6 +4,4 @@ public enum DependencyType {
     INSTANTIATE,
     CALL,
     USE,
-    INCLUDE,
-    EXTEND
 }

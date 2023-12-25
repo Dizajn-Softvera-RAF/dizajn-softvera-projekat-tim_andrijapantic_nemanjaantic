@@ -46,8 +46,6 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
     private List<ISubscriber> subscribers;
     @JsonIgnore
     private MyNodeMutable myNodeMutable;
-    private String path;
-    private boolean changed = true;
 
     public DiagramNode() {
         this.subscribers = new ArrayList<>();
@@ -140,7 +138,6 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
             for (DiagramElement child : getChildren()) {
                 content.append(generateBody(child));
             }
-            System.out.println(content.toString());
             writer.write(content.toString());
             writer.close();
         } catch (IOException e) {
@@ -158,11 +155,65 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
                 interklasa = "interface";
             else if (element.getClass().getSimpleName().equalsIgnoreCase("enumcomp"))
                 interklasa = "enum";
-            content.append("public " + interklasa + " " + element.getName() + " {\n\n");
+            String extensions = generateExtensions((Interclass) element);
+            content.append("public " + interklasa + " " + element.getName() + extensions + " {\n\n");
             content.append(generateContent((Interclass)element));
             content.append("}\n\n");
         }
         return content.toString();
+    }
+
+    private String generateExtensions(Interclass element) {
+        StringBuilder finalBuilder = new StringBuilder();
+        StringBuilder extensionsBuilder = new StringBuilder();
+        StringBuilder implementationsBuilder = new StringBuilder();
+        boolean anyExtentionFlag = false;
+        boolean anyImplementationFlag = false;
+        for (DiagramElement child: getChildren()) {
+            if (child instanceof Generalization && ((Generalization) child).getFromInterclass().equals(element)) {
+              if (((Generalization) child).getExtentionType().equals("extend") && extensionsBuilder.length()==0) {
+                  extensionsBuilder.append(" extends ");
+
+
+              } else  if (((Generalization) child).getExtentionType().equals("implement") && implementationsBuilder.length()==0) {
+                  implementationsBuilder.append(" implements ");
+              }
+            }
+        }
+        for (DiagramElement child: getChildren()) {
+            if (child instanceof Generalization && ((Generalization) child).getFromInterclass().equals(element)) {
+                if (element instanceof Klasa) {
+                    if (((Generalization) child).getExtentionType().equals("implement")) {
+                        if (!anyImplementationFlag) {
+                            implementationsBuilder.append(((Generalization) child).getToInterclass().getName());
+                            anyImplementationFlag = true;
+                        } else
+                            implementationsBuilder.append("," + ((Generalization) child).getToInterclass().getName());
+                    }
+                    if (((Generalization) child).getExtentionType().equals("extend")) {
+                        if (!anyExtentionFlag ) {
+                            extensionsBuilder.append(((Generalization) child).getToInterclass().getName());
+                            anyExtentionFlag = true;
+                        }
+                    }
+                } else if (element instanceof Interface) {
+                    if (((Generalization) child).getExtentionType().equals("extend")) {
+                        if (!anyExtentionFlag ) {
+                            extensionsBuilder.append(((Generalization) child).getToInterclass().getName());
+                            anyExtentionFlag  = true;
+                        } else
+                            extensionsBuilder.append("," + ((Generalization) child).getToInterclass().getName());
+                    }
+                }
+
+
+            }
+        }
+        if (anyExtentionFlag)
+            finalBuilder.append(extensionsBuilder + " ");
+        if (anyImplementationFlag)
+            finalBuilder.append(implementationsBuilder + " ");
+        return finalBuilder.toString();
     }
 
     public String generateContent(Interclass element) {
@@ -182,6 +233,8 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
                 }
             }
             contentBuilder.append("\n\n");
+            contentBuilder.append("\tpublic " + element.getName() + "() {\n\t}");
+            contentBuilder.append("\n\n");
             for (ClassContent content:  element.getContent()) {
                 if (content instanceof Method) {
                     if (content.getVisibility().equals(Visibility.PUBLIC))
@@ -190,8 +243,10 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
                         visibility = "private";
                     else if (content.getVisibility().equals(Visibility.PROTECTED))
                         visibility = "protected";
-                    contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn " + content.getType() +";\n\t}\n");
-
+                    if (!content.getType().equalsIgnoreCase("void"))
+                        contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn " + content.getType() +";\n\t}\n");
+                    else
+                        contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn;\n\t}\n");
                 }
             }
         }
@@ -211,13 +266,6 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         return contentBuilder.toString();
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 
     @Override
     public void addSubscriber(ISubscriber sub) {
@@ -253,11 +301,4 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         this.myNodeMutable = myNodeMutable;
     }
 
-    public boolean isChanged() {
-        return changed;
-    }
-
-    public void setChanged(boolean changed) {
-        this.changed = changed;
-    }
 }

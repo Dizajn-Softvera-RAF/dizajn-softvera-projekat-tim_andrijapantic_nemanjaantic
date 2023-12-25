@@ -6,9 +6,6 @@ import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.Dependency;
 import app.model.diagimplementation.connection.Generalization;
-import app.model.diagimplementation.interclass.EnumComp;
-import app.model.diagimplementation.interclass.Interface;
-import app.model.diagimplementation.interclass.Klasa;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -33,6 +30,8 @@ public abstract class Connection extends DiagramElement {
 
     private Point startPoint;
     private  Point endPoint;
+    private ArrayList<Integer> listaDodatihKardinalnosti  = new ArrayList<>();
+    private String extentionType;
 
     public Connection(String name, AbstractClassyNode parent, Color color, Integer lineWidth) {
         super(name, parent);
@@ -96,5 +95,21 @@ public abstract class Connection extends DiagramElement {
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
         notifySubscribers(new Notification(NotificationType.PAINTER_STATE_CHANGED));
+    }
+
+    public ArrayList<Integer> getListaDodatihKardinalnosti() {
+        return listaDodatihKardinalnosti;
+    }
+
+    public void setListaDodatihKardinalnosti(ArrayList<Integer> listaDodatihKardinalnosti) {
+        this.listaDodatihKardinalnosti = listaDodatihKardinalnosti;
+    }
+
+    public String getExtentionType() {
+        return extentionType;
+    }
+
+    public void setExtentionType(String extentionType) {
+        this.extentionType = extentionType;
     }
 }

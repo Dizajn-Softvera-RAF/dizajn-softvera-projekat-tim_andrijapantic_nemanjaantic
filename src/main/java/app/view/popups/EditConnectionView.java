@@ -78,12 +78,10 @@ public class EditConnectionView extends JFrame {
         interclasses[0] = element.getFromInterclass().getName();
         interclasses[1] = element.getToInterclass().getName();
 
-        String[] dependencyTypes = new String[5];
+        String[] dependencyTypes = new String[3];
         dependencyTypes[0] = "INSTANTATE";
         dependencyTypes[1] = "CALL";
         dependencyTypes[2] = "USE";
-        dependencyTypes[3] = "INCLUDE";
-        dependencyTypes[4] = "EXTEND";
 
         JLabel createNewCardinalitiesLbl = new JLabel("Create a new Cardinality: ");
 
@@ -203,13 +201,16 @@ public class EditConnectionView extends JFrame {
                 if (element instanceof Aggregation) {
                     Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
                     ((Aggregation) element).getCardinalitiesList().add(cardinality);
-
+                    element.getFromInterclass().getContent().add(newAttribute);
+                    element.getListaDodatihKardinalnosti().add(element.getFromInterclass().getContent().indexOf(newAttribute));
                     cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);
                 }
                 if (element instanceof Composition) {
                     Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
                     ((Composition) element).getCardinalitiesList().add(cardinality);
+                    element.getFromInterclass().getContent().add(newAttribute);
+                    element.getListaDodatihKardinalnosti().add(element.getFromInterclass().getContent().indexOf(newAttribute));
                     cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);
                 }
@@ -236,11 +237,6 @@ public class EditConnectionView extends JFrame {
                         dependencyType = DependencyType.USE;
                         break;
                     case 3:
-                        dependencyType = DependencyType.INCLUDE;
-                        break;
-                    case 4:
-                        dependencyType = DependencyType.EXTEND;
-                        break;
                 }
                 Dependencies dependencyToAdd = new Dependencies(element.getFromInterclass(), element.getToInterclass(), dependencyType);
                 ((Dependency) element).getDependencies().add(dependencyToAdd);
@@ -262,6 +258,7 @@ public class EditConnectionView extends JFrame {
                         ((Composition) element).getCardinalitiesList().remove(indexForDeletion);
                         cardinalities.remove(indexForDeletion);
                     }
+                    element.getFromInterclass().getContent().remove(element.getFromInterclass().getContent().get(element.getListaDodatihKardinalnosti().get(indexForDeletion)));
                     refreshCurrentCardinalities(cardinalities);
                 }
 

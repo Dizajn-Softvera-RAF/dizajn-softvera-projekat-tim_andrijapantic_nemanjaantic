@@ -7,6 +7,7 @@ import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.Dependency;
 import app.model.diagimplementation.connection.Generalization;
+import app.model.diagimplementation.interclass.Interface;
 import app.model.diagimplementation.interclass.Klasa;
 import app.view.mainframe.DiagramView;
 import app.view.mainframe.MainFrame;
@@ -119,10 +120,22 @@ public class AddConnectionState implements State {
                             isOnInterclass = false;
                         else {
                             isOnInterclass = true;
+
                             diagramView.getCurrentLink().setToInterclass((Interclass) elementPainter.getElement());
                             Point[] tacke = diagramView.getTwoClosestPoints(startPoints, ((Interclass) elementPainter.getElement()).getConnectionsDots());
                             diagramView.getCurrentLink().setStartPoint(tacke[0]);
                             diagramView.getCurrentLink().setEndPoint(tacke[1]);
+                            if (diagramView.getCurrentLink() instanceof Generalization) {
+                                if (diagramView.getCurrentLink().getFromInterclass() instanceof Klasa &&
+                                        diagramView.getCurrentLink().getToInterclass() instanceof Klasa)
+                                    diagramView.getCurrentLink().setExtentionType("extend");
+                                else if (diagramView.getCurrentLink().getFromInterclass() instanceof Klasa &&
+                                        diagramView.getCurrentLink().getToInterclass() instanceof Interface)
+                                    diagramView.getCurrentLink().setExtentionType("implement");
+                                else if (diagramView.getCurrentLink().getFromInterclass() instanceof Interface &&
+                                        diagramView.getCurrentLink().getToInterclass() instanceof Interface)
+                                    diagramView.getCurrentLink().setExtentionType("extend");
+                            }
 
                         }
                         break;
