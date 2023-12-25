@@ -20,6 +20,7 @@ public class DeleteState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+        System.out.println("Trenutan DiagramView: " + diagramView);
         for (ElementPainter elementPainter : diagramView.getElementPainters()) {
             if (elementPainter.getElement() instanceof Connection && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                 isConnection = true;

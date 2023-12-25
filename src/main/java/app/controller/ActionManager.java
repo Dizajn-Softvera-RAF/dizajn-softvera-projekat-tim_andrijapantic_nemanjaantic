@@ -31,6 +31,7 @@ public class ActionManager {
     private OpenProjectAction openAction;
     private SaveProjectAsAction saveProjectAsAction;
     private SaveTemplateAction saveTemplateAction;
+    private CodeGenerationAction codeGenerationAction;
 
     public ActionManager() {
         initilizeActions();
@@ -60,6 +61,7 @@ public class ActionManager {
         openAction = new OpenProjectAction();
         saveProjectAsAction = new SaveProjectAsAction();
         saveTemplateAction = new SaveTemplateAction();
+        codeGenerationAction = new CodeGenerationAction();
     }
 
     public ExitAction getExitAction() {
@@ -251,6 +253,14 @@ public class ActionManager {
 
     public void setSaveTemplateAction(SaveTemplateAction saveTemplateAction) {
         this.saveTemplateAction = saveTemplateAction;
+    }
+
+    public CodeGenerationAction getCodeGenerationAction() {
+        return codeGenerationAction;
+    }
+
+    public void setCodeGenerationAction(CodeGenerationAction codeGenerationAction) {
+        this.codeGenerationAction = codeGenerationAction;
     }
 }
 

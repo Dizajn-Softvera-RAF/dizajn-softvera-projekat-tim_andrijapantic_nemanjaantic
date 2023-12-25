@@ -100,8 +100,12 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
         if (notification.getType().equals(NotificationType.PAINTER_POSITION_CHANGED)) {
             for (ElementPainter e : elementPainters) {
+                System.out.println("Proso sam kroz element: " + e.getElement().getName());
                 if (e.getElement() instanceof Connection) {
                     Point[] points = getTwoClosestPoints(((Connection) e.getElement()).getFromInterclass().getConnectionsDots(), ((Connection) e.getElement()).getToInterclass().getConnectionsDots());
+                    System.out.println(points);
+                    System.out.println(points[0]);
+                    System.out.println(points[1]);
                     ((Connection) e.getElement()).setStartPoint(points[0]);
                     ((Connection) e.getElement()).setEndPoint(points[1]);
                 }

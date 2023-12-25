@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.io.File;
 import java.util.ArrayList;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
@@ -38,6 +39,18 @@ public class PackageNode extends ClassyNodeComposite<ClassyNodeComposite> implem
             MyNodeMutable childNode = (MyNodeMutable) node.getChildAt(i);
             MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(new Notification(NotificationType.DELETE_DIAGRAM, childNode.getClassyNode().getId()));
             prodjiKrozDecu(childNode);
+        }
+    }
+
+    public void generateCodeStructure(String path) {
+        File packageFolder = new File(path, getName().toLowerCase());
+        packageFolder.mkdirs();
+        for (ClassyNodeComposite child : getChildren()) {
+            if (child instanceof PackageNode) {
+                ((PackageNode)child).generateCodeStructure(packageFolder.getAbsolutePath());
+            } else if (child instanceof DiagramNode) {
+                ((DiagramNode)child).generateFile(packageFolder.getAbsolutePath());
+            }
         }
     }
 

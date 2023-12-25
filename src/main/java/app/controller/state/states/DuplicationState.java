@@ -23,6 +23,7 @@ public class DuplicationState implements State {
     private ElementPainter painterToCreate;
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
+        System.out.println("Trenutan DiagramView: " + diagramView);
         for(ElementPainter elementPainter: diagramView.getElementPainters()){
             if(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
                 System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());
@@ -43,6 +44,7 @@ public class DuplicationState implements State {
                     newKlasa.setInitialColor(copyFrom.getInitialColor());
                     newKlasa.setCurrentColor(copyFrom.getCurrentColor());
                     newKlasa.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newKlasa));
+                    System.out.println("NodeMuutable je: " + newKlasa.getMyNodeMutable().getClassyNode().getName());
                     newKlasa.addSubscriber(diagramView);
                     painterToCreate = new ClassPainter(newKlasa);
                     painterToCreate.setElement(newKlasa);
@@ -60,6 +62,7 @@ public class DuplicationState implements State {
                     newInterface.setInitialColor(copyFrom.getInitialColor());
                     newInterface.setCurrentColor(copyFrom.getCurrentColor());
                     newInterface.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newInterface));
+                    System.out.println("NodeMuutable je: " + newInterface.getMyNodeMutable().getClassyNode().getName());
                     newInterface.addSubscriber(diagramView);
                     painterToCreate = new InterfacePainter(newInterface);
                     painterToCreate.setElement(newInterface);
@@ -77,6 +80,7 @@ public class DuplicationState implements State {
                     newEnum.setInitialColor(copyFrom.getInitialColor());
                     newEnum.setCurrentColor(copyFrom.getCurrentColor());
                     newEnum.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), newEnum));
+                    System.out.println("NodeMuutable je: " + newEnum.getMyNodeMutable().getClassyNode().getName());
                     newEnum.addSubscriber(diagramView);
                     painterToCreate = new EnumPainter(newEnum);
                     painterToCreate.setElement(newEnum);

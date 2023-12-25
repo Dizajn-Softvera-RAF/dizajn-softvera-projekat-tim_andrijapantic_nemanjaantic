@@ -2,12 +2,12 @@ package app.model.implementation;
 
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
-import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.Dependency;
@@ -21,15 +21,12 @@ import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
-import app.view.tabs.TabbedPane;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@class")
@@ -125,6 +122,15 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
             this.getChildren().remove(child);
             notifySubscribers(new Notification(NotificationType.PAINTER_REMOVED));
         }
+    }
+
+    public void generateFile(String path) {
+        File file = new File(path, getName() + ".txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+        }
+
     }
 
     public String getPath() {

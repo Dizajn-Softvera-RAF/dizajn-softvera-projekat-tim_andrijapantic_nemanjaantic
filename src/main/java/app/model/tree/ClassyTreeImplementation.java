@@ -4,6 +4,11 @@ import app.core.AppCore;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagimplementation.connection.Aggregation;
+import app.model.diagimplementation.connection.Composition;
+import app.model.diagimplementation.connection.Dependency;
+import app.model.diagimplementation.connection.Generalization;
+import app.model.diagimplementation.interclass.*;
 import app.model.implementation.*;
 import app.view.mainframe.MainFrame;
 import app.view.tree.ClassyTreeView;
@@ -45,8 +50,36 @@ public class ClassyTreeImplementation implements ClassyTree {
     }
 
     public MyNodeMutable addExistingChild(MyNodeMutable element, ClassyNodeComposite child) {
+            MyNodeMutable toReturn = null;
+            if (child instanceof PackageNode) {
+                PackageNode childToCreate = (PackageNode) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof DiagramNode) {
+                DiagramNode childToCreate = (DiagramNode) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Klasa) {
+                Klasa childToCreate = (Klasa) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Interface) {
+                Interface childToCreate = (Interface) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof EnumComp) {
+                EnumComp childToCreate = (EnumComp) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Aggregation) {
+                Aggregation childToCreate = (Aggregation) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Composition) {
+                Composition childToCreate = (Composition) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Dependency) {
+                Dependency childToCreate = (Dependency) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            } else if (child instanceof Generalization) {
+                Generalization childToCreate = (Generalization) child;
+                toReturn = new MyNodeMutable(childToCreate);
+            }
 
-            MyNodeMutable toReturn = new MyNodeMutable(child);
             element.add(toReturn);
             element.getClassyNode().addChild(child);
             treeView.expandPath(treeView.getSelectionPath());
@@ -146,6 +179,8 @@ public class ClassyTreeImplementation implements ClassyTree {
             parentNode.add(childNode);
             if (childNode.getClassyNode() instanceof DiagramElement) {
                 ((DiagramElement) childNode.getClassyNode()).setMyNodeMutable(childNode);
+            } else if (childNode.getClassyNode() instanceof DiagramNode) {
+                ((DiagramNode) childNode.getClassyNode()).setMyNodeMutable(childNode);
             }
             addChildrenToTree(childNode, (ClassyNodeComposite) child);
         }

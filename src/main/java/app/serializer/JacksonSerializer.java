@@ -3,7 +3,6 @@ package app.serializer;
 import app.core.Serializer;
 import app.model.implementation.DiagramNode;
 import app.model.implementation.ProjectNode;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
