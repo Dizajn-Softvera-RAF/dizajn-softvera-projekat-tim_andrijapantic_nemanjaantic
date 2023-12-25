@@ -1,13 +1,20 @@
 package app.model.implementation;
 
+import app.model.classcontent.Attribute;
+import app.model.classcontent.ClassContent;
+import app.model.classcontent.Method;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
 import app.model.diagcomposite.DiagramElement;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import app.model.diagcomposite.Interclass;
+import app.model.diagcomposite.Visibility;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.Dependency;
@@ -128,9 +135,80 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         File file = new File(path, getName() + ".txt");
         try {
             file.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            StringBuilder content = new StringBuilder();
+            for (DiagramElement child : getChildren()) {
+                content.append(generateBody(child));
+            }
+            System.out.println(content.toString());
+            writer.write(content.toString());
+            writer.close();
         } catch (IOException e) {
         }
 
+    }
+
+    public String generateBody(DiagramElement element) {
+        StringBuilder content = new StringBuilder();
+        if (element instanceof Interclass) {
+            String interklasa = "";
+            if (element.getClass().getSimpleName().equalsIgnoreCase("klasa"))
+                interklasa = "class";
+            else if (element.getClass().getSimpleName().equalsIgnoreCase("interface"))
+                interklasa = "interface";
+            else if (element.getClass().getSimpleName().equalsIgnoreCase("enumcomp"))
+                interklasa = "enum";
+            content.append("public " + interklasa + " " + element.getName() + " {\n\n");
+            content.append(generateContent((Interclass)element));
+            content.append("}\n\n");
+        }
+        return content.toString();
+    }
+
+    public String generateContent(Interclass element) {
+        StringBuilder contentBuilder = new StringBuilder();
+        if (element instanceof Klasa) {
+            String visibility = null;
+            for (ClassContent content:  element.getContent()) {
+                if (content instanceof Attribute) {
+                    if (content.getVisibility().equals(Visibility.PUBLIC))
+                        visibility = "public";
+                    else if (content.getVisibility().equals(Visibility.PRIVATE))
+                        visibility = "private";
+                    else if (content.getVisibility().equals(Visibility.PROTECTED))
+                        visibility = "protected";
+                    contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + ";\n");
+
+                }
+            }
+            contentBuilder.append("\n\n");
+            for (ClassContent content:  element.getContent()) {
+                if (content instanceof Method) {
+                    if (content.getVisibility().equals(Visibility.PUBLIC))
+                        visibility = "public";
+                    else if (content.getVisibility().equals(Visibility.PRIVATE))
+                        visibility = "private";
+                    else if (content.getVisibility().equals(Visibility.PROTECTED))
+                        visibility = "protected";
+                    contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn " + content.getType() +";\n\t}\n");
+
+                }
+            }
+        }
+        else if (element instanceof Interface) {
+            for (ClassContent content:  element.getContent()) {
+                contentBuilder.append("\t"+content.getType() + " " + content.getName() + "();\n");
+            }
+        } else if (element instanceof EnumComp) {
+            for (ClassContent content:  element.getContent()) {
+                if (!content.equals(element.getContent().get(element.getContent().size()-1)))
+                    contentBuilder.append("\t" + content.getName() + ",\n");
+                else
+                    contentBuilder.append("\t" + content.getName() + "\n");
+            }
+        }
+        contentBuilder.append("\n\n");
+        return contentBuilder.toString();
     }
 
     public String getPath() {
