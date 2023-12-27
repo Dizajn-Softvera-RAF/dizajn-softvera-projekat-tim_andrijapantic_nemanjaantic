@@ -3,7 +3,9 @@ package app.model.tree;
 import app.core.AppCore;
 import app.model.composite.AbstractClassyNode;
 import app.model.composite.ClassyNodeComposite;
+import app.model.diagcomposite.Connection;
 import app.model.diagcomposite.DiagramElement;
+import app.model.diagcomposite.Interclass;
 import app.model.diagimplementation.connection.Aggregation;
 import app.model.diagimplementation.connection.Composition;
 import app.model.diagimplementation.connection.Dependency;
@@ -181,6 +183,16 @@ public class ClassyTreeImplementation implements ClassyTree {
                 ((DiagramElement) childNode.getClassyNode()).setMyNodeMutable(childNode);
             } else if (childNode.getClassyNode() instanceof DiagramNode) {
                 ((DiagramNode) childNode.getClassyNode()).setMyNodeMutable(childNode);
+            }
+            if (childNode.getClassyNode() instanceof Connection) {
+                for (DiagramElement diagramElement: ((DiagramNode)parentNode.getClassyNode()).getChildren()) {
+                    if (diagramElement instanceof Interclass) {
+                        if (((Interclass)diagramElement).getPosition().equals(((Connection) childNode.getClassyNode()).getFromInterclass().getPosition()))
+                            ((Connection) childNode.getClassyNode()).setFromInterclass((Interclass)diagramElement);
+                        else if (((Interclass)diagramElement).getPosition().equals(((Connection) childNode.getClassyNode()).getToInterclass().getPosition()))
+                            ((Connection) childNode.getClassyNode()).setToInterclass((Interclass)diagramElement);
+                    }
+                }
             }
             addChildrenToTree(childNode, (ClassyNodeComposite) child);
         }

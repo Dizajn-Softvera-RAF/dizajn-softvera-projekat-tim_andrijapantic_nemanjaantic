@@ -135,6 +135,7 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
             file.createNewFile();
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             StringBuilder content = new StringBuilder();
+            content.append(generatePackage());
             for (DiagramElement child : getChildren()) {
                 content.append(generateBody(child));
             }
@@ -143,6 +144,28 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         } catch (IOException e) {
         }
 
+    }
+
+    public String generatePackage() {
+        ArrayList<String> packageNames = new ArrayList<>();
+        StringBuilder packageBuilder = new StringBuilder();
+        AbstractClassyNode currentNode = this;
+        packageBuilder.append("package ");
+        while (!(currentNode instanceof ProjectNode)) {
+            AbstractClassyNode temp;
+            temp = currentNode.getParent();
+            packageNames.add(temp.getName());
+            currentNode = temp;
+        }
+        packageNames.remove(packageNames.size()-1);
+        for (int i=packageNames.size()-1; i>=0; i--) {
+            if (i==packageNames.size()-1)
+                packageBuilder.append(packageNames.get(i).toLowerCase());
+            else
+            packageBuilder.append("."+packageNames.get(i).toLowerCase());
+        }
+        packageBuilder.append(";\n\n");
+        return packageBuilder.toString();
     }
 
     public String generateBody(DiagramElement element) {
@@ -212,7 +235,7 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         if (anyExtentionFlag)
             finalBuilder.append(extensionsBuilder + " ");
         if (anyImplementationFlag)
-            finalBuilder.append(implementationsBuilder + " ");
+            finalBuilder.append(implementationsBuilder);
         return finalBuilder.toString();
     }
 
@@ -249,10 +272,45 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
                         contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn;\n\t}\n");
                 }
             }
+            for (DiagramElement child: getChildren()) {
+                if (child instanceof Generalization && ((Generalization)child).getFromInterclass().getPosition().equals(element.getPosition())) {
+                    for (ClassContent content:  ((Generalization)child).getToInterclass().getContent()) {
+                        if (content instanceof Method) {
+                            if (content.getVisibility().equals(Visibility.PUBLIC))
+                                visibility = "public";
+                            else if (content.getVisibility().equals(Visibility.PRIVATE))
+                                visibility = "private";
+                            else if (content.getVisibility().equals(Visibility.PROTECTED))
+                                visibility = "protected";
+                            if (!sameMethodExists(element, (Method)content)) {
+                                if (!content.getType().equalsIgnoreCase("void"))
+                                    contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn " + content.getType() +";\n\t}\n");
+                                else
+                                    contentBuilder.append("\t"+visibility+" "+content.getType() + " " + content.getName() + "() {\n\t\treturn;\n\t}\n");
+                            }
+                        }
+                    }
+
+                }
+            }
         }
         else if (element instanceof Interface) {
             for (ClassContent content:  element.getContent()) {
                 contentBuilder.append("\t"+content.getType() + " " + content.getName() + "();\n");
+            }
+            for (DiagramElement child: getChildren()) {
+
+                if (child instanceof Generalization && ((Generalization)child).getToInterclass() instanceof Interface
+                        && ((Generalization)child).getFromInterclass().getPosition().equals(element.getPosition())) {
+                    for (ClassContent content:  ((Generalization)child).getToInterclass().getContent()) {
+                        if (content instanceof Method) {
+                            if (!sameMethodExists(element, (Method)content)) {
+                                contentBuilder.append("\t"+content.getType() + " " + content.getName() + "();\n");
+                            }
+                        }
+                    }
+
+                }
             }
         } else if (element instanceof EnumComp) {
             for (ClassContent content:  element.getContent()) {
@@ -264,6 +322,15 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         }
         contentBuilder.append("\n\n");
         return contentBuilder.toString();
+    }
+
+    private boolean sameMethodExists(Interclass element, Method method) {
+        for (ClassContent content: element.getContent()) {
+            if (content instanceof Method && content.getName().equals(method.getName())
+                    && content.getType().equals(method.getType()) && content.getVisibility().equals(method.getVisibility()))
+                return true;
+        }
+        return false;
     }
 
 

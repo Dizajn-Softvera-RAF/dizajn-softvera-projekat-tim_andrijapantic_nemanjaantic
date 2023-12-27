@@ -201,7 +201,7 @@ public class EditConnectionView extends JFrame {
                 if (element instanceof Aggregation) {
                     Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
                     ((Aggregation) element).getCardinalitiesList().add(cardinality);
-                    element.getFromInterclass().getContent().add(newAttribute);
+                    element.getFromInterclass().addNewContent(newAttribute);
                     element.getListaDodatihKardinalnosti().add(element.getFromInterclass().getContent().indexOf(newAttribute));
                     cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);
@@ -209,7 +209,7 @@ public class EditConnectionView extends JFrame {
                 if (element instanceof Composition) {
                     Cardinality cardinality = new Cardinality(newCardinalityType, element.getFromInterclass(), objectInstantiated, newAttribute);
                     ((Composition) element).getCardinalitiesList().add(cardinality);
-                    element.getFromInterclass().getContent().add(newAttribute);
+                    element.getFromInterclass().addNewContent(newAttribute);
                     element.getListaDodatihKardinalnosti().add(element.getFromInterclass().getContent().indexOf(newAttribute));
                     cardinalities.add(cardinality.toString());
                     refreshCurrentCardinalities(cardinalities);

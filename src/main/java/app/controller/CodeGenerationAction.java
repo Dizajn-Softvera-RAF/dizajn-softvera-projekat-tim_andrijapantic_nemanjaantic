@@ -21,7 +21,7 @@ public class CodeGenerationAction extends AbstractClassyAction{
             ProjectNode projectNode = (ProjectNode)MainFrame.getInstance().getSelectedNode().getClassyNode();
             File projectFolder = new File(path, projectNode.getName());
             projectFolder.mkdirs();
-            System.out.println("Napravljen projekat" + projectNode.getName() + "na putanji: " + projectFolder.getAbsolutePath());
+            System.out.println("Napravljen projekat " + projectNode.getName() + " na putanji: " + projectFolder.getAbsolutePath());
             for (PackageNode packageNode: projectNode.getChildren()) {
                 packageNode.generateCodeStructure(projectFolder.getAbsolutePath());
             }

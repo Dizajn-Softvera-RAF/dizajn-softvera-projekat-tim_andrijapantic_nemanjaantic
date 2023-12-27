@@ -183,7 +183,7 @@ public class EditInterclassView extends JFrame {
                         Visibility visibility;
                         if (changeVisibilityBox.getSelectedItem().equals("Private"))
                             visibility = Visibility.PRIVATE;
-                        else if (changeVisibilityBox.getSelectedItem().equals("Private"))
+                        else if (changeVisibilityBox.getSelectedItem().equals("Public"))
                             visibility = Visibility.PUBLIC;
                         else
                             visibility = Visibility.PROTECTED;

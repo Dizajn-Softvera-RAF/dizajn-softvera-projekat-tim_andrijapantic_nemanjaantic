@@ -18,7 +18,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
-public class PackageView extends JPanel implements ISubscriber {
+public class  PackageView extends JPanel implements ISubscriber {
     JLabel autorJe = new JLabel();
     JLabel projekatJe = new JLabel();
     JLabel pathJe = new JLabel();

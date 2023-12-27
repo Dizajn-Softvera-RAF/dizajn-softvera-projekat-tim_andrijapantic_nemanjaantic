@@ -68,31 +68,24 @@ public class DiagramView extends JPanel implements ISubscriber {
                 if (element instanceof Klasa) {
                     getElementPainters().add(new ClassPainter((Klasa)element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Interface){
                     getElementPainters().add(new InterfacePainter((Interface)element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof EnumComp){
                     getElementPainters().add(new EnumPainter((EnumComp)element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Aggregation){
                     getElementPainters().add(0, new AggregationPainter((Aggregation)element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Composition){
                     getElementPainters().add(0, new CompositionPainter((Composition) element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Generalization){
                     getElementPainters().add(0, new GeneralizationPainter((Generalization) element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 } else if(element instanceof Dependency){
                     getElementPainters().add(0, new DependencyPainter((Dependency) element));
                     element.addSubscriber(this);
-                    System.out.println("Dodao sam element: " + element.getName());
                 }
 
             }
@@ -100,7 +93,6 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
         if (notification.getType().equals(NotificationType.PAINTER_POSITION_CHANGED)) {
             for (ElementPainter e : elementPainters) {
-                System.out.println("Proso sam kroz element: " + e.getElement().getName());
                 if (e.getElement() instanceof Connection) {
                     Point[] points = getTwoClosestPoints(((Connection) e.getElement()).getFromInterclass().getConnectionsDots(), ((Connection) e.getElement()).getToInterclass().getConnectionsDots());
                     System.out.println(points);
