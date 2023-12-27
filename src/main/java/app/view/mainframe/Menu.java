@@ -20,6 +20,7 @@ public class Menu extends JMenuBar {
         JMenuItem miDelete = new JMenuItem("Delete");
         JMenuItem miChangeAuthor = new JMenuItem("Change Author");
         JMenuItem miChangePath = new JMenuItem("Change Path");
+        JMenuItem miGenerate = new JMenuItem("Generate Code For Project");
 
         miNew.addActionListener(MainFrame.getInstance().getActionManager().getNewProjectAction());
         miChangeAuthor.addActionListener(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
@@ -31,6 +32,7 @@ public class Menu extends JMenuBar {
         miOpen.addActionListener(MainFrame.getInstance().getActionManager().getOpenAction());
         miSaveAs.addActionListener(MainFrame.getInstance().getActionManager().getSaveProjectAsAction());
         miSaveTemplate.addActionListener(MainFrame.getInstance().getActionManager().getSaveTemplateAction());
+        miGenerate.addActionListener(MainFrame.getInstance().getActionManager().getCodeGenerationAction());
 
         JSeparator seperator = new JSeparator();
         seperator.setOpaque(true);
@@ -43,6 +45,7 @@ public class Menu extends JMenuBar {
         file.add(miSaveTemplate);
         edit.add(miAboutUs);
         functions.add(miDelete);
+        functions.add(miGenerate);
         edit.add(miChangeAuthor);
         edit.add(miChangePath);
 

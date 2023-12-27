@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
@@ -22,9 +23,8 @@ public class DeleteAction extends AbstractClassyAction{
         try {
             MyNodeMutable nodeToDelete = MainFrame.getInstance().getSelectedNode();
             if (nodeToDelete.getClassyNode() instanceof ProjectExplorer) {
-                Message message = new Message(PossibleErr.CANNOT_DELETE_PROJECT_EXPLORER);
-                MessageGenerator msggenerator = new MessageGenerator();
-                msggenerator.generateMsg(message);
+                AppCore.getInstance().showMessage(PossibleErr.CANNOT_DELETE_PROJECT_EXPLORER);
+                
             }
             else {
                 DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
@@ -40,9 +40,8 @@ public class DeleteAction extends AbstractClassyAction{
 
         } catch (NullPointerException exception) {
 
-            Message message = new Message(PossibleErr.CANNOT_DELETE_ELEMENT);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.CANNOT_DELETE_ELEMENT);
+            
 
         }
     }

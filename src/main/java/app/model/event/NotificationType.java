@@ -2,7 +2,6 @@ package app.model.event;
 
 public enum NotificationType {
     RENAME,
-    DELETE_PROJECT,
     DELETE_DIAGRAM,
     DELETE_PACKAGE,
     CHANGE_AUTHOR,

@@ -1,6 +1,7 @@
 package app.controller.diagramActions;
 
 import app.controller.AbstractClassyAction;
+import app.core.AppCore;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.message.Message;
@@ -64,9 +65,8 @@ public class DoubleClickAction extends AbstractClassyAction implements MouseList
             }
         } catch (NullPointerException exception) {
 
-            Message message = new Message(PossibleErr.ONLY_USE_DOUBLE_CLICK_ON_NODES);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.ONLY_USE_DOUBLE_CLICK_ON_NODES);
+            
 
         }
     }

@@ -3,6 +3,7 @@ package app.controller.state.states;
 import app.model.diagcomposite.Interclass;
 import app.controller.state.State;
 import app.view.mainframe.DiagramView;
+import app.view.mainframe.MainFrame;
 import app.view.painters.ElementPainter;
 
 import java.awt.*;
@@ -81,6 +82,7 @@ public class MoveState implements State {
             }
             lastPointX = (int) diagramView.getAbsolutePoint(x, y).getX();
             lastPointY = (int) diagramView.getAbsolutePoint(x, y).getY();
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
         } else {
             Point endPoint = diagramView.getAbsolutePoint(x, y);
             double deltaX = -(startPoint.x - endPoint.getX());
@@ -114,7 +116,7 @@ public class MoveState implements State {
                 System.out.println("Validan");
                 ((Interclass) diagramView.getElementPainters().get(selectedElementIndex).getElement()).setPosition(diagramView.getAbsolutePoint(x, y));
             }
-
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
         }
         selectedElementIndex = -1;
         movingElements = false;

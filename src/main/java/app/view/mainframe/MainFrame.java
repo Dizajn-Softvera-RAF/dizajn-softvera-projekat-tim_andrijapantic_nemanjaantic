@@ -6,6 +6,7 @@ import app.core.AppCore;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
+import app.model.implementation.ProjectNode;
 import app.model.tree.ClassyTreeImplementation;
 import app.model.tree.MyNodeMutable;
 import app.view.popups.MessagePane;
@@ -28,6 +29,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private StateToolBar stateToolBar;
     private String childToCreateType;
     private PackageView packageView;
+    private ProjectNode currentProject;
     private int connectionType = 0;
 
     public static MainFrame getInstance() {
@@ -180,5 +182,13 @@ public class MainFrame extends JFrame implements ISubscriber {
 
     public void setPackageView(PackageView packageView) {
         this.packageView = packageView;
+    }
+
+    public ProjectNode getCurrentProject() {
+        return currentProject;
+    }
+
+    public void setCurrentProject(ProjectNode currentProject) {
+        this.currentProject = currentProject;
     }
 }

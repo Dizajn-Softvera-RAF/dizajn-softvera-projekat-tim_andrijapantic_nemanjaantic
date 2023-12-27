@@ -15,7 +15,7 @@ public class ScreenshotAction extends AbstractClassyAction{
     public ScreenshotAction() {
         putValue(SMALL_ICON, loadIcon("/images/screenshot.png"));
         putValue(NAME, "Screenshot");
-        putValue(SHORT_DESCRIPTION, "Screenshot");
+        putValue(SHORT_DESCRIPTION, "Save Diagram As Picture");
     }
     @Override
     public void actionPerformed(ActionEvent e) {

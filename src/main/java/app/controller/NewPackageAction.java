@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
@@ -10,8 +11,6 @@ import app.model.implementation.PackageNode;
 import java.awt.event.ActionEvent;
 
 public class NewPackageAction extends AbstractClassyAction{
-
-     boolean packageCheck = false;
 
     public NewPackageAction() {
 
@@ -27,27 +26,14 @@ public class NewPackageAction extends AbstractClassyAction{
             if (selected.getClassyNode() instanceof PackageNode) {
                 selected.getClassyNode().setPackageCheck(true);
                 MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-              //  System.out.println(createdChild.getClassyNode().getClass());
-
-
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
             } else {
-                Message message = new Message(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
-                MessageGenerator msggenerator = new MessageGenerator();
-                msggenerator.generateMsg(message);
+                AppCore.getInstance().showMessage(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
             }
         } catch (NullPointerException exception) {
-            Message message = new Message(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.PROJECT_OR_PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_PACKAGE);
+            
         }
 
-    }
-
-    public boolean isPackageCheck() {
-        return packageCheck;
-    }
-
-    public void setPackageCheck(boolean packageCheck) {
-        this.packageCheck = packageCheck;
     }
 }

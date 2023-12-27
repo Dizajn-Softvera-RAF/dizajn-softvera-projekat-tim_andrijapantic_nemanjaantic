@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.implementation.ProjectNode;
@@ -37,14 +38,12 @@ public class ChangePathAction extends AbstractClassyAction{
                     MainFrame.getInstance().getClassyTree().getTreeView().notifySubscribers(notification);
                 }
             } else {
-                Message message = new Message(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH);
-                MessageGenerator msggenerator = new MessageGenerator();
-                msggenerator.generateMsg(message);
+                AppCore.getInstance().showMessage(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH);
+                
             }
         } catch (NullPointerException exception) {
-            Message message = new Message(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH);
+            
         }
 
 

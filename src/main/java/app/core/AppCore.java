@@ -3,6 +3,9 @@ package app.core;
 import app.model.logger.Logger;
 import app.model.logger.LoggerFactory;
 import app.model.logger.LoggerType;
+import app.model.message.Message;
+import app.model.message.MessageGenerator;
+import app.model.message.PossibleErr;
 import app.model.repository.ClassyRepository;
 
 public class AppCore {
@@ -13,6 +16,7 @@ public class AppCore {
     private Logger consoleLogger;
     private Logger fileLogger;
     private Serializer serializer;
+    private MessageGenerator messageGenerator;
 
     private AppCore() {
 
@@ -34,6 +38,7 @@ public class AppCore {
         this.serializer = serializer;
         consoleLogger =  LoggerFactory.createLogger(LoggerType.CONSOLE);
         fileLogger = LoggerFactory.createLogger(LoggerType.FILE);
+        messageGenerator = new MessageGenerator();
     }
 
     public void run() {
@@ -78,5 +83,10 @@ public class AppCore {
 
     public void setSerializer(Serializer serializer) {
         this.serializer = serializer;
+    }
+
+    public void showMessage(PossibleErr err) {
+        Message message = new Message(err);
+        messageGenerator.generateMsg(message);
     }
 }

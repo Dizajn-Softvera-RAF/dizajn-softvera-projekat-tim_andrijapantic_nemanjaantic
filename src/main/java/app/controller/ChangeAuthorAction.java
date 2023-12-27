@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.message.Message;
@@ -28,14 +29,12 @@ public class ChangeAuthorAction extends AbstractClassyAction {
                 Notification notification = new Notification(NotificationType.CHANGE_AUTHOR, input);
                 projectExplorer.notifySubscribers(notification);
             } else {
-                Message message = new Message(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR);
-                MessageGenerator msggenerator = new MessageGenerator();
-                msggenerator.generateMsg(message);
+                AppCore.getInstance().showMessage(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR);
+                
             }
         } catch (NullPointerException exception) {
-            Message message = new Message(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_AUTHOR);
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.composite.ClassyNodeComposite;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
@@ -44,15 +45,14 @@ public class NewDiagramAction extends AbstractClassyAction {
 
                     }
                 }
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
             } else {
-                Message message = new Message(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_DIAGRAM);
-                MessageGenerator msggenerator = new MessageGenerator();
-                msggenerator.generateMsg(message);
+                AppCore.getInstance().showMessage(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_DIAGRAM);
+                
             }
         } catch (NullPointerException exception) {
-            Message message = new Message(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_DIAGRAM);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.PACKAGE_MUST_BE_SELECTED_TO_CREATE_A_DIAGRAM);
+            
         }
 
     }

@@ -1,7 +1,9 @@
 package app.controller;
 
+import app.core.AppCore;
 import app.model.implementation.PackageNode;
 import app.model.implementation.ProjectNode;
+import app.model.message.PossibleErr;
 import app.view.mainframe.MainFrame;
 
 import java.awt.event.ActionEvent;
@@ -25,6 +27,7 @@ public class CodeGenerationAction extends AbstractClassyAction{
             for (PackageNode packageNode: projectNode.getChildren()) {
                 packageNode.generateCodeStructure(projectFolder.getAbsolutePath());
             }
-        }
+        } else
+            AppCore.getInstance().showMessage(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION);
     }
 }

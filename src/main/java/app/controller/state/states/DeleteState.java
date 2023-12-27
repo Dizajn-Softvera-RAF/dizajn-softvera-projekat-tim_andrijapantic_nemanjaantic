@@ -78,6 +78,7 @@ public class DeleteState implements State {
                     diagramView.getElementPainters().removeAll(toDelete);
 
                     diagramView.getDiagramNode().removeChildren(toDeleteChild);
+                    MainFrame.getInstance().getCurrentProject().setChanged(true);
                 }
 
             }
@@ -117,12 +118,12 @@ public class DeleteState implements State {
             }
             diagramView.getElementPainters().removeAll(toDelete);
             diagramView.getDiagramNode().removeChildren(toDeleteChild);
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
         } else if (isConnection) {
-            System.out.println("Ulazim u else za brisanje veze");
             diagramView.getDiagramNode().removeChild(diagramView.getElementPainters().get(indexLinka).getElement());
             MainFrame.getInstance().getClassyTree().deleteChildFromTree(diagramView.getElementPainters().get(indexLinka).getElement().getMyNodeMutable());
             diagramView.getElementPainters().remove(diagramView.getElementPainters().get(indexLinka));
-
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
 
         }
         deletingOneElement = false;

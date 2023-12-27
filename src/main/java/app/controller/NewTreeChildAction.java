@@ -1,5 +1,7 @@
 package app.controller;
 
+import app.core.AppCore;
+import app.model.implementation.ProjectNode;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
@@ -27,12 +29,11 @@ public class NewTreeChildAction extends AbstractClassyAction {
                 new AddToPackageView();
             } else {
                 MyNodeMutable createdChild = MainFrame.getInstance().getClassyTree().addChild(selected, null);
-
+                if (selected.getClassyNode() instanceof ProjectNode)
+                    ((ProjectNode) selected.getClassyNode()).setChanged(true);
             }
         } catch (NullPointerException exception) {
-            Message message = new Message(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.PROJECT_EXPLORER_MUST_BE_SELECTED_TO_CREATE_A_PROJECT);
         }
     }
 }

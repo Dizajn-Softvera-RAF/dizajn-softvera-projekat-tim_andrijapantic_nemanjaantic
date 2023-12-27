@@ -1,5 +1,6 @@
 package app.model.tree;
 
+import app.core.AppCore;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.message.Message;
@@ -77,9 +78,8 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
 
 
         } else {
-            Message message = new Message(PossibleErr.NAME_CANNOT_BE_EMPTY);
-            MessageGenerator msggenerator = new MessageGenerator();
-            msggenerator.generateMsg(message);
+            AppCore.getInstance().showMessage(PossibleErr.NAME_CANNOT_BE_EMPTY);
+            
         }
 
 

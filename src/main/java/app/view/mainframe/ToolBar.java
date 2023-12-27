@@ -14,6 +14,8 @@ public class ToolBar extends JToolBar {
         this.setPreferredSize(sizeT.getSize());
         add(MainFrame.getInstance().getActionManager().getNewProjectAction());
         addSeparator();
+        add(MainFrame.getInstance().getActionManager().getOpenAction());
+        addSeparator();
         add(MainFrame.getInstance().getActionManager().getInfoAction());
         addSeparator();
         add(MainFrame.getInstance().getActionManager().getDeleteAction());
@@ -21,6 +23,12 @@ public class ToolBar extends JToolBar {
         add(MainFrame.getInstance().getActionManager().getChangeAuthorAction());
         addSeparator();
         add(MainFrame.getInstance().getActionManager().getChangePathAction());
+        addSeparator();
+        add(MainFrame.getInstance().getActionManager().getSaveAction());
+        addSeparator();
+        add(MainFrame.getInstance().getActionManager().getSaveProjectAsAction());
+        addSeparator();
+        add(MainFrame.getInstance().getActionManager().getSaveTemplateAction());
         addSeparator();
         add(MainFrame.getInstance().getActionManager().getScreenshotAction());
         addSeparator();

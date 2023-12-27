@@ -161,6 +161,7 @@ public class EditConnectionView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 element.setName(nameTextField.getText());
                 SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getClassyTree().getTreeView());
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
             }
         });
 
@@ -215,7 +216,7 @@ public class EditConnectionView extends JFrame {
                     refreshCurrentCardinalities(cardinalities);
                 }
 
-
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
             }
         });
 
@@ -242,6 +243,7 @@ public class EditConnectionView extends JFrame {
                 ((Dependency) element).getDependencies().add(dependencyToAdd);
                 dependenciesList.add(dependencyToAdd.toString());
                 refreshCurrentDependencies(dependenciesList);
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
             }
         });
 
@@ -260,6 +262,7 @@ public class EditConnectionView extends JFrame {
                     }
                     element.getFromInterclass().getContent().remove(element.getFromInterclass().getContent().get(element.getListaDodatihKardinalnosti().get(indexForDeletion)));
                     refreshCurrentCardinalities(cardinalities);
+                    MainFrame.getInstance().getCurrentProject().setChanged(true);
                 }
 
             }
@@ -275,6 +278,7 @@ public class EditConnectionView extends JFrame {
                         dependenciesList.remove(indexForDeletion);
                     }
                     refreshCurrentDependencies(dependenciesList);
+                    MainFrame.getInstance().getCurrentProject().setChanged(true);
                 }
             }
         });

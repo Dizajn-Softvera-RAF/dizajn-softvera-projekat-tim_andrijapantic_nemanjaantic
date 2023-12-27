@@ -152,6 +152,7 @@ public class AddConnectionState implements State {
                 DefaultTreeModel model = MainFrame.getInstance().getClassyTree().getTreeModel();
                 model.removeNodeFromParent(diagramView.getCurrentLink().getMyNodeMutable());
             }
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
         }
         startExists = false;
 

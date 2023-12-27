@@ -151,18 +151,17 @@ public class DiagramNode extends ClassyNodeComposite<DiagramElement> implements 
         StringBuilder packageBuilder = new StringBuilder();
         AbstractClassyNode currentNode = this;
         packageBuilder.append("package ");
-        while (!(currentNode instanceof ProjectNode)) {
+        while (!(currentNode.getParent() instanceof ProjectNode)) {
             AbstractClassyNode temp;
             temp = currentNode.getParent();
             packageNames.add(temp.getName());
             currentNode = temp;
         }
-        packageNames.remove(packageNames.size()-1);
         for (int i=packageNames.size()-1; i>=0; i--) {
             if (i==packageNames.size()-1)
                 packageBuilder.append(packageNames.get(i).toLowerCase());
             else
-            packageBuilder.append("."+packageNames.get(i).toLowerCase());
+                packageBuilder.append("."+packageNames.get(i).toLowerCase());
         }
         packageBuilder.append(";\n\n");
         return packageBuilder.toString();

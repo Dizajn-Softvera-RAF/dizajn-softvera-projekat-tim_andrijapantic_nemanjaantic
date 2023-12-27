@@ -86,6 +86,7 @@ public class AddInterclassState implements State {
                 enumComp.setMyNodeMutable(MainFrame.getInstance().getClassyTree().addExistingChild(diagramView.getMyNodeMutable(), enumComp));
                 System.out.println("Ime enuma je: " + enumComp);
             }
+            MainFrame.getInstance().getCurrentProject().setChanged(true);
         }
 
         elementExists = false;

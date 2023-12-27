@@ -56,6 +56,7 @@ public class TemplatePickView extends JDialog{
                     d.setName("Diagram" + new Random().nextInt(1000));
                     MainFrame.getInstance().getClassyTree().loadTemplate(d);
                 }
+                MainFrame.getInstance().getCurrentProject().setChanged(true);
                 dispose();
             }
         });

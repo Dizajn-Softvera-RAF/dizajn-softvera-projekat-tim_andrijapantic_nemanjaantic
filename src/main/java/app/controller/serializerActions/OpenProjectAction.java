@@ -12,6 +12,7 @@ import java.io.File;
 
 public class OpenProjectAction extends AbstractClassyAction {
     public OpenProjectAction() {
+        putValue(SMALL_ICON, loadIcon("/images/open.png"));
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(
                 KeyEvent.VK_O, ActionEvent.CTRL_MASK));
         putValue(NAME, "Open action");

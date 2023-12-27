@@ -89,6 +89,7 @@ public class  PackageView extends JPanel implements ISubscriber {
                                     currentNode = temp;
                                 }
                                 projectNode = (ProjectNode) currentNode;
+                                MainFrame.getInstance().setCurrentProject(projectNode);
                                 if (projectNode.getPath()!=null) {
                                     path.setText(projectNode.getPath());
                                 }

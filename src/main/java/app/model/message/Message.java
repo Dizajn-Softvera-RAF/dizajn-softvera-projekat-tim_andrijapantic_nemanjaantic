@@ -56,6 +56,12 @@ public class Message {
         } else if (err.equals(PossibleErr.CANNOT_DELETE_PROJECT_EXPLORER)) {
             stringContent = "Ne mozes izbrisati Project Explorer.";
             this.type = ErrType.ERROR;
+        } else if (err.equals(PossibleErr.DIAGRAM_MUST_BE_SELECTED_FOR_THIS_ACTION)) {
+            stringContent = "Moras selektovati dijagram za ovu akciju.";
+            this.type = ErrType.ERROR;
+        } else if (err.equals(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION)) {
+            stringContent = "Moras selektovati projekat za ovu akciju.";
+            this.type = ErrType.ERROR;
         } else if (err.equals(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH)) {
             stringContent = "Moras selektovati projekat da bi dodao njegovu putanju.";
             this.type = ErrType.ERROR;
