@@ -1,4 +1,4 @@
-package app.model.tree;
+package app.model.tree.controller;
 
 import app.core.AppCore;
 import app.model.event.Notification;
@@ -7,6 +7,7 @@ import app.model.message.Message;
 import app.model.implementation.DiagramNode;
 import app.model.message.MessageGenerator;
 import app.model.message.PossibleErr;
+import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
 import app.view.tabs.TabbedPane;
 import app.view.tree.ClassyTreeView;

@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.treeActions;
 
+import app.controller.AbstractClassyAction;
 import app.core.AppCore;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
@@ -11,7 +12,7 @@ import app.model.implementation.ProjectExplorer;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.event.ActionEvent;
 
-public class DeleteAction extends AbstractClassyAction{
+public class DeleteAction extends AbstractClassyAction {
     public DeleteAction() {
         putValue(SMALL_ICON, loadIcon("/images/delete.png"));
         putValue(NAME, "Delete");

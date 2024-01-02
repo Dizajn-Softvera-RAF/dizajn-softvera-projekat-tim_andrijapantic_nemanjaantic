@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.treeActions;
 
+import app.controller.AbstractClassyAction;
 import app.core.AppCore;
 import app.model.implementation.ProjectNode;
 import app.model.message.Message;

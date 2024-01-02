@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.projectActions;
 
+import app.controller.AbstractClassyAction;
 import app.core.AppCore;
 import app.model.event.Notification;
 import app.model.event.NotificationType;

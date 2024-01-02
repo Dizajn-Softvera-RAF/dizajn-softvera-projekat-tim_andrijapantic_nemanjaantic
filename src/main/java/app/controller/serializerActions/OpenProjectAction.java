@@ -22,13 +22,14 @@ public class OpenProjectAction extends AbstractClassyAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser jfc = new JFileChooser();
-
+        // Ucitani projekat se ne vidi odmah u stablu ako Project Explorer nije bio prethodno selektovan
+        // kada se doda novi projekat itd prikazace se
         if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = jfc.getSelectedFile();
                 ProjectNode p = AppCore.getInstance().getSerializer().loadProject(file);
                 MainFrame.getInstance().getClassyTree().loadProject(p);
-
+                SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getClassyTree().getTreeView());
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

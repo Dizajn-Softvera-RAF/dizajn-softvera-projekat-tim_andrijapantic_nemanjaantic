@@ -19,25 +19,28 @@ public class SaveProjectAsAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        try {
+            if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof ProjectNode) {
+                ProjectNode projectNode = (ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
+                File projectFile = null;
 
-        if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof ProjectNode) {
-            ProjectNode projectNode = (ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
-            File projectFile = null;
+                JFileChooser jfc = new JFileChooser();
+                if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                    projectFile = jfc.getSelectedFile();
+                    projectNode.setPath(projectFile.getPath());
+                } else {
+                    return;
+                }
 
-            JFileChooser jfc = new JFileChooser();
-            if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
-                projectFile = jfc.getSelectedFile();
-                projectNode.setPath(projectFile.getPath());
-            } else {
-                return;
-            }
+                AppCore.getInstance().getSerializer().saveProject((ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode());
+                AppCore.getInstance().showMessage(PossibleErr.SUCCESSFULLY_SAVED_PROJECT);
 
-            AppCore.getInstance().getSerializer().saveProject((ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode());
-
-        } else
+            } else
+                AppCore.getInstance().showMessage(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION);
+        }
+        catch (NullPointerException exception) {
             AppCore.getInstance().showMessage(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION);
-
-
+        }
 
     }
 }

@@ -21,17 +21,23 @@ public class SaveTemplateAction extends AbstractClassyAction {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof DiagramNode) {
+        try {
+            if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof DiagramNode) {
 
-            String templateName = JOptionPane.showInputDialog("Enter Template Name: ");
+                String templateName = JOptionPane.showInputDialog("Enter Template Name: ");
 
-            File templatesDir = new File("src/main/resources/templates/");
-            File templateFile = new File(templatesDir, templateName.concat(".json"));
+                File templatesDir = new File("src/main/resources/templates/");
+                File templateFile = new File(templatesDir, templateName.concat(".json"));
 
-            String filepath = templateFile.getAbsolutePath();
+                String filepath = templateFile.getAbsolutePath();
 
-            AppCore.getInstance().getSerializer().saveDiagram((DiagramNode) MainFrame.getInstance().getSelectedNode().getClassyNode(), filepath);
+                AppCore.getInstance().getSerializer().saveDiagram((DiagramNode) MainFrame.getInstance().getSelectedNode().getClassyNode(), filepath);
+                AppCore.getInstance().showMessage(PossibleErr.SUCCESSFULLY_SAVED_TEMPLATE);
+            } else
+                AppCore.getInstance().showMessage(PossibleErr.DIAGRAM_MUST_BE_SELECTED_FOR_THIS_ACTION);
         }
-        AppCore.getInstance().showMessage(PossibleErr.DIAGRAM_MUST_BE_SELECTED_FOR_THIS_ACTION);
+        catch (NullPointerException exception) {
+            AppCore.getInstance().showMessage(PossibleErr.DIAGRAM_MUST_BE_SELECTED_FOR_THIS_ACTION);
+        }
     }
 }

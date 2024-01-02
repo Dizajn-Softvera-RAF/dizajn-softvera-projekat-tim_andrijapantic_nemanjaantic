@@ -3,7 +3,7 @@ package app.view.tree;
 import app.model.event.IPublisher;
 import app.model.event.ISubscriber;
 import app.model.event.Notification;
-import app.model.tree.ClassyTreeCellEditor;
+import app.model.tree.controller.ClassyTreeCellEditor;
 import app.model.tree.ClassyTreeCellRenderer;
 import app.model.tree.ClassyTreeSelectionListener;
 

@@ -1,5 +1,6 @@
-package app.controller;
+package app.controller.treeActions;
 
+import app.controller.AbstractClassyAction;
 import app.core.AppCore;
 import app.model.message.Message;
 import app.model.message.MessageGenerator;
@@ -10,7 +11,7 @@ import app.model.implementation.PackageNode;
 
 import java.awt.event.ActionEvent;
 
-public class NewPackageAction extends AbstractClassyAction{
+public class NewPackageAction extends AbstractClassyAction {
 
     public NewPackageAction() {
 

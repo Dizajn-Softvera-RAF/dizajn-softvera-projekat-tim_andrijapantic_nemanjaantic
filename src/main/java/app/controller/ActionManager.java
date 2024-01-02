@@ -1,10 +1,18 @@
 package app.controller;
 
+import app.controller.diagramActions.ScreenshotAction;
+import app.controller.projectActions.ChangeAuthorAction;
+import app.controller.projectActions.ChangePathAction;
+import app.controller.projectActions.CodeGenerationAction;
 import app.controller.serializerActions.OpenProjectAction;
 import app.controller.serializerActions.SaveProjectAction;
 import app.controller.serializerActions.SaveProjectAsAction;
 import app.controller.serializerActions.SaveTemplateAction;
 import app.controller.state.stateActions.*;
+import app.controller.treeActions.DeleteAction;
+import app.controller.treeActions.NewDiagramAction;
+import app.controller.treeActions.NewPackageAction;
+import app.controller.treeActions.NewTreeChildAction;
 
 public class ActionManager {
 

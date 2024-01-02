@@ -65,6 +65,18 @@ public class Message {
         } else if (err.equals(PossibleErr.NEED_TO_SELECT_PROJECT_TO_ADD_PATH)) {
             stringContent = "Moras selektovati projekat da bi dodao njegovu putanju.";
             this.type = ErrType.ERROR;
+        } else if (err.equals(PossibleErr.SUCCESSFULLY_SAVED_PROJECT)) {
+            stringContent = "Projekat je uspesno sacuvan.";
+            this.type = ErrType.INFO;
+        } else if (err.equals(PossibleErr.SUCCESSFULLY_SAVED_TEMPLATE)) {
+            stringContent = "Template je uspesno sacuvan.";
+            this.type = ErrType.INFO;
+        } else if (err.equals(PossibleErr.SUCCESSFULLY_GENERATED_CODE)) {
+            stringContent = "Kod je uspesno generisan.";
+            this.type = ErrType.INFO;
+        } else if (err.equals(PossibleErr.NO_DIAGRAMS_EDITED)) {
+            stringContent = "Moras imati dijagram da bi ga Screenshot-ovao.";
+            this.type = ErrType.ERROR;
         }
         time = LocalDateTime.now();
         formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");

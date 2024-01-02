@@ -22,30 +22,31 @@ public class SaveProjectAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if ( MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof ProjectNode) {
-            ProjectNode projectNode = (ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
-            File projectFile = null;
-            if (!projectNode.isChanged()) {
-                System.out.println("Projekat nije promenjen");
-                return;
-            }
-            if (projectNode.getPath()==null || projectNode.getPath().isEmpty()) {
-                JFileChooser jfc = new JFileChooser();
-                if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
-                    projectFile = jfc.getSelectedFile();
-                    projectNode.setPath(projectFile.getPath());
-                } else {
+        try {
+            if (MainFrame.getInstance().getSelectedNode().getClassyNode() instanceof ProjectNode) {
+                ProjectNode projectNode = (ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode();
+                File projectFile = null;
+                if (!projectNode.isChanged()) {
+                    System.out.println("Projekat nije promenjen");
                     return;
                 }
-            }
-            AppCore.getInstance().getSerializer().saveProject((ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode());
-
-            projectNode.setChanged(false);
+                if (projectNode.getPath() == null || projectNode.getPath().isEmpty()) {
+                    JFileChooser jfc = new JFileChooser();
+                    if (jfc.showSaveDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION) {
+                        projectFile = jfc.getSelectedFile();
+                        projectNode.setPath(projectFile.getPath());
+                    } else {
+                        return;
+                    }
+                }
+                AppCore.getInstance().getSerializer().saveProject((ProjectNode) MainFrame.getInstance().getSelectedNode().getClassyNode());
+                AppCore.getInstance().showMessage(PossibleErr.SUCCESSFULLY_SAVED_PROJECT);
+                projectNode.setChanged(false);
+            } else
+                AppCore.getInstance().showMessage(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION);
         }
-        else
+        catch (NullPointerException exception) {
             AppCore.getInstance().showMessage(PossibleErr.PROJECT_MUST_BE_SELECTED_FOR_THIS_ACTION);
-
-
+        }
     }
 }

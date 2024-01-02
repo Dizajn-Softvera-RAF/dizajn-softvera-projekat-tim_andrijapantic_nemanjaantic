@@ -7,7 +7,7 @@ import app.model.event.ISubscriber;
 import app.model.event.Notification;
 import app.model.event.NotificationType;
 import app.model.implementation.ProjectNode;
-import app.model.tree.ClassyTreeImplementation;
+import app.model.tree.controller.ClassyTreeImplementation;
 import app.model.tree.MyNodeMutable;
 import app.view.popups.MessagePane;
 
@@ -25,7 +25,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private JPanel leftPanel = new JPanel();
     private MyNodeMutable selectedNode;
     private ActionManager actionManager;
-    private app.view.mainframe.Menu menu;
+    private Menu menu;
     private StateToolBar stateToolBar;
     private String childToCreateType;
     private PackageView packageView;

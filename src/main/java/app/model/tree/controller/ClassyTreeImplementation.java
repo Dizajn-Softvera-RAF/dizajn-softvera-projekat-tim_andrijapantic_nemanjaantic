@@ -1,4 +1,4 @@
-package app.model.tree;
+package app.model.tree.controller;
 
 import app.core.AppCore;
 import app.model.composite.AbstractClassyNode;
@@ -12,6 +12,8 @@ import app.model.diagimplementation.connection.Dependency;
 import app.model.diagimplementation.connection.Generalization;
 import app.model.diagimplementation.interclass.*;
 import app.model.implementation.*;
+import app.model.tree.ClassyTree;
+import app.model.tree.MyNodeMutable;
 import app.view.mainframe.MainFrame;
 import app.view.tree.ClassyTreeView;
 

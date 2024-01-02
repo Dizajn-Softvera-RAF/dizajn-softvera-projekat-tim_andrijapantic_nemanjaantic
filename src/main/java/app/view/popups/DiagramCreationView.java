@@ -1,6 +1,6 @@
 package app.view.popups;
 
-import app.controller.NewDiagramAction;
+import app.controller.treeActions.NewDiagramAction;
 import app.view.mainframe.MainFrame;
 
 import javax.swing.*;
