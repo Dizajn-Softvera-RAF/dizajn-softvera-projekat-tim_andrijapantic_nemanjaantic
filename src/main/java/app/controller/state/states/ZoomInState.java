@@ -13,11 +13,11 @@ public class ZoomInState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u ZoomInState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+        //System.out.println("Trenutno si u ZoomInState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u ZoomInState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+      //  System.out.println("Trenutno si u ZoomInState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 }

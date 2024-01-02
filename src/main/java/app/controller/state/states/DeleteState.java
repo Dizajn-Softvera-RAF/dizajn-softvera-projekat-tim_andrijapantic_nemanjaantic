@@ -20,7 +20,6 @@ public class DeleteState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutan DiagramView: " + diagramView);
         for (ElementPainter elementPainter : diagramView.getElementPainters()) {
             if (elementPainter.getElement() instanceof Connection && elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))) {
                 isConnection = true;
@@ -32,11 +31,9 @@ public class DeleteState implements State {
                 if (elementPainter.getElement().isSelected()) {
                     deletingElements = true;
                     deletingOneElement = false;
-                    System.out.println("Jeste selektovan");
                 } else {
                     deletingOneElement = true;
                     deletingElements = false;
-                    System.out.println("Nije selektovan");
                 }
 
                 break;
@@ -134,11 +131,11 @@ public class DeleteState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u DeleteState i povukao  si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+      //  System.out.println("Trenutno si u DeleteState i povukao  si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u DeleteState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+     //   System.out.println("Trenutno si u DeleteState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 }

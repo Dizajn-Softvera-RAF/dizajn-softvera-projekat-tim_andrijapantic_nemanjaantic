@@ -23,7 +23,6 @@ public class DuplicationState implements State {
     private ElementPainter painterToCreate;
     @Override
     public void misKliknut(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutan DiagramView: " + diagramView);
         for(ElementPainter elementPainter: diagramView.getElementPainters()){
             if(elementPainter.elementAt(elementPainter.getElement(), diagramView.getAbsolutePoint(x, y))){
                 System.out.println("element u ovoj tacki je:" + elementPainter.getElement().getName());

@@ -58,11 +58,11 @@ public class ZoomToFitState implements State {
 
     @Override
     public void misPovucen(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u ZoomToFitState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+     //   System.out.println("Trenutno si u ZoomToFitState i povukao si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 
     @Override
     public void misOtpusten(int x, int y, DiagramView diagramView) {
-        System.out.println("Trenutno si u ZoomToFitState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
+     //   System.out.println("Trenutno si u ZoomToFitState i pustio si na tacku: (" + x + "," + y + ") na dijagramu: " + diagramView.getDiagramNode().getName());
     }
 }
